@@ -16,7 +16,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     fill: ${token.colorTextDescription};
   `,
   strongLabel: css`
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 16px;
     fill: ${token.colorTextSecondary};

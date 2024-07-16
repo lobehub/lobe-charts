@@ -1,22 +1,16 @@
 ---
 nav: Components
 group: Charts
-description: Bar charts compare numerical values and use the length of each bar to represent the value of each variable.
+description: A scatter chart visualizes relationships between two or three variables.
 ---
 
 <code src="./demos/index.tsx" nopadding></code>
 
 ### Usage example
 
-The example below shows a chart composition combining a `BarChart` with text elements.
+The example below shows a chart composition combining a `ScatterChart` with text elements.
 
 <code src="./demos/example.tsx"></code>
-
-### Usage example with groups
-
-The example below shows a chart with a group composition.
-
-<code src="./demos/groups.tsx"></code>
 
 ### Usage example with click event
 
@@ -41,10 +35,6 @@ The example below shows a chart with custom `colors`.
 The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` props.
 
 <code src="./demos/axis.tsx"></code>
-
-### No Data
-
-<code src="./demos/noData.tsx"></code>
 
 ## API
 

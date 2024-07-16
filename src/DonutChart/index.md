@@ -1,22 +1,22 @@
 ---
 nav: Components
 group: Charts
-description: Bar charts compare numerical values and use the length of each bar to represent the value of each variable.
+description: A donut chart displays quantitative information through a circular visualization.
 ---
 
 <code src="./demos/index.tsx" nopadding></code>
 
 ### Usage example
 
-The example below shows a chart composition combining a `BarChart` with text elements.
+The example below shows a composition of a `DonutChart` component.
 
 <code src="./demos/example.tsx"></code>
 
-### Usage example with groups
+### Usage example with legend
 
-The example below shows a chart with a group composition.
+The example below shows a composition of a `DonutChart` and `Legend` component.
 
-<code src="./demos/groups.tsx"></code>
+<code src="./demos/withLegend.tsx"></code>
 
 ### Usage example with click event
 
@@ -35,16 +35,6 @@ The example below shows a custom tooltip using `customTooltip` prop.
 The example below shows a chart with custom `colors`.
 
 <code src="./demos/customColors.tsx"></code>
-
-### Usage example with x-axis and y-axis labels
-
-The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` props.
-
-<code src="./demos/axis.tsx"></code>
-
-### No Data
-
-<code src="./demos/noData.tsx"></code>
 
 ## API
 

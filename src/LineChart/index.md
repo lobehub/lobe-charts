@@ -1,22 +1,16 @@
 ---
 nav: Components
 group: Charts
-description: Bar charts compare numerical values and use the length of each bar to represent the value of each variable.
+description: A line chart is a graphical representation that connects one or more series of data points with a continuous line.
 ---
 
 <code src="./demos/index.tsx" nopadding></code>
 
 ### Usage example
 
-The example below shows a chart composition combining a `BarChart` with text elements.
+The example below shows a composition combining an `AreaChart` with text elements.
 
 <code src="./demos/example.tsx"></code>
-
-### Usage example with groups
-
-The example below shows a chart with a group composition.
-
-<code src="./demos/groups.tsx"></code>
 
 ### Usage example with click event
 
@@ -38,13 +32,9 @@ The example below shows a chart with custom `colors`.
 
 ### Usage example with x-axis and y-axis labels
 
-The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` props.
+The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` prop.
 
 <code src="./demos/axis.tsx"></code>
-
-### No Data
-
-<code src="./demos/noData.tsx"></code>
 
 ## API
 

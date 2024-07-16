@@ -13,7 +13,7 @@ const themeConfig = {
       text: 'Github',
     },
     {
-      link: '/components/anthropic',
+      link: '/components/area-chart',
       text: 'Get Started',
       type: 'primary',
     },
@@ -28,7 +28,7 @@ const themeConfig = {
   footer: 'Made with 🤯 by LobeHub',
   name: 'Charts',
   nav: [
-    { link: '/components/anthropic', title: 'Components' },
+    { link: '/components/area-chart', title: 'Components' },
     { link: '/changelog', title: 'Changelog' },
   ],
   socialLinks: {

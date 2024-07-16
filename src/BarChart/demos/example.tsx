@@ -1,0 +1,51 @@
+import { BarChart } from '@lobehub/charts';
+import { Flexbox } from 'react-layout-kit';
+
+const chartdata = [
+  {
+    'Number of threatened species': 2488,
+    'name': 'Amphibians',
+  },
+  {
+    'Number of threatened species': 1445,
+    'name': 'Birds',
+  },
+  {
+    'Number of threatened species': 743,
+    'name': 'Crustaceans',
+  },
+  {
+    'Number of threatened species': 281,
+    'name': 'Ferns',
+  },
+  {
+    'Number of threatened species': 251,
+    'name': 'Arachnids',
+  },
+  {
+    'Number of threatened species': 232,
+    'name': 'Corals',
+  },
+  {
+    'Number of threatened species': 98,
+    'name': 'Algae',
+  },
+];
+
+const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+
+export default () => {
+  return (
+    <Flexbox>
+      <h4>Number of species threatened with extinction (2021)</h4>
+      <BarChart
+        categories={['Number of threatened species']}
+        className="mt-6"
+        data={chartdata}
+        index="name"
+        valueFormatter={dataFormatter}
+        yAxisWidth={48}
+      />
+    </Flexbox>
+  );
+};

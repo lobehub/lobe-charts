@@ -1,185 +1,369 @@
-import { ComponentPropsWithoutRef, MouseEvent, forwardRef, useState } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+'use client';
+
+import { css } from 'antd-style';
+import { MouseEvent, forwardRef, useState } from 'react';
+import { Flexbox } from 'react-layout-kit';
 import {
   Bar,
   CartesianGrid,
+  Label,
+  Legend,
   BarChart as ReChartsBarChart,
-  ReferenceLine,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from 'recharts';
+import { AxisDomain } from 'recharts/types/util/types';
 
-import Legend from '@/components/Legend';
-import Tooltip from '@/components/Tooltip';
-import XAxis from '@/components/XAxis';
-import YAxis from '@/components/YAxis';
-import type { ChartSeries } from '@/types';
-import { GridChartBaseProps } from '@/types';
-import { valueToPercent } from '@/utils/valueToPercent';
+import BaseChartProps from '@/common/BaseChartProps';
+import ChartLegend from '@/common/ChartLegend';
+import ChartTooltip from '@/common/ChartTooltip';
+import NoData from '@/common/NoData';
+import { constructCategoryColors, deepEqual, getYAxisDomain } from '@/common/utils';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
+import { defaultValueFormatter } from '@/utils';
 
+import { renderShape } from './renderShape';
 import { useStyles } from './styles';
 
-export type BarChartSeries = ChartSeries;
-
-export type BarChartType = 'default' | 'stacked' | 'percent';
-
-export interface BarChartProps extends GridChartBaseProps, FlexboxProps {
-  /** Props passed down to recharts `BarChart` component */
-  barChartProps?: ComponentPropsWithoutRef<typeof ReChartsBarChart>;
-
-  /** Fill of hovered bar section, by default value is based on color scheme */
-  cursorFill?: string;
-
-  /** Data used to display chart */
-  data: Record<string, any>[];
-
-  /** Controls fill opacity of all bars, `1` by default */
-  fillOpacity?: number;
-
-  /** An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array. */
-  series: BarChartSeries[];
-
-  /** Controls how bars are positioned relative to each other, `'default'` by default */
-  type?: BarChartType;
+export interface BarChartProps extends BaseChartProps {
+  barCategoryGap?: string | number;
+  layout?: 'vertical' | 'horizontal';
+  relative?: boolean;
+  stack?: boolean;
 }
 
-const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
-  (
-    {
-      className,
-      data,
-      withLegend = true,
-      legendProps,
-      series,
-      onMouseLeave,
-      dataKey,
-      withTooltip = true,
-      withXAxis = true,
-      withYAxis = true,
-      gridAxis = 'x',
-      tickLine = 'y',
-      xAxisProps,
-      yAxisProps,
-      unit,
-      tooltipAnimationDuration = 200,
-      strokeDasharray = '4 4',
-      gridProps,
-      tooltipProps,
-      referenceLines,
-      fillOpacity = 1,
-      barChartProps,
-      type = 'default',
-      orientation,
-      valueFormatter,
-      ...rest
-    },
-    ref,
-  ) => {
-    const { cx, styles, theme } = useStyles();
-    const withXTickLine = gridAxis !== 'none' && (tickLine === 'x' || tickLine === 'xy');
-    const withYTickLine = gridAxis !== 'none' && (tickLine === 'y' || tickLine === 'xy');
-    const [highlightedArea, setHighlightedArea] = useState<string | null>(null);
-    const shouldHighlight = highlightedArea !== null;
-    const stacked = type === 'stacked' || type === 'percent';
-    const handleMouseLeave = (event: MouseEvent<HTMLDivElement>) => {
-      setHighlightedArea(null);
-      onMouseLeave?.(event);
-    };
+const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
+  const { cx, theme, styles } = useStyles();
+  const themeColorRange = useThemeColorRange();
+  const {
+    data = [],
+    categories = [],
+    index,
+    colors = themeColorRange,
+    valueFormatter = defaultValueFormatter,
+    layout = 'horizontal',
+    stack = false,
+    relative = false,
+    startEndOnly = false,
+    animationDuration = 900,
+    showAnimation = false,
+    showXAxis = true,
+    showYAxis = true,
+    yAxisWidth = 56,
+    intervalType = 'equidistantPreserveStart',
+    showTooltip = true,
+    showLegend = true,
+    showGridLines = true,
+    autoMinValue = false,
+    minValue,
+    maxValue,
+    allowDecimals = true,
+    noDataText,
+    onValueChange,
+    enableLegendSlider = false,
+    customTooltip,
+    rotateLabelX,
+    barCategoryGap,
+    tickGap = 5,
+    xAxisLabel,
+    yAxisLabel,
+    className,
+    width = '100%',
+    height = '20rem',
+    ...rest
+  } = props;
+  const CustomTooltip = customTooltip;
+  const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
+  const [legendHeight, setLegendHeight] = useState(60);
+  const categoryColors = constructCategoryColors(categories, colors);
+  const [activeBar, setActiveBar] = useState<any | undefined>();
+  const [activeLegend, setActiveLegend] = useState<string | undefined>();
+  const hasOnValueChange = !!onValueChange;
 
-    const bars = series.map((item) => {
-      const color = item.color;
-      const dimmed = shouldHighlight && highlightedArea !== item.name;
-      return (
-        <Bar
-          className={styles.bar}
-          dataKey={item.name}
-          fill={color}
-          fillOpacity={dimmed ? 0.1 : fillOpacity}
-          isAnimationActive={false}
-          key={item.name}
-          name={item.name}
-          stackId={stacked ? 'stack' : undefined}
-          stroke={color}
-          strokeOpacity={dimmed ? 0.2 : 0}
-        />
-      );
-    });
+  const onBarClick = (data: any, idx: number, event: MouseEvent) => {
+    event.stopPropagation();
+    if (!onValueChange) return;
+    if (deepEqual(activeBar, { ...data.payload, value: data.value })) {
+      setActiveLegend(undefined);
+      setActiveBar(undefined);
+      onValueChange?.(null);
+    } else {
+      setActiveLegend(data.tooltipPayload?.[0]?.dataKey);
+      setActiveBar({
+        ...data.payload,
+        value: data.value,
+      });
+      onValueChange?.({
+        categoryClicked: data.tooltipPayload?.[0]?.dataKey,
+        eventType: 'bar',
+        ...data.payload,
+      });
+    }
+  };
 
-    const referenceLinesItems = referenceLines?.map((line, index) => {
-      const color = line.color;
-      return (
-        <ReferenceLine
-          key={index}
-          stroke={line.color ? color : theme.colorPrimary}
-          strokeWidth={1}
-          {...line}
-          className={styles.referenceLine}
-          label={{
-            fill: line.color ? color : theme.colorPrimary,
-            position: line.labelPosition ?? 'insideBottomLeft',
-            value: line.label,
-          }}
-        />
-      );
-    });
+  const onCategoryClick = (dataKey: string) => {
+    if (!hasOnValueChange) return;
+    if (dataKey === activeLegend && !activeBar) {
+      setActiveLegend(undefined);
+      onValueChange?.(null);
+    } else {
+      setActiveLegend(dataKey);
+      onValueChange?.({
+        categoryClicked: dataKey,
+        eventType: 'category',
+      });
+    }
+    setActiveBar(undefined);
+  };
 
-    return (
-      <Flexbox
-        className={cx(styles.root, className)}
-        onMouseLeave={handleMouseLeave}
-        ref={ref}
-        {...rest}
-      >
-        <ResponsiveContainer className={styles.container}>
+  const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
+
+  return (
+    <Flexbox className={className} height={height} ref={ref} width={width} {...rest}>
+      <ResponsiveContainer>
+        {data?.length ? (
           <ReChartsBarChart
+            barCategoryGap={barCategoryGap}
             data={data}
-            layout={orientation}
-            stackOffset={type === 'percent' ? 'expand' : undefined}
-            {...barChartProps}
+            layout={layout === 'vertical' ? 'vertical' : 'horizontal'}
+            margin={{
+              bottom: xAxisLabel ? 30 : undefined,
+              left: yAxisLabel ? 20 : undefined,
+              right: yAxisLabel ? 5 : undefined,
+              top: 5,
+            }}
+            onClick={
+              hasOnValueChange && (activeLegend || activeBar)
+                ? () => {
+                    setActiveBar(undefined);
+                    setActiveLegend(undefined);
+                    onValueChange?.(null);
+                  }
+                : undefined
+            }
+            stackOffset={stack ? 'sign' : relative ? 'expand' : 'none'}
           >
-            {withLegend && (
-              <Legend onHighlight={setHighlightedArea} series={series} {...legendProps} />
-            )}
-            <XAxis
-              className={styles.axis}
-              {...(orientation === 'vertical' ? { type: 'number' } : { dataKey })}
-              hide={!withXAxis}
-              withXTickLine={withXTickLine}
-              {...xAxisProps}
-            />
-            <YAxis
-              className={styles.axis}
-              hide={!withYAxis}
-              {...(orientation === 'vertical' ? { dataKey, type: 'category' } : { type: 'number' })}
-              tickFormatter={type === 'percent' ? valueToPercent : valueFormatter}
-              unit={unit}
-              withYTickLine={withYTickLine}
-              {...yAxisProps}
-            />
-            <CartesianGrid
-              className={styles.grid}
-              horizontal={gridAxis === 'x' || gridAxis === 'xy'}
-              stroke={theme.colorBorder}
-              strokeDasharray={strokeDasharray}
-              vertical={gridAxis === 'y' || gridAxis === 'xy'}
-              {...gridProps}
-            />
-            {withTooltip && (
-              <Tooltip
-                series={series}
-                strokeDasharray={strokeDasharray}
-                tooltipAnimationDuration={tooltipAnimationDuration}
-                unit={unit}
-                valueFormatter={valueFormatter}
-                {...tooltipProps}
+            {showGridLines ? (
+              <CartesianGrid
+                className={styles.gridLines}
+                horizontal={layout !== 'vertical'}
+                vertical={layout === 'vertical'}
               />
+            ) : undefined}
+
+            {layout === 'vertical' ? (
+              <XAxis
+                allowDecimals={allowDecimals}
+                angle={rotateLabelX?.angle}
+                axisLine={false}
+                className={styles.label}
+                domain={yAxisDomain as AxisDomain}
+                dy={rotateLabelX?.verticalShift}
+                fill=""
+                height={rotateLabelX?.xAxisHeight}
+                hide={!showXAxis}
+                minTickGap={tickGap}
+                stroke=""
+                tick={{ transform: 'translate(-3, 0)' }}
+                tickFormatter={valueFormatter}
+                tickLine={false}
+                type="number"
+              >
+                {xAxisLabel && (
+                  <Label
+                    className={cx(styles.strongLabel, styles.emphasis)}
+                    offset={-20}
+                    position="insideBottom"
+                    style={{
+                      fill: theme.colorTextSecondary,
+                      fontWeight: 500,
+                      textAnchor: 'middle',
+                    }}
+                  >
+                    {xAxisLabel}
+                  </Label>
+                )}
+              </XAxis>
+            ) : (
+              <XAxis
+                angle={rotateLabelX?.angle}
+                axisLine={false}
+                className={styles.label}
+                dataKey={index}
+                dy={rotateLabelX?.verticalShift}
+                fill=""
+                height={rotateLabelX?.xAxisHeight}
+                hide={!showXAxis}
+                interval={startEndOnly ? 'preserveStartEnd' : intervalType}
+                minTickGap={tickGap}
+                padding={{ left: paddingValue, right: paddingValue }}
+                stroke=""
+                tick={{ transform: 'translate(0, 6)' }}
+                tickLine={false}
+                ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
+              >
+                {xAxisLabel && (
+                  <Label
+                    className={cx(styles.strongLabel, styles.emphasis)}
+                    offset={-20}
+                    position="insideBottom"
+                    style={{
+                      fill: theme.colorTextSecondary,
+                      fontWeight: 500,
+                      textAnchor: 'middle',
+                    }}
+                  >
+                    {xAxisLabel}
+                  </Label>
+                )}
+              </XAxis>
             )}
-            {bars}
-            {referenceLinesItems}
+            {layout === 'vertical' ? (
+              <YAxis
+                axisLine={false}
+                className={styles.label}
+                dataKey={index}
+                fill=""
+                hide={!showYAxis}
+                interval="preserveStartEnd"
+                stroke=""
+                tick={{ transform: 'translate(0, 6)' }}
+                tickLine={false}
+                ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
+                type="category"
+                width={yAxisWidth}
+              >
+                {yAxisLabel && (
+                  <Label
+                    angle={-90}
+                    className={styles.emphasis}
+                    offset={-15}
+                    position="insideLeft"
+                    style={{
+                      fill: theme.colorTextSecondary,
+                      fontWeight: 500,
+                      textAnchor: 'middle',
+                    }}
+                  >
+                    {yAxisLabel}
+                  </Label>
+                )}
+              </YAxis>
+            ) : (
+              <YAxis
+                allowDecimals={allowDecimals}
+                axisLine={false}
+                className={styles.label}
+                domain={yAxisDomain as AxisDomain}
+                fill=""
+                hide={!showYAxis}
+                stroke=""
+                tick={{ transform: 'translate(-3, 0)' }}
+                tickFormatter={
+                  relative ? (value: number) => `${(value * 100).toString()} %` : valueFormatter
+                }
+                tickLine={false}
+                type="number"
+                width={yAxisWidth}
+              >
+                {yAxisLabel && (
+                  <Label
+                    angle={-90}
+                    className={styles.emphasis}
+                    offset={-15}
+                    position="insideLeft"
+                    style={{
+                      fill: theme.colorTextSecondary,
+                      fontWeight: 500,
+                      textAnchor: 'middle',
+                    }}
+                  >
+                    {yAxisLabel}
+                  </Label>
+                )}
+              </YAxis>
+            )}
+            <Tooltip
+              content={
+                showTooltip
+                  ? ({ active, payload, label }) =>
+                      CustomTooltip ? (
+                        <CustomTooltip
+                          active={active}
+                          label={label}
+                          payload={payload?.map((payloadItem: any) => ({
+                            ...payloadItem,
+                            color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                          }))}
+                        />
+                      ) : (
+                        <ChartTooltip
+                          active={active}
+                          categoryColors={categoryColors}
+                          label={label}
+                          payload={payload}
+                          valueFormatter={valueFormatter}
+                        />
+                      )
+                  : undefined
+              }
+              cursor={{ fill: theme.colorFillTertiary }}
+              isAnimationActive={false}
+              position={{ y: 0 }}
+              wrapperStyle={{ outline: 'none' }}
+            />
+            {showLegend ? (
+              <Legend
+                content={({ payload }) =>
+                  ChartLegend(
+                    { payload },
+                    categoryColors,
+                    setLegendHeight,
+                    activeLegend,
+                    hasOnValueChange
+                      ? (clickedLegendItem: string) => onCategoryClick(clickedLegendItem)
+                      : undefined,
+                    enableLegendSlider,
+                  )
+                }
+                height={legendHeight}
+                verticalAlign="top"
+              />
+            ) : undefined}
+            {categories.map((category) => {
+              console.log(categoryColors.get(category));
+              return (
+                <Bar
+                  animationDuration={animationDuration}
+                  className={cx(css`
+                    fill: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  `)}
+                  dataKey={category}
+                  fill={''}
+                  isAnimationActive={showAnimation}
+                  key={category}
+                  name={category}
+                  onClick={onBarClick}
+                  shape={(props: any) => renderShape(props, activeBar, activeLegend, layout)}
+                  stackId={stack || relative ? 'a' : undefined}
+                  style={{
+                    cursor: onValueChange ? 'pointer' : undefined,
+                  }}
+                  type="linear"
+                />
+              );
+            })}
           </ReChartsBarChart>
-        </ResponsiveContainer>
-      </Flexbox>
-    );
-  },
-);
+        ) : (
+          <NoData noDataText={noDataText} />
+        )}
+      </ResponsiveContainer>
+    </Flexbox>
+  );
+});
+
+BarChart.displayName = 'BarChart';
 
 export default BarChart;
