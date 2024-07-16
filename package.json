@@ -6,13 +6,13 @@
     "lobehub",
     "charts"
   ],
-  "homepage": "https://github.com/lobehub/lobe-icons",
+  "homepage": "https://github.com/lobehub/lobe-charts",
   "bugs": {
-    "url": "https://github.com/lobehub/lobe-icons/issues/new"
+    "url": "https://github.com/lobehub/lobe-charts/issues/new"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lobehub/lobe-icons.git"
+    "url": "https://github.com/lobehub/lobe-charts.git"
   },
   "license": "MIT",
   "author": "LobeHub <i@lobehub.com>",

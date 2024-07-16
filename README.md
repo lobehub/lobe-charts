@@ -6,7 +6,7 @@
 <img height="120" src="https://gw.alipayobjects.com/zos/kitchen/qJ3l3EPsdW/split.svg">
 <img height="120" src="https://registry.npmmirror.com/@lobehub/assets-emoji/1.3.0/files/assets/bar-chart.webp">
 
-<h1>Lobe Icons</h1>
+<h1>Lobe Charts</h1>
 
 React modern charts components built on recharts
 
@@ -27,6 +27,8 @@ React modern charts components built on recharts
 [![][github-issues-shield]][github-issues-link]
 [![][github-license-shield]][github-license-link]
 
+![](https://github.com/user-attachments/assets/71f7ff66-7fc6-49b1-af12-02151c5b1026)
+
 </div>
 
 <details>
@@ -40,7 +42,9 @@ React modern charts components built on recharts
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
 - [🩷 Sponsor](#-sponsor)
-- [🔗 More Products](#-more-products)
+- [🔗 Links](#-links)
+  - [More Products](#more-products)
+  - [Credits](#credits)
 
 ####
 
@@ -139,12 +143,19 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 </div>
 
-## 🔗 More Products
+## 🔗 Links
+
+### More Products
 
 - **[🤖 Lobe Chat][lobe-chat] :** An open-source, extensible (Function Calling), high-performance chatbot framework. It supports one-click free deployment of your private ChatGPT/LLM web application.
 - **[🤯 Lobe Theme][lobe-theme] :** The modern theme for stable diffusion webui, exquisite interface design, highly customizable UI, and efficiency boosting features.
 - **[🌏 Lobe i18n][lobe-i18n] :** Lobe i18n is an automation tool for the i18n (internationalization) translation process, powered by ChatGPT. It supports features such as automatic splitting of large files, incremental updates, and customization options for the OpenAI model, API proxy, and temperature.
 - **[💌 Lobe Commit][lobe-commit] :** Lobe Commit is a CLI tool that leverages Langchain/ChatGPT to generate Gitmoji-based commit messages.
+
+### Credits
+
+- **recharts** - <https://github.com/recharts/recharts>
+- **tremor** - <https://github.com/tremorlabs/tremor>
 
 <div align="right">
 
@@ -170,7 +181,7 @@ This project is [MIT](./LICENSE) licensed.
 [bun-shield]: https://img.shields.io/badge/-speedup%20with%20bun-black?logo=bun&style=for-the-badge
 [codespaces-link]: https://codespaces.new/lobehub/lobe-charts
 [codespaces-shield]: https://github.com/codespaces/badge.svg
-[contributors-contrib]: https://contrib.rocks/image?repo=lobehub/charts
+[contributors-contrib]: https://contrib.rocks/image?repo=lobehub/lobe-charts
 [contributors-link]: https://github.com/lobehub/lobe-charts/graphs/contributors
 [discord-link]: https://discord.gg/AYFPHvv2jT
 [discord-shield]: https://img.shields.io/discord/1127171173982154893?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
@@ -203,5 +214,5 @@ This project is [MIT](./LICENSE) licensed.
 [pr-welcome-link]: https://github.com/lobehub/lobe-chat/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/🤯_pr_welcome-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub
-[vercel-link]: https://icons.lobehub.com
+[vercel-link]: https://charts.lobehub.com
 [vercel-shield]: https://img.shields.io/website?down_message=offline&label=vercel&labelColor=black&logo=vercel&style=flat-square&up_message=online&url=https%3A%2F%2Fui.lobehub.com

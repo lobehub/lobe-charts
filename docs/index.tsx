@@ -4,6 +4,7 @@ import { createStyles } from 'antd-style';
 
 import AreaChart from '@/AreaChart/demos/example';
 import BarChart from '@/BarChart/demos/example';
+import BarChartGroups from '@/BarChart/demos/groups';
 import DonutChart from '@/DonutChart/demos/withLegend';
 import LineChart from '@/LineChart/demos/customColors';
 import ScatterChart from '@/ScatterChart/demos/example';
@@ -33,6 +34,9 @@ export default () => {
       </Card>
       <Card>
         <ScatterChart />
+      </Card>
+      <Card>
+        <BarChartGroups />
       </Card>
     </Grid>
   );
