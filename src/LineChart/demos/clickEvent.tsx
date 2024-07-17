@@ -1,9 +1,9 @@
-import { EventProps, LineChart } from '@lobehub/charts';
+import { EventProps, LineChart, LineChartProps } from '@lobehub/charts';
 import { Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: LineChartProps['data'] = [
   {
     2022: 45,
     2023: 78,
@@ -74,7 +74,7 @@ export default () => {
       <LineChart
         categories={['2022', '2023']}
         connectNulls={true}
-        data={chartdata}
+        data={data}
         index="date"
         onValueChange={(v) => setValue(v)}
         yAxisWidth={30}

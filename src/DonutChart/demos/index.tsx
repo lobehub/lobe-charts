@@ -1,7 +1,7 @@
-import { DonutChart } from '@lobehub/charts';
+import { DonutChart, DonutChartProps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 
-const sales = [
+const data: DonutChartProps['data'] = [
   {
     name: 'New York',
     sales: 980,
@@ -24,7 +24,8 @@ const sales = [
   },
 ];
 
-const valueFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`;
+const valueFormatter: DonutChartProps['valueFormatter'] = (number) =>
+  `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
 export default () => {
   const store = useCreateStore();
@@ -51,7 +52,7 @@ export default () => {
     <StoryBook levaStore={store}>
       <DonutChart
         category="sales"
-        data={sales}
+        data={data}
         index="name"
         valueFormatter={valueFormatter}
         {...props}

@@ -1,7 +1,7 @@
-import { BarChart } from '@lobehub/charts';
+import { BarChart, BarChartProps } from '@lobehub/charts';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: BarChartProps['data'] = [
   {
     groupA: 890,
     groupB: 338,
@@ -40,7 +40,8 @@ const chartdata = [
   },
 ];
 
-const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+const valueFormatter: BarChartProps['valueFormatter'] = (number: number) =>
+  Intl.NumberFormat('us').format(number).toString();
 
 export default () => {
   return (
@@ -48,9 +49,9 @@ export default () => {
       <h4>Writing Contest: Entries</h4>
       <BarChart
         categories={['groupA', 'groupB', 'groupC', 'groupD', 'groupE', 'groupF']}
-        data={chartdata}
+        data={data}
         index="name"
-        valueFormatter={dataFormatter}
+        valueFormatter={valueFormatter}
         yAxisWidth={48}
       />
     </Flexbox>

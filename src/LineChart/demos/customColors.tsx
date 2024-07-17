@@ -1,7 +1,7 @@
-import { LineChart } from '@lobehub/charts';
+import { LineChart, LineChartProps } from '@lobehub/charts';
 import { useTheme } from 'antd-style';
 
-const chartdata = [
+const data: LineChartProps['data'] = [
   {
     'Distance Running': 167,
     'Hatha Yoga': 115,
@@ -58,7 +58,7 @@ export default () => {
     <LineChart
       categories={['Distance Running', 'Road Cycling', 'Open Water Swimming']}
       colors={[theme.purple, theme.cyan, '#ffcc33']}
-      data={chartdata}
+      data={data}
       index="date"
       yAxisWidth={36}
     />

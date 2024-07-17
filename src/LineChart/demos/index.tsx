@@ -1,7 +1,7 @@
-import { LineChart } from '@lobehub/charts';
+import { LineChart, LineChartProps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 
-const chartdata = [
+const data: LineChartProps['data'] = [
   {
     Inverters: 2338,
     SolarPanels: 2890,
@@ -64,12 +64,13 @@ const chartdata = [
   },
 ];
 
-const dataFormatter = (number: number) => `$${Intl.NumberFormat('us').format(number).toString()}`;
+const valueFormatter: LineChartProps['valueFormatter'] = (number) =>
+  `$${Intl.NumberFormat('us').format(number).toString()}`;
 
 export default () => {
   const store = useCreateStore();
 
-  const props: any = useControls(
+  const props: LineChartProps | any = useControls(
     {
       allowDecimals: true,
       animationDuration: {
@@ -115,10 +116,10 @@ export default () => {
     <StoryBook levaStore={store}>
       <LineChart
         categories={['SolarPanels', 'Inverters']}
-        data={chartdata}
+        data={data}
         index={'date'}
         onValueChange={(v) => console.log(v)}
-        valueFormatter={dataFormatter}
+        valueFormatter={valueFormatter}
         {...props}
       />
     </StoryBook>

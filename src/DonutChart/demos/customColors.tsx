@@ -1,7 +1,7 @@
-import { DonutChart } from '@lobehub/charts';
+import { DonutChart, DonutChartProps } from '@lobehub/charts';
 import { useTheme } from 'antd-style';
 
-const sales = [
+const data: DonutChartProps['data'] = [
   {
     name: 'New York',
     sales: 980,
@@ -34,7 +34,7 @@ export default () => {
     <DonutChart
       category="sales"
       colors={[theme.purple, theme.cyan, theme.green, theme.orange, theme.colorPrimary, '#ffcc33']}
-      data={sales}
+      data={data}
       index="name"
     />
   );

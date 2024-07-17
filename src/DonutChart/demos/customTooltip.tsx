@@ -1,9 +1,9 @@
-import { ChartTooltipFrame, DonutChart } from '@lobehub/charts';
+import { ChartTooltipFrame, DonutChart, DonutChartProps } from '@lobehub/charts';
 import { Typography } from 'antd';
 import { useTheme } from 'antd-style';
 import { Flexbox } from 'react-layout-kit';
 
-const sales = [
+const data: DonutChartProps['data'] = [
   {
     name: 'New York',
     sales: 980,
@@ -30,19 +30,13 @@ const sales = [
   },
 ];
 
-const valueFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`;
-
-type CustomTooltipTypeBar = {
-  active: boolean | undefined;
-  label: any;
-  payload: any;
-};
+const valueFormatter: DonutChartProps['valueFormatter'] = (number) =>
+  `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
 export default () => {
   const theme = useTheme();
 
-  const customTooltip = (props: CustomTooltipTypeBar) => {
-    const { payload, active } = props;
+  const customTooltip: DonutChartProps['customTooltip'] = ({ payload, active }) => {
     if (!active || !payload) return null;
     return (
       <ChartTooltipFrame gap={4} padding={8}>
@@ -70,7 +64,7 @@ export default () => {
     <DonutChart
       category="sales"
       customTooltip={customTooltip}
-      data={sales}
+      data={data}
       index="name"
       valueFormatter={valueFormatter}
     />

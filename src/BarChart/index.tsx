@@ -72,6 +72,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     className,
     width = '100%',
     height = '20rem',
+    style,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -121,7 +122,14 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
 
   return (
-    <Flexbox className={className} height={height} ref={ref} width={width} {...rest}>
+    <Flexbox
+      className={className}
+      height={height}
+      ref={ref}
+      style={{ position: 'relative', ...style }}
+      width={width}
+      {...rest}
+    >
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsBarChart

@@ -1,7 +1,7 @@
-import { BarChart } from '@lobehub/charts';
+import { BarChart, BarChartProps } from '@lobehub/charts';
 import { useTheme } from 'antd-style';
 
-const chartdata = [
+const data: BarChartProps['data'] = [
   {
     'Distance Running': 167,
     'Hatha Yoga': 115,
@@ -58,7 +58,7 @@ export default () => {
     <BarChart
       categories={['Distance Running', 'Road Cycling', 'Open Water Swimming']}
       colors={[theme.purple, theme.colorSuccess, '#ffcc33']}
-      data={chartdata}
+      data={data}
       index="date"
       yAxisWidth={36}
     />

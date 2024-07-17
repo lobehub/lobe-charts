@@ -128,6 +128,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     yAxisLabel,
     width = '100%',
     height = '20rem',
+    style,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -136,7 +137,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const hasOnValueChange = !!onValueChange;
 
-  function onNodeClick(data: any, index: number, event: MouseEvent) {
+  const onNodeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();
     if (!hasOnValueChange) return;
     if (deepEqual(activeNode, data.node)) {
@@ -152,9 +153,9 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
         ...data.payload,
       });
     }
-  }
+  };
 
-  function onCategoryClick(dataKey: string) {
+  const onCategoryClick = (dataKey: string) => {
     if (!hasOnValueChange) return;
     if (dataKey === activeLegend && !activeNode) {
       setActiveLegend(undefined);
@@ -167,7 +168,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
       });
     }
     setActiveNode(undefined);
-  }
+  };
 
   const categories = constructCategories(data, category);
   const categoryColors = constructCategoryColors(categories, colors);
@@ -177,7 +178,14 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
   const yAxisDomain = getYAxisDomain(autoMinYValue, minYValue, maxYValue);
 
   return (
-    <Flexbox className={className} height={height} ref={ref} width={width} {...rest}>
+    <Flexbox
+      className={className}
+      height={height}
+      ref={ref}
+      style={{ position: 'relative', ...style }}
+      width={width}
+      {...rest}
+    >
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsScatterChart
@@ -292,7 +300,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                     }
                   : undefined
               }
-              cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+              cursor={{ stroke: theme.colorTextSecondary, strokeWidth: 1 }}
               isAnimationActive={false}
               wrapperStyle={{ outline: 'none' }}
             />

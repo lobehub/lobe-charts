@@ -1,9 +1,9 @@
-import { ChartTooltipFrame, ScatterChart } from '@lobehub/charts';
+import { ChartTooltipFrame, ScatterChart, ScatterChartProps } from '@lobehub/charts';
 import { Typography } from 'antd';
 import { useTheme } from 'antd-style';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: ScatterChartProps['data'] = [
   {
     location: 'Location A',
     x: 100,
@@ -66,16 +66,10 @@ const chartdata = [
   },
 ];
 
-type CustomTooltipTypeBar = {
-  active: boolean | undefined;
-  label: any;
-  payload: any;
-};
-
 export default () => {
   const theme = useTheme();
 
-  const customTooltip = ({ payload, active, label }: CustomTooltipTypeBar) => {
+  const customTooltip: ScatterChartProps['customTooltip'] = ({ payload, active, label }) => {
     if (!active || !payload) return null;
     return (
       <ChartTooltipFrame gap={8} padding={8}>
@@ -114,7 +108,7 @@ export default () => {
     <ScatterChart
       category="location"
       customTooltip={customTooltip}
-      data={chartdata}
+      data={data}
       showLegend={false}
       size="z"
       x="x"

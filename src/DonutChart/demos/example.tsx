@@ -1,7 +1,7 @@
-import { DonutChart } from '@lobehub/charts';
+import { DonutChart, DonutChartProps } from '@lobehub/charts';
 import { Flexbox } from 'react-layout-kit';
 
-const datahero = [
+const data: DonutChartProps['data'] = [
   {
     name: 'Noche Holding AG',
     value: 9800,
@@ -28,22 +28,23 @@ const datahero = [
   },
 ];
 
-const dataFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`;
+const valueFormatter: DonutChartProps['valueFormatter'] = (number) =>
+  `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
 export default () => (
   <Flexbox align={'center'} gap={8}>
     <h4>Donut Variant</h4>
     <DonutChart
-      data={datahero}
+      data={data}
       onValueChange={(v) => console.log(v)}
-      valueFormatter={dataFormatter}
+      valueFormatter={valueFormatter}
       variant="donut"
     />
     <h4>Pie Variant</h4>
     <DonutChart
-      data={datahero}
+      data={data}
       onValueChange={(v) => console.log(v)}
-      valueFormatter={dataFormatter}
+      valueFormatter={valueFormatter}
       variant="pie"
     />
   </Flexbox>

@@ -1,7 +1,7 @@
-import { AreaChart } from '@lobehub/charts';
+import { AreaChart, AreaChartProps } from '@lobehub/charts';
 import { useTheme } from 'antd-style';
 
-const chartdata = [
+const data: AreaChartProps['data'] = [
   {
     'Distance Running': 167,
     'Hatha Yoga': 115,
@@ -58,7 +58,7 @@ export default () => {
     <AreaChart
       categories={['Distance Running', 'Road Cycling', 'Open Water Swimming']}
       colors={[theme.purple, theme.cyan, '#ffcc33']}
-      data={chartdata}
+      data={data}
       index="date"
       yAxisWidth={30}
     />

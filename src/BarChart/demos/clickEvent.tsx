@@ -1,9 +1,9 @@
-import { BarChart, EventProps } from '@lobehub/charts';
+import { BarChart, BarChartProps, EventProps } from '@lobehub/charts';
 import { Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: BarChartProps['data'] = [
   {
     '2022': 45,
     '2023': 78,
@@ -73,7 +73,7 @@ export default () => {
       <h4>Closed Pull Requests</h4>
       <BarChart
         categories={['2022', '2023']}
-        data={chartdata}
+        data={data}
         index="date"
         onValueChange={(v) => setValue(v)}
         yAxisWidth={36}

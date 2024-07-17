@@ -79,6 +79,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
     yAxisLabel,
     width = '100%',
     height = '20rem',
+    style,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -91,7 +92,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
   const hasOnValueChange = !!onValueChange;
 
-  function onDotClick(itemData: any, event: MouseEvent) {
+  const onDotClick = (itemData: any, event: MouseEvent) => {
     event.stopPropagation();
 
     if (!hasOnValueChange) return;
@@ -116,9 +117,9 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
         ...itemData.payload,
       });
     }
-  }
+  };
 
-  function onCategoryClick(dataKey: string) {
+  const onCategoryClick = (dataKey: string) => {
     if (!hasOnValueChange) return;
     if (
       (dataKey === activeLegend && !activeDot) ||
@@ -134,9 +135,16 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
       });
     }
     setActiveDot(undefined);
-  }
+  };
   return (
-    <Flexbox className={className} height={height} ref={ref} width={width} {...rest}>
+    <Flexbox
+      className={className}
+      height={height}
+      ref={ref}
+      style={{ position: 'relative', ...style }}
+      width={width}
+      {...rest}
+    >
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsAreaChart

@@ -1,6 +1,6 @@
-import { LineChart } from '@lobehub/charts';
+import { LineChart, LineChartProps } from '@lobehub/charts';
 
-const chartdata = [
+const data: LineChartProps['data'] = [
   {
     Inverters: 2338,
     SolarPanels: 2890,
@@ -63,7 +63,7 @@ const chartdata = [
   },
 ];
 
-const valueFormatter = (number: number) => {
+const valueFormatter: LineChartProps['valueFormatter'] = (number) => {
   return '$ ' + new Intl.NumberFormat('us').format(number).toString();
 };
 
@@ -71,7 +71,7 @@ export default () => {
   return (
     <LineChart
       categories={['SolarPanels', 'Inverters']}
-      data={chartdata}
+      data={data}
       index="date"
       valueFormatter={valueFormatter}
       xAxisLabel="Month of Year"

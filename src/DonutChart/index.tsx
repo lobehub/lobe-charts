@@ -1,7 +1,7 @@
 'use client';
 
 import { css } from 'antd-style';
-import { ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
+import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -33,6 +33,7 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   showAnimation?: boolean;
   showLabel?: boolean;
   showTooltip?: boolean;
+  style?: CSSProperties;
   valueFormatter?: ValueFormatter;
   variant?: DonutChartVariant;
 }
@@ -58,6 +59,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     className,
     width = '100%',
     height = '10rem',
+    style,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -67,7 +69,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
   const [activeIndex, setActiveIndex] = useState<number | undefined>();
   const hasOnValueChange = !!onValueChange;
 
-  function onShapeClick(data: any, index: number, event: MouseEvent) {
+  const onShapeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();
 
     if (!hasOnValueChange) return;
@@ -81,7 +83,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
         ...data.payload.payload,
       });
     }
-  }
+  };
 
   useEffect(() => {
     const pieSectors = document.querySelectorAll('.recharts-pie-sector');
@@ -106,7 +108,14 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     });
 
   return (
-    <Flexbox className={className} height={height} ref={ref} width={width} {...rest}>
+    <Flexbox
+      className={className}
+      height={height}
+      ref={ref}
+      style={{ position: 'relative', ...style }}
+      width={width}
+      {...rest}
+    >
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsDonutChart

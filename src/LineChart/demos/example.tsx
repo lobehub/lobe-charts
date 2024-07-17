@@ -1,7 +1,7 @@
-import { LineChart } from '@lobehub/charts';
+import { LineChart, LineChartProps } from '@lobehub/charts';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: LineChartProps['data'] = [
   {
     Inverters: 2338,
     SolarPanels: 2890,
@@ -64,7 +64,7 @@ const chartdata = [
   },
 ];
 
-const valueFormatter = (number: number) => {
+const valueFormatter: LineChartProps['valueFormatter'] = (number) => {
   return '$ ' + new Intl.NumberFormat('us').format(number).toString();
 };
 
@@ -75,7 +75,7 @@ export default () => {
       <h2 style={{ marginTop: 4 }}>$34,567</h2>
       <LineChart
         categories={['SolarPanels', 'Inverters']}
-        data={chartdata}
+        data={data}
         index="date"
         valueFormatter={valueFormatter}
         yAxisWidth={65}

@@ -1,6 +1,6 @@
-import { ScatterChart } from '@lobehub/charts';
+import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
 
-const chartdata = [
+const data: ScatterChartProps['data'] = [
   {
     'Country': 'Argentina',
     'GDP': 13_467.1236,
@@ -129,20 +129,22 @@ const chartdata = [
   },
 ];
 
+const valueFormatter: ScatterChartProps['valueFormatter'] = {
+  size: (population) => `${(population / 1_000_000).toFixed(1)}M people`,
+  x: (amount) => `$${(amount / 1000).toFixed(1)}K`,
+  y: (lifeExp) => `${lifeExp} yrs`,
+};
+
 export default () => {
   return (
     <ScatterChart
       category="Country"
-      data={chartdata}
+      data={data}
       enableLegendSlider
       minYValue={60}
       showOpacity={true}
       size="Population"
-      valueFormatter={{
-        size: (population) => `${(population / 1_000_000).toFixed(1)}M people`,
-        x: (amount) => `$${(amount / 1000).toFixed(1)}K`,
-        y: (lifeExp) => `${lifeExp} yrs`,
-      }}
+      valueFormatter={valueFormatter}
       x="GDP"
       xAxisLabel="GDP"
       y="Life expectancy"

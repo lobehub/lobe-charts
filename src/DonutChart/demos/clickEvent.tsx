@@ -1,9 +1,9 @@
-import { DonutChart, EventProps } from '@lobehub/charts';
+import { DonutChart, DonutChartProps, EventProps } from '@lobehub/charts';
 import { Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-const sales = [
+const data: DonutChartProps['data'] = [
   {
     name: 'New York',
     sales: 980,
@@ -26,7 +26,8 @@ const sales = [
   },
 ];
 
-const valueFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`;
+const valueFormatter: DonutChartProps['valueFormatter'] = (number) =>
+  `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
 export default () => {
   const [value, setValue] = useState<EventProps>(null);
@@ -34,7 +35,7 @@ export default () => {
     <Flexbox>
       <DonutChart
         category="sales"
-        data={sales}
+        data={data}
         index="name"
         onValueChange={(v) => setValue(v)}
         valueFormatter={valueFormatter}

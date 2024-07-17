@@ -1,7 +1,7 @@
-import { ScatterChart } from '@lobehub/charts';
+import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
 import { useTheme } from 'antd-style';
 
-const chartdata = [
+const data: ScatterChartProps['data'] = [
   {
     location: 'Location A',
     x: 100,
@@ -70,7 +70,7 @@ export default () => {
     <ScatterChart
       category="location"
       colors={[theme.purple, theme.colorSuccess, theme.volcano, '#ffcc33']}
-      data={chartdata}
+      data={data}
       showLegend={false}
       size="z"
       x="x"

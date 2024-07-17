@@ -9,7 +9,6 @@ export const useThemeColorRange = () => {
     theme.lime,
     theme.volcano,
     theme.purple,
-
     theme.blue,
     theme.orange,
     theme.green,

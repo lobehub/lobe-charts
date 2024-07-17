@@ -1,6 +1,6 @@
-import { AreaChart } from '@lobehub/charts';
+import { AreaChart, AreaChartProps } from '@lobehub/charts';
 
-const chartdata = [
+const data: AreaChartProps['data'] = [
   {
     Inverters: 2338,
     SolarPanels: 2890,
@@ -63,7 +63,7 @@ const chartdata = [
   },
 ];
 
-const valueFormatter = (number: number) => {
+const valueFormatter: AreaChartProps['valueFormatter'] = (number) => {
   return '$ ' + new Intl.NumberFormat('us').format(number).toString();
 };
 
@@ -71,7 +71,7 @@ export default () => {
   return (
     <AreaChart
       categories={['SolarPanels', 'Inverters']}
-      data={chartdata}
+      data={data}
       index="date"
       valueFormatter={valueFormatter}
       xAxisLabel="Month of Year"

@@ -74,6 +74,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
+    "@icons-pack/react-simple-icons": "^9.6.0",
     "@lobehub/lint": "^1.24.3",
     "@lobehub/ui": "^1.146.8",
     "@testing-library/react": "^14.3.1",

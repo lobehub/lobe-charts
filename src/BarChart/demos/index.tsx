@@ -1,7 +1,7 @@
-import { BarChart } from '@lobehub/charts';
+import { BarChart, BarChartProps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 
-const chartdata = [
+const data: BarChartProps['data'] = [
   {
     groupA: 890,
     groupB: 338,
@@ -28,12 +28,13 @@ const chartdata = [
   },
 ];
 
-const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+const valueFormatter: BarChartProps['valueFormatter'] = (number) =>
+  Intl.NumberFormat('us').format(number).toString();
 
 export default () => {
   const store = useCreateStore();
 
-  const props: any = useControls(
+  const props: BarChartProps | any = useControls(
     {
       allowDecimals: true,
       animationDuration: {
@@ -81,10 +82,10 @@ export default () => {
     <StoryBook levaStore={store}>
       <BarChart
         categories={['groupA', 'groupB']}
-        data={chartdata}
+        data={data}
         index={'name'}
         onValueChange={(v) => console.log(v)}
-        valueFormatter={dataFormatter}
+        valueFormatter={valueFormatter}
         {...props}
       />
     </StoryBook>

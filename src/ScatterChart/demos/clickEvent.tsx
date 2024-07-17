@@ -1,9 +1,9 @@
-import { EventProps, ScatterChart } from '@lobehub/charts';
+import { EventProps, ScatterChart, ScatterChartProps } from '@lobehub/charts';
 import { Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: ScatterChartProps['data'] = [
   {
     'Country': 'Argentina',
     'GDP': 13_467.1236,
@@ -132,6 +132,12 @@ const chartdata = [
   },
 ];
 
+const valueFormatter: ScatterChartProps['valueFormatter'] = {
+  size: (population) => `${(population / 1_000_000).toFixed(1)}M people`,
+  x: (amount) => `$${(amount / 1000).toFixed(1)}K`,
+  y: (lifeExp) => `${lifeExp} yrs`,
+};
+
 export default () => {
   const [value, setValue] = useState<EventProps>(null);
   return (
@@ -139,17 +145,13 @@ export default () => {
       <h4>Closed Pull Requests</h4>
       <ScatterChart
         category="Country"
-        data={chartdata}
+        data={data}
         minYValue={60}
         onValueChange={(v) => setValue(v)}
         showLegend={false}
         showOpacity={true}
         size="Population"
-        valueFormatter={{
-          size: (population) => `${(population / 1_000_000).toFixed(1)}M people`,
-          x: (amount) => `$${(amount / 1000).toFixed(1)}K`,
-          y: (lifeExp) => `${lifeExp} yrs`,
-        }}
+        valueFormatter={valueFormatter}
         x="GDP"
         y="Life expectancy"
         yAxisWidth={50}

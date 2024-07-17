@@ -1,9 +1,9 @@
-import { AreaChart, ChartTooltipFrame } from '@lobehub/charts';
+import { AreaChart, AreaChartProps, ChartTooltipFrame } from '@lobehub/charts';
 import { Typography } from 'antd';
 import { useTheme } from 'antd-style';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: AreaChartProps['data'] = [
   {
     Running: 167,
     date: 'Jan 23',
@@ -30,17 +30,10 @@ const chartdata = [
   },
 ];
 
-type CustomTooltipTypeBar = {
-  active: boolean | undefined;
-  label: any;
-  payload: any;
-};
-
 export default () => {
   const theme = useTheme();
 
-  const customTooltip = (props: CustomTooltipTypeBar) => {
-    const { payload, active } = props;
+  const customTooltip: AreaChartProps['customTooltip'] = ({ payload, active }) => {
     if (!active || !payload) return null;
     return (
       <ChartTooltipFrame gap={4} padding={8}>
@@ -70,7 +63,7 @@ export default () => {
       <AreaChart
         categories={['Running']}
         customTooltip={customTooltip}
-        data={chartdata}
+        data={data}
         index="date"
         yAxisWidth={30}
       />

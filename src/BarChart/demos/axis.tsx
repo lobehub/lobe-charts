@@ -1,7 +1,7 @@
-import { BarChart } from '@lobehub/charts';
+import { BarChart, BarChartProps } from '@lobehub/charts';
 import { Flexbox } from 'react-layout-kit';
 
-const chartdata = [
+const data: BarChartProps['data'] = [
   {
     'Number of threatened species': 2488,
     'name': 'Amphibians',
@@ -32,7 +32,8 @@ const chartdata = [
   },
 ];
 
-const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+const valueFormatter: BarChartProps['valueFormatter'] = (number) =>
+  Intl.NumberFormat('us').format(number).toString();
 
 export default () => {
   return (
@@ -40,10 +41,9 @@ export default () => {
       <h4>Number of species threatened with extinction (2021)</h4>
       <BarChart
         categories={['Number of threatened species']}
-        className="mt-6"
-        data={chartdata}
+        data={data}
         index="name"
-        valueFormatter={dataFormatter}
+        valueFormatter={valueFormatter}
         xAxisLabel="Species"
         yAxisLabel="Count"
         yAxisWidth={48}
