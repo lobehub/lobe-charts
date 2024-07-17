@@ -68,8 +68,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.8",
+    "date-fns": "^3.6.0",
     "polished": "^4.3.1",
-    "react-layout-kit": "^1.9.0",
     "recharts": "^2.12.7"
   },
   "devDependencies": {
@@ -78,6 +78,7 @@
     "@lobehub/lint": "^1.24.3",
     "@lobehub/ui": "^1.146.8",
     "@testing-library/react": "^14.3.1",
+    "@types/chroma-js": "^2.4.4",
     "@types/pangu": "^4.0.2",
     "@types/query-string": "^6.3.0",
     "@types/react": "18.2.40",
@@ -109,9 +110,11 @@
     "ahooks": ">=3",
     "antd": ">=5.13.0",
     "antd-style": ">=3",
+    "chroma-js": ">=2",
     "lucide-react": ">=0.396.0",
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "react-layout-kit": ">=1"
   },
   "publishConfig": {
     "access": "public",

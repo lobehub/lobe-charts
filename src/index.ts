@@ -4,6 +4,7 @@ export { type Bar, default as BarList, type BarListProps } from './BarList';
 export { default as ChartTooltipFrame } from './common/ChartTooltip/ChartTooltipFrame';
 export { default as Legend, type LegendProps } from './components/Legend';
 export { default as DonutChart, type DonutChartProps } from './DonutChart';
+export { default as Heatmaps, type HeatmapsProps } from './Heatmaps';
 export { default as LineChart, type LineChartProps } from './LineChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
 export * from './SparkChart';

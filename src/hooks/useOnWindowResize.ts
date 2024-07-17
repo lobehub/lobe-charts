@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 
+import { isOnSeverSide } from '@/utils';
+
 export const useOnWindowResize = (handler: { (): void }) => {
   useEffect(() => {
-    if (window === undefined) return;
+    if (isOnSeverSide) return;
     const handleResize = () => {
       handler();
     };
