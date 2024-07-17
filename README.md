@@ -156,6 +156,7 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 - **recharts** - <https://github.com/recharts/recharts>
 - **tremor** - <https://github.com/tremorlabs/tremor>
+- **react-activity-calendar** - <https://github.com/grubersjoe/react-activity-calendar>
 
 <div align="right">
 
