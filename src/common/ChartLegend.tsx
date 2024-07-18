@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import Legend from '@/components/Legend';
+import Legend from '@/Legend';
 import { useOnWindowResize } from '@/hooks/useOnWindowResize';
 
 const calculateHeight = (height: number | undefined) =>
