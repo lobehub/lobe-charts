@@ -341,7 +341,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
               />
             ) : undefined}
             {categories.map((category) => {
-              console.log(categoryColors.get(category));
               return (
                 <Bar
                   animationDuration={animationDuration}
