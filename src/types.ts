@@ -95,3 +95,21 @@ export type ScatterChartValueFormatter = {
   x?: ValueFormatter;
   y?: ValueFormatter;
 };
+
+const deltaTypeValues = [
+  'increase',
+  'moderateIncrease',
+  'decrease',
+  'moderateDecrease',
+  'unchanged',
+] as const;
+
+export type DeltaType = (typeof deltaTypeValues)[number];
+
+export const DeltaTypes: { [key: string]: DeltaType } = {
+  Decrease: 'decrease',
+  Increase: 'increase',
+  ModerateDecrease: 'moderateDecrease',
+  ModerateIncrease: 'moderateIncrease',
+  Unchanged: 'unchanged',
+};

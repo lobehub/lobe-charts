@@ -18,15 +18,13 @@ const createstringScale = (colors: [from: string, to: string], size: number): st
 
 const validateTheme = (input: string[], size: number) => {
   if (typeof input !== 'object' || input === undefined) {
-    throw new Error(
-      `The theme object must contain at least one of the fields "light" and "dark" with exactly 2 or ${size} colors respectively.`,
-    );
+    throw new Error(`The theme object must contain at least 2 or ${size} colors respectively.`);
   }
 
   if (input) {
     const { length } = input;
     if (length !== 2 && length !== size) {
-      throw new Error(`theme.light must contain exactly 2 or ${size} colors, ${length} passed.`);
+      throw new Error(`theme must contain exactly 2 or ${size} colors, ${length} passed.`);
     }
   }
 };

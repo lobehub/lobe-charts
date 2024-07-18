@@ -1,5 +1,4 @@
-import { SparkAreaChart, SparkBarChart, SparkLineChart } from '@lobehub/charts';
-import { Flexbox } from 'react-layout-kit';
+import { SparkAreaChart } from '@lobehub/charts';
 
 const data = [
   {
@@ -40,11 +39,5 @@ const data = [
 ];
 
 export default () => {
-  return (
-    <Flexbox align={'center'} gap={16} horizontal justify={'center'} wrap={'wrap'}>
-      <SparkAreaChart categories={['Performance', 'Benchmark']} data={data} index="date" />
-      <SparkLineChart categories={['Performance', 'Benchmark']} data={data} index="date" />
-      <SparkBarChart categories={['Performance', 'Benchmark']} data={data} index="date" />
-    </Flexbox>
-  );
+  return <SparkAreaChart categories={['Performance', 'Benchmark']} data={data} index="date" />;
 };

@@ -6,31 +6,31 @@ description: A donut chart displays quantitative information through a circular 
 
 <code src="./demos/index.tsx" nopadding></code>
 
-### Usage example
+## Usage example
 
 The example below shows a composition of a `DonutChart` component.
 
 <code src="./demos/example.tsx"></code>
 
-### Usage example with legend
+## Usage example with legend
 
 The example below shows a composition of a `DonutChart` and `Legend` component.
 
 <code src="./demos/withLegend.tsx"></code>
 
-### Usage example with click event
+## Usage example with click event
 
 The example below shows an interacive chart using the `onValueChange` prop.
 
 <code src="./demos/clickEvent.tsx"></code>
 
-### Usage example with custom tooltip
+## Usage example with custom tooltip
 
 The example below shows a custom tooltip using `customTooltip` prop.
 
 <code src="./demos/customTooltip.tsx"></code>
 
-### Usage example with a custom colors
+## Usage example with a custom colors
 
 The example below shows a chart with custom `colors`.
 
