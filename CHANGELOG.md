@@ -2,6 +2,40 @@
 
 # Changelog
 
+## [Version 1.3.0](https://github.com/lobehub/lobe-charts/compare/v1.2.0...v1.3.0)
+
+<sup>Released on **2024-07-18**</sup>
+
+#### ✨ Features
+
+- **misc**: Add Legend, Add more charts.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Clean console log.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add Legend ([50e933c](https://github.com/lobehub/lobe-charts/commit/50e933c))
+- **misc**: Add more charts ([668602d](https://github.com/lobehub/lobe-charts/commit/668602d))
+
+#### What's fixed
+
+- **misc**: Clean console log ([adce8db](https://github.com/lobehub/lobe-charts/commit/adce8db))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.2.0](https://github.com/lobehub/lobe-charts/compare/v1.1.0...v1.2.0)
 
 <sup>Released on **2024-07-17**</sup>
