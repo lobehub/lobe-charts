@@ -103,7 +103,7 @@
     "semantic-release": "^21.1.2",
     "stylelint": "^15.11.0",
     "typescript": "^5.5.3",
-    "vitest": "~1.2.2"
+    "vitest": "~1.6.0"
   },
   "peerDependencies": {
     "@lobehub/ui": ">=1",
