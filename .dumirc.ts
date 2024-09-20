@@ -1,6 +1,6 @@
 import { defineConfig } from 'dumi';
 
-import { homepage, name } from './package.json';
+import { description, homepage, name } from './package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isWin = process.platform === 'win32';
@@ -24,7 +24,7 @@ const themeConfig = {
     pkg: name,
     sourceUrl: `{github}/tree/master/src/{atomId}/index.tsx`,
   },
-  description: 'React modern charts components built on recharts',
+  description: description,
   footer: 'Made with 🤯 by LobeHub',
   name: 'Charts',
   nav: [
@@ -45,7 +45,13 @@ export default defineConfig({
     'process.env': process.env,
   },
   extraBabelPlugins: ['babel-plugin-antd-style'],
-  favicons: ['https://npm.elemecdn.com/@lobehub/assets-favicons/assets/favicon.ico'],
+  favicons: ['https://lobehub.com/favicon.ico'],
+  giscus: {
+    category: 'Q&A',
+    categoryId: 'DIC_kwDOLNrpbc4Cin_G',
+    repo: 'lobehub/lobe-charts',
+    repoId: 'R_kgDOLNrpbQ',
+  },
   locales: [{ id: 'en-US', name: 'English' }],
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
@@ -55,6 +61,9 @@ export default defineConfig({
         entryFile: './src/index.ts',
       }
     : undefined,
+  sitemap: {
+    hostname: 'https://charts.lobehub.com',
+  },
   styles: [
     `html, body { background: transparent;  }
 
