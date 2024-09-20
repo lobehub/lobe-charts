@@ -26,6 +26,12 @@ const themeConfig = {
   },
   description: description,
   footer: 'Made with 🤯 by LobeHub',
+  giscus: {
+    category: 'Q&A',
+    categoryId: 'DIC_kwDOLNrpbc4Cin_G',
+    repo: 'lobehub/lobe-charts',
+    repoId: 'R_kgDOLNrpbQ',
+  },
   name: 'Charts',
   nav: [
     { link: '/components/area-chart', title: 'Components' },
@@ -46,12 +52,6 @@ export default defineConfig({
   },
   extraBabelPlugins: ['babel-plugin-antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
-  giscus: {
-    category: 'Q&A',
-    categoryId: 'DIC_kwDOLNrpbc4Cin_G',
-    repo: 'lobehub/lobe-charts',
-    repoId: 'R_kgDOLNrpbQ',
-  },
   locales: [{ id: 'en-US', name: 'English' }],
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
