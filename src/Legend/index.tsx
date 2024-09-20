@@ -140,6 +140,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
     };
   }, [checkScroll, enableLegendSlider]);
 
+  // @ts-ignore
   return (
     <Flexbox className={cx(styles.container, className)} gap={8} horizontal ref={ref} {...rest}>
       <Flexbox
@@ -176,7 +177,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
           ref={scrollButtonsRef}
         >
           <ScrollButton
-            disabled={!hasScroll?.left ?? true}
+            disabled={!hasScroll?.left}
             icon={ChevronLeft}
             onClick={() => {
               setIsKeyDowned(null);
@@ -184,7 +185,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
             }}
           />
           <ScrollButton
-            disabled={!hasScroll?.right ?? true}
+            disabled={!hasScroll?.right}
             icon={ChevronRight}
             onClick={() => {
               setIsKeyDowned(null);
