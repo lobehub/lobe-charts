@@ -7,11 +7,19 @@ import { ValueFormatter } from '@/types';
 
 export interface DonutChartTooltipProps {
   active: boolean | undefined;
+  customCategories?: {
+    [key: string]: string;
+  };
   payload: any;
   valueFormatter: ValueFormatter;
 }
 
-export const DonutChartTooltip = ({ active, payload, valueFormatter }: DonutChartTooltipProps) => {
+export const DonutChartTooltip = ({
+  customCategories,
+  active,
+  payload,
+  valueFormatter,
+}: DonutChartTooltipProps) => {
   if (active && payload?.[0]) {
     const payloadRow = payload?.[0];
     return (
@@ -19,7 +27,7 @@ export const DonutChartTooltip = ({ active, payload, valueFormatter }: DonutChar
         <Flexbox paddingBlock={8} paddingInline={16}>
           <ChartTooltipRow
             color={payloadRow.payload.color}
-            name={payloadRow.name}
+            name={customCategories?.[payloadRow.name] || payloadRow.name}
             value={valueFormatter(payloadRow.value)}
           />
         </Flexbox>

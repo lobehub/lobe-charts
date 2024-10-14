@@ -80,6 +80,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
     width = '100%',
     height = '20rem',
     style,
+    customCategories,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -228,6 +229,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                       CustomTooltip ? (
                         <CustomTooltip
                           active={active}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload?.map((payloadItem: any) => ({
                             ...payloadItem,
@@ -238,6 +240,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                         <ChartTooltip
                           active={active}
                           categoryColors={categoryColors}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload}
                           valueFormatter={valueFormatter}
@@ -262,6 +265,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                       ? (clickedLegendItem: string) => onCategoryClick(clickedLegendItem)
                       : undefined,
                     enableLegendSlider,
+                    customCategories,
                   )
                 }
                 height={legendHeight}

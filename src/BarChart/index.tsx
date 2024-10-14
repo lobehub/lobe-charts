@@ -40,6 +40,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
   const {
     data = [],
     categories = [],
+    customCategories,
     index,
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
@@ -300,6 +301,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                       CustomTooltip ? (
                         <CustomTooltip
                           active={active}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload?.map((payloadItem: any) => ({
                             ...payloadItem,
@@ -310,6 +312,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                         <ChartTooltip
                           active={active}
                           categoryColors={categoryColors}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload}
                           valueFormatter={valueFormatter}
@@ -334,6 +337,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                       ? (clickedLegendItem: string) => onCategoryClick(clickedLegendItem)
                       : undefined,
                     enableLegendSlider,
+                    customCategories,
                   )
                 }
                 height={legendHeight}

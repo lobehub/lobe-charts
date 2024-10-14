@@ -24,6 +24,9 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   category?: string;
   className?: string;
   colors?: string[];
+  customCategories?: {
+    [key: string]: string;
+  };
   customTooltip?: ComponentType<CustomTooltipProps>;
   data: any[];
   index?: string;
@@ -60,6 +63,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     width = '100%',
     height = '10rem',
     style,
+    customCategories,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -170,6 +174,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                       CustomTooltip ? (
                         <CustomTooltip
                           active={active}
+                          customCategories={customCategories}
                           label={payload?.[0]?.name}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
@@ -179,6 +184,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                       ) : (
                         <DonutChartTooltip
                           active={active}
+                          customCategories={customCategories}
                           payload={payload}
                           valueFormatter={valueFormatter}
                         />

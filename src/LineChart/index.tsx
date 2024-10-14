@@ -75,6 +75,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
     width = '100%',
     height = '20rem',
     style,
+    customCategories,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -224,6 +225,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                       CustomTooltip ? (
                         <CustomTooltip
                           active={active}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload?.map((payloadItem: any) => ({
                             ...payloadItem,
@@ -234,6 +236,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                         <ChartTooltip
                           active={active}
                           categoryColors={categoryColors}
+                          customCategories={customCategories}
                           label={label}
                           payload={payload}
                           valueFormatter={valueFormatter}
@@ -259,6 +262,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                       ? (clickedLegendItem: string) => onCategoryClick(clickedLegendItem)
                       : undefined,
                     enableLegendSlider,
+                    customCategories,
                   )
                 }
                 height={legendHeight}

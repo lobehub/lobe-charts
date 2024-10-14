@@ -3,64 +3,64 @@ import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 
 const data: AreaChartProps['data'] = [
   {
-    Inverters: 2338,
-    SolarPanels: 2890,
     date: 'Jan 22',
+    inverters: 2338,
+    solarPanels: 2890,
   },
   {
-    Inverters: 2103,
-    SolarPanels: 2756,
     date: 'Feb 22',
+    inverters: 2103,
+    solarPanels: 2756,
   },
   {
-    Inverters: 2194,
-    SolarPanels: 3322,
     date: 'Mar 22',
+    inverters: 2194,
+    solarPanels: 3322,
   },
   {
-    Inverters: 2108,
-    SolarPanels: 3470,
     date: 'Apr 22',
+    inverters: 2108,
+    solarPanels: 3470,
   },
   {
-    Inverters: 1812,
-    SolarPanels: 3475,
     date: 'May 22',
+    inverters: 1812,
+    solarPanels: 3475,
   },
   {
-    Inverters: 1726,
-    SolarPanels: 3129,
     date: 'Jun 22',
+    inverters: 1726,
+    solarPanels: 3129,
   },
   {
-    Inverters: 1982,
-    SolarPanels: 3490,
     date: 'Jul 22',
+    inverters: 1982,
+    solarPanels: 3490,
   },
   {
-    Inverters: 2012,
-    SolarPanels: 2903,
     date: 'Aug 22',
+    inverters: 2012,
+    solarPanels: 2903,
   },
   {
-    Inverters: 2342,
-    SolarPanels: 2643,
     date: 'Sep 22',
+    inverters: 2342,
+    solarPanels: 2643,
   },
   {
-    Inverters: 2473,
-    SolarPanels: 2837,
     date: 'Oct 22',
+    inverters: 2473,
+    solarPanels: 2837,
   },
   {
-    Inverters: 3848,
-    SolarPanels: 2954,
     date: 'Nov 22',
+    inverters: 3848,
+    solarPanels: 2954,
   },
   {
-    Inverters: 3736,
-    SolarPanels: 3239,
     date: 'Dec 22',
+    inverters: 3736,
+    solarPanels: 3239,
   },
 ];
 
@@ -116,7 +116,11 @@ export default () => {
   return (
     <StoryBook levaStore={store}>
       <AreaChart
-        categories={['SolarPanels', 'Inverters']}
+        categories={['solarPanels', 'inverters']}
+        customCategories={{
+          inverters: 'Inverters',
+          solarPanels: 'Solar Panels',
+        }}
         data={data}
         index={'date'}
         onValueChange={(v) => console.log(v)}

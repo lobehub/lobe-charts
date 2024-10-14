@@ -22,6 +22,9 @@ interface BaseChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDi
   autoMinValue?: boolean;
   categories: string[];
   colors?: string[];
+  customCategories?: {
+    [key: string]: string;
+  };
   customTooltip?: ComponentType<CustomTooltipProps>;
   data: any[];
   enableLegendSlider?: boolean;

@@ -17,6 +17,9 @@ const useStyles = createStyles(({ css, token }) => ({
 export interface ChartTooltipProps {
   active: boolean | undefined;
   categoryColors: Map<string, string>;
+  customCategories?: {
+    [key: string]: string;
+  };
   label: string;
   payload: any;
   valueFormatter: ValueFormatter;
@@ -28,6 +31,7 @@ const ChartTooltip = ({
   label,
   categoryColors,
   valueFormatter,
+  customCategories,
 }: ChartTooltipProps) => {
   const { cx, theme, styles } = useStyles();
 
@@ -46,7 +50,7 @@ const ChartTooltip = ({
             <ChartTooltipRow
               color={categoryColors.get(name) ?? theme.colorPrimary}
               key={`id-${idx}`}
-              name={name}
+              name={customCategories?.[name] || name}
               value={valueFormatter(value)}
             />
           ))}

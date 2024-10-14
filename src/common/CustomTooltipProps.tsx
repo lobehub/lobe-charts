@@ -2,6 +2,9 @@ import { NameType, Payload } from 'recharts/types/component/DefaultTooltipConten
 
 export type CustomTooltipProps = {
   active: boolean | undefined;
+  customCategories?: {
+    [key: string]: string;
+  };
   label: NameType | undefined;
   payload: Payload<string | number | (string | number)[], string | number>[] | undefined;
 };

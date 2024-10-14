@@ -32,11 +32,12 @@ const useStyles = createStyles(({ css, token }) => ({
 export interface LegendItemProps {
   activeLegend?: string;
   color: string;
+  label: string;
   name: string;
   onClick?: (name: string, color: string) => void;
 }
 
-const LegendItem = memo<LegendItemProps>(({ name, color, onClick, activeLegend }) => {
+const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeLegend }) => {
   const { cx, styles, theme } = useStyles();
   const hasOnValueChange = !!onClick;
 
@@ -73,7 +74,7 @@ const LegendItem = memo<LegendItemProps>(({ name, color, onClick, activeLegend }
           opacity: activeLegend && activeLegend !== name ? 0.4 : 1,
         }}
       >
-        {name}
+        {label}
       </Typography.Paragraph>
     </Flexbox>
   );

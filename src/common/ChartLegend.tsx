@@ -16,6 +16,9 @@ const ChartLegend = (
   activeLegend: string | undefined,
   onClick?: (category: string, color: string) => void,
   enableLegendSlider?: boolean,
+  customCategories?: {
+    [key: string]: string;
+  },
 ) => {
   const legendRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +34,7 @@ const ChartLegend = (
         activeLegend={activeLegend}
         categories={filteredPayload.map((entry: any) => entry.value)}
         colors={filteredPayload.map((entry: any) => categoryColors.get(entry.value))}
+        customCategories={customCategories}
         enableLegendSlider={enableLegendSlider}
         onClickLegendItem={onClick}
       />

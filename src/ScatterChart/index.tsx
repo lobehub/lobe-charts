@@ -50,6 +50,9 @@ export interface ScatterChartProps
   autoMinYValue?: boolean;
   category: string;
   colors?: string[];
+  customCategories?: {
+    [key: string]: string;
+  };
   customTooltip?: ComponentType<CustomTooltipProps>;
   data: any[];
   enableLegendSlider?: boolean;
@@ -129,6 +132,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     width = '100%',
     height = '20rem',
     style,
+    customCategories,
     ...rest
   } = props;
   const CustomTooltip = customTooltip;
@@ -280,6 +284,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                       return CustomTooltip ? (
                         <CustomTooltip
                           active={active}
+                          customCategories={customCategories}
                           label={color}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
@@ -292,6 +297,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                           axis={{ size: size, x: x, y: y }}
                           category={category}
                           categoryColors={categoryColors}
+                          customCategories={customCategories}
                           label={color}
                           payload={payload}
                           valueFormatter={valueFormatter}
@@ -344,6 +350,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                       ? (clickedLegendItem: string) => onCategoryClick(clickedLegendItem)
                       : undefined,
                     enableLegendSlider,
+                    customCategories,
                   )
                 }
                 height={legendHeight}

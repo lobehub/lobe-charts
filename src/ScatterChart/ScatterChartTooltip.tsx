@@ -23,13 +23,25 @@ export interface ScatterChartTooltipProps {
   axis: any;
   category?: string;
   categoryColors: Map<string, string>;
+  customCategories?: {
+    [key: string]: string;
+  };
   label: string;
   payload: any;
   valueFormatter: ScatterChartValueFormatter;
 }
 
 const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
-  ({ label, active, payload, valueFormatter, axis, category, categoryColors }) => {
+  ({
+    customCategories,
+    label,
+    active,
+    payload,
+    valueFormatter,
+    axis,
+    category,
+    categoryColors,
+  }) => {
     const { cx, theme, styles } = useStyles();
 
     const color = category
@@ -60,7 +72,7 @@ const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
               return (
                 <ScatterChartTooltipRow
                   key={`id-${idx}`}
-                  name={name}
+                  name={customCategories?.[name] || name}
                   value={valueFormatter && valueFormatterFn ? valueFormatterFn(value) : `${value}`}
                 />
               );

@@ -82,6 +82,10 @@ export default () => {
     <StoryBook levaStore={store}>
       <BarChart
         categories={['groupA', 'groupB']}
+        customCategories={{
+          groupA: 'Group A',
+          groupB: 'Group B',
+        }}
         data={data}
         index={'name'}
         onValueChange={(v) => console.log(v)}

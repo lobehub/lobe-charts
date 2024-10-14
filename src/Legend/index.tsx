@@ -33,6 +33,9 @@ export interface LegendProps extends FlexboxProps {
   activeLegend?: string;
   categories: string[];
   colors?: string[];
+  customCategories?: {
+    [key: string]: string;
+  };
   enableLegendSlider?: boolean;
   onClickLegendItem?: (category: string, color: string) => void;
 }
@@ -46,6 +49,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
   const { cx, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
+    customCategories,
     categories,
     colors = themeColorRange,
     className,
@@ -160,6 +164,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
             activeLegend={activeLegend}
             color={colors[idx % colors.length]}
             key={`item-${idx}`}
+            label={customCategories?.[category] || category}
             name={category}
             onClick={onClickLegendItem}
           />
