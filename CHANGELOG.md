@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.4.1](https://github.com/lobehub/lobe-charts/compare/v1.4.0...v1.4.1)
+
+<sup>Released on **2024-10-14**</sup>
+
+#### 💄 Styles
+
+- **misc**: Add customCategories.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Add customCategories ([6c012c2](https://github.com/lobehub/lobe-charts/commit/6c012c2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.4.0](https://github.com/lobehub/lobe-charts/compare/v1.3.0...v1.4.0)
 
 <sup>Released on **2024-09-20**</sup>
