@@ -76,7 +76,6 @@ export default () => {
       valueFormatter={valueFormatter}
       xAxisLabel="Month of Year"
       yAxisLabel="Revenue (USD)"
-      yAxisWidth={65}
     />
   );
 };

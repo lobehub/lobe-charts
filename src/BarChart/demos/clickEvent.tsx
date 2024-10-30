@@ -76,7 +76,6 @@ export default () => {
         data={data}
         index="date"
         onValueChange={(v) => setValue(v)}
-        yAxisWidth={36}
       />
       <Highlighter language={'json'} style={{ marginTop: 16 }}>
         {JSON.stringify(value, null, 2)}

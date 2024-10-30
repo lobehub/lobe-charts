@@ -1,7 +1,7 @@
 'use client';
 
 import { css } from 'antd-style';
-import { MouseEvent, forwardRef, useState } from 'react';
+import { MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import {
   Bar,
@@ -19,10 +19,12 @@ import { AxisDomain } from 'recharts/types/util/types';
 import BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
+import CustomYAxisTick from '@/common/CustomYAxisTick';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, deepEqual, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
+import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import { renderShape } from './renderShape';
 import { useStyles } from './styles';
@@ -32,6 +34,7 @@ export interface BarChartProps extends BaseChartProps {
   layout?: 'vertical' | 'horizontal';
   relative?: boolean;
   stack?: boolean;
+  yAxisAlign?: 'left' | 'right';
 }
 
 const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
@@ -42,6 +45,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     categories = [],
     customCategories,
     index,
+    yAxisAlign = 'left',
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
     layout = 'horizontal',
@@ -52,7 +56,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     showAnimation = false,
     showXAxis = true,
     showYAxis = true,
-    yAxisWidth = 56,
+    yAxisWidth,
     intervalType = 'equidistantPreserveStart',
     showTooltip = true,
     showLegend = true,
@@ -83,6 +87,11 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
   const [activeBar, setActiveBar] = useState<any | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const hasOnValueChange = !!onValueChange;
+
+  const calculatedYAxisWidth: number | string = useMemo(() => {
+    if (yAxisWidth) return yAxisWidth;
+    return getMaxLabelLength({ data, index, layout, relative, valueFormatter });
+  }, [yAxisWidth, layout, data, valueFormatter, relative, index]);
 
   const onBarClick = (data: any, idx: number, event: MouseEvent) => {
     event.stopPropagation();
@@ -238,11 +247,19 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 hide={!showYAxis}
                 interval="preserveStartEnd"
                 stroke=""
-                tick={{ transform: 'translate(0, 6)' }}
+                tick={(props) => (
+                  <CustomYAxisTick
+                    {...props}
+                    align={yAxisAlign}
+                    formatter={(v) => v}
+                    textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
+                    yAxisLabel={Boolean(yAxisLabel)}
+                  />
+                )}
                 tickLine={false}
                 ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
                 type="category"
-                width={yAxisWidth}
+                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label
@@ -269,13 +286,25 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 fill=""
                 hide={!showYAxis}
                 stroke=""
-                tick={{ transform: 'translate(-3, 0)' }}
+                tick={(props) => (
+                  <CustomYAxisTick
+                    {...props}
+                    align={yAxisAlign}
+                    formatter={
+                      relative
+                        ? (value: number | string) => `${Number(value) * 100}%`
+                        : valueFormatter
+                    }
+                    textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
+                    yAxisLabel={Boolean(yAxisLabel)}
+                  />
+                )}
                 tickFormatter={
                   relative ? (value: number) => `${(value * 100).toString()} %` : valueFormatter
                 }
                 tickLine={false}
                 type="number"
-                width={yAxisWidth}
+                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label

@@ -60,13 +60,7 @@ export default () => {
   return (
     <Flexbox>
       <h4>Average BPM</h4>
-      <LineChart
-        categories={['Running']}
-        customTooltip={customTooltip}
-        data={data}
-        index="date"
-        yAxisWidth={36}
-      />
+      <LineChart categories={['Running']} customTooltip={customTooltip} data={data} index="date" />
     </Flexbox>
   );
 };

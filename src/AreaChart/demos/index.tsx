@@ -85,11 +85,6 @@ export default () => {
         options: ['preserveStart', 'preserveEnd', 'preserveStartEnd', 'equidistantPreserveStart'],
         value: 'equidistantPreserveStart',
       },
-      layout: {
-        options: ['horizontal', 'vertical'],
-        value: 'horizontal',
-      },
-      relative: false,
       showAnimation: false,
       showGradient: true,
       showGridLines: true,
@@ -104,11 +99,11 @@ export default () => {
         value: 5,
       },
       xAxisLabel: '',
-      yAxisLabel: '',
-      yAxisWidth: {
-        step: 1,
-        value: 60,
+      yAxisAlign: {
+        options: ['left', 'right'],
+        value: 'left',
       },
+      yAxisLabel: '',
     },
     { store },
   );

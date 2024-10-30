@@ -60,7 +60,6 @@ export default () => {
       colors={[theme.purple, theme.colorSuccess, '#ffcc33']}
       data={data}
       index="date"
-      yAxisWidth={36}
     />
   );
 };

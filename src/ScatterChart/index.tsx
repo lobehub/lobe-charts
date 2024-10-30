@@ -1,7 +1,7 @@
 'use client';
 
 import { css } from 'antd-style';
-import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useState } from 'react';
+import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import {
   CartesianGrid,
@@ -20,6 +20,7 @@ import { AxisDomain } from 'recharts/types/util/types';
 import { renderShape } from '@/ScatterChart/renderShape';
 import ChartLegend from '@/common/ChartLegend';
 import { CustomTooltipProps } from '@/common/CustomTooltipProps';
+import CustomYAxisTick from '@/common/CustomYAxisTick';
 import {
   constructCategories,
   constructCategoryColors,
@@ -30,6 +31,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { EventProps } from '@/types';
 import { IntervalType, ValueFormatter } from '@/types';
 import { defaultValueFormatter } from '@/utils';
+import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import BaseAnimationTimingProps from '../common/BaseAnimationTimingProps';
 import NoData, { type NoDataProps } from '../common/NoData';
@@ -82,6 +84,7 @@ export interface ScatterChartProps
   x: string;
   xAxisLabel?: string;
   y: string;
+  yAxisAlign?: 'left' | 'right';
   yAxisLabel?: string;
   yAxisWidth?: number;
 }
@@ -97,6 +100,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     category,
     colors = themeColorRange,
     showOpacity = false,
+    yAxisAlign = 'left',
     sizeRange = [1, 1000],
     valueFormatter = {
       size: defaultValueFormatter,
@@ -106,7 +110,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     startEndOnly = false,
     showXAxis = true,
     showYAxis = true,
-    yAxisWidth = 56,
+    yAxisWidth,
     intervalType = 'equidistantPreserveStart',
     animationDuration = 900,
     showAnimation = false,
@@ -140,6 +144,17 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
   const [activeNode, setActiveNode] = useState<any | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const hasOnValueChange = !!onValueChange;
+
+  const calculatedYAxisWidth: number | string = useMemo(() => {
+    if (yAxisWidth) return yAxisWidth;
+    return getMaxLabelLength({
+      data,
+      index: y,
+      isScatterChart: true,
+      margin: 0,
+      valueFormatter: valueFormatter?.y,
+    });
+  }, [yAxisWidth, data, valueFormatter, y]);
 
   const onNodeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();
@@ -257,11 +272,19 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                 hide={!showYAxis}
                 name={y}
                 stroke=""
-                tick={{ transform: 'translate(-3, 0)' }}
+                tick={(props) => (
+                  <CustomYAxisTick
+                    {...props}
+                    align={yAxisAlign}
+                    formatter={valueFormatter.y}
+                    textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
+                    yAxisLabel={Boolean(yAxisLabel)}
+                  />
+                )}
                 tickFormatter={valueFormatter.y}
                 tickLine={false}
                 type="number"
-                width={yAxisWidth}
+                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label

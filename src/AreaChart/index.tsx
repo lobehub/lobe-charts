@@ -1,7 +1,7 @@
 'use client';
 
 import { css } from 'antd-style';
-import { Fragment, MouseEvent, forwardRef, useState } from 'react';
+import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import {
   Area,
@@ -21,11 +21,13 @@ import { AxisDomain } from 'recharts/types/util/types';
 import BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
+import CustomYAxisTick from '@/common/CustomYAxisTick';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain, hasOnlyOneValueForThisKey } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { CurveType } from '@/types';
 import { defaultValueFormatter } from '@/utils';
+import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import { useStyles } from './styles';
 
@@ -34,6 +36,7 @@ export interface AreaChartProps extends BaseChartProps {
   curveType?: CurveType;
   showGradient?: boolean;
   stack?: boolean;
+  yAxisAlign?: 'left' | 'right';
 }
 
 interface ActiveDot {
@@ -54,7 +57,8 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
     startEndOnly = false,
     showXAxis = true,
     showYAxis = true,
-    yAxisWidth = 56,
+    yAxisAlign = 'left',
+    yAxisWidth,
     intervalType = 'equidistantPreserveStart',
     showAnimation = false,
     animationDuration = 900,
@@ -92,6 +96,11 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
 
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
   const hasOnValueChange = !!onValueChange;
+
+  const calculatedYAxisWidth: number | string = useMemo(() => {
+    if (yAxisWidth) return yAxisWidth;
+    return getMaxLabelLength({ data, index, margin: 16, valueFormatter });
+  }, [yAxisWidth, data, valueFormatter, index]);
 
   const onDotClick = (itemData: any, event: MouseEvent) => {
     event.stopPropagation();
@@ -204,11 +213,19 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
               fill=""
               hide={!showYAxis}
               stroke=""
-              tick={{ transform: 'translate(-3, 0)' }}
+              tick={(props) => (
+                <CustomYAxisTick
+                  {...props}
+                  align={yAxisAlign}
+                  formatter={valueFormatter}
+                  textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
+                  yAxisLabel={Boolean(yAxisLabel)}
+                />
+              )}
               tickFormatter={valueFormatter}
               tickLine={false}
               type="number"
-              width={yAxisWidth}
+              width={calculatedYAxisWidth}
             >
               {yAxisLabel && (
                 <Label

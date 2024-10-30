@@ -153,7 +153,6 @@ export default () => {
         options: ['preserveStart', 'preserveEnd', 'preserveStartEnd', 'equidistantPreserveStart'],
         value: 'equidistantPreserveStart',
       },
-      relative: false,
       showAnimation: false,
       showGridLines: true,
       showLegend: true,
@@ -168,11 +167,11 @@ export default () => {
         value: 5,
       },
       xAxisLabel: '',
-      yAxisLabel: '',
-      yAxisWidth: {
-        step: 1,
-        value: 48,
+      yAxisAlign: {
+        options: ['left', 'right'],
+        value: 'left',
       },
+      yAxisLabel: '',
     },
     { store },
   );

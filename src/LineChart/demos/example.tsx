@@ -78,7 +78,6 @@ export default () => {
         data={data}
         index="date"
         valueFormatter={valueFormatter}
-        yAxisWidth={65}
       />
     </Flexbox>
   );

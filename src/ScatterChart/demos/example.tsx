@@ -147,7 +147,6 @@ export default () => {
       valueFormatter={valueFormatter}
       x="GDP"
       y="Life expectancy"
-      yAxisWidth={50}
     />
   );
 };

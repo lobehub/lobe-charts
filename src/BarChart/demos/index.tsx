@@ -6,7 +6,7 @@ const data: BarChartProps['data'] = [
     groupA: 890,
     groupB: 338,
 
-    name: 'Topic 1',
+    name: 'Topic 1sdafsdafsd',
   },
   {
     groupA: 289,
@@ -69,11 +69,11 @@ export default () => {
         value: 5,
       },
       xAxisLabel: '',
-      yAxisLabel: '',
-      yAxisWidth: {
-        step: 1,
-        value: 48,
+      yAxisAlign: {
+        options: ['left', 'right'],
+        value: 'left',
       },
+      yAxisLabel: '',
     },
     { store },
   );

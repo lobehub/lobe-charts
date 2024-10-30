@@ -113,7 +113,6 @@ export default () => {
       size="z"
       x="x"
       y="y"
-      yAxisWidth={50}
     />
   );
 };

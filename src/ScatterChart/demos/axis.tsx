@@ -149,7 +149,6 @@ export default () => {
       xAxisLabel="GDP"
       y="Life expectancy"
       yAxisLabel="Life expectancy"
-      yAxisWidth={50}
     />
   );
 };

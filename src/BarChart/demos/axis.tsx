@@ -46,7 +46,6 @@ export default () => {
         valueFormatter={valueFormatter}
         xAxisLabel="Species"
         yAxisLabel="Count"
-        yAxisWidth={48}
       />
     </Flexbox>
   );

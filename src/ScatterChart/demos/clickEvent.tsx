@@ -154,7 +154,6 @@ export default () => {
         valueFormatter={valueFormatter}
         x="GDP"
         y="Life expectancy"
-        yAxisWidth={50}
       />
       <Highlighter language={'json'} style={{ marginTop: 16 }}>
         {JSON.stringify(value, null, 2)}

@@ -45,7 +45,6 @@ export default () => {
         data={data}
         index="name"
         valueFormatter={valueFormatter}
-        yAxisWidth={48}
       />
     </Flexbox>
   );
