@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { forwardRef } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -13,6 +14,7 @@ import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 
 export interface SparkBarChartProps extends BaseSparkChartProps {
+  loading?: boolean;
   relative?: boolean;
   stack?: boolean;
 }
@@ -30,6 +32,7 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
     animationDuration = 900,
     showAnimation = false,
     noDataText = <div />,
+    loading,
     autoMinValue = false,
     minValue,
     maxValue,
@@ -39,6 +42,9 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
     style,
     ...rest
   } = props;
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
   const categoryColors = constructCategoryColors(categories, colors);
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
 

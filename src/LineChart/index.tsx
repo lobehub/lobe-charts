@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -33,6 +34,7 @@ import { useStyles } from './styles';
 export interface LineChartProps extends BaseChartProps {
   connectNulls?: boolean;
   curveType?: CurveType;
+  loading?: boolean;
   yAxisAlign?: 'left' | 'right';
 }
 
@@ -80,22 +82,24 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
     height = '20rem',
     style,
     customCategories,
+    loading,
     ...rest
   } = props;
-  const CustomTooltip = customTooltip;
-  const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
   const [legendHeight, setLegendHeight] = useState(60);
   const [activeDot, setActiveDot] = useState<ActiveDot | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
-  const categoryColors = constructCategoryColors(categories, colors);
-
-  const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
-  const hasOnValueChange = !!onValueChange;
-
   const calculatedYAxisWidth: number | string = useMemo(() => {
     if (yAxisWidth) return yAxisWidth;
     return getMaxLabelLength({ data, index, margin: 16, valueFormatter });
   }, [yAxisWidth, data, valueFormatter, index]);
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
+  const CustomTooltip = customTooltip;
+  const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
+  const categoryColors = constructCategoryColors(categories, colors);
+  const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
+  const hasOnValueChange = !!onValueChange;
 
   const onDotClick = (itemData: any, event: MouseEvent) => {
     event.stopPropagation();

@@ -46,6 +46,10 @@ The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` pr
 
 <code src="./demos/noData.tsx"></code>
 
+## Loading
+
+<code src="./demos/loading.tsx"></code>
+
 ## API
 
 <API></API>

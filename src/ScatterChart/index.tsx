@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -59,6 +60,7 @@ export interface ScatterChartProps
   data: any[];
   enableLegendSlider?: boolean;
   intervalType?: IntervalType;
+  loading?: boolean;
   maxXValue?: number;
   maxYValue?: number;
   minXValue?: number;
@@ -116,6 +118,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     showAnimation = false,
     showTooltip = true,
     showLegend = true,
+    loading,
     showGridLines = true,
     autoMinXValue = false,
     minXValue,
@@ -139,12 +142,10 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     customCategories,
     ...rest
   } = props;
-  const CustomTooltip = customTooltip;
+
   const [legendHeight, setLegendHeight] = useState(60);
   const [activeNode, setActiveNode] = useState<any | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
-  const hasOnValueChange = !!onValueChange;
-
   const calculatedYAxisWidth: number | string = useMemo(() => {
     if (yAxisWidth) return yAxisWidth;
     return getMaxLabelLength({
@@ -155,6 +156,11 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
       valueFormatter: valueFormatter?.y,
     });
   }, [yAxisWidth, data, valueFormatter, y]);
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
+  const CustomTooltip = customTooltip;
+  const hasOnValueChange = !!onValueChange;
 
   const onNodeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();

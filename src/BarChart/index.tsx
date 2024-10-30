@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -32,6 +33,7 @@ import { useStyles } from './styles';
 export interface BarChartProps extends BaseChartProps {
   barCategoryGap?: string | number;
   layout?: 'vertical' | 'horizontal';
+  loading?: boolean;
   relative?: boolean;
   stack?: boolean;
   yAxisAlign?: 'left' | 'right';
@@ -72,6 +74,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     rotateLabelX,
     barCategoryGap,
     tickGap = 5,
+    loading,
     xAxisLabel,
     yAxisLabel,
     className,
@@ -80,18 +83,21 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     style,
     ...rest
   } = props;
-  const CustomTooltip = customTooltip;
-  const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
-  const [legendHeight, setLegendHeight] = useState(60);
-  const categoryColors = constructCategoryColors(categories, colors);
+
   const [activeBar, setActiveBar] = useState<any | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
-  const hasOnValueChange = !!onValueChange;
-
+  const [legendHeight, setLegendHeight] = useState(60);
   const calculatedYAxisWidth: number | string = useMemo(() => {
     if (yAxisWidth) return yAxisWidth;
     return getMaxLabelLength({ data, index, layout, relative, valueFormatter });
   }, [yAxisWidth, layout, data, valueFormatter, relative, index]);
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
+  const CustomTooltip = customTooltip;
+  const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
+  const categoryColors = constructCategoryColors(categories, colors);
+  const hasOnValueChange = !!onValueChange;
 
   const onBarClick = (data: any, idx: number, event: MouseEvent) => {
     event.stopPropagation();

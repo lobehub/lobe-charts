@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { forwardRef } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -16,6 +17,7 @@ import { CurveType } from '@/types';
 export interface SparkLineChartProps extends BaseSparkChartProps {
   connectNulls?: boolean;
   curveType?: CurveType;
+  loading?: boolean;
 }
 
 const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, ref) => {
@@ -38,8 +40,12 @@ const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, r
     width = 112,
     height = 48,
     style,
+    loading,
     ...rest
   } = props;
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
   const categoryColors = constructCategoryColors(categories, colors);
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
 
