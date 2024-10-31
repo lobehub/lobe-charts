@@ -1,7 +1,7 @@
 import { ComponentType, HTMLAttributes } from 'react';
 
 import type { NoDataProps } from '@/common/NoData';
-import { IntervalType, ValueFormatter } from '@/types';
+import { IntervalType, LabelFormatter, ValueFormatter } from '@/types';
 
 import type BaseAnimationTimingProps from './BaseAnimationTimingProps';
 import { CustomTooltipProps } from './CustomTooltipProps';
@@ -31,6 +31,7 @@ interface BaseChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDi
   height?: string | number;
   index: string;
   intervalType?: IntervalType;
+  loading?: boolean;
   maxValue?: number;
   minValue?: number;
   noDataText?: NoDataProps['noDataText'];
@@ -50,6 +51,8 @@ interface BaseChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDi
   valueFormatter?: ValueFormatter;
   width?: string | number;
   xAxisLabel?: string;
+  xAxisLabelFormatter?: LabelFormatter;
+  yAxisAlign?: 'left' | 'right';
   yAxisLabel?: string;
   yAxisWidth?: number;
 }

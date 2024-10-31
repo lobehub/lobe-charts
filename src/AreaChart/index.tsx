@@ -35,10 +35,8 @@ import { useStyles } from './styles';
 export interface AreaChartProps extends BaseChartProps {
   connectNulls?: boolean;
   curveType?: CurveType;
-  loading?: boolean;
   showGradient?: boolean;
   stack?: boolean;
-  yAxisAlign?: 'left' | 'right';
 }
 
 interface ActiveDot {
@@ -56,6 +54,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
     stack = false,
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
+    xAxisLabelFormatter = defaultValueFormatter,
     startEndOnly = false,
     showXAxis = true,
     showYAxis = true,
@@ -196,6 +195,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
               padding={{ left: paddingValue, right: paddingValue }}
               stroke=""
               tick={{ transform: 'translate(0, 6)' }}
+              tickFormatter={xAxisLabelFormatter}
               tickLine={false}
               ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
             >
@@ -252,10 +252,12 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
-                          payload={payload?.map((payloadItem: any) => ({
-                            ...payloadItem,
-                            color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
-                          }))}
+                          payload={(stack ? payload?.reverse() : payload)?.map(
+                            (payloadItem: any) => ({
+                              ...payloadItem,
+                              color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                            }),
+                          )}
                         />
                       ) : (
                         <ChartTooltip
@@ -263,7 +265,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                           categoryColors={categoryColors}
                           customCategories={customCategories}
                           label={label}
-                          payload={payload}
+                          payload={stack ? payload?.reverse() : payload}
                           valueFormatter={valueFormatter}
                         />
                       )

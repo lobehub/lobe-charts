@@ -33,10 +33,7 @@ import { useStyles } from './styles';
 export interface BarChartProps extends BaseChartProps {
   barCategoryGap?: string | number;
   layout?: 'vertical' | 'horizontal';
-  loading?: boolean;
-  relative?: boolean;
   stack?: boolean;
-  yAxisAlign?: 'left' | 'right';
 }
 
 const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
@@ -50,9 +47,9 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     yAxisAlign = 'left',
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
+    xAxisLabelFormatter = defaultValueFormatter,
     layout = 'horizontal',
     stack = false,
-    relative = false,
     startEndOnly = false,
     animationDuration = 900,
     showAnimation = false,
@@ -89,8 +86,8 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
   const [legendHeight, setLegendHeight] = useState(60);
   const calculatedYAxisWidth: number | string = useMemo(() => {
     if (yAxisWidth) return yAxisWidth;
-    return getMaxLabelLength({ data, index, layout, relative, valueFormatter });
-  }, [yAxisWidth, layout, data, valueFormatter, relative, index]);
+    return getMaxLabelLength({ data, index, layout, valueFormatter });
+  }, [yAxisWidth, layout, data, valueFormatter, index]);
 
   if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
 
@@ -167,7 +164,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   }
                 : undefined
             }
-            stackOffset={stack ? 'sign' : relative ? 'expand' : 'none'}
+            stackOffset={stack ? 'sign' : 'none'}
           >
             {showGridLines ? (
               <CartesianGrid
@@ -225,6 +222,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 padding={{ left: paddingValue, right: paddingValue }}
                 stroke=""
                 tick={{ transform: 'translate(0, 6)' }}
+                tickFormatter={xAxisLabelFormatter}
                 tickLine={false}
                 ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
               >
@@ -257,11 +255,12 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   <CustomYAxisTick
                     {...props}
                     align={yAxisAlign}
-                    formatter={(v) => v}
+                    formatter={xAxisLabelFormatter}
                     textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
+                tickFormatter={xAxisLabelFormatter}
                 tickLine={false}
                 ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
                 type="category"
@@ -296,18 +295,12 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   <CustomYAxisTick
                     {...props}
                     align={yAxisAlign}
-                    formatter={
-                      relative
-                        ? (value: number | string) => `${Number(value) * 100}%`
-                        : valueFormatter
-                    }
+                    formatter={valueFormatter}
                     textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
-                tickFormatter={
-                  relative ? (value: number) => `${(value * 100).toString()} %` : valueFormatter
-                }
+                tickFormatter={valueFormatter}
                 tickLine={false}
                 type="number"
                 width={calculatedYAxisWidth}
@@ -338,10 +331,12 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
-                          payload={payload?.map((payloadItem: any) => ({
-                            ...payloadItem,
-                            color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
-                          }))}
+                          payload={(stack ? payload?.reverse() : payload)?.map(
+                            (payloadItem: any) => ({
+                              ...payloadItem,
+                              color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                            }),
+                          )}
                         />
                       ) : (
                         <ChartTooltip
@@ -349,7 +344,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           categoryColors={categoryColors}
                           customCategories={customCategories}
                           label={label}
-                          payload={payload}
+                          payload={stack ? payload?.reverse() : payload}
                           valueFormatter={valueFormatter}
                         />
                       )
@@ -393,7 +388,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   name={category}
                   onClick={onBarClick}
                   shape={(props: any) => renderShape(props, activeBar, activeLegend, layout)}
-                  stackId={stack || relative ? 'a' : undefined}
+                  stackId={stack ? 'a' : undefined}
                   style={{
                     cursor: onValueChange ? 'pointer' : undefined,
                   }}

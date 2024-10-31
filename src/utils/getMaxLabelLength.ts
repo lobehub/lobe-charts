@@ -29,7 +29,6 @@ export const getTextWidth = (text: string) => {
 export const getMaxLabelLength = ({
   data,
   valueFormatter = defaultValueFormatter,
-  relative,
   index,
   layout = 'horizontal',
   margin = 24,
@@ -40,7 +39,6 @@ export const getMaxLabelLength = ({
   isScatterChart?: boolean;
   layout?: 'vertical' | 'horizontal';
   margin?: number;
-  relative?: boolean;
   valueFormatter?: ValueFormatter;
 }): number => {
   let maxLength = 0;
@@ -67,9 +65,7 @@ export const getMaxLabelLength = ({
       for (const category of categories) {
         const value = item[category];
         if (value === undefined) continue; // Skip null or undefined values
-        const formattedValue = relative
-          ? `${((value as number) * 100).toFixed(2)}%`
-          : valueFormatter(value);
+        const formattedValue = valueFormatter(value);
         if (formattedValue.length > maxLength) {
           maxLength = formattedValue.length;
           maxLabel = formattedValue;

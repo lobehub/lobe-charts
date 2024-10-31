@@ -34,8 +34,6 @@ import { useStyles } from './styles';
 export interface LineChartProps extends BaseChartProps {
   connectNulls?: boolean;
   curveType?: CurveType;
-  loading?: boolean;
-  yAxisAlign?: 'left' | 'right';
 }
 
 interface ActiveDot {
@@ -52,6 +50,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
     index,
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
+    xAxisLabelFormatter = defaultValueFormatter,
     startEndOnly = false,
     showXAxis = true,
     showYAxis = true,
@@ -192,6 +191,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
               padding={{ left: paddingValue, right: paddingValue }}
               stroke=""
               tick={{ transform: 'translate(0, 6)' }}
+              tickFormatter={xAxisLabelFormatter}
               tickLine={false}
               ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
             >

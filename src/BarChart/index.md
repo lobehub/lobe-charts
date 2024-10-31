@@ -12,6 +12,12 @@ The example below shows a chart composition combining a `BarChart` with text ele
 
 <code src="./demos/example.tsx"></code>
 
+## Usage example with custom X axis labels
+
+The example below shows an interacive chart using the `xAxisLabelFormatter` prop.
+
+<code src="./demos/xAxisLabelFormatter.tsx"></code>
+
 ## Usage example with groups
 
 The example below shows a chart with a group composition.

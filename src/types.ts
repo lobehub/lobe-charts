@@ -90,6 +90,10 @@ export type ValueFormatter = {
   (value: number): string;
 };
 
+export type LabelFormatter = {
+  (value: number | string): string;
+};
+
 export type ScatterChartValueFormatter = {
   size?: ValueFormatter;
   x?: ValueFormatter;
