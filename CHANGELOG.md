@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.6.1](https://github.com/lobehub/lobe-charts/compare/v1.6.0...v1.6.1)
+
+<sup>Released on **2024-10-31**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Clean console.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Clean console ([7bbeae9](https://github.com/lobehub/lobe-charts/commit/7bbeae9))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.6.0](https://github.com/lobehub/lobe-charts/compare/v1.5.0...v1.6.0)
 
 <sup>Released on **2024-10-31**</sup>
