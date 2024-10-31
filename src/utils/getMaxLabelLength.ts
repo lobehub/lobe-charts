@@ -74,6 +74,5 @@ export const getMaxLabelLength = ({
     }
   }
 
-  console.log(maxLabel);
   return getTextWidth(maxLabel) + margin;
 };
