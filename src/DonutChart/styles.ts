@@ -11,7 +11,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     stroke-width: 1;
   `,
   label: css`
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
     fill: ${token.colorTextDescription};
   `,

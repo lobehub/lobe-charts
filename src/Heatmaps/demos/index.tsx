@@ -22,7 +22,7 @@ export default () => {
       },
       fontSize: {
         step: 1,
-        value: 14,
+        value: 12,
       },
       hideColorLegend: false,
       hideMonthLabels: false,

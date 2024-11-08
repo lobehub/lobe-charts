@@ -1,6 +1,6 @@
 'use client';
 
-import { css } from 'antd-style';
+import { css, useThemeMode } from 'antd-style';
 import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
@@ -29,6 +29,7 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   };
   customTooltip?: ComponentType<CustomTooltipProps>;
   data: any[];
+  donutLabel?: string;
   index?: string;
   label?: string;
   noDataText?: NoDataProps['noDataText'];
@@ -64,8 +65,10 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     height = '10rem',
     style,
     customCategories,
+    donutLabel,
     ...rest
   } = props;
+  const { isDarkMode } = useThemeMode();
   const CustomTooltip = customTooltip;
   const isDonut = variant === 'donut';
   const parsedLabelInput = parseLabelInput(label, valueFormatter, data, category);
@@ -141,7 +144,9 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 x="50%"
                 y="50%"
               >
-                {parsedLabelInput}
+                {donutLabel || typeof activeIndex === 'number'
+                  ? valueFormatter(data?.[activeIndex as any]?.[category])
+                  : parsedLabelInput}
               </text>
             ) : null}
             <Pie
@@ -167,6 +172,32 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 stroke: theme.colorBgContainer,
               }}
             />
+            {isDonut && (
+              <Pie
+                activeIndex={activeIndex}
+                animationDuration={animationDuration}
+                cx="50%"
+                cy="50%"
+                data={parseData(
+                  [{ [category]: 1 }],
+                  [isDarkMode ? 'rgba(0,0,0,.33)' : 'rgba(0,0,0,.1)'],
+                )}
+                dataKey={category}
+                endAngle={-270}
+                inactiveShape={renderInactiveShape}
+                innerRadius={isDonut ? '75%' : '0%'}
+                isAnimationActive={false}
+                nameKey={index}
+                outerRadius="80%"
+                startAngle={90}
+                stroke=""
+                strokeLinejoin="round"
+                style={{
+                  outline: 'none',
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
             <Tooltip
               content={
                 showTooltip

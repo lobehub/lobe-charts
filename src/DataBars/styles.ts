@@ -7,7 +7,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     white-space: nowrap;
   `,
   label: css`
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
     fill: ${token.colorTextDescription};
   `,

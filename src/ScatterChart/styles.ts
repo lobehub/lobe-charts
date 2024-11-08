@@ -11,12 +11,12 @@ export const useStyles = createStyles(({ css, token }) => ({
     stroke-width: 1;
   `,
   label: css`
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
     fill: ${token.colorTextDescription};
   `,
   strongLabel: css`
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 16px;
     fill: ${token.colorTextSecondary};

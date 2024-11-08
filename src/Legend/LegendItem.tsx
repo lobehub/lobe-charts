@@ -24,7 +24,7 @@ const useStyles = createStyles(({ css, token }) => ({
     }
   `,
   itemContent: css`
-    font-size: 14px;
+    font-size: 12px;
     color: inherit;
   `,
 }));
@@ -44,7 +44,7 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
   return (
     <Flexbox
       className={cx(styles.container, hasOnValueChange && styles.hasOnValueChange)}
-      gap={8}
+      gap={6}
       horizontal
       onClick={(e) => {
         e.stopPropagation();

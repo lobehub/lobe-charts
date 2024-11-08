@@ -54,7 +54,7 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
     blockRadius = 2,
     blockSize = 12,
     onValueChange,
-    fontSize = 14,
+    fontSize = 12,
     hideColorLegend = false,
     hideMonthLabels = false,
     hideTotalCount = false,

@@ -6,7 +6,7 @@ export const getTextWidth = (text: string) => {
   const span = document.createElement('span');
 
   // 设置样式使其不可见
-  span.style.fontSize = '14px';
+  span.style.fontSize = '12px';
   span.style.position = 'absolute';
   span.style.visibility = 'hidden';
   span.style.whiteSpace = 'nowrap';

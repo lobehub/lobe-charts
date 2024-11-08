@@ -27,7 +27,7 @@ const CustomYAxisTick = memo<CustomYAxisTickProps>(
         <text
           dy={4}
           fill={theme.colorTextDescription}
-          fontSize={14}
+          fontSize={12}
           textAnchor={align === 'left' ? 'start' : 'end'}
           x={0}
           y={0}
