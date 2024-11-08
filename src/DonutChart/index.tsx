@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from 'antd';
 import { css, useThemeMode } from 'antd-style';
 import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -32,6 +33,7 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   donutLabel?: string;
   index?: string;
   label?: string;
+  loading?: boolean;
   noDataText?: NoDataProps['noDataText'];
   onValueChange?: (value: EventProps) => void;
   showAnimation?: boolean;
@@ -62,6 +64,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     customTooltip,
     className,
     width = '100%',
+    loading,
     height = '10rem',
     style,
     customCategories,
@@ -75,6 +78,17 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
 
   const [activeIndex, setActiveIndex] = useState<number | undefined>();
   const hasOnValueChange = !!onValueChange;
+
+  useEffect(() => {
+    const pieSectors = document.querySelectorAll('.recharts-pie-sector');
+    if (pieSectors) {
+      for (const sector of pieSectors) {
+        sector.setAttribute('style', 'outline: none');
+      }
+    }
+  }, [activeIndex]);
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
 
   const onShapeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();
@@ -91,15 +105,6 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
       });
     }
   };
-
-  useEffect(() => {
-    const pieSectors = document.querySelectorAll('.recharts-pie-sector');
-    if (pieSectors) {
-      for (const sector of pieSectors) {
-        sector.setAttribute('style', 'outline: none');
-      }
-    }
-  }, [activeIndex]);
 
   const parseData = (data: any[], colors: string[]) =>
     data.map((dataPoint: any, idx: number) => {

@@ -31,11 +31,11 @@ const NoData = memo<NoDataProps>(
             isReactNodeText ? (
               noDataText
             ) : (
-              <Flexbox gap={4} padding={8}>
+              <Flexbox padding={8}>
                 <div style={{ color: theme.colorText, fontSize: 14, fontWeight: 'bold' }}>
                   {(noDataText as any)?.title}
                 </div>
-                <div style={{ color: theme.colorTextDescription, fontSize: 14 }}>
+                <div style={{ color: theme.colorTextDescription, fontSize: 12 }}>
                   {(noDataText as any)?.desc}
                 </div>
               </Flexbox>
