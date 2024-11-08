@@ -79,7 +79,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
       style={{ position: 'relative', ...style }}
       {...rest}
     >
-      <Flexbox flex={1} gap={8} style={{ position: 'relative' }}>
+      <Flexbox flex={1} gap={8} style={{ overflow: 'hidden', position: 'relative' }}>
         {(leftLabel || rightLabel) && (
           <Flexbox className={cx(styles.label, styles.emphasis)} height={labelHeight} width="100%">
             {leftLabel}
@@ -98,7 +98,6 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
               }}
               style={{
                 cursor: onValueChange ? 'pointer' : 'default',
-                width: `${widths[index]}%`,
               }}
               width={'100%'}
             >
@@ -111,7 +110,13 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
                   zIndex: 0,
                 }}
               />
-              <Flexbox align={'center'} gap={8} horizontal paddingInline={8} style={{ zIndex: 1 }}>
+              <Flexbox
+                align={'center'}
+                gap={8}
+                horizontal
+                paddingInline={8}
+                style={{ overflow: 'hidden', position: 'relative', width: '100%', zIndex: 1 }}
+              >
                 {item.icon}
                 {item.href ? (
                   <A
