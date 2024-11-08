@@ -149,9 +149,10 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 x="50%"
                 y="50%"
               >
-                {donutLabel || typeof activeIndex === 'number'
-                  ? valueFormatter(data?.[activeIndex as any]?.[category])
-                  : parsedLabelInput}
+                {donutLabel ||
+                  (typeof activeIndex === 'number'
+                    ? valueFormatter(data?.[activeIndex as any]?.[category])
+                    : parsedLabelInput)}
               </text>
             ) : null}
             <Pie
