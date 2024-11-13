@@ -12,3 +12,4 @@ export { default as ScatterChart, type ScatterChartProps } from './ScatterChart'
 export * from './SparkChart';
 export { default as Tracker, type TrackerProps } from './Tracker';
 export type * from './types';
+export { useThemeColorRange } from '@/hooks/useThemeColorRange';
