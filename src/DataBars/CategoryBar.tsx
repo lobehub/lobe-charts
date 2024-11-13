@@ -1,11 +1,12 @@
 'use client';
 
 import { Tooltip } from '@lobehub/ui';
-import chroma from 'chroma-js';
 import { forwardRef, memo, useMemo } from 'react';
 import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
-import { sumNumericArray } from '@/utils';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
+import { ValueFormatter } from '@/types';
+import { defaultValueFormatter, sumNumericArray } from '@/utils';
 
 import { useStyles } from './styles';
 
@@ -30,62 +31,65 @@ const getMarkerBgColor = (
 const getPositionLeft = (value: number | undefined, maxValue: number): number =>
   value ? (value / maxValue) * 100 : 0;
 
-const BarLabels = memo<{ values: number[] }>(({ values }) => {
-  const { cx, styles } = useStyles();
-  const sumValues = useMemo(() => sumNumericArray(values), [values]);
-  let prefixSum = 0;
-  let sumConsecutiveHiddenLabels = 0;
-  return (
-    <Flexbox
-      className={cx(styles.label, styles.emphasis)}
-      horizontal
-      style={{
-        position: 'relative',
-      }}
-    >
-      {values.slice(0, values.length).map((widthPercentage, idx) => {
-        prefixSum += widthPercentage;
-        const showLabel =
-          (widthPercentage >= 0.1 * sumValues || sumConsecutiveHiddenLabels >= 0.09 * sumValues) &&
-          sumValues - prefixSum >= 0.15 * sumValues &&
-          prefixSum >= 0.1 * sumValues;
-        sumConsecutiveHiddenLabels = showLabel
-          ? 0
-          : (sumConsecutiveHiddenLabels += widthPercentage);
+const BarLabels = memo<{ valueFormatter?: ValueFormatter; values: number[] }>(
+  ({ values, valueFormatter }) => {
+    const { cx, styles } = useStyles();
+    const sumValues = useMemo(() => sumNumericArray(values), [values]);
+    let prefixSum = 0;
+    let sumConsecutiveHiddenLabels = 0;
+    return (
+      <Flexbox
+        className={cx(styles.label, styles.emphasis)}
+        horizontal
+        style={{
+          position: 'relative',
+        }}
+      >
+        {values.slice(0, values.length).map((widthPercentage, idx) => {
+          prefixSum += widthPercentage;
+          const showLabel =
+            (widthPercentage >= 0.1 * sumValues ||
+              sumConsecutiveHiddenLabels >= 0.09 * sumValues) &&
+            sumValues - prefixSum >= 0.15 * sumValues &&
+            prefixSum >= 0.1 * sumValues;
+          sumConsecutiveHiddenLabels = showLabel
+            ? 0
+            : (sumConsecutiveHiddenLabels += widthPercentage);
 
-        const widthPositionLeft = getPositionLeft(widthPercentage, sumValues);
+          const widthPositionLeft = getPositionLeft(widthPercentage, sumValues);
 
-        if (prefixSum === sumValues) return null;
+          if (prefixSum === sumValues) return null;
 
-        return (
-          <Flexbox
-            align={'center'}
-            horizontal
-            justify={'flex-end'}
-            key={`item-${idx}`}
-            style={{ width: `${widthPositionLeft}%` }}
-          >
-            <span
-              style={{
-                display: showLabel ? 'block' : 'hidden',
-                left: '50%',
-                transform: 'translateX(50%)',
-              }}
+          return (
+            <Flexbox
+              align={'center'}
+              horizontal
+              justify={'flex-end'}
+              key={`item-${idx}`}
+              style={{ width: `${widthPositionLeft}%` }}
             >
-              {prefixSum}
-            </span>
-          </Flexbox>
-        );
-      })}
-      <Flexbox align={'center'} horizontal style={{ bottom: 0, left: 0, position: 'absolute' }}>
-        0
+              <span
+                style={{
+                  display: showLabel ? 'block' : 'hidden',
+                  left: '50%',
+                  transform: 'translateX(50%)',
+                }}
+              >
+                {valueFormatter ? valueFormatter(prefixSum) : prefixSum}
+              </span>
+            </Flexbox>
+          );
+        })}
+        <Flexbox align={'center'} horizontal style={{ bottom: 0, left: 0, position: 'absolute' }}>
+          {valueFormatter ? valueFormatter(0) : 0}
+        </Flexbox>
+        <Flexbox align={'center'} horizontal style={{ bottom: 0, position: 'absolute', right: 0 }}>
+          {valueFormatter ? valueFormatter(sumValues) : sumValues}
+        </Flexbox>
       </Flexbox>
-      <Flexbox align={'center'} horizontal style={{ bottom: 0, position: 'absolute', right: 0 }}>
-        {sumValues}
-      </Flexbox>
-    </Flexbox>
-  );
-});
+    );
+  },
+);
 
 export interface CategoryBarProps extends FlexboxProps {
   colors?: string[];
@@ -94,14 +98,17 @@ export interface CategoryBarProps extends FlexboxProps {
   showLabels?: boolean;
   size?: number;
   tooltip?: string;
+  valueFormatter?: ValueFormatter;
   values: number[];
 }
 
 const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) => {
   const { cx, styles, theme } = useStyles();
+  const themeColorRange = useThemeColorRange();
   const {
     values = [],
-    colors = [theme.colorSuccess, theme.colorWarning, theme.colorError],
+    colors = themeColorRange,
+    valueFormatter = defaultValueFormatter,
     markerValue,
     showLabels = true,
     tooltip,
@@ -113,10 +120,8 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
     ...rest
   } = props;
 
-  const colorGroup =
-    colors.length === values.length
-      ? colors
-      : chroma.scale(colors).mode('lch').colors(values.length);
+  const colorGroup = colors.concat(themeColorRange);
+
   const markerBgColor = useMemo(
     () => getMarkerBgColor(markerValue, values, colorGroup),
     [markerValue, values, colorGroup],
@@ -142,7 +147,7 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
         width={width}
         {...rest}
       >
-        {showLabels && <BarLabels values={values} />}
+        {showLabels && <BarLabels valueFormatter={valueFormatter} values={values} />}
         <Flexbox
           align={'center'}
           className={cx('relative w-full flex items-center h-2')}
