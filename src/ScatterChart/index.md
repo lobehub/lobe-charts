@@ -2,6 +2,7 @@
 nav: Components
 group: Charts
 description: A scatter chart visualizes relationships between two or three variables.
+order: 4
 ---
 
 <code src="./demos/index.tsx" nopadding></code>

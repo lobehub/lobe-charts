@@ -34,7 +34,9 @@ const themeConfig = {
   },
   name: 'Charts',
   nav: [
-    { link: '/components/area-chart', title: 'Components' },
+    { link: '/components/bar-chart', title: 'Charts' },
+    { link: 'https://ui.lobehub.com', mode: 'override', title: 'UI' },
+    { link: 'https://icon.lobehub.com', mode: 'override', title: 'Icons' },
     { link: '/changelog', title: 'Changelog' },
   ],
   socialLinks: {

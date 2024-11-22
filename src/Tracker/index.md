@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 description: Component for visualizing activity logs or other data related to monitoring.
 ---
 

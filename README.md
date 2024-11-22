@@ -52,6 +52,18 @@ React modern charts components built on recharts
 
 ## ✨ Features
 
+- [x] Line Chart
+- [x] Area Chart
+- [x] Bar Chart
+- [x] Donut Chart
+- [x] Funnel Chart
+- [x] Scatter Chart
+- [x] Spark Chart
+- [x] Heatmaps
+- [x] Data List
+- [x] Tracker
+- [x] Legend
+
 <div align="right">
 
 [![][back-to-top]](#readme-top)

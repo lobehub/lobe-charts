@@ -2,6 +2,7 @@
 nav: Components
 group: Charts
 description: A line chart is a graphical representation that connects one or more series of data points with a continuous line.
+order: 1
 ---
 
 <code src="./demos/index.tsx" nopadding></code>

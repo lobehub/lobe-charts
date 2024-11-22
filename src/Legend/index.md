@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 description: A color-coded legend which goes well with data bar components.
 ---
 

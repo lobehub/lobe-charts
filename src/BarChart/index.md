@@ -2,6 +2,7 @@
 nav: Components
 group: Charts
 description: Bar charts compare numerical values and use the length of each bar to represent the value of each variable.
+order: 0
 ---
 
 <code src="./demos/index.tsx" nopadding></code>

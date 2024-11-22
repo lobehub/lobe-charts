@@ -2,6 +2,7 @@
 nav: Components
 group: Charts
 description: A funnel chart illustrates the progression or conversion rates through successive stages of a process.
+order: 3
 ---
 
 <code src="./demos/index.tsx" nopadding></code>

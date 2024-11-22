@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 atomId: 'ProgressBar, MarkerBar, DeltaBar, CategoryBar'
 description: Components to indicate progress, performance, or status. For example, an individual score compared to a benchmark, the length of a process, or the deviation of a value.
 ---

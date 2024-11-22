@@ -2,6 +2,7 @@
 nav: Components
 group: Charts
 description: An area chart displays quantitative data graphically. It is based on the line chart but the area between x-axis and line is emphasized with color.
+order: 2
 ---
 
 <code src="./demos/index.tsx" nopadding></code>

@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 description: A flexible React component to display activity data in a heatmaps chart.
 ---
 

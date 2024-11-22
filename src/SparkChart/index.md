@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 atomId: 'SparkAreaChart, SparkBarChart, SparkLineChart'
 description: A small graph capable of visualizing data in a simplified form.
 ---
