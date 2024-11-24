@@ -71,7 +71,8 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
-  extraBabelPlugins: ['babel-plugin-antd-style'],
+  exportStatic: {},
+  extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   locales: [{ id: 'en-US', name: 'English' }],
   mfsu: isWin ? undefined : {},
@@ -85,6 +86,7 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://charts.lobehub.com',
   },
+  ssr: isProduction ? {} : false,
   styles: [
     `html, body { background: transparent;  }
 

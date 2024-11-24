@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://charts.lobehub.com
+Sitemap: https://charts.lobehub.com/sitemap.xml
