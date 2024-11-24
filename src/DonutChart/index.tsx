@@ -12,7 +12,7 @@ import NoData, { type NoDataProps } from '@/common/NoData';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { EventProps } from '@/types';
 import { ValueFormatter } from '@/types';
-import { defaultValueFormatter } from '@/utils';
+import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 
 import { DonutChartTooltip } from './DonutChartTooltip';
 import { parseLabelInput } from './inputParser';
@@ -80,6 +80,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
   const hasOnValueChange = !!onValueChange;
 
   useEffect(() => {
+    if (isOnSeverSide) return;
     const pieSectors = document.querySelectorAll('.recharts-pie-sector');
     if (pieSectors) {
       for (const sector of pieSectors) {

@@ -1,7 +1,9 @@
 import { ValueFormatter } from '@/types';
-import { defaultValueFormatter } from '@/utils/index';
+import { defaultValueFormatter, isOnSeverSide } from '@/utils/index';
 
 export const getTextWidth = (text: string) => {
+  if (isOnSeverSide) return 0;
+
   // 创建临时 span 元素
   const span = document.createElement('span');
 
