@@ -10,7 +10,7 @@
 
 React modern charts components built on recharts
 
-[Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
+[Documents](https://charts.lobehub.com) · [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
 <!-- SHIELD GROUP -->
 
