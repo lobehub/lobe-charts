@@ -1,6 +1,7 @@
 'use client';
 
 import A from '@lobehub/ui/es/A';
+import { Skeleton } from 'antd';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -24,12 +25,15 @@ export interface Bar {
 export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
   color?: string;
   data: Bar[];
+  height?: string | number;
   leftLabel?: ReactNode;
+  loading?: boolean;
   onValueChange?: (payload: Bar) => void;
   rightLabel?: ReactNode;
   showAnimation?: boolean;
   sortOrder?: 'ascending' | 'descending' | 'none';
   valueFormatter?: ValueFormatter;
+  width?: string | number;
 }
 
 const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
@@ -46,6 +50,9 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
     leftLabel,
     rightLabel,
     style,
+    loading,
+    width = '100%',
+    height,
     ...rest
   } = props;
 
@@ -65,6 +72,8 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
     );
   }, [sortedData]);
 
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
   const rowHeight = 32;
   const labelHeight = 20;
 
@@ -76,7 +85,8 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
       horizontal
       justify={'space-between'}
       ref={ref}
-      style={{ position: 'relative', ...style }}
+      style={{ minHeight: height, position: 'relative', ...style }}
+      width={width}
       {...rest}
     >
       <Flexbox flex={1} gap={8} style={{ overflow: 'hidden', position: 'relative' }}>
