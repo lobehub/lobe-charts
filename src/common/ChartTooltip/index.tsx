@@ -1,5 +1,6 @@
 import { Typography } from 'antd';
 import { createStyles } from 'antd-style';
+import { ReactNode } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { ValueFormatter } from '@/types';
@@ -20,6 +21,7 @@ export interface ChartTooltipProps {
   customCategories?: {
     [key: string]: string;
   };
+  footer?: ReactNode;
   label: string;
   payload: any;
   valueFormatter: ValueFormatter;
@@ -32,6 +34,7 @@ const ChartTooltip = ({
   categoryColors,
   valueFormatter,
   customCategories,
+  footer,
 }: ChartTooltipProps) => {
   const { cx, theme, styles } = useStyles();
 
@@ -60,6 +63,7 @@ const ChartTooltip = ({
             />
           ))}
         </Flexbox>
+        {footer}
       </ChartTooltipFrame>
     );
   }
