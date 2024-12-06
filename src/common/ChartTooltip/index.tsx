@@ -45,7 +45,12 @@ const ChartTooltip = ({
             {label}
           </Typography.Paragraph>
         </Flexbox>
-        <Flexbox gap={4} paddingBlock={8} paddingInline={16} style={{ marginTop: 4 }}>
+        <Flexbox
+          gap={4}
+          paddingBlock={8}
+          paddingInline={16}
+          style={{ flexDirection: 'column-reverse', marginTop: 4 }}
+        >
           {filteredPayload.map(({ value, name }: { name: string; value: number }, idx: number) => (
             <ChartTooltipRow
               color={categoryColors.get(name) ?? theme.colorPrimary}
