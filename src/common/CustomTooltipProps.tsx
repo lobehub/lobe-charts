@@ -1,5 +1,8 @@
 import { NameType, Payload } from 'recharts/types/component/DefaultTooltipContent';
 
+import { ScatterChartValueFormatter } from '@/ScatterChart';
+import { ValueFormatter } from '@/types';
+
 export type CustomTooltipProps = {
   active: boolean | undefined;
   customCategories?: {
@@ -7,4 +10,5 @@ export type CustomTooltipProps = {
   };
   label: NameType | undefined;
   payload: Payload<string | number | (string | number)[], string | number>[] | undefined;
+  valueFormatter: ValueFormatter | ScatterChartValueFormatter;
 };

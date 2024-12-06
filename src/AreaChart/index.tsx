@@ -258,6 +258,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                               color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
                             }),
                           )}
+                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip

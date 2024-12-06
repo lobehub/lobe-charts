@@ -337,6 +337,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                               color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
                             }),
                           )}
+                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip

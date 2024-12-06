@@ -319,6 +319,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                             ...payloadItem,
                             color: categoryColors.get(color) ?? theme.colorPrimary,
                           }))}
+                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ScatterChartTooltip

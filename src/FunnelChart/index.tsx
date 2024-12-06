@@ -611,6 +611,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                   active={!!tooltip.data}
                   label={tooltip.data?.name}
                   payload={tooltip.data ? [tooltip.data] : []}
+                  valueFormatter={valueFormatter}
                 />
               ) : (
                 <ChartTooltip

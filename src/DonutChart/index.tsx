@@ -218,6 +218,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                             ...payloadItem,
                             color: payload?.[0]?.payload?.color ?? theme.colorPrimary,
                           }))}
+                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <DonutChartTooltip

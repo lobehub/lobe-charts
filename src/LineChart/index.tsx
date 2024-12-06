@@ -252,6 +252,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                             ...payloadItem,
                             color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
                           }))}
+                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip
