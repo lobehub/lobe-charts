@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.9.8](https://github.com/lobehub/lobe-charts/compare/v1.9.7...v1.9.8)
+
+<sup>Released on **2024-12-06**</sup>
+
+#### 💄 Styles
+
+- **misc**: Export ChartTooltip.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Export ChartTooltip ([677ed55](https://github.com/lobehub/lobe-charts/commit/677ed55))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.7](https://github.com/lobehub/lobe-charts/compare/v1.9.6...v1.9.7)
 
 <sup>Released on **2024-12-06**</sup>
