@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.9.9](https://github.com/lobehub/lobe-charts/compare/v1.9.8...v1.9.9)
+
+<sup>Released on **2024-12-15**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update colors.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update colors ([357cc08](https://github.com/lobehub/lobe-charts/commit/357cc08))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.8](https://github.com/lobehub/lobe-charts/compare/v1.9.7...v1.9.8)
 
 <sup>Released on **2024-12-06**</sup>
