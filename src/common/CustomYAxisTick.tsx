@@ -1,7 +1,7 @@
 import { useTheme } from 'antd-style';
 import React, { memo } from 'react';
 
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 
 interface CustomYAxisTickProps {
   align: 'left' | 'right';

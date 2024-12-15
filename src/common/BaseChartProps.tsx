@@ -1,7 +1,7 @@
 import { ComponentType, HTMLAttributes } from 'react';
 
 import type { NoDataProps } from '@/common/NoData';
-import { IntervalType, LabelFormatter, ValueFormatter } from '@/types';
+import { IntervalType, LabelFormatter, ValueFormatter } from '@/types/charts';
 
 import type BaseAnimationTimingProps from './BaseAnimationTimingProps';
 import { CustomTooltipProps } from './CustomTooltipProps';

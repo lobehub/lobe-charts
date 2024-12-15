@@ -1,4 +1,4 @@
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, isOnSeverSide } from '@/utils/index';
 
 export const getTextWidth = (text: string) => {

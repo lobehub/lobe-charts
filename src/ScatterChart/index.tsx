@@ -29,8 +29,8 @@ import {
   getYAxisDomain,
 } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import type { EventProps } from '@/types';
-import { IntervalType, ValueFormatter } from '@/types';
+import type { EventProps } from '@/types/charts';
+import { IntervalType, ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 

@@ -10,8 +10,8 @@ import type BaseAnimationTimingProps from '@/common/BaseAnimationTimingProps';
 import { CustomTooltipProps } from '@/common/CustomTooltipProps';
 import NoData, { type NoDataProps } from '@/common/NoData';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import type { EventProps } from '@/types';
-import { ValueFormatter } from '@/types';
+import type { EventProps } from '@/types/charts';
+import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 
 import { DonutChartTooltip } from './DonutChartTooltip';

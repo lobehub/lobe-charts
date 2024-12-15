@@ -8,7 +8,7 @@ import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import NoData, { NoDataProps } from '@/common/NoData';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
-import type { Activity, Labels, Week } from '@/types';
+import type { Activity, Labels, Week } from '@/types/charts';
 import { isOnSeverSide } from '@/utils';
 import {
   DEFAULT_LABELS,

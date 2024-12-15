@@ -2,7 +2,7 @@ import { Tooltip } from '@lobehub/ui';
 import { keyframes } from 'antd-style';
 import { Fragment, ReactNode, memo } from 'react';
 
-import type { Activity, Labels, Week } from '@/types';
+import type { Activity, Labels, Week } from '@/types/charts';
 
 interface CalendarProps {
   blockMargin: number;

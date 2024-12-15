@@ -12,7 +12,7 @@ import {
   subWeeks,
 } from 'date-fns';
 
-import type { Activity, Week } from '@/types';
+import type { Activity, Week } from '@/types/charts';
 import { isOnSeverSide } from '@/utils/index';
 
 export const DEFAULT_MONTH_LABELS = [

@@ -4,7 +4,7 @@ import { Tooltip } from '@lobehub/ui';
 import { ReactNode, forwardRef } from 'react';
 import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
-import { DeltaTypes } from '@/types';
+import { DeltaTypes } from '@/types/charts';
 import { mapInputsToDeltaType } from '@/utils';
 
 import { useStyles } from './styles';

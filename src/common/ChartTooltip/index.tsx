@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 import { ReactNode } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 
 import ChartTooltipFrame from './ChartTooltipFrame';
 import ChartTooltipRow from './ChartTooltipRow';

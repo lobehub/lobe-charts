@@ -6,7 +6,7 @@ import React, { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { ChartTooltipFrame } from '@/common/ChartTooltip/ChartTooltipFrame';
-import { ScatterChartValueFormatter } from '@/types';
+import { ScatterChartValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
 import ScatterChartTooltipRow from './ScatterChartTooltipRow';

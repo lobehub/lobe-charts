@@ -3,7 +3,7 @@ import { Flexbox } from 'react-layout-kit';
 
 import ChartTooltipFrame from '@/common/ChartTooltip/ChartTooltipFrame';
 import ChartTooltipRow from '@/common/ChartTooltip/ChartTooltipRow';
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 
 export interface DonutChartTooltipProps {
   active: boolean | undefined;

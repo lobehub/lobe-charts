@@ -1,4 +1,4 @@
-import { DeltaTypes, ValueFormatter } from '@/types';
+import { DeltaTypes, ValueFormatter } from '@/types/charts';
 
 export const defaultValueFormatter: ValueFormatter = String;
 

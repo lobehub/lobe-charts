@@ -26,7 +26,7 @@ import CustomYAxisTick from '@/common/CustomYAxisTick';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain, hasOnlyOneValueForThisKey } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { CurveType } from '@/types';
+import { CurveType } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 

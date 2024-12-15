@@ -12,7 +12,7 @@ import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { CurveType } from '@/types';
+import { CurveType } from '@/types/charts';
 
 export interface SparkLineChartProps extends BaseSparkChartProps {
   connectNulls?: boolean;

@@ -13,5 +13,5 @@ export { default as LineChart, type LineChartProps } from './LineChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
 export * from './SparkChart';
 export { default as Tracker, type TrackerProps } from './Tracker';
-export type * from './types';
+export type * from './types/charts';
 export { useThemeColorRange } from '@/hooks/useThemeColorRange';

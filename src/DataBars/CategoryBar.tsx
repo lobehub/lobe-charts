@@ -5,7 +5,7 @@ import { forwardRef, memo, useMemo } from 'react';
 import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, sumNumericArray } from '@/utils';
 
 import { useStyles } from './styles';

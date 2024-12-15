@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import type { Labels, Week } from '@/types';
+import type { Labels, Week } from '@/types/charts';
 import { getMonthLabels } from '@/utils/calendar';
 
 import { useStyles } from './styles';

@@ -6,7 +6,7 @@ import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { ValueFormatter } from '@/types';
+import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
 import { useStyles } from './styles';
