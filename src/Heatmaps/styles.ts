@@ -38,5 +38,6 @@ export const useStyles = createStyles(({ css, token }) => ({
   scrollContainer: css`
     overflow: auto hidden;
     max-width: 100%;
+    padding-block: 2px;
   `,
 }));

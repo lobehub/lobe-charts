@@ -107,10 +107,10 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
       case 4: {
         return [
           theme.colorFillSecondary,
+          isDarkMode ? theme.lime2 : theme.green2,
           isDarkMode ? theme.lime4 : theme.green4,
           isDarkMode ? theme.lime6 : theme.green6,
           isDarkMode ? theme.lime8 : theme.green8,
-          isDarkMode ? theme.lime10 : theme.green10,
         ];
       }
       default: {
