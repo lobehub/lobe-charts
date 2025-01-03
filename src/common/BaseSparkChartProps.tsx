@@ -1,5 +1,7 @@
 import { HTMLAttributes } from 'react';
 
+import { NoDataProps } from '@/common/NoData';
+
 import BaseAnimationTimingProps from './BaseAnimationTimingProps';
 
 interface BaseSparkChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
@@ -10,7 +12,7 @@ interface BaseSparkChartProps extends BaseAnimationTimingProps, HTMLAttributes<H
   index: string;
   maxValue?: number;
   minValue?: number;
-  noDataText?: string;
+  noDataText?: NoDataProps['noDataText'];
 }
 
 export default BaseSparkChartProps;

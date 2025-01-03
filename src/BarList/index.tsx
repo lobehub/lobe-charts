@@ -5,6 +5,7 @@ import { Skeleton } from 'antd';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import NoData, { NoDataProps } from '@/common/NoData';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
@@ -28,6 +29,7 @@ export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
   height?: string | number;
   leftLabel?: ReactNode;
   loading?: boolean;
+  noDataText?: NoDataProps['noDataText'];
   onValueChange?: (payload: Bar) => void;
   rightLabel?: ReactNode;
   showAnimation?: boolean;
@@ -53,6 +55,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
     loading,
     width = '100%',
     height,
+    noDataText,
     ...rest
   } = props;
 
@@ -144,6 +147,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
             </Flexbox>
           );
         })}
+        {!data?.length && <NoData noDataText={noDataText} />}
       </Flexbox>
       <Flexbox gap={8}>
         {(leftLabel || rightLabel) && (
