@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.9.13](https://github.com/lobehub/lobe-charts/compare/v1.9.12...v1.9.13)
+
+<sup>Released on **2025-01-03**</sup>
+
+#### 💄 Styles
+
+- **misc**: Fix heatmap labels.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Fix heatmap labels ([2fb7849](https://github.com/lobehub/lobe-charts/commit/2fb7849))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.12](https://github.com/lobehub/lobe-charts/compare/v1.9.11...v1.9.12)
 
 <sup>Released on **2025-01-03**</sup>
