@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.9.12](https://github.com/lobehub/lobe-charts/compare/v1.9.11...v1.9.12)
+
+<sup>Released on **2025-01-03**</sup>
+
+#### 💄 Styles
+
+- **misc**: Fix BarList Hover style.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Fix BarList Hover style ([344a85a](https://github.com/lobehub/lobe-charts/commit/344a85a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.11](https://github.com/lobehub/lobe-charts/compare/v1.9.10...v1.9.11)
 
 <sup>Released on **2025-01-03**</sup>
