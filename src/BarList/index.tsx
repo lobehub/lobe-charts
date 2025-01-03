@@ -39,7 +39,7 @@ export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
-  const { cx, styles } = useStyles();
+  const { cx, styles, prefixCls } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -102,7 +102,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
           return (
             <Flexbox
               align={'center'}
-              className={styles.barContainer}
+              className={cx(styles.barContainer, onValueChange && styles.barHover)}
               height={rowHeight}
               horizontal
               key={item.key ?? index}
@@ -115,7 +115,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
               width={'100%'}
             >
               <div
-                className={cx(styles.bar, onValueChange && styles.barHover)}
+                className={cx(`${prefixCls}-chart-bar-item`, styles.bar)}
                 style={{
                   background: item.color ?? color,
                   transition: showAnimation ? undefined : 'none',

@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const useStyles = createStyles(({ prefixCls, css, token }) => ({
   bar: css`
     position: absolute;
     top: 0;
@@ -20,7 +20,9 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   barHover: css`
     &:hover {
-      opacity: 0.4;
+      .${prefixCls}-chart-bar-item {
+        opacity: 0.4;
+      }
     }
   `,
   emphasis: css`
