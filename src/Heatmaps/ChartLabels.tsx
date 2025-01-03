@@ -41,6 +41,8 @@ const ChartLabels = memo<ChartLabelsProps>(
               }
 
               const dayIndex = (index + weekStart) % 7;
+              const maxLength = Math.floor((blockSize * 7 + blockMargin * 6) / 12);
+              const label = labels?.weekdays?.[dayIndex] || '';
 
               return (
                 <text
@@ -50,7 +52,7 @@ const ChartLabels = memo<ChartLabelsProps>(
                   x={-labelMargin}
                   y={labelHeight + (blockSize + blockMargin) * index + blockSize / 2}
                 >
-                  {labels?.weekdays?.[dayIndex]}
+                  {label.length > maxLength ? label.slice(0, maxLength) + '...' : label}
                 </text>
               );
             })}
@@ -58,15 +60,18 @@ const ChartLabels = memo<ChartLabelsProps>(
         )}
         {!hideMonthLabels && (
           <g className={cx('legend-month')}>
-            {getMonthLabels(weeks, labels.months).map(({ label, weekIndex }) => (
-              <text
-                dominantBaseline="hanging"
-                key={weekIndex}
-                x={(blockSize + blockMargin) * weekIndex}
-              >
-                {label}
-              </text>
-            ))}
+            {getMonthLabels(weeks, labels.months).map(({ label, weekIndex }) => {
+              const maxLength = Math.floor((blockSize * 4 + blockMargin * 3) / 12);
+              return (
+                <text
+                  dominantBaseline="hanging"
+                  key={weekIndex}
+                  x={(blockSize + blockMargin) * weekIndex}
+                >
+                  {label.length > maxLength ? label.slice(0, maxLength) + '...' : label}
+                </text>
+              );
+            })}
           </g>
         )}
       </>
