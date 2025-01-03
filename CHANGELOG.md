@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.9.11](https://github.com/lobehub/lobe-charts/compare/v1.9.10...v1.9.11)
+
+<sup>Released on **2025-01-03**</sup>
+
+#### 💄 Styles
+
+- **misc**: Add Empty to Bar List.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Add Empty to Bar List ([c5dd2ad](https://github.com/lobehub/lobe-charts/commit/c5dd2ad))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.10](https://github.com/lobehub/lobe-charts/compare/v1.9.9...v1.9.10)
 
 <sup>Released on **2024-12-27**</sup>
