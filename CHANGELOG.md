@@ -2,6 +2,32 @@
 
 # Changelog
 
+## [Version 1.10.0](https://github.com/lobehub/lobe-charts/compare/v1.9.13...v1.10.0)
+
+<sup>Released on **2025-01-06**</sup>
+
+#### ✨ Features
+
+- **misc**: Support react 19, Support React 19.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Support react 19 ([a634542](https://github.com/lobehub/lobe-charts/commit/a634542))
+- **misc**: Support React 19 ([97bb1fc](https://github.com/lobehub/lobe-charts/commit/97bb1fc))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.9.13](https://github.com/lobehub/lobe-charts/compare/v1.9.12...v1.9.13)
 
 <sup>Released on **2025-01-03**</sup>
