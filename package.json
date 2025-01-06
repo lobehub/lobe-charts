@@ -116,11 +116,18 @@
     "polished": "^4.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "react-is": "^18.0.0 || ^19.0.0",
     "react-layout-kit": "^1.0.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "pnpm": {
+    "overrides": {
+      "react-is": "^19.0.0"
+    }
+  },
+  "overrides": {
+    "react-is": "^19.0.0"
   }
 }
