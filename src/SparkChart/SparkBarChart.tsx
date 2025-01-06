@@ -7,11 +7,12 @@ import { Flexbox } from 'react-layout-kit';
 import { Bar, BarChart as ReChartsBarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 
-import { useStyles } from '@/BarChart/styles';
 import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
+
+import { useStyles } from './styles';
 
 export interface SparkBarChartProps extends BaseSparkChartProps {
   loading?: boolean;
@@ -20,7 +21,7 @@ export interface SparkBarChartProps extends BaseSparkChartProps {
 }
 
 const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref) => {
-  const { cx, theme } = useStyles();
+  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -60,6 +61,7 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsBarChart
+            className={styles.chart}
             data={data}
             margin={{ bottom: 0, left: -1.5, right: -1.5, top: 0 }}
             stackOffset={relative ? 'expand' : 'none'}

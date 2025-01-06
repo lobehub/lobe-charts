@@ -157,6 +157,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsLineChart
+            className={styles.chart}
             data={data}
             margin={{
               bottom: xAxisLabel ? 30 : undefined,

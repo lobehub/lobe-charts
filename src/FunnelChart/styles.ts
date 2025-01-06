@@ -1,6 +1,9 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
+  chart: css`
+    outline: none;
+  `,
   emphasis: css`
     overflow: hidden;
     text-overflow: ellipsis;

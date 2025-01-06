@@ -7,12 +7,13 @@ import { Flexbox } from 'react-layout-kit';
 import { Area, AreaChart as ReChartsAreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 
-import { useStyles } from '@/AreaChart/styles';
 import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { CurveType } from '@/types/charts';
+
+import { useStyles } from './styles';
 
 export interface SparkAreaChartProps extends BaseSparkChartProps {
   connectNulls?: boolean;
@@ -23,7 +24,7 @@ export interface SparkAreaChartProps extends BaseSparkChartProps {
 }
 
 const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, ref) => {
-  const { cx, theme } = useStyles();
+  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
 
   const {
@@ -65,7 +66,11 @@ const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, r
     >
       <ResponsiveContainer>
         {data?.length ? (
-          <ReChartsAreaChart data={data} margin={{ bottom: 1, left: 1, right: 1, top: 1 }}>
+          <ReChartsAreaChart
+            className={styles.chart}
+            data={data}
+            margin={{ bottom: 1, left: 1, right: 1, top: 1 }}
+          >
             <YAxis domain={yAxisDomain as AxisDomain} hide />
             <XAxis dataKey={index} hide />
             {categories.map((category) => {

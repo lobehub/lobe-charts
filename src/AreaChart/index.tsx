@@ -161,6 +161,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsAreaChart
+            className={styles.chart}
             data={data}
             margin={{
               bottom: xAxisLabel ? 30 : undefined,

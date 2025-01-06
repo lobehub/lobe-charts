@@ -310,6 +310,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
       {data?.length ? (
         <>
           <svg
+            className={styles.chart}
             onMouseLeave={() => setTooltip({ x: 0, y: 0 })}
             onMouseMove={(e) => {
               const fakeTouch = {

@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0",
-    "recharts": "^2.15.0"
+    "recharts": "^3.0.0-alpha.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
@@ -121,13 +121,5 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-is": "^19.0.0"
-    }
-  },
-  "overrides": {
-    "react-is": "^19.0.0"
   }
 }

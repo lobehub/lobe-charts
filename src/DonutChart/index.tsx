@@ -2,7 +2,15 @@
 
 import { Skeleton } from 'antd';
 import { css, useThemeMode } from 'antd-style';
-import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
+import {
+  CSSProperties,
+  ComponentType,
+  MouseEvent,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -16,6 +24,7 @@ import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 
 import { DonutChartTooltip } from './DonutChartTooltip';
 import { parseLabelInput } from './inputParser';
+import { renderActiveShape } from './renderActiveShape';
 import { renderInactiveShape } from './renderInactiveShape';
 import { useStyles } from './styles';
 
@@ -89,8 +98,6 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
     }
   }, [activeIndex]);
 
-  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
-
   const onShapeClick = (data: any, index: number, event: MouseEvent) => {
     event.stopPropagation();
 
@@ -120,6 +127,15 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
       };
     });
 
+  const paredData = useMemo(() => parseData(data, colors), [data, colors]);
+
+  const paredDonutData = useMemo(
+    () => parseData([{ [category]: 1 }], [isDarkMode ? 'rgba(0,0,0,.33)' : 'rgba(0,0,0,.1)']),
+    [category, isDarkMode],
+  );
+
+  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+
   return (
     <Flexbox
       className={className}
@@ -132,6 +148,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsDonutChart
+            className={styles.chart}
             margin={{ bottom: 0, left: 0, right: 0, top: 0 }}
             onClick={
               hasOnValueChange && activeIndex
@@ -157,11 +174,11 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
               </text>
             ) : null}
             <Pie
-              activeIndex={activeIndex}
+              activeShape={renderActiveShape}
               animationDuration={animationDuration}
               cx="50%"
               cy="50%"
-              data={parseData(data, colors)}
+              data={paredData}
               dataKey={category}
               endAngle={-270}
               inactiveShape={renderInactiveShape}
@@ -181,19 +198,16 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
             />
             {isDonut && (
               <Pie
-                activeIndex={activeIndex}
+                activeShape={renderActiveShape}
                 animationDuration={animationDuration}
                 cx="50%"
                 cy="50%"
-                data={parseData(
-                  [{ [category]: 1 }],
-                  [isDarkMode ? 'rgba(0,0,0,.33)' : 'rgba(0,0,0,.1)'],
-                )}
+                data={paredDonutData}
                 dataKey={category}
                 endAngle={-270}
                 inactiveShape={renderInactiveShape}
                 innerRadius={isDonut ? '75%' : '0%'}
-                isAnimationActive={false}
+                isAnimationActive={showAnimation}
                 nameKey={index}
                 outerRadius="80%"
                 startAngle={90}

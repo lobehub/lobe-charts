@@ -79,7 +79,7 @@ export interface ScatterChartProps
   showXAxis?: boolean;
   showYAxis?: boolean;
   size?: string;
-  sizeRange?: number[];
+  sizeRange?: [number, number];
   startEndOnly?: boolean;
   tickGap?: number;
   valueFormatter?: ScatterChartValueFormatter;
@@ -214,6 +214,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsScatterChart
+            className={styles.chart}
             margin={{
               bottom: xAxisLabel ? 20 : undefined,
               left: 20,

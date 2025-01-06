@@ -147,6 +147,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
         {data?.length ? (
           <ReChartsBarChart
             barCategoryGap={barCategoryGap}
+            className={styles.chart}
             data={data}
             layout={layout === 'vertical' ? 'vertical' : 'horizontal'}
             margin={{
