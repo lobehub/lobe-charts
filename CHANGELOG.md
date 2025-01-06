@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.10.1](https://github.com/lobehub/lobe-charts/compare/v1.10.0...v1.10.1)
+
+<sup>Released on **2025-01-06**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix overrides.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix overrides ([a3d86cb](https://github.com/lobehub/lobe-charts/commit/a3d86cb))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.10.0](https://github.com/lobehub/lobe-charts/compare/v1.9.13...v1.10.0)
 
 <sup>Released on **2025-01-06**</sup>
