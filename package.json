@@ -70,17 +70,26 @@
     ]
   },
   "dependencies": {
+    "@lobehub/ui": "^1.161.0",
+    "ahooks": "^3.8.4",
+    "antd-style": "^3.7.1",
+    "chroma-js": "^3.1.2",
     "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
+    "lucide-react": "^0.469.0",
+    "polished": "^4.3.1",
+    "react-layout-kit": "^1.9.1",
     "recharts": "^2.15.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.26.0",
     "@commitlint/cli": "^19.6.1",
     "@icons-pack/react-simple-icons": "^9.7.0",
     "@lobehub/lint": "^1.24.4",
     "@testing-library/react": "^14.3.1",
     "@types/chroma-js": "^2.4.5",
     "@types/pangu": "^4.0.2",
-    "@types/react": "^19.0.2",
+    "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
     "@vitest/coverage-v8": "~1.2.2",
     "babel-plugin-antd-style": "^1.0.4",
@@ -90,7 +99,7 @@
     "cross-env": "^7.0.3",
     "dpdm": "^3.14.0",
     "dumi": "^2.4.17",
-    "dumi-theme-lobehub": "^1.11.0",
+    "dumi-theme-lobehub": "^1.12.0",
     "eslint": "^8.57.1",
     "father": "^4.5.1",
     "husky": "^9.1.7",
@@ -105,29 +114,12 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.0.0",
-    "@lobehub/ui": "^1.160.0",
-    "ahooks": "^3.8.0",
-    "antd": "^5.22.0",
-    "antd-style": "^3.7.0",
-    "chroma-js": "^3.0.0",
-    "dayjs": "^1.11.0",
-    "lucide-react": "^0.469.0",
-    "polished": "^4.0.0",
+    "antd": "^5.23.0",
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-    "react-layout-kit": "^1.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-is": "^19.0.0"
-    }
-  },
-  "overrides": {
-    "react-is": "^19.0.0"
   }
 }
