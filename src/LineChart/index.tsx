@@ -78,7 +78,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
     xAxisLabel,
     yAxisLabel,
     width = '100%',
-    height = '20rem',
+    height = 280,
     style,
     customCategories,
     loading,
@@ -184,7 +184,6 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
               dataKey={index}
               dy={rotateLabelX?.verticalShift}
               fill=""
-              height={rotateLabelX?.xAxisHeight}
               hide={!showXAxis}
               interval={startEndOnly ? 'preserveStartEnd' : intervalType}
               minTickGap={tickGap}

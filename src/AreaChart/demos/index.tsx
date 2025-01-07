@@ -78,7 +78,6 @@ export default () => {
         value: 900,
       },
       autoMinValue: false,
-      barCategoryGap: 10,
       connectNulls: false,
       enableLegendSlider: false,
       intervalType: {

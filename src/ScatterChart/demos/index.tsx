@@ -160,7 +160,6 @@ export default () => {
       showTooltip: true,
       showXAxis: true,
       showYAxis: true,
-      stack: false,
       startEndOnly: false,
       tickGap: {
         step: 1,

@@ -76,7 +76,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     yAxisLabel,
     className,
     width = '100%',
-    height = '20rem',
+    height = 280,
     style,
     ...rest
   } = props;
@@ -183,7 +183,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 domain={yAxisDomain as AxisDomain}
                 dy={rotateLabelX?.verticalShift}
                 fill=""
-                height={rotateLabelX?.xAxisHeight}
                 hide={!showXAxis}
                 minTickGap={tickGap}
                 stroke=""
@@ -215,7 +214,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 dataKey={index}
                 dy={rotateLabelX?.verticalShift}
                 fill=""
-                height={rotateLabelX?.xAxisHeight}
                 hide={!showXAxis}
                 interval={startEndOnly ? 'preserveStartEnd' : intervalType}
                 minTickGap={tickGap}

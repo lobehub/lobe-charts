@@ -55,7 +55,6 @@ export default () => {
       },
       maxValue: 1000,
       minValue: 0,
-      relative: false,
       showAnimation: false,
       showGridLines: true,
       showLegend: true,

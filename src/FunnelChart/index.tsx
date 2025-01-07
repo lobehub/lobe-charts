@@ -115,7 +115,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
     barGap = '20%',
     loading,
     width = '100%',
-    height = '20rem',
+    height = 280,
     className,
     style,
     yAxisWidth,

@@ -16,12 +16,10 @@ export default () => {
   const props: FunnelChartProps | any = useControls(
     {
       barGap: '20%',
-      enableLegendSlider: false,
       evolutionGradient: true,
       gradient: false,
       showArrow: true,
       showGridLines: true,
-      showLegend: true,
       showTooltip: true,
       showXAxis: true,
       showYAxis: true,

@@ -41,7 +41,6 @@ export default () => {
       <h4>Number of species threatened with extinction (2021)</h4>
       <BarChart
         categories={['Number of threatened species']}
-        className="mt-6"
         data={data}
         index="name"
         valueFormatter={valueFormatter}
