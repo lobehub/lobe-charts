@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.11.0](https://github.com/lobehub/lobe-charts/compare/v1.10.1...v1.11.0)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### ✨ Features
+
+- **misc**: Update antd.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update antd ([f619f3d](https://github.com/lobehub/lobe-charts/commit/f619f3d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.10.1](https://github.com/lobehub/lobe-charts/compare/v1.10.0...v1.10.1)
 
 <sup>Released on **2025-01-06**</sup>
