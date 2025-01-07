@@ -6,9 +6,10 @@ export const useStyles = createStyles(({ css, token }) => ({
   container: css`
     overflow: hidden;
 
-    background: ${token.colorBgElevated};
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadiusLG}px;
+
+    background: ${token.colorBgElevated};
     box-shadow: ${token.boxShadow};
   `,
 }));

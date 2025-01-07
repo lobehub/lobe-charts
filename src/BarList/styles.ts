@@ -9,9 +9,9 @@ export const useStyles = createStyles(({ prefixCls, css, token }) => ({
 
     max-width: 100%;
     height: 100%;
+    border-radius: ${token.borderRadius}px;
 
     opacity: 0.25;
-    border-radius: ${token.borderRadius}px;
 
     transition: all 0.25s ${token.motionEaseInOut};
   `,

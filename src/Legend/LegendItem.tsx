@@ -10,10 +10,10 @@ const useStyles = createStyles(({ css, token }) => ({
     display: inline-flex;
     align-items: center;
 
+    border-radius: ${token.borderRadius}px;
+
     color: ${token.colorTextDescription};
     white-space: nowrap;
-
-    border-radius: ${token.borderRadius}px;
   `,
   hasOnValueChange: css`
     transition: all 0.25s ${token.motionEaseInOut};
