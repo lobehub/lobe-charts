@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.12.0](https://github.com/lobehub/lobe-charts/compare/v1.11.1...v1.12.0)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### ✨ Features
+
+- **misc**: Update remark.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update remark ([135f0f1](https://github.com/lobehub/lobe-charts/commit/135f0f1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.11.1](https://github.com/lobehub/lobe-charts/compare/v1.11.0...v1.11.1)
 
 <sup>Released on **2025-01-07**</sup>
