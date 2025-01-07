@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.11.1](https://github.com/lobehub/lobe-charts/compare/v1.11.0...v1.11.1)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix Chart in React 19.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix Chart in React 19 ([c248945](https://github.com/lobehub/lobe-charts/commit/c248945))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.11.0](https://github.com/lobehub/lobe-charts/compare/v1.10.1...v1.11.0)
 
 <sup>Released on **2025-01-07**</sup>
