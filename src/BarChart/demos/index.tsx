@@ -1,5 +1,6 @@
 import { BarChart, BarChartProps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { FC } from 'react';
 
 const data: BarChartProps['data'] = [
   {
@@ -31,7 +32,7 @@ const data: BarChartProps['data'] = [
 const valueFormatter: BarChartProps['valueFormatter'] = (number) =>
   Intl.NumberFormat('us').format(number).toString();
 
-export default () => {
+const BarChartDemo: FC = () => {
   const store = useCreateStore();
 
   const props: BarChartProps | any = useControls(
@@ -94,3 +95,7 @@ export default () => {
     </StoryBook>
   );
 };
+
+BarChartDemo.displayName = 'BarChartDemo';
+
+export default BarChartDemo;

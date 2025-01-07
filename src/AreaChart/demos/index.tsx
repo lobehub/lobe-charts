@@ -1,5 +1,6 @@
 import { AreaChart, AreaChartProps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { FC } from 'react';
 
 const data: AreaChartProps['data'] = [
   {
@@ -67,7 +68,7 @@ const data: AreaChartProps['data'] = [
 const valueFormatter: AreaChartProps['valueFormatter'] = (number: number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
 
-export default () => {
+const Demo: FC = () => {
   const store = useCreateStore();
 
   const props: AreaChartProps | any = useControls(
@@ -124,3 +125,7 @@ export default () => {
     </StoryBook>
   );
 };
+
+Demo.displayName = 'AreaChartsDemo';
+
+export default Demo;
