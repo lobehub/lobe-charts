@@ -60,7 +60,7 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
         color={color}
         fill={color}
         icon={Circle}
-        size={{ fontSize: 10 }}
+        size={10}
         style={{
           opacity: activeLegend && activeLegend !== name ? 0.4 : 1,
         }}

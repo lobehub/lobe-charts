@@ -1,5 +1,5 @@
 import { AreaChart, AreaChartProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { FC } from 'react';
 
 const data: AreaChartProps['data'] = [

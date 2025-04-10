@@ -24,7 +24,7 @@ const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name, color }) => {
   return (
     <Flexbox align={'center'} gap={32} horizontal justify={'space-between'}>
       <Flexbox align={'center'} gap={8} horizontal>
-        <Icon color={color} fill={color} icon={Circle} size={{ fontSize: 10 }} />
+        <Icon color={color} fill={color} icon={Circle} size={10} />
         <Typography.Paragraph className={styles.title} ellipsis style={{ margin: 0 }}>
           {name}
         </Typography.Paragraph>

@@ -1,5 +1,5 @@
 import { FunnelChart, FunnelChartProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: FunnelChartProps['data'] = [
   { name: '1. Add credit Card', value: 89 },

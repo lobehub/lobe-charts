@@ -1,5 +1,5 @@
 import { BarChart, BarChartProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { FC } from 'react';
 
 const data: BarChartProps['data'] = [

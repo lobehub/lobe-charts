@@ -1,5 +1,5 @@
 import { Tracker, TrackerProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: TrackerProps['data'] = [
   { color: 'success', tooltip: 'Tracker Info' },

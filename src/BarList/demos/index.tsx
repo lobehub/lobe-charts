@@ -1,5 +1,5 @@
 import { BarList, BarListProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: BarListProps['data'] = [
   { name: '/home', value: 456 },
