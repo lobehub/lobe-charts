@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/charts",
-  "version": "1.12.0",
+  "version": "2.0.0",
   "description": "React modern charts components built on recharts",
   "keywords": [
     "lobehub",
@@ -70,7 +70,7 @@
     ]
   },
   "dependencies": {
-    "@lobehub/ui": "https://pkg.pr.new/lobehub/lobe-ui/@lobehub/ui@306e573",
+    "@lobehub/ui": "^2.0.0",
     "ahooks": "^3.8.4",
     "antd-style": "^3.7.1",
     "chroma-js": "^3.1.2",
@@ -97,7 +97,7 @@
     "cross-env": "^7.0.3",
     "dpdm": "^3.14.0",
     "dumi": "^2.4.20",
-    "dumi-theme-lobehub": "https://pkg.pr.new/lobehub/dumi-theme-lobehub@8546cf3",
+    "dumi-theme-lobehub": "^2.0.0",
     "eslint": "^8.57.1",
     "father": "^4.5.2",
     "husky": "^9.1.7",
