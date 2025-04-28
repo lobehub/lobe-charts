@@ -58,7 +58,7 @@ const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
             paddingBlock={8}
             paddingInline={16}
           >
-            <Icon color={color} fill={color} icon={Circle} size={{ fontSize: 10 }} />
+            <Icon color={color} fill={color} icon={Circle} size={10} />
             <Typography.Paragraph ellipsis style={{ margin: 0 }}>
               {label}
             </Typography.Paragraph>

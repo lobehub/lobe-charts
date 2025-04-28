@@ -1,5 +1,5 @@
 import { LineChart, LineChartProps } from '@lobehub/charts';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: LineChartProps['data'] = [
   {
