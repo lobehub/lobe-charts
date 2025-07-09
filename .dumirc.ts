@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isWin = process.platform === 'win32';
 
 const nav: INavItem[] = [
-  { link: '/components/bar-chart', title: 'Charts' },
+  { link: '/components/area-chart', title: 'Charts' },
   { link: 'https://ui.lobehub.com', mode: 'override', title: 'UI' },
   { link: 'https://icon.lobehub.com', mode: 'override', title: 'Icons' },
   { link: '/changelog', title: 'Changelog' },
@@ -40,13 +40,14 @@ const themeConfig: SiteThemeConfig = {
     pkg: name,
     sourceUrl: `{github}/tree/master/src/{atomId}/index.tsx`,
   },
-  description: description,
+  description,
   giscus: {
     category: 'Q&A',
     categoryId: 'DIC_kwDOLNrpbc4Cin_G',
     repo: 'lobehub/lobe-charts',
     repoId: 'R_kgDOLNrpbQ',
   },
+  lastUpdated: true,
   metadata: {
     openGraph: {
       image:
@@ -73,11 +74,10 @@ export default defineConfig({
     'process.env': process.env,
   },
   exportStatic: {},
-  extraBabelPlugins: ['antd-style'],
+  extraBabelPlugins: ['babel-plugin-antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   jsMinifier: 'swc',
   locales: [{ id: 'en-US', name: 'English' }],
-  mako: isWin || isProduction ? false : {},
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
   publicPath: '/',
