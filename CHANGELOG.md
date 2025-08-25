@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 2.1.1](https://github.com/lobehub/lobe-charts/compare/v2.1.0...v2.1.1)
+
+<sup>Released on **2025-08-25**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update AccuracyBarChart style.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update AccuracyBarChart style ([7c6f782](https://github.com/lobehub/lobe-charts/commit/7c6f782))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 2.1.0](https://github.com/lobehub/lobe-charts/compare/v2.0.0...v2.1.0)
 
 <sup>Released on **2025-08-25**</sup>
