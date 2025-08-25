@@ -28,7 +28,7 @@ import NoData from '@/common/NoData';
 import { constructCategoryColors, deepEqual, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
-import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
+import { getMaxLabelLength, getTextWidth } from '@/utils/getMaxLabelLength';
 
 import { useStyles } from './styles';
 
@@ -475,16 +475,22 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
               {showPercentage && layout === 'vertical' ? (
                 <LabelList
                   content={(labelProps: any) => {
-                    const { x: lx, y: ly, height: lh, value } = labelProps;
+                    const { x: lx, y: ly, height: lh, width: lw, value } = labelProps;
                     if (
                       lx === null ||
                       lx === undefined ||
                       ly === null ||
                       ly === undefined ||
                       lh === null ||
-                      lh === undefined
+                      lh === undefined ||
+                      lw === null ||
+                      lw === undefined
                     )
                       return null;
+                    const text = accuracyFormatter(Number(value ?? 0));
+                    const textWidth = getTextWidth(text);
+                    const horizontalPadding = 16; // 8px left padding + 8px safe space
+                    if (Number(lw) <= textWidth + horizontalPadding) return null;
                     return (
                       <text
                         className={styles.percentageLabel}
@@ -495,7 +501,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                         x={Number(lx) + 8}
                         y={Number(ly) + Number(lh) / 2}
                       >
-                        {accuracyFormatter(Number(value ?? 0))}
+                        {text}
                       </text>
                     );
                   }}
@@ -505,7 +511,11 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                 />
               ) : null}
               {showErrorBars ? (
-                <ErrorBar dataKey={errorKey} direction="x" stroke={theme.colorTextSecondary} />
+                <ErrorBar
+                  dataKey={errorKey}
+                  direction={layout === 'vertical' ? 'x' : 'y'}
+                  stroke={theme.colorTextSecondary}
+                />
               ) : null}
             </Bar>
           </ReChartsBarChart>
