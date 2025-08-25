@@ -423,7 +423,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                                 {accuracyFormatter(Number(val))}
                                 <span style={{ color: theme.colorTextSecondary }}>
                                   {' '}
-                                  ± ${errorFormatter(Number(errVal))}
+                                  ± {errorFormatter(Number(errVal))}
                                 </span>
                               </>
                             );
