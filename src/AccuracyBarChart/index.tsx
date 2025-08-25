@@ -2,12 +2,15 @@
 
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
+import { readableColor } from 'polished';
 import { MouseEvent, forwardRef, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import {
   Bar,
   CartesianGrid,
+  ErrorBar,
   Label,
+  LabelList,
   Legend,
   BarChart as ReChartsBarChart,
   ResponsiveContainer,
@@ -29,26 +32,79 @@ import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import { useStyles } from './styles';
 
-export interface BarChartProps extends BaseChartProps {
+export interface AccuracyBarChartProps extends Omit<BaseChartProps, 'categories'> {
+  /**
+   * Custom accuracy formatter
+   */
+  accuracyFormatter?: (value: number) => string;
+  /**
+   * Gap between bar categories
+   */
   barCategoryGap?: string | number;
+  /**
+   * Single data category key (e.g., 'accuracy')
+   * @default 'accuracy'
+   */
+  category?: string;
+  /**
+   * Color scheme for accuracy levels
+   * @default 'gradient'
+   */
+  colorScheme?: 'gradient' | 'threshold' | 'uniform';
+  /**
+   * Error value formatter used in tooltip when displaying value±error
+   */
+  errorFormatter?: (value: number) => string;
+  /**
+   * Error bar data key (e.g., 'error', 'stdDev')
+   */
+  errorKey?: string;
+  /**
+   * Chart layout orientation
+   * @default 'vertical'
+   */
   layout?: 'vertical' | 'horizontal';
-  stack?: boolean;
+  /**
+   * Show error bars on the right side
+   * @default true
+   */
+  showErrorBars?: boolean;
+  /**
+   * Show accuracy value on the left side
+   * @default true
+   */
+  showLeftValue?: boolean;
+  /**
+   * Show accuracy percentage on bars
+   * @default true
+   */
+  showPercentage?: boolean;
+  /**
+   * Threshold values for color coding (only used with 'threshold' colorScheme)
+   */
+  thresholds?: {
+    excellent?: number;
+    // >= this value
+    fair?: number;
+    // >= this value
+    good?: number; // >= this value
+    // below fair is considered poor
+  };
 }
 
-const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
+const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((props, ref) => {
   const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
-    categories = [],
+    category = 'accuracy',
     customCategories,
     index,
     yAxisAlign = 'left',
     colors = themeColorRange,
     valueFormatter = defaultValueFormatter,
     xAxisLabelFormatter = defaultValueFormatter,
-    layout = 'horizontal',
-    stack = false,
+    layout = 'vertical', // Default to vertical for leaderboard-style display
     startEndOnly = false,
     animationDuration = 900,
     showAnimation = false,
@@ -57,42 +113,48 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     yAxisWidth,
     intervalType = 'equidistantPreserveStart',
     showTooltip = true,
-    showLegend = true,
+    showLegend = false, // Default to false for accuracy charts
     showGridLines = true,
-    autoMinValue = false,
-    minValue,
-    maxValue,
+    autoMinValue = true, // Default to true for percentage data
+    minValue = 0,
+    maxValue = 100, // Default max for percentage
     allowDecimals = true,
     noDataText,
     onValueChange,
     enableLegendSlider = false,
+    showPercentage = true,
     customTooltip,
     rotateLabelX,
-    barCategoryGap,
+    barCategoryGap = '20%',
     tickGap = 5,
     loading,
     xAxisLabel,
     yAxisLabel,
     className,
     width = '100%',
-    height = 280,
+    height = 400, // Taller default for vertical layout
     style,
+    showErrorBars = true,
+    errorFormatter = (value: number) => value.toFixed(1),
+    errorKey = 'error',
+    accuracyFormatter = (value: number) => `${value.toFixed(1)}%`,
     ...rest
   } = props;
 
   const [activeBar, setActiveBar] = useState<any | undefined>();
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const [legendHeight, setLegendHeight] = useState(60);
+
   const calculatedYAxisWidth: number | string = useMemo(() => {
     if (yAxisWidth) return yAxisWidth;
-    return getMaxLabelLength({ data, index, layout, valueFormatter });
-  }, [yAxisWidth, layout, data, valueFormatter, index]);
+    return getMaxLabelLength({ data, index, layout, valueFormatter: xAxisLabelFormatter });
+  }, [yAxisWidth, layout, data, xAxisLabelFormatter, index]);
 
   if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
 
   const CustomTooltip = customTooltip;
   const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
-  const categoryColors = constructCategoryColors(categories, colors);
+  const categoryColors = constructCategoryColors([category], colors);
   const hasOnValueChange = !!onValueChange;
 
   const onBarClick = (data: any, idx: number, event: MouseEvent) => {
@@ -133,6 +195,9 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
 
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
 
+  // Custom accuracy formatter for display
+  const displayFormatter = accuracyFormatter || valueFormatter;
+
   return (
     <Flexbox
       className={className}
@@ -151,7 +216,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
             margin={{
               bottom: xAxisLabel ? 30 : undefined,
               left: yAxisLabel ? 20 : undefined,
-              right: yAxisLabel ? 5 : undefined,
+              right: showErrorBars && layout === 'vertical' ? 40 : yAxisLabel ? 5 : undefined,
               top: 5,
             }}
             onClick={
@@ -163,7 +228,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   }
                 : undefined
             }
-            stackOffset={stack ? 'sign' : 'none'}
           >
             {showGridLines ? (
               <CartesianGrid
@@ -186,7 +250,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 minTickGap={tickGap}
                 stroke=""
                 tick={{ transform: 'translate(-3, 0)' }}
-                tickFormatter={valueFormatter}
+                tickFormatter={displayFormatter}
                 tickLine={false}
                 type="number"
               >
@@ -292,12 +356,12 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   <CustomYAxisTick
                     {...props}
                     align={yAxisAlign}
-                    formatter={valueFormatter}
+                    formatter={displayFormatter}
                     textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
-                tickFormatter={valueFormatter}
+                tickFormatter={displayFormatter}
                 tickLine={false}
                 type="number"
                 width={calculatedYAxisWidth}
@@ -328,13 +392,19 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
-                          payload={(stack ? payload?.reverse() : payload)?.map(
-                            (payloadItem: any) => ({
+                          payload={payload?.map((payloadItem: any) => {
+                            const record = data.find((item) => item[index] === label);
+                            const errVal = record?.[errorKey];
+                            const combined =
+                              errVal === undefined || errVal === null
+                                ? accuracyFormatter(Number(payloadItem.value))
+                                : `${accuracyFormatter(Number(payloadItem.value))} ± ${errorFormatter(Number(errVal))}`;
+                            return {
                               ...payloadItem,
-                              color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
-                            }),
-                          )}
-                          valueFormatter={valueFormatter}
+                              formattedValue: combined,
+                            };
+                          })}
+                          valueFormatter={displayFormatter}
                         />
                       ) : (
                         <ChartTooltip
@@ -342,8 +412,22 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           categoryColors={categoryColors}
                           customCategories={customCategories}
                           label={label}
-                          payload={stack ? payload?.reverse() : payload}
-                          valueFormatter={valueFormatter}
+                          payload={payload}
+                          valueFormatter={(val: number): any => {
+                            const record = data.find((item) => item[index] === label);
+                            const errVal = record?.[errorKey];
+                            if (!showErrorBars || errVal === undefined || errVal === null)
+                              return accuracyFormatter(Number(val));
+                            return (
+                              <>
+                                {accuracyFormatter(Number(val))}
+                                <span style={{ color: theme.colorTextSecondary }}>
+                                  {' '}
+                                  ± ${errorFormatter(Number(errVal))}
+                                </span>
+                              </>
+                            );
+                          }}
                         />
                       )
                   : undefined
@@ -372,27 +456,58 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 verticalAlign="top"
               />
             ) : undefined}
-            {categories.map((category) => {
-              return (
-                <Bar
-                  animationDuration={animationDuration}
-                  className={cx(css`
-                    fill: ${categoryColors.get(category) ?? theme.colorPrimary};
-                  `)}
-                  dataKey={category}
-                  fill={''}
-                  isAnimationActive={showAnimation}
-                  key={category}
-                  name={category}
-                  onClick={onBarClick}
-                  stackId={stack ? 'a' : undefined}
-                  style={{
-                    cursor: onValueChange ? 'pointer' : undefined,
+            <Bar
+              animationDuration={animationDuration}
+              className={cx(css`
+                fill: ${categoryColors.get(category) ?? theme.colorPrimary};
+              `)}
+              dataKey={category}
+              fill={''}
+              isAnimationActive={showAnimation}
+              key={category}
+              name={category}
+              onClick={onBarClick}
+              style={{
+                cursor: onValueChange ? 'pointer' : undefined,
+              }}
+              type="linear"
+            >
+              {showPercentage && layout === 'vertical' ? (
+                <LabelList
+                  content={(labelProps: any) => {
+                    const { x: lx, y: ly, height: lh, value } = labelProps;
+                    if (
+                      lx === null ||
+                      lx === undefined ||
+                      ly === null ||
+                      ly === undefined ||
+                      lh === null ||
+                      lh === undefined
+                    )
+                      return null;
+                    return (
+                      <text
+                        className={styles.percentageLabel}
+                        dominantBaseline="central"
+                        style={{
+                          fill: readableColor(categoryColors.get(category) ?? theme.colorPrimary),
+                        }}
+                        x={Number(lx) + 8}
+                        y={Number(ly) + Number(lh) / 2}
+                      >
+                        {accuracyFormatter(Number(value ?? 0))}
+                      </text>
+                    );
                   }}
-                  type="linear"
+                  dataKey={category}
+                  offset={8}
+                  position="insideLeft"
                 />
-              );
-            })}
+              ) : null}
+              {showErrorBars ? (
+                <ErrorBar dataKey={errorKey} direction="x" stroke={theme.colorTextSecondary} />
+              ) : null}
+            </Bar>
           </ReChartsBarChart>
         ) : (
           <NoData noDataText={noDataText} />
@@ -402,6 +517,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
   );
 });
 
-BarChart.displayName = 'BarChart';
+AccuracyBarChart.displayName = 'AccuracyBarChart';
 
-export default BarChart;
+export default AccuracyBarChart;

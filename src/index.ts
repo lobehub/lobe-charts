@@ -1,3 +1,4 @@
+export { default as AccuracyBarChart, type AccuracyBarChartProps } from './AccuracyBarChart';
 export { default as AreaChart, type AreaChartProps } from './AreaChart';
 export { default as BarChart, type BarChartProps } from './BarChart';
 export { type Bar, default as BarList, type BarListProps } from './BarList';
