@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 3.0.0](https://github.com/lobehub/lobe-charts/compare/v2.1.2...v3.0.0)
+
+<sup>Released on **2025-12-20**</sup>
+
+#### ✨ Features
+
+- **misc**: Bump v3 \[force major].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Bump v3 \[force major] ([c2f26df](https://github.com/lobehub/lobe-charts/commit/c2f26df))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 2.1.2](https://github.com/lobehub/lobe-charts/compare/v2.1.1...v2.1.2)
 
 <sup>Released on **2025-08-25**</sup>
