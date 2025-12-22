@@ -1,7 +1,7 @@
+import { Flexbox, FlexboxProps } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 

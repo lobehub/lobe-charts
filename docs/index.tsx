@@ -1,6 +1,5 @@
-import { Grid, Snippet } from '@lobehub/ui';
+import { Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
 import { Card } from 'antd';
-import { Center, Flexbox } from 'react-layout-kit';
 
 import AreaChart from '@/AreaChart/demos/example';
 import BarChart from '@/BarChart/demos/example';

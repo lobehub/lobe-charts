@@ -1,8 +1,7 @@
 'use client';
 
-import { Tooltip } from '@lobehub/ui';
+import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
 import { forwardRef, memo, useMemo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { ValueFormatter } from '@/types/charts';

@@ -1,9 +1,8 @@
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import { Circle } from 'lucide-react';
 import React, { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import { ChartTooltipFrame } from '@/common/ChartTooltip/ChartTooltipFrame';
 import { ScatterChartValueFormatter } from '@/types/charts';

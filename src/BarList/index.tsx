@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import A from '@lobehub/ui/es/A';
 import { Skeleton } from 'antd';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import NoData, { NoDataProps } from '@/common/NoData';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';

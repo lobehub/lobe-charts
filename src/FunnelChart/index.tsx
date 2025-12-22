@@ -1,5 +1,6 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { useSize } from 'ahooks';
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
@@ -13,7 +14,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import ArrowRightIcon from '@/FunnelChart/ArrowRightIcon';
 import BaseChartProps from '@/common/BaseChartProps';

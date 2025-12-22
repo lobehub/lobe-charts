@@ -1,6 +1,6 @@
+import { Flexbox, FlexboxProps } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 export const useStyles = createStyles(({ css, token }) => ({
   container: css`

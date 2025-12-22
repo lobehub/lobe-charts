@@ -1,9 +1,8 @@
 'use client';
 
-import { Tooltip } from '@lobehub/ui';
+import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { ReactNode, forwardRef, useMemo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 const useStyles = createStyles(({ css, token }) => ({
   block: css`

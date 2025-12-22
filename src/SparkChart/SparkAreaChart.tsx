@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { forwardRef } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import { Area, AreaChart as ReChartsAreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 

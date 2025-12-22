@@ -1,7 +1,7 @@
 import { ChartTooltipFrame, ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import { Flexbox } from '@lobehub/ui';
 import { Typography } from 'antd';
 import { useTheme } from 'antd-style';
-import { Flexbox } from 'react-layout-kit';
 
 const data: ScatterChartProps['data'] = [
   {

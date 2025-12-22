@@ -1,7 +1,7 @@
 'use client';
 
+import { Flexbox, FlexboxProps } from '@lobehub/ui';
 import { ReactNode, forwardRef } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import TrackerBlock, { TrackerBlockProps } from './TrackerBlock';
 import { useStyles } from './styles';

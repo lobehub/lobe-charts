@@ -1,7 +1,7 @@
+import { Flexbox } from '@lobehub/ui';
 import { Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import { ReactNode } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import { ValueFormatter } from '@/types/charts';
 

@@ -1,5 +1,5 @@
+import { Flexbox } from '@lobehub/ui';
 import React from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import ChartTooltipFrame from '@/common/ChartTooltip/ChartTooltipFrame';
 import ChartTooltipRow from '@/common/ChartTooltip/ChartTooltipRow';

@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import {
   Area,
   CartesianGrid,
@@ -412,7 +412,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                       />
                     );
                   }
-                  return <Fragment key={index}></Fragment>;
+                  return <Fragment key={index} />;
                 }}
                 fill={`url(#${categoryColors.get(category)})`}
                 isAnimationActive={showAnimation}

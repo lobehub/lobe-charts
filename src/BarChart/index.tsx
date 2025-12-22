@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { MouseEvent, forwardRef, useMemo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import {
   Bar,
   CartesianGrid,

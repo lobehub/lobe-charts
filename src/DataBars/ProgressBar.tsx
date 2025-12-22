@@ -1,8 +1,7 @@
 'use client';
 
-import { Tooltip } from '@lobehub/ui';
+import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
 import { ReactNode, forwardRef } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import { useStyles } from './styles';
 

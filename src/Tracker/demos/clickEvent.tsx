@@ -1,7 +1,6 @@
 import { Tracker, TrackerProps } from '@lobehub/charts';
-import { Highlighter } from '@lobehub/ui';
+import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 const data: TrackerProps['data'] = [
   { color: 'success', tooltip: 'Tracker Info' },

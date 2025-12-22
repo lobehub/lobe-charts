@@ -1,5 +1,5 @@
 import { BarChart, BarChartProps } from '@lobehub/charts';
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox } from '@lobehub/ui';
 
 const data: BarChartProps['data'] = [
   {

@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { css } from 'antd-style';
 import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import {
   CartesianGrid,
   Label,
@@ -46,8 +46,7 @@ export type ScatterChartValueFormatter = {
 };
 
 export interface ScatterChartProps
-  extends BaseAnimationTimingProps,
-    HTMLAttributes<HTMLDivElement> {
+  extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
   allowDecimals?: boolean;
   autoMinXValue?: boolean;
   autoMinYValue?: boolean;

@@ -1,7 +1,7 @@
+import { Center, Flexbox } from '@lobehub/ui';
 import { Empty } from 'antd';
 import { useTheme } from 'antd-style';
 import { ReactNode, isValidElement, memo } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
 
 export interface NoDataProps {
   className?: string;

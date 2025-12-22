@@ -1,9 +1,9 @@
 'use client';
 
+import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { css, useThemeMode } from 'antd-style';
 import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 import type BaseAnimationTimingProps from '@/common/BaseAnimationTimingProps';

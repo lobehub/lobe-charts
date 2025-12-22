@@ -1,5 +1,5 @@
 import { AreaChart, AreaChartProps } from '@lobehub/charts';
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox } from '@lobehub/ui';
 
 const data: AreaChartProps['data'] = [
   {

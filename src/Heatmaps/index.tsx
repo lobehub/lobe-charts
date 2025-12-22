@@ -1,10 +1,10 @@
 'use client';
 
+import { Flexbox, FlexboxProps } from '@lobehub/ui';
 import { useThemeMode } from 'antd-style';
 import type { Day as WeekDay } from 'date-fns';
 import { getYear, parseISO } from 'date-fns';
 import { ReactNode, forwardRef, useMemo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
 
 import NoData, { NoDataProps } from '@/common/NoData';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
