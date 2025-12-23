@@ -1,7 +1,7 @@
 'use client';
 
 import { Flexbox } from '@lobehub/ui';
-import A from '@lobehub/ui/es/A';
+import { A } from '@lobehub/ui/es/A/index.mjs';
 import { Skeleton } from 'antd';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 
