@@ -85,7 +85,7 @@
     "@commitlint/cli": "^19.8.1",
     "@icons-pack/react-simple-icons": "^9.7.0",
     "@lobehub/lint": "^1.26.3",
-    "@lobehub/ui": "^3.4.5",
+    "@lobehub/ui": "^4.1.1",
     "@testing-library/react": "^16.3.1",
     "@types/chroma-js": "^3.1.2",
     "@types/pangu": "^4.0.2",
@@ -99,7 +99,7 @@
     "cross-env": "^10.1.0",
     "dpdm": "^3.14.0",
     "dumi": "^2.4.21",
-    "dumi-theme-lobehub": "^3.0.1",
+    "dumi-theme-lobehub": "^4.0.0",
     "eslint": "^8.57.1",
     "father": "^4.6.11",
     "husky": "^9.1.7",
@@ -116,7 +116,7 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@lobehub/ui": "^3.4.5",
+    "@lobehub/ui": "^3.0.0 || ^4.0.0",
     "antd": "^6.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
