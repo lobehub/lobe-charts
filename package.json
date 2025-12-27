@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "ahooks": "^3.9.6",
-    "antd-style": "^4.0.1",
+    "antd-style": "^4.1.0",
     "chroma-js": "^3.2.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.19",
