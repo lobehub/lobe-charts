@@ -1,10 +1,11 @@
 'use client';
 
 import { Flexbox, FlexboxProps } from '@lobehub/ui';
+import { cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 
 import TrackerBlock, { TrackerBlockProps } from './TrackerBlock';
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 interface DataItem extends TrackerBlockProps {
   [key: string]: any;
@@ -37,8 +38,6 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
     style,
     ...rest
   } = props;
-
-  const { styles, cx } = useStyles();
 
   const content = data.map((item, idx) => (
     <TrackerBlock

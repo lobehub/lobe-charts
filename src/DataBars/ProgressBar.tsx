@@ -1,9 +1,10 @@
 'use client';
 
 import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
+import { cssVar, cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface ProgressBarProps extends FlexboxProps {
   bgColors?: string;
@@ -15,7 +16,6 @@ export interface ProgressBarProps extends FlexboxProps {
 }
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) => {
-  const { cx, styles, theme } = useStyles();
   const {
     value,
     color,
@@ -47,7 +47,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) =>
         <Flexbox
           height={'100%'}
           style={{
-            background: bgColors || theme.colorFillTertiary,
+            background: bgColors || cssVar.colorFillTertiary,
             borderRadius: size / 2,
             inset: 0,
             opacity: bgColors ? 0.2 : 1,
@@ -60,7 +60,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) =>
           className={cx(showAnimation && styles.showAnimation)}
           height={'100%'}
           style={{
-            background: color || theme.colorPrimary,
+            background: color || cssVar.colorPrimary,
             borderRadius: size / 2,
             zIndex: 1,
           }}

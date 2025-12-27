@@ -2,7 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
   Bar,
@@ -27,7 +27,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface BarChartProps extends BaseChartProps {
   barCategoryGap?: string | number;
@@ -36,7 +36,6 @@ export interface BarChartProps extends BaseChartProps {
 }
 
 const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -196,7 +195,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     offset={-20}
                     position="insideBottom"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -229,7 +228,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     offset={-20}
                     position="insideBottom"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -270,7 +269,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     offset={-15}
                     position="insideLeft"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -309,7 +308,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     offset={-15}
                     position="insideLeft"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -331,7 +330,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           payload={(stack ? payload?.reverse() : payload)?.map(
                             (payloadItem: any) => ({
                               ...payloadItem,
-                              color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                              color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                             }),
                           )}
                           valueFormatter={valueFormatter}
@@ -348,7 +347,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ fill: theme.colorFillTertiary }}
+              cursor={{ fill: cssVar.colorFillTertiary }}
               isAnimationActive={false}
               position={{ y: 0 }}
               wrapperStyle={{ outline: 'none' }}
@@ -377,7 +376,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 <Bar
                   animationDuration={animationDuration}
                   className={cx(css`
-                    fill: ${categoryColors.get(category) ?? theme.colorPrimary};
+                    fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                   `)}
                   dataKey={category}
                   fill={''}

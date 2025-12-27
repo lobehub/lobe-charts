@@ -1,15 +1,15 @@
 import { Flexbox, Icon } from '@lobehub/ui';
 import { Typography } from 'antd';
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css, cssVar }) => ({
   number: css`
     font-weight: 500;
   `,
   title: css`
-    color: ${token.colorTextSecondary};
+    color: ${cssVar.colorTextSecondary};
   `,
 }));
 export interface ChartTooltipRowProps {
@@ -19,7 +19,6 @@ export interface ChartTooltipRowProps {
 }
 
 const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name, color }) => {
-  const { styles } = useStyles();
   return (
     <Flexbox align={'center'} gap={32} horizontal justify={'space-between'}>
       <Flexbox align={'center'} gap={8} horizontal>

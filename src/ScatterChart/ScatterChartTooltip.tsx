@@ -1,6 +1,6 @@
 import { Flexbox, Icon } from '@lobehub/ui';
 import { Typography } from 'antd';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { Circle } from 'lucide-react';
 import React, { memo } from 'react';
 
@@ -10,9 +10,9 @@ import { defaultValueFormatter } from '@/utils';
 
 import ScatterChartTooltipRow from './ScatterChartTooltipRow';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css }) => ({
   header: css`
-    border-bottom: 1px solid ${token.colorBorderSecondary};
+    border-bottom: 1px solid ${cssVar.colorBorderSecondary};
     font-weight: 500;
   `,
 }));
@@ -41,11 +41,9 @@ const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
     category,
     categoryColors,
   }) => {
-    const { cx, theme, styles } = useStyles();
-
     const color = category
-      ? (categoryColors.get(payload?.[0]?.payload[category]) ?? theme.colorPrimary)
-      : theme.colorPrimary;
+      ? (categoryColors.get(payload?.[0]?.payload[category]) ?? cssVar.colorPrimary)
+      : cssVar.colorPrimary;
     if (active && payload) {
       return (
         <ChartTooltipFrame>

@@ -1,6 +1,8 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ prefixCls, css, token }) => ({
+const prefixCls = 'ant';
+
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   bar: css`
     position: absolute;
     top: 0;
@@ -9,11 +11,11 @@ export const useStyles = createStyles(({ prefixCls, css, token }) => ({
 
     max-width: 100%;
     height: 100%;
-    border-radius: ${token.borderRadius}px;
+    border-radius: ${cssVar.borderRadius};
 
     opacity: 0.25;
 
-    transition: all 0.25s ${token.motionEaseInOut};
+    transition: all 0.25s ${cssVar.motionEaseInOut};
   `,
   barContainer: css`
     position: relative;
@@ -33,26 +35,26 @@ export const useStyles = createStyles(({ prefixCls, css, token }) => ({
   label: css`
     font-size: 12px;
     line-height: 16px;
-    color: ${token.colorTextDescription};
+    color: ${cssVar.colorTextDescription};
   `,
   sourceALabel: css`
     font-size: 14px;
     line-height: 16px;
-    color: ${token.colorText} !important;
+    color: ${cssVar.colorText} !important;
 
     &:hover {
-      color: ${token.colorLinkHover} !important;
+      color: ${cssVar.colorLinkHover} !important;
     }
   `,
   sourceLabel: css`
     font-size: 14px;
     line-height: 16px;
-    color: ${token.colorText};
+    color: ${cssVar.colorText};
   `,
   strongLabel: css`
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
-    color: ${token.colorText};
+    color: ${cssVar.colorText};
   `,
 }));

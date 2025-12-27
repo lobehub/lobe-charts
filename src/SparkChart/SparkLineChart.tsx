@@ -2,12 +2,11 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { forwardRef } from 'react';
 import { Line, LineChart as ReChartsLineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 
-import { useStyles } from '@/LineChart/styles';
 import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
@@ -21,7 +20,6 @@ export interface SparkLineChartProps extends BaseSparkChartProps {
 }
 
 const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, ref) => {
-  const { cx, theme } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -67,7 +65,7 @@ const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, r
               <Line
                 animationDuration={animationDuration}
                 className={cx(css`
-                  stroke: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
                 connectNulls={connectNulls}
                 dataKey={category}

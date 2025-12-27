@@ -1,13 +1,13 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   accuracyText: css`
     font-size: 11px;
     font-weight: 500;
 
     dominant-baseline: central;
     text-anchor: middle;
-    fill: ${token.colorText};
+    fill: ${cssVar.colorText};
   `,
   accuracyTextLight: css`
     font-size: 11px;
@@ -15,7 +15,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 
     dominant-baseline: central;
     text-anchor: middle;
-    fill: ${token.colorTextLightSolid};
+    fill: ${cssVar.colorTextLightSolid};
   `,
   emphasis: css`
     overflow: hidden;
@@ -23,13 +23,13 @@ export const useStyles = createStyles(({ css, token }) => ({
     white-space: nowrap;
   `,
   gridLines: css`
-    stroke: ${token.colorBorderSecondary};
+    stroke: ${cssVar.colorBorderSecondary};
     stroke-width: 1;
   `,
   label: css`
     font-size: 12px;
     line-height: 16px;
-    fill: ${token.colorTextDescription};
+    fill: ${cssVar.colorTextDescription};
   `,
   leftValue: css`
     display: flex;
@@ -62,6 +62,6 @@ export const useStyles = createStyles(({ css, token }) => ({
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
-    fill: ${token.colorTextSecondary};
+    fill: ${cssVar.colorTextSecondary};
   `,
 }));

@@ -1,13 +1,14 @@
 'use client';
 
 import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
+import { cssVar, cx } from 'antd-style';
 import { forwardRef, memo, useMemo } from 'react';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, sumNumericArray } from '@/utils';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 const getMarkerBgColor = (
   markerValue: number | undefined,
@@ -32,7 +33,6 @@ const getPositionLeft = (value: number | undefined, maxValue: number): number =>
 
 const BarLabels = memo<{ valueFormatter?: ValueFormatter; values: number[] }>(
   ({ values, valueFormatter }) => {
-    const { cx, styles } = useStyles();
     const sumValues = useMemo(() => sumNumericArray(values), [values]);
     let prefixSum = 0;
     let sumConsecutiveHiddenLabels = 0;
@@ -102,7 +102,6 @@ export interface CategoryBarProps extends FlexboxProps {
 }
 
 const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) => {
-  const { cx, styles, theme } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     values = [],
@@ -167,7 +166,7 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
             width={'100%'}
           >
             {values.map((value, idx) => {
-              const baseColor = colorGroup[idx] ?? theme.colorPrimary;
+              const baseColor = colorGroup[idx] ?? cssVar.colorPrimary;
               const percentage = (value / maxValue) * 100;
               return (
                 <Flexbox
@@ -188,7 +187,7 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
               <div
                 className={styles.marker}
                 style={{
-                  background: markerBgColor || theme.colorPrimary,
+                  background: markerBgColor || cssVar.colorPrimary,
                   height: size + 8,
                 }}
               />

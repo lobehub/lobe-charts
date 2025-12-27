@@ -2,7 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
   CartesianGrid,
@@ -37,7 +37,7 @@ import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 import BaseAnimationTimingProps from '../common/BaseAnimationTimingProps';
 import NoData, { type NoDataProps } from '../common/NoData';
 import ScatterChartTooltip from './ScatterChartTooltip';
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export type ScatterChartValueFormatter = {
   size?: ValueFormatter;
@@ -91,7 +91,6 @@ export interface ScatterChartProps
 }
 
 const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -315,7 +314,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                           label={color}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
-                            color: categoryColors.get(color) ?? theme.colorPrimary,
+                            color: categoryColors.get(color) ?? cssVar.colorPrimary,
                           }))}
                           valueFormatter={valueFormatter}
                         />
@@ -334,7 +333,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                     }
                   : undefined
               }
-              cursor={{ stroke: theme.colorTextSecondary, strokeWidth: 1 }}
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
               isAnimationActive={false}
               wrapperStyle={{ outline: 'none' }}
             />
@@ -345,11 +344,11 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                   animationDuration={animationDuration}
                   className={cx(
                     css`
-                      fill: ${categoryColors.get(cat) ?? theme.colorPrimary};
+                      fill: ${categoryColors.get(cat) ?? cssVar.colorPrimary};
                     `,
                     showOpacity &&
                       css`
-                        stroke: ${categoryColors.get(cat) ?? theme.colorPrimary};
+                        stroke: ${categoryColors.get(cat) ?? cssVar.colorPrimary};
                       `,
                   )}
                   data={category ? data.filter((d) => d[category] === cat) : data}

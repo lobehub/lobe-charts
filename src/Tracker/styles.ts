@@ -1,6 +1,6 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   emphasis: css`
     overflow: hidden;
     text-overflow: ellipsis;
@@ -9,12 +9,12 @@ export const useStyles = createStyles(({ css, token }) => ({
   label: css`
     font-size: 12px;
     line-height: 16px;
-    color: ${token.colorTextDescription};
+    color: ${cssVar.colorTextDescription};
   `,
   strongLabel: css`
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
-    fill: ${token.colorTextSecondary};
+    fill: ${cssVar.colorTextSecondary};
   `,
 }));

@@ -2,7 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
   Area,
@@ -30,7 +30,7 @@ import { CurveType } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface AreaChartProps extends BaseChartProps {
   connectNulls?: boolean;
@@ -45,7 +45,6 @@ interface ActiveDot {
 }
 
 const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -254,7 +253,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                           payload={(stack ? payload?.reverse() : payload)?.map(
                             (payloadItem: any) => ({
                               ...payloadItem,
-                              color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                              color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                             }),
                           )}
                           valueFormatter={valueFormatter}
@@ -271,7 +270,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ stroke: theme.colorTextSecondary, strokeWidth: 1 }}
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
               isAnimationActive={false}
               position={{ y: 0 }}
               wrapperStyle={{ outline: 'none' }}
@@ -301,7 +300,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   {showGradient ? (
                     <linearGradient
                       className={cx(css`
-                        color: ${categoryColors.get(category) ?? theme.colorPrimary};
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                       `)}
                       id={categoryColors.get(category)}
                       x1="0"
@@ -321,7 +320,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   ) : (
                     <linearGradient
                       className={cx(css`
-                        color: ${categoryColors.get(category) ?? theme.colorPrimary};
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                       `)}
                       id={categoryColors.get(category)}
                       x1="0"
@@ -355,7 +354,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   return (
                     <Dot
                       className={cx(css`
-                        fill: ${categoryColors.get(dataKey) ?? theme.colorPrimary};
+                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
                       `)}
                       cx={dotCx}
                       cy={dotCy}
@@ -371,7 +370,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                 }}
                 animationDuration={animationDuration}
                 className={cx(css`
-                  stroke: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
                 connectNulls={connectNulls}
                 dataKey={category}
@@ -395,7 +394,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                     return (
                       <Dot
                         className={cx(css`
-                          fill: ${categoryColors.get(dataKey) ?? theme.colorPrimary};
+                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
                         `)}
                         cx={dotCx}
                         cy={dotCy}

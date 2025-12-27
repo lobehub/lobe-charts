@@ -1,9 +1,10 @@
 'use client';
 
 import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
+import { cssVar, cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface MarkerBarProps extends FlexboxProps {
   bgColors?: string;
@@ -35,7 +36,6 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
     size = 8,
     ...rest
   } = props;
-  const { cx, styles, theme } = useStyles();
   return (
     <Flexbox
       align={'center'}
@@ -53,7 +53,7 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
       <Flexbox
         height={'100%'}
         style={{
-          background: bgColors || theme.colorFillTertiary,
+          background: bgColors || cssVar.colorFillTertiary,
           borderRadius: size / 2,
           inset: 0,
           opacity: bgColors ? 0.2 : 1,
@@ -68,7 +68,7 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
             className={cx(showAnimation && styles.showAnimation)}
             height={'100%'}
             style={{
-              background: rangeColors || theme.colorFill,
+              background: rangeColors || cssVar.colorFill,
               borderRadius: size / 2,
               inset: 0,
               left: `${minValue}%`,
@@ -90,7 +90,7 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
           <div
             className={styles.marker}
             style={{
-              background: color || theme.colorPrimary,
+              background: color || cssVar.colorPrimary,
               height: size + 8,
             }}
           />

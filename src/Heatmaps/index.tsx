@@ -1,7 +1,7 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { useThemeMode } from 'antd-style';
+import { Flexbox, FlexboxProps, TooltipGroup } from '@lobehub/ui';
+import { cx, useTheme, useThemeMode } from 'antd-style';
 import type { Day as WeekDay } from 'date-fns';
 import { getYear, parseISO } from 'date-fns';
 import { ReactNode, forwardRef, useMemo } from 'react';
@@ -21,7 +21,7 @@ import { createTheme } from '@/utils/theme';
 import Calendar from './Calendar';
 import ChartLabels from './ChartLabels';
 import Footer from './Footer';
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 const LABEL_MARGIN = 8;
 
@@ -82,8 +82,10 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
   }, [data, maxLevel, loading]);
 
   const { isDarkMode } = useThemeMode();
-  const { cx, styles, theme } = useStyles();
+  const theme = useTheme();
 
+  // Note: defaultColors must use theme (actual color values) instead of cssVar
+  // because createTheme() uses chroma.valid() which requires actual color values, not CSS variables
   const defaultColors = useMemo(() => {
     switch (maxLevel) {
       case 1: {
@@ -121,104 +123,135 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
 
   const useAnimation = !usePrefersReducedMotion();
 
+  // Memoize weeks calculation - expensive operation
+  const weeks = useMemo(() => {
+    if (activities.length === 0) return [];
+    return groupByWeeks(activities, weekStart);
+  }, [activities, weekStart]);
+
+  // Memoize color scale calculation
+  const colorScale = useMemo(() => {
+    return createTheme(colors || defaultColors, maxLevel + 1);
+  }, [colors, defaultColors, maxLevel]);
+
+  // Memoize year calculation
+  const year = useMemo(() => {
+    if (activities.length === 0) return new Date().getFullYear();
+    const firstActivity = activities[0] as Activity;
+    return getYear(parseISO(firstActivity.date));
+  }, [activities]);
+
+  // Memoize labels object merge
+  const labels = useMemo(() => {
+    return Object.assign({}, DEFAULT_LABELS, labelsProp);
+  }, [labelsProp]);
+
+  // Memoize label height calculation
+  const labelHeight = useMemo(() => {
+    return hideMonthLabels ? 0 : fontSize + LABEL_MARGIN;
+  }, [hideMonthLabels, fontSize]);
+
+  // Memoize weekday label offset calculation
+  const weekdayLabelOffset = useMemo(() => {
+    if (!showWeekdayLabels || weeks.length === 0) return undefined;
+    const firstWeek = weeks[0] as Week;
+    return maxWeekdayLabelLength(firstWeek, weekStart, labels.weekdays, fontSize) + LABEL_MARGIN;
+  }, [showWeekdayLabels, weeks, weekStart, labels.weekdays, fontSize]);
+
+  // Memoize dimensions calculation
+  const dimensions = useMemo(() => {
+    return {
+      height: labelHeight + (blockSize + blockMargin) * 7 - blockMargin,
+      width: weeks.length * (blockSize + blockMargin) - blockMargin,
+    };
+  }, [labelHeight, blockSize, blockMargin, weeks.length]);
+
+  const { width, height } = dimensions;
+
+  // Memoize total count calculation
+  const totalCount = useMemo(() => {
+    if (typeof totalCountProp === 'number') return totalCountProp;
+    return activities.reduce((sum, activity) => sum + activity.count, 0);
+  }, [totalCountProp, activities]);
+
+  // Memoize container styles
+  const containerStyles = useMemo(() => {
+    const zeroColor = colorScale[0];
+    return {
+      fontSize,
+      ...(useAnimation && {
+        [`--lobe-heatmaps-loading`]: zeroColor,
+        [`--lobe-heatmaps-loading-active`]: theme.colorFill,
+      }),
+    };
+  }, [fontSize, useAnimation, colorScale, theme.colorFill]);
+
   if (activities.length === 0) return <NoData noDataText={noDataText} />;
 
   if (showWeekdayLabels && isOnSeverSide) return null;
 
-  const colorScale = createTheme(colors || defaultColors, maxLevel + 1);
-
-  const firstActivity = activities[0] as Activity;
-  const year = getYear(parseISO(firstActivity.date));
-  const weeks = groupByWeeks(activities, weekStart);
-  const firstWeek = weeks[0] as Week;
-
-  const labels = Object.assign({}, DEFAULT_LABELS, labelsProp);
-  const labelHeight = hideMonthLabels ? 0 : fontSize + LABEL_MARGIN;
-
-  const weekdayLabelOffset = showWeekdayLabels
-    ? maxWeekdayLabelLength(firstWeek, weekStart, labels.weekdays, fontSize) + LABEL_MARGIN
-    : undefined;
-
-  const getDimensions = () => ({
-    height: labelHeight + (blockSize + blockMargin) * 7 - blockMargin,
-    width: weeks.length * (blockSize + blockMargin) - blockMargin,
-  });
-
-  const { width, height } = getDimensions();
-
-  const zeroColor = colorScale[0];
-  const containerStyles = {
-    fontSize,
-    ...(useAnimation && {
-      [`--lobe-heatmaps-loading`]: zeroColor,
-      [`--lobe-heatmaps-loading-active`]: theme.colorFill,
-    }),
-  };
-
   return (
-    <Flexbox
-      className={cx(styles.container, className)}
-      ref={ref}
-      style={{ ...style, ...containerStyles }}
-      {...rest}
-    >
-      <div className={styles.scrollContainer}>
-        <svg
-          className={styles.calendar}
-          height={height}
-          style={{ marginLeft: weekdayLabelOffset }}
-          viewBox={`0 0 ${width} ${height}`}
-          width={width}
-        >
-          {!loading && !showWeekdayLabels && hideMonthLabels ? undefined : (
-            <ChartLabels
+    <TooltipGroup>
+      <Flexbox
+        className={cx(styles.container, className)}
+        ref={ref}
+        style={{ ...style, ...containerStyles }}
+        {...rest}
+      >
+        <div className={styles.scrollContainer}>
+          <svg
+            className={styles.calendar}
+            height={height}
+            style={{ marginLeft: weekdayLabelOffset }}
+            viewBox={`0 0 ${width} ${height}`}
+            width={width}
+          >
+            {!loading && !showWeekdayLabels && hideMonthLabels ? undefined : (
+              <ChartLabels
+                blockMargin={blockMargin}
+                blockSize={blockSize}
+                hideMonthLabels={hideMonthLabels}
+                labelHeight={labelHeight}
+                labelMargin={LABEL_MARGIN}
+                labels={labels}
+                showWeekdayLabels={showWeekdayLabels}
+                weekStart={weekStart}
+                weeks={weeks}
+              />
+            )}
+            <Calendar
               blockMargin={blockMargin}
+              blockRadius={blockRadius}
               blockSize={blockSize}
-              hideMonthLabels={hideMonthLabels}
+              colorScale={colorScale}
+              customTooltip={customTooltip}
+              enableAnimation={loading && useAnimation}
               labelHeight={labelHeight}
-              labelMargin={LABEL_MARGIN}
               labels={labels}
-              showWeekdayLabels={showWeekdayLabels}
-              weekStart={weekStart}
+              maxLevel={maxLevel}
+              onValueChange={onValueChange}
+              showTooltip={showTooltip}
               weeks={weeks}
             />
-          )}
-          <Calendar
-            blockMargin={blockMargin}
+          </svg>
+        </div>
+        {hideTotalCount && hideColorLegend ? undefined : (
+          <Footer
             blockRadius={blockRadius}
             blockSize={blockSize}
             colorScale={colorScale}
-            customTooltip={customTooltip}
-            enableAnimation={loading && useAnimation}
-            labelHeight={labelHeight}
+            hideColorLegend={hideColorLegend}
+            hideTotalCount={hideTotalCount}
             labels={labels}
+            loading={loading}
             maxLevel={maxLevel}
-            onValueChange={onValueChange}
-            showTooltip={showTooltip}
-            weeks={weeks}
+            totalCount={totalCount}
+            weekdayLabelOffset={weekdayLabelOffset}
+            year={year}
           />
-        </svg>
-      </div>
-      {hideTotalCount && hideColorLegend ? undefined : (
-        <Footer
-          blockRadius={blockRadius}
-          blockSize={blockSize}
-          colorScale={colorScale}
-          hideColorLegend={hideColorLegend}
-          hideTotalCount={hideTotalCount}
-          labels={labels}
-          loading={loading}
-          maxLevel={maxLevel}
-          totalCount={
-            typeof totalCountProp === 'number'
-              ? totalCountProp
-              : activities.reduce((sum, activity) => sum + activity.count, 0)
-          }
-          weekdayLabelOffset={weekdayLabelOffset}
-          year={year}
-        />
-      )}
-    </Flexbox>
+        )}
+      </Flexbox>
+    </TooltipGroup>
   );
 });
 

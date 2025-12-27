@@ -2,7 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css, useThemeMode } from 'antd-style';
+import { css, cssVar, cx, useThemeMode } from 'antd-style';
 import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -17,7 +17,7 @@ import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 import { DonutChartTooltip } from './DonutChartTooltip';
 import { parseLabelInput } from './inputParser';
 import { renderInactiveShape } from './renderInactiveShape';
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 type DonutChartVariant = 'donut' | 'pie';
 
@@ -45,7 +45,6 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
 }
 
 const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -109,11 +108,11 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
 
   const parseData = (data: any[], colors: string[]) =>
     data.map((dataPoint: any, idx: number) => {
-      const baseColor = idx < colors.length ? colors[idx] : theme.colorPrimary;
+      const baseColor = idx < colors.length ? colors[idx] : cssVar.colorPrimary;
       return {
         ...dataPoint,
         className: cx(css`
-          fill: ${baseColor ?? theme.colorPrimary};
+          fill: ${baseColor ?? cssVar.colorPrimary};
         `),
         color: baseColor,
         fill: '',
@@ -176,7 +175,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
               style={{
                 cursor: onValueChange ? 'pointer' : undefined,
                 outline: 'none',
-                stroke: theme.colorBgContainer,
+                stroke: cssVar.colorBgContainer,
               }}
             />
             {isDonut && (
@@ -187,7 +186,11 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 cy="50%"
                 data={parseData(
                   [{ [category]: 1 }],
-                  [isDarkMode ? 'rgba(0,0,0,.33)' : 'rgba(0,0,0,.1)'],
+                  [
+                    isDarkMode
+                      ? 'color-mix(in srgb, #000000 33%, transparent)'
+                      : 'color-mix(in srgb, #000000 10%, transparent)',
+                  ],
                 )}
                 dataKey={category}
                 endAngle={-270}
@@ -216,7 +219,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                           label={payload?.[0]?.name}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
-                            color: payload?.[0]?.payload?.color ?? theme.colorPrimary,
+                            color: payload?.[0]?.payload?.color ?? cssVar.colorPrimary,
                           }))}
                           valueFormatter={valueFormatter}
                         />

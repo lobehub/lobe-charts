@@ -2,12 +2,11 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { forwardRef } from 'react';
 import { Area, AreaChart as ReChartsAreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 
-import { useStyles } from '@/AreaChart/styles';
 import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
@@ -23,7 +22,6 @@ export interface SparkAreaChartProps extends BaseSparkChartProps {
 }
 
 const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, ref) => {
-  const { cx, theme } = useStyles();
   const themeColorRange = useThemeColorRange();
 
   const {
@@ -74,7 +72,7 @@ const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, r
                   {showGradient ? (
                     <linearGradient
                       className={cx(css`
-                        color: ${categoryColors.get(category) ?? theme.colorPrimary};
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                       `)}
                       id={categoryColors.get(category)}
                       x1="0"
@@ -88,7 +86,7 @@ const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, r
                   ) : (
                     <linearGradient
                       className={cx(css`
-                        color: ${categoryColors.get(category) ?? theme.colorPrimary};
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                       `)}
                       id={categoryColors.get(category)}
                       x1="0"
@@ -106,7 +104,7 @@ const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, r
               <Area
                 animationDuration={animationDuration}
                 className={cx(css`
-                  stroke: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
                 connectNulls={connectNulls}
                 dataKey={category}

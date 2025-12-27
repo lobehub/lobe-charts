@@ -1,6 +1,6 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   emphasis: css`
     overflow: hidden;
     text-overflow: ellipsis;
@@ -9,12 +9,12 @@ export const useStyles = createStyles(({ css, token }) => ({
   label: css`
     font-size: 12px;
     line-height: 16px;
-    fill: ${token.colorTextDescription};
+    fill: ${cssVar.colorTextDescription};
   `,
   marker: css`
     width: 4px;
     border-radius: 4px;
-    box-shadow: 0 0 0 3px ${token.colorBgContainer};
+    box-shadow: 0 0 0 3px ${cssVar.colorBgContainer};
   `,
   markerWrapper: css`
     position: absolute;
@@ -22,6 +22,6 @@ export const useStyles = createStyles(({ css, token }) => ({
     width: 1.25rem;
   `,
   showAnimation: css`
-    transition: all 0.25s ${token.motionEaseInOut};
+    transition: all 0.25s ${cssVar.motionEaseInOut};
   `,
 }));

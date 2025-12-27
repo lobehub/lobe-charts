@@ -1,6 +1,6 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   calendar: css`
     overflow: visible;
     display: block;
@@ -18,7 +18,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     max-width: 100%;
 
     rect {
-      stroke: ${token.colorFillTertiary};
+      stroke: ${cssVar.colorFillTertiary};
       stroke-width: 1px;
       shape-rendering: geometricprecision;
     }

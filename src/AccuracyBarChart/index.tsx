@@ -2,8 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
-import { readableColor } from 'polished';
+import { css, cssVar, cx } from 'antd-style';
 import { MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
   Bar,
@@ -30,7 +29,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength, getTextWidth } from '@/utils/getMaxLabelLength';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface AccuracyBarChartProps extends Omit<BaseChartProps, 'categories'> {
   /**
@@ -93,7 +92,6 @@ export interface AccuracyBarChartProps extends Omit<BaseChartProps, 'categories'
 }
 
 const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -260,7 +258,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                     offset={-20}
                     position="insideBottom"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -293,7 +291,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                     offset={-20}
                     position="insideBottom"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -334,7 +332,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                     offset={-15}
                     position="insideLeft"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -373,7 +371,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                     offset={-15}
                     position="insideLeft"
                     style={{
-                      fill: theme.colorTextSecondary,
+                      fill: cssVar.colorTextSecondary,
                       fontWeight: 500,
                       textAnchor: 'middle',
                     }}
@@ -421,7 +419,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                             return (
                               <>
                                 {accuracyFormatter(Number(val))}
-                                <span style={{ color: theme.colorTextSecondary }}>
+                                <span style={{ color: cssVar.colorTextSecondary }}>
                                   {' '}
                                   ± {errorFormatter(Number(errVal))}
                                 </span>
@@ -432,7 +430,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                       )
                   : undefined
               }
-              cursor={{ fill: theme.colorFillTertiary }}
+              cursor={{ fill: cssVar.colorFillTertiary }}
               isAnimationActive={false}
               position={{ y: 0 }}
               wrapperStyle={{ outline: 'none' }}
@@ -459,7 +457,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
             <Bar
               animationDuration={animationDuration}
               className={cx(css`
-                fill: ${categoryColors.get(category) ?? theme.colorPrimary};
+                fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
               `)}
               dataKey={category}
               fill={''}
@@ -496,7 +494,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                         className={styles.percentageLabel}
                         dominantBaseline="central"
                         style={{
-                          fill: readableColor(categoryColors.get(category) ?? theme.colorPrimary),
+                          fill: cssVar.colorTextLightSolid,
                         }}
                         x={Number(lx) + 8}
                         y={Number(ly) + Number(lh) / 2}
@@ -514,7 +512,7 @@ const AccuracyBarChart = forwardRef<HTMLDivElement, AccuracyBarChartProps>((prop
                 <ErrorBar
                   dataKey={errorKey}
                   direction={layout === 'vertical' ? 'x' : 'y'}
-                  stroke={theme.colorTextSecondary}
+                  stroke={cssVar.colorTextSecondary}
                 />
               ) : null}
             </Bar>

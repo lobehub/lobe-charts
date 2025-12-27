@@ -3,7 +3,7 @@
 import { Flexbox } from '@lobehub/ui';
 import { useSize } from 'ahooks';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import {
   Fragment,
   MouseEvent,
@@ -23,7 +23,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 type FormattedDataT = DataT & {
   barHeight: number;
@@ -89,7 +89,6 @@ export interface FunnelChartProps extends Omit<BaseChartProps, 'categories' | 'i
 }
 
 const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
 
   const {
@@ -259,9 +258,9 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
       data: {
         className: cx(css`
           cursor: ${onValueChange ? 'pointer' : undefined};
-          color: ${color ?? theme.colorPrimary};
+          color: ${color ?? cssVar.colorPrimary};
         `),
-        color: color ?? theme.colorPrimary,
+        color: color ?? cssVar.colorPrimary,
         dataKey: closestBar.name,
         fill: '',
         name: closestBar.name,
@@ -366,7 +365,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                 <rect
                   height={realHeight}
                   style={{
-                    fill: tooltip.index === index ? theme.colorFillTertiary : 'transparent',
+                    fill: tooltip.index === index ? cssVar.colorFillTertiary : 'transparent',
                     zIndex: 0,
                   }}
                   width={barWidth + gap}
@@ -405,7 +404,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                   onClick={(e) => onBarClick(item, index, e)}
                   style={{
                     cursor: onValueChange ? 'pointer' : undefined,
-                    fill: color ?? theme.colorPrimary,
+                    fill: color ?? cssVar.colorPrimary,
                     opacity: activeBar && activeBar.index !== index ? 0.3 : 1,
                   }}
                   width={barWidth}
@@ -545,7 +544,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
             <linearGradient
               className={cx(css`
                 stop {
-                  stop-color: ${color ?? theme.colorPrimary};
+                  stop-color: ${color ?? cssVar.colorPrimary};
                 }
               `)}
               id={'base-gradient'}
@@ -560,7 +559,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
             <linearGradient
               className={cx(css`
                 stop {
-                  stop-color: ${color ?? theme.colorPrimary};
+                  stop-color: ${color ?? cssVar.colorPrimary};
                 }
               `)}
               id={'base-gradient-revert'}

@@ -1,12 +1,13 @@
 'use client';
 
 import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
+import { cssVar, cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 
 import { DeltaTypes } from '@/types/charts';
 import { mapInputsToDeltaType } from '@/utils';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 const getDeltaType = (value: number) => (value >= 0 ? DeltaTypes.Increase : DeltaTypes.Decrease);
 
@@ -21,7 +22,6 @@ export interface DeltaBarProps extends FlexboxProps {
 }
 
 const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
-  const { cx, styles, theme } = useStyles();
   const {
     value,
     bgColors,
@@ -38,11 +38,11 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
   const deltaType = mapInputsToDeltaType(getDeltaType(value), isIncreasePositive);
 
   const colors = {
-    [DeltaTypes.Increase]: theme.colorSuccess,
-    [DeltaTypes.ModerateIncrease]: theme.colorSuccess,
-    [DeltaTypes.Decrease]: theme.colorError,
-    [DeltaTypes.ModerateDecrease]: theme.colorError,
-    [DeltaTypes.Unchanged]: theme.colorWarning,
+    [DeltaTypes.Increase]: cssVar.colorSuccess,
+    [DeltaTypes.ModerateIncrease]: cssVar.colorSuccess,
+    [DeltaTypes.Decrease]: cssVar.colorError,
+    [DeltaTypes.ModerateDecrease]: cssVar.colorError,
+    [DeltaTypes.Unchanged]: cssVar.colorWarning,
   };
 
   return (
@@ -63,7 +63,7 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
         <Flexbox
           height={'100%'}
           style={{
-            background: bgColors || theme.colorFillTertiary,
+            background: bgColors || cssVar.colorFillTertiary,
             borderRadius: size / 2,
             inset: 0,
             opacity: bgColors ? 0.2 : 1,
@@ -97,7 +97,7 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
           className={styles.marker}
           flex={'none'}
           style={{
-            background: color || theme.colorPrimary,
+            background: color || cssVar.colorPrimary,
             height: size + 8,
             zIndex: 2,
           }}

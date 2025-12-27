@@ -1,6 +1,6 @@
 import { Center, Flexbox } from '@lobehub/ui';
 import { Empty } from 'antd';
-import { useTheme } from 'antd-style';
+import { cssVar } from 'antd-style';
 import { ReactNode, isValidElement, memo } from 'react';
 
 export interface NoDataProps {
@@ -21,7 +21,6 @@ const NoData = memo<NoDataProps>(
     },
     className,
   }) => {
-    const theme = useTheme();
     const isReactNodeText = isValidElement(noDataText);
     return (
       <Center height={'100%'} width={'100%'}>
@@ -32,10 +31,10 @@ const NoData = memo<NoDataProps>(
               noDataText
             ) : (
               <Flexbox padding={8}>
-                <div style={{ color: theme.colorText, fontSize: 14, fontWeight: 'bold' }}>
+                <div style={{ color: cssVar.colorText, fontSize: 14, fontWeight: 'bold' }}>
                   {(noDataText as any)?.title}
                 </div>
-                <div style={{ color: theme.colorTextDescription, fontSize: 12 }}>
+                <div style={{ color: cssVar.colorTextDescription, fontSize: 12 }}>
                   {(noDataText as any)?.desc}
                 </div>
               </Flexbox>

@@ -1,4 +1,4 @@
-import { useTheme } from 'antd-style';
+import { cssVar } from 'antd-style';
 import React, { memo } from 'react';
 
 import { ValueFormatter } from '@/types/charts';
@@ -18,15 +18,13 @@ interface CustomYAxisTickProps {
 
 const CustomYAxisTick = memo<CustomYAxisTickProps>(
   ({ yAxisLabel, x, y, payload, align, formatter }) => {
-    const theme = useTheme();
-
     const yAxisLabelWidth = yAxisLabel ? 24 : 0;
 
     return (
       <g transform={`translate(${align === 'left' ? yAxisLabelWidth : x + yAxisLabelWidth},${y})`}>
         <text
           dy={4}
-          fill={theme.colorTextDescription}
+          fill={cssVar.colorTextDescription}
           fontSize={12}
           textAnchor={align === 'left' ? 'start' : 'end'}
           x={0}

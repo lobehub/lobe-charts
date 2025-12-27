@@ -1,14 +1,14 @@
 import { Flexbox } from '@lobehub/ui';
 import { Typography } from 'antd';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cssVar } from 'antd-style';
 import React, { memo } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css }) => ({
   number: css`
     font-weight: 500;
   `,
   title: css`
-    color: ${token.colorTextSecondary};
+    color: ${cssVar.colorTextSecondary};
   `,
 }));
 
@@ -18,7 +18,6 @@ export interface ChartTooltipRowProps {
 }
 
 const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name }) => {
-  const { styles } = useStyles();
   return (
     <Flexbox align={'center'} gap={32} horizontal justify={'space-between'}>
       <Typography.Paragraph className={styles.title} ellipsis style={{ margin: 0 }}>

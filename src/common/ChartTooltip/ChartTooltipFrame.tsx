@@ -1,21 +1,20 @@
 import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 import { memo } from 'react';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   container: css`
     overflow: hidden;
 
-    border: 1px solid ${token.colorBorderSecondary};
-    border-radius: ${token.borderRadiusLG}px;
+    border: 1px solid ${cssVar.colorBorderSecondary};
+    border-radius: ${cssVar.borderRadiusLG};
 
-    background: ${token.colorBgElevated};
-    box-shadow: ${token.boxShadow};
+    background: ${cssVar.colorBgElevated};
+    box-shadow: ${cssVar.boxShadow};
   `,
 }));
 
 export const ChartTooltipFrame = memo<FlexboxProps>(({ children, ...rest }) => {
-  const { styles } = useStyles();
   return (
     <Flexbox className={styles.container} {...rest}>
       {children}

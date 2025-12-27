@@ -1,24 +1,24 @@
-import { createStyles } from 'antd-style';
+import { createStaticStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   emphasis: css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   `,
   gridLines: css`
-    stroke: ${token.colorBorderSecondary};
+    stroke: ${cssVar.colorBorderSecondary};
     stroke-width: 1;
   `,
   label: css`
     font-size: 12px;
     line-height: 16px;
-    fill: ${token.colorTextDescription};
+    fill: ${cssVar.colorTextDescription};
   `,
   strongLabel: css`
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
-    fill: ${token.colorTextSecondary};
+    fill: ${cssVar.colorTextSecondary};
   `,
 }));

@@ -1,9 +1,116 @@
-import { memo } from 'react';
+import { cx } from 'antd-style';
+import isEqual from 'fast-deep-equal';
+import { memo, useMemo } from 'react';
 
 import type { Labels, Week } from '@/types/charts';
 import { getMonthLabels } from '@/utils/calendar';
 
-import { useStyles } from './styles';
+interface WeekdayLabelItem {
+  dayIndex: number;
+  index: number;
+  label: string;
+  y: number;
+}
+
+interface WeekdayLabelsProps {
+  blockMargin: number;
+  blockSize: number;
+  firstWeek: Week;
+  labelHeight: number;
+  labelMargin: number;
+  weekStart: number;
+  weekdays?: string[];
+}
+
+// Simple component - ChartLabels already memoized, so this doesn't need memo
+const WeekdayLabels = ({
+  blockMargin,
+  blockSize,
+  firstWeek,
+  labelHeight,
+  labelMargin,
+  weekStart,
+  weekdays,
+}: WeekdayLabelsProps) => {
+  const labels = useMemo(() => {
+    const maxLength = Math.floor((blockSize * 7 + blockMargin * 6) / 12);
+
+    return firstWeek
+      .map((_, index) => {
+        if (index % 2 === 0) return null;
+        const dayIndex = (index + weekStart) % 7;
+        const label = weekdays?.[dayIndex] || '';
+        const truncatedLabel = label.length > maxLength ? label.slice(0, maxLength) + '...' : label;
+        return {
+          dayIndex,
+          index,
+          label: truncatedLabel,
+          y: labelHeight + (blockSize + blockMargin) * index + blockSize / 2,
+        };
+      })
+      .filter((item): item is WeekdayLabelItem => item !== null);
+  }, [firstWeek, weekStart, blockSize, blockMargin, labelHeight, weekdays]);
+
+  if (labels.length === 0) return null;
+
+  return (
+    <g className={cx('legend-weekday')}>
+      {labels.map((item) => (
+        <text
+          dominantBaseline="middle"
+          key={item.index}
+          textAnchor="end"
+          x={-labelMargin}
+          y={item.y}
+        >
+          {item.label}
+        </text>
+      ))}
+    </g>
+  );
+};
+
+WeekdayLabels.displayName = 'WeekdayLabels';
+
+interface MonthLabelsProps {
+  blockMargin: number;
+  blockSize: number;
+  monthNames?: string[];
+  weeks: Week[];
+}
+
+// Simple component - ChartLabels already memoized, so this doesn't need memo
+const MonthLabels = ({ blockMargin, blockSize, monthNames, weeks }: MonthLabelsProps) => {
+  const labels = useMemo(() => {
+    if (weeks.length === 0) return [];
+    return getMonthLabels(weeks, monthNames);
+  }, [weeks, monthNames]);
+
+  const maxLength = useMemo(() => {
+    return Math.floor((blockSize * 4 + blockMargin * 3) / 12);
+  }, [blockSize, blockMargin]);
+
+  if (labels.length === 0) return null;
+
+  return (
+    <g className={cx('legend-month')}>
+      {labels.map(({ label, weekIndex }) => {
+        const truncatedLabel = label.length > maxLength ? label.slice(0, maxLength) + '...' : label;
+        return (
+          <text
+            dominantBaseline="hanging"
+            key={weekIndex}
+            x={(blockSize + blockMargin) * weekIndex}
+          >
+            {truncatedLabel}
+          </text>
+        );
+      })}
+    </g>
+  );
+};
+
+MonthLabels.displayName = 'MonthLabels';
 
 interface ChartLabelsProps {
   blockMargin: number;
@@ -29,54 +136,33 @@ const ChartLabels = memo<ChartLabelsProps>(
     weeks,
     weekStart,
   }) => {
-    const { cx } = useStyles();
-
     return (
       <>
         {showWeekdayLabels && weeks[0] && (
-          <g className={cx('legend-weekday')}>
-            {weeks[0].map((_, index) => {
-              if (index % 2 === 0) {
-                return null;
-              }
-
-              const dayIndex = (index + weekStart) % 7;
-              const maxLength = Math.floor((blockSize * 7 + blockMargin * 6) / 12);
-              const label = labels?.weekdays?.[dayIndex] || '';
-
-              return (
-                <text
-                  dominantBaseline="middle"
-                  key={index}
-                  textAnchor="end"
-                  x={-labelMargin}
-                  y={labelHeight + (blockSize + blockMargin) * index + blockSize / 2}
-                >
-                  {label.length > maxLength ? label.slice(0, maxLength) + '...' : label}
-                </text>
-              );
-            })}
-          </g>
+          <WeekdayLabels
+            blockMargin={blockMargin}
+            blockSize={blockSize}
+            firstWeek={weeks[0]}
+            labelHeight={labelHeight}
+            labelMargin={labelMargin}
+            weekStart={weekStart}
+            weekdays={labels.weekdays}
+          />
         )}
         {!hideMonthLabels && (
-          <g className={cx('legend-month')}>
-            {getMonthLabels(weeks, labels.months).map(({ label, weekIndex }) => {
-              const maxLength = Math.floor((blockSize * 4 + blockMargin * 3) / 12);
-              return (
-                <text
-                  dominantBaseline="hanging"
-                  key={weekIndex}
-                  x={(blockSize + blockMargin) * weekIndex}
-                >
-                  {label.length > maxLength ? label.slice(0, maxLength) + '...' : label}
-                </text>
-              );
-            })}
-          </g>
+          <MonthLabels
+            blockMargin={blockMargin}
+            blockSize={blockSize}
+            monthNames={labels.months}
+            weeks={weeks}
+          />
         )}
       </>
     );
   },
+  isEqual,
 );
+
+ChartLabels.displayName = 'ChartLabels';
 
 export default ChartLabels;

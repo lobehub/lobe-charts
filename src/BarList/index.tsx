@@ -2,6 +2,7 @@
 
 import { A, Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
+import { cx } from 'antd-style';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 
 import NoData, { NoDataProps } from '@/common/NoData';
@@ -9,7 +10,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface Bar {
   [key: string]: any;
@@ -37,8 +38,9 @@ export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
   width?: string | number;
 }
 
+const prefixCls = 'ant';
+
 const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
-  const { cx, styles, prefixCls } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],

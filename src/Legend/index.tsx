@@ -1,5 +1,5 @@
 import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cx } from 'antd-style';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
@@ -8,7 +8,7 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import LegendItem from './LegendItem';
 import ScrollButton from './ScrollButton';
 
-const useStyles = createStyles(({ css }) => ({
+const styles = createStaticStyles(({ css }) => ({
   container: css`
     position: relative;
     overflow: hidden;
@@ -46,7 +46,6 @@ type HasScrollProps = {
 };
 
 const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
-  const { cx, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     customCategories,

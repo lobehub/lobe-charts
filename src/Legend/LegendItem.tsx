@@ -1,25 +1,25 @@
 import { Flexbox, Icon } from '@lobehub/ui';
 import { Typography } from 'antd';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css }) => ({
   container: css`
     display: inline-flex;
     align-items: center;
 
-    border-radius: ${token.borderRadius}px;
+    border-radius: ${cssVar.borderRadius};
 
-    color: ${token.colorTextDescription};
+    color: ${cssVar.colorTextDescription};
     white-space: nowrap;
   `,
   hasOnValueChange: css`
-    transition: all 0.25s ${token.motionEaseInOut};
+    transition: all 0.25s ${cssVar.motionEaseInOut};
 
     &:hover {
-      color: ${token.colorTextSecondary};
-      background: ${token.colorFillTertiary};
+      color: ${cssVar.colorTextSecondary};
+      background: ${cssVar.colorFillTertiary};
     }
   `,
   itemContent: css`
@@ -37,7 +37,6 @@ export interface LegendItemProps {
 }
 
 const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeLegend }) => {
-  const { cx, styles, theme } = useStyles();
   const hasOnValueChange = !!onClick;
 
   return (
@@ -68,7 +67,7 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
         className={styles.itemContent}
         ellipsis
         style={{
-          color: activeLegend && activeLegend === name ? theme.colorTextSecondary : undefined,
+          color: activeLegend && activeLegend === name ? cssVar.colorTextSecondary : undefined,
           margin: 0,
           opacity: activeLegend && activeLegend !== name ? 0.4 : 1,
         }}

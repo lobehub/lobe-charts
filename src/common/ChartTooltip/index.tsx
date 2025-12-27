@@ -1,6 +1,6 @@
 import { Flexbox } from '@lobehub/ui';
 import { Typography } from 'antd';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { ReactNode } from 'react';
 
 import { ValueFormatter } from '@/types/charts';
@@ -8,9 +8,9 @@ import { ValueFormatter } from '@/types/charts';
 import ChartTooltipFrame from './ChartTooltipFrame';
 import ChartTooltipRow from './ChartTooltipRow';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css, cssVar }) => ({
   header: css`
-    border-bottom: 1px solid ${token.colorBorderSecondary};
+    border-bottom: 1px solid ${cssVar.colorBorderSecondary};
     font-weight: 500;
   `,
 }));
@@ -36,8 +36,6 @@ const ChartTooltip = ({
   customCategories,
   footer,
 }: ChartTooltipProps) => {
-  const { cx, theme, styles } = useStyles();
-
   if (active && payload) {
     const filteredPayload = payload.filter((item: any) => item.type !== 'none');
 
@@ -56,7 +54,7 @@ const ChartTooltip = ({
         >
           {filteredPayload.map(({ value, name }: { name: string; value: number }, idx: number) => (
             <ChartTooltipRow
-              color={categoryColors.get(name) ?? theme.colorPrimary}
+              color={categoryColors.get(name) ?? cssVar.colorPrimary}
               key={`id-${idx}`}
               name={customCategories?.[name] || name}
               value={valueFormatter(value)}

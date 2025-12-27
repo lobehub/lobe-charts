@@ -2,12 +2,11 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { forwardRef } from 'react';
 import { Bar, BarChart as ReChartsBarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';
 
-import { useStyles } from '@/BarChart/styles';
 import BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
@@ -20,7 +19,6 @@ export interface SparkBarChartProps extends BaseSparkChartProps {
 }
 
 const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref) => {
-  const { cx, theme } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -70,7 +68,7 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
               <Bar
                 animationDuration={animationDuration}
                 className={cx(css`
-                  fill: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
                 dataKey={category}
                 fill=""

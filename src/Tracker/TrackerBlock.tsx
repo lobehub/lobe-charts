@@ -1,21 +1,21 @@
 'use client';
 
 import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
+import { createStaticStyles, cssVar } from 'antd-style';
 import { ReactNode, forwardRef, useMemo } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
+const styles = createStaticStyles(({ css }) => ({
   block: css`
-    background: ${token.colorFill};
+    background: ${cssVar.colorFill};
 
     &:first-child {
-      border-top-left-radius: ${token.borderRadiusSM}px;
-      border-bottom-left-radius: ${token.borderRadiusSM}px;
+      border-top-left-radius: ${cssVar.borderRadiusSM};
+      border-bottom-left-radius: ${cssVar.borderRadiusSM};
     }
 
     &:last-child {
-      border-top-right-radius: ${token.borderRadiusSM}px;
-      border-bottom-right-radius: ${token.borderRadiusSM}px;
+      border-top-right-radius: ${cssVar.borderRadiusSM};
+      border-bottom-right-radius: ${cssVar.borderRadiusSM};
     }
 
     &:hover {
@@ -32,18 +32,16 @@ export interface TrackerBlockProps {
 
 const TrackerBlock = forwardRef<HTMLDivElement, TrackerBlockProps & FlexboxProps>(
   ({ color, tooltip, width, style, ...rest }, ref) => {
-    const { styles, theme } = useStyles();
-
     const blockColor = useMemo(() => {
       switch (color) {
         case 'success': {
-          return theme.colorSuccess;
+          return cssVar.colorSuccess;
         }
         case 'warning': {
-          return theme.colorWarning;
+          return cssVar.colorWarning;
         }
         case 'error': {
-          return theme.colorError;
+          return cssVar.colorError;
         }
         default: {
           return color;

@@ -2,7 +2,7 @@
 
 import { Flexbox } from '@lobehub/ui';
 import { Skeleton } from 'antd';
-import { css } from 'antd-style';
+import { css, cssVar, cx } from 'antd-style';
 import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
   CartesianGrid,
@@ -29,7 +29,7 @@ import { CurveType } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
-import { useStyles } from './styles';
+import { styles } from './styles';
 
 export interface LineChartProps extends BaseChartProps {
   connectNulls?: boolean;
@@ -42,7 +42,6 @@ interface ActiveDot {
 }
 
 const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
-  const { cx, theme, styles } = useStyles();
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -249,7 +248,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                           label={label}
                           payload={payload?.map((payloadItem: any) => ({
                             ...payloadItem,
-                            color: categoryColors.get(payloadItem.dataKey) ?? theme.colorPrimary,
+                            color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                           }))}
                           valueFormatter={valueFormatter}
                         />
@@ -265,7 +264,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ stroke: theme.colorTextSecondary, strokeWidth: 1 }}
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
               isAnimationActive={false}
               position={{ y: 0 }}
               wrapperStyle={{ outline: 'none' }}
@@ -305,7 +304,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                   return (
                     <Dot
                       className={cx(css`
-                        fill: ${categoryColors.get(dataKey) ?? theme.colorPrimary};
+                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
                       `)}
                       cx={dotCx}
                       cy={dotCy}
@@ -321,7 +320,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                 }}
                 animationDuration={animationDuration}
                 className={cx(css`
-                  stroke: ${categoryColors.get(category) ?? theme.colorPrimary};
+                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
                 connectNulls={connectNulls}
                 dataKey={category}
@@ -345,7 +344,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                     return (
                       <Dot
                         className={cx(css`
-                          fill: ${categoryColors.get(dataKey) ?? theme.colorPrimary};
+                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
                         `)}
                         cx={dotCx}
                         cy={dotCy}
