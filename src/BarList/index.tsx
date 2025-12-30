@@ -1,12 +1,10 @@
 'use client';
 
-import { A, Flexbox } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { cx } from 'antd-style';
+import { A, Flexbox, Skeleton } from '@lobehub/ui';
+import { cssVar, cx } from 'antd-style';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 
 import NoData, { NoDataProps } from '@/common/NoData';
-import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
@@ -41,10 +39,9 @@ export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
 const prefixCls = 'ant';
 
 const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
-  const themeColorRange = useThemeColorRange();
   const {
     data = [],
-    color = themeColorRange[0],
+    color = cssVar.colorTextQuaternary,
     valueFormatter = defaultValueFormatter,
     showAnimation = false,
     onValueChange,
@@ -76,7 +73,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
     );
   }, [sortedData]);
 
-  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
 
   const rowHeight = 32;
   const labelHeight = 20;

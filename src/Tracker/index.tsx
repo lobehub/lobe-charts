@@ -1,6 +1,6 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
+import { Flexbox, FlexboxProps, TooltipGroup } from '@lobehub/ui';
 import { cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 
@@ -39,19 +39,23 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
     ...rest
   } = props;
 
-  const content = data.map((item, idx) => (
-    <TrackerBlock
-      color={item.color}
-      height={blockHeight}
-      key={item.key ?? idx}
-      onClick={() => onValueChange?.(item)}
-      style={{
-        cursor: onValueChange ? 'pointer' : 'default',
-      }}
-      tooltip={customTooltip ? customTooltip(item) : item.tooltip}
-      width={blockWidth}
-    />
-  ));
+  const content = (
+    <TooltipGroup>
+      {data.map((item, idx) => (
+        <TrackerBlock
+          color={item.color}
+          height={blockHeight}
+          key={item.key ?? idx}
+          onClick={() => onValueChange?.(item)}
+          style={{
+            cursor: onValueChange ? 'pointer' : 'default',
+          }}
+          tooltip={customTooltip ? customTooltip(item) : item.tooltip}
+          width={blockWidth}
+        />
+      ))}
+    </TooltipGroup>
+  );
 
   if (leftLabel || rightLabel) {
     return (

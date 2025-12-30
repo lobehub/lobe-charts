@@ -1,7 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from 'antd';
+import { Flexbox, Skeleton } from '@lobehub/ui';
 import { css, cssVar, cx } from 'antd-style';
 import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
@@ -155,7 +154,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
     });
   }, [yAxisWidth, data, valueFormatter, y]);
 
-  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
 
   const CustomTooltip = customTooltip;
   const hasOnValueChange = !!onValueChange;

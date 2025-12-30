@@ -1,6 +1,6 @@
 ---
 nav: Components
-group: Charts
+group: Visualizations
 description: Horizontal bars with a customizable label inside.
 ---
 

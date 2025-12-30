@@ -1,8 +1,7 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
+import { Flexbox, Skeleton } from '@lobehub/ui';
 import { useSize } from 'ahooks';
-import { Skeleton } from 'antd';
 import { css, cssVar, cx } from 'antd-style';
 import {
   Fragment,
@@ -273,7 +272,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
     });
   };
 
-  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
 
   const errorMessage = data ? validateData(data, calculateFrom) : null;
 

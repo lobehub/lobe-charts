@@ -1,7 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from 'antd';
+import { Flexbox, Skeleton } from '@lobehub/ui';
 import { css, cssVar, cx } from 'antd-style';
 import { forwardRef } from 'react';
 import { Area, AreaChart as ReChartsAreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -47,7 +46,7 @@ const SparkAreaChart = forwardRef<HTMLDivElement, SparkAreaChartProps>((props, r
     ...rest
   } = props;
 
-  if (loading || !data) return <Skeleton.Button active block style={{ height, width }} />;
+  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
 
   const categoryColors = constructCategoryColors(categories, colors);
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
