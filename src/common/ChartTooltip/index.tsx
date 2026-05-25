@@ -24,7 +24,7 @@ export interface ChartTooltipProps {
   footer?: ReactNode;
   label: string;
   payload: any;
-  valueFormatter: ValueFormatter;
+  valueFormatter: ValueFormatter | ((value: number, name?: string) => string);
 }
 
 const ChartTooltip = ({
@@ -57,7 +57,7 @@ const ChartTooltip = ({
               color={categoryColors.get(name) ?? cssVar.colorPrimary}
               key={`id-${idx}`}
               name={customCategories?.[name] || name}
-              value={valueFormatter(value)}
+              value={valueFormatter(value, name)}
             />
           ))}
         </Flexbox>
