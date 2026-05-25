@@ -5,6 +5,12 @@ export { type Bar, default as BarList, type BarListProps } from './BarList';
 export { default as ChartTooltip, type ChartTooltipProps } from './common/ChartTooltip';
 export { default as ChartTooltipFrame } from './common/ChartTooltip/ChartTooltipFrame';
 export { default as ChartTooltipRow } from './common/ChartTooltip/ChartTooltipRow';
+export {
+  default as ComposedChart,
+  type ComposedChartProps,
+  type ComposedChartSeries,
+  type ComposedChartYAxisConfig,
+} from './ComposedChart';
 export * from './DataBars';
 export { default as DonutChart, type DonutChartProps } from './DonutChart';
 export { default as FunnelChart, type FunnelChartProps } from './FunnelChart';
