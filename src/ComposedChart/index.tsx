@@ -6,10 +6,10 @@ import { forwardRef, useMemo, useState } from 'react';
 import {
   Bar,
   CartesianGrid,
-  ComposedChart as ReChartsComposedChart,
   Label,
   Legend,
   Line,
+  ComposedChart as ReChartsComposedChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -25,7 +25,7 @@ import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import { styles } from './styles';
-import type { ComposedChartProps, SeriesItem } from './types';
+import type { ComposedChartProps } from './types';
 
 export type { ComposedChartProps, SeriesItem } from './types';
 
@@ -62,10 +62,8 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
     ...rest
   } = props;
 
-  const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const [legendHeight, setLegendHeight] = useState(60);
 
-  // Map series to colors
   const seriesColorMap = useMemo(() => {
     const map = new Map<string, string>();
     series.forEach((s, i) => {
@@ -74,8 +72,13 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
     return map;
   }, [series, colors]);
 
-  // Build legend payload format compatible with ChartLegend
   const categoryColors = seriesColorMap;
+  const customCategories = useMemo(() => {
+    return series.reduce<Record<string, string>>((acc, item) => {
+      if (item.name) acc[item.key] = item.name;
+      return acc;
+    }, {});
+  }, [series]);
 
   const hasRightAxis = series.some((s) => s.axis === 'right');
 
@@ -243,15 +246,19 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                       <ChartTooltip
                         active={active}
                         categoryColors={categoryColors}
+                        customCategories={customCategories}
                         label={label}
-                        payload={payload?.map((item: any) => ({
-                          ...item,
-                          color: seriesColorMap.get(item.dataKey) ?? cssVar.colorPrimary,
-                        }))}
-                        valueFormatter={(value) => {
-                          // Try to find per-series formatter
-                          const s = series.find((s) => s.key === payload?.[0]?.dataKey);
-                          return s?.valueFormatter ? s.valueFormatter(value) : defaultValueFormatter(value);
+                        payload={payload}
+                        valueFormatter={(value, name) => {
+                          const currentSeries = series.find((item) => item.key === name);
+                          const formatter =
+                            currentSeries?.valueFormatter ??
+                            (currentSeries?.axis === 'right'
+                              ? yAxisRight?.valueFormatter
+                              : yAxisLeft?.valueFormatter) ??
+                            defaultValueFormatter;
+
+                          return formatter(value);
                         }}
                       />
                     )
@@ -270,9 +277,10 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                     { payload },
                     categoryColors,
                     setLegendHeight,
-                    activeLegend,
+                    undefined,
                     undefined,
                     enableLegendSlider,
+                    customCategories,
                   )
                 }
                 height={legendHeight}
@@ -288,16 +296,14 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 return (
                   <Bar
                     animationDuration={animationDuration}
-                    className={cx(
-                      css`
-                        fill: ${color};
-                      `,
-                    )}
+                    className={cx(css`
+                      fill: ${color};
+                    `)}
                     dataKey={s.key}
                     fill=""
                     isAnimationActive={showAnimation}
                     key={s.key}
-                    name={s.name ?? s.key}
+                    name={s.key}
                     yAxisId={axisId}
                   />
                 );
@@ -307,16 +313,14 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 return (
                   <Line
                     animationDuration={animationDuration}
-                    className={cx(
-                      css`
-                        stroke: ${color};
-                      `,
-                    )}
+                    className={cx(css`
+                      stroke: ${color};
+                    `)}
                     dataKey={s.key}
                     dot={false}
                     isAnimationActive={showAnimation}
                     key={s.key}
-                    name={s.name ?? s.key}
+                    name={s.key}
                     stroke=""
                     strokeWidth={2}
                     type="monotone"
