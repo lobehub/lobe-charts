@@ -1,4 +1,5 @@
-import type { ComponentType, HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { AxisDomain } from 'recharts/types/util/types';
 
 import type { NoDataProps } from '@/common/NoData';
 import type { IntervalType, LabelFormatter, ValueFormatter } from '@/types/charts';
@@ -24,6 +25,11 @@ export interface SeriesItem {
 }
 
 export interface YAxisConfig {
+  /**
+   * Forward to recharts `YAxis.domain`.
+   * Accepts numbers or `'auto'` / `'dataMin'` / `'dataMax'` / `'dataMin - N'` etc.
+   */
+  domain?: AxisDomain;
   /** Label string rendered alongside the axis */
   label?: string;
   /** Custom tick formatter */
@@ -32,7 +38,8 @@ export interface YAxisConfig {
   width?: number;
 }
 
-export interface ComposedChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
+export interface ComposedChartProps
+  extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
   allowDecimals?: boolean;
   colors?: string[];
   data: any[];

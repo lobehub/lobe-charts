@@ -1,4 +1,5 @@
 import { ComponentType, HTMLAttributes } from 'react';
+import type { AxisDomain } from 'recharts/types/util/types';
 
 import type { NoDataProps } from '@/common/NoData';
 import { IntervalType, LabelFormatter, ValueFormatter } from '@/types/charts';
@@ -53,6 +54,10 @@ interface BaseChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDi
   xAxisLabel?: string;
   xAxisLabelFormatter?: LabelFormatter;
   yAxisAlign?: 'left' | 'right';
+  /**
+   * Forward to recharts `YAxis.domain`. When set, overrides `autoMinValue` / `minValue` / `maxValue`.
+   */
+  yAxisDomain?: AxisDomain;
   yAxisLabel?: string;
   yAxisWidth?: number;
 }

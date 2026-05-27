@@ -71,6 +71,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     loading,
     xAxisLabel,
     yAxisLabel,
+    yAxisDomain: yAxisDomainOverride,
     className,
     width = '100%',
     height = 280,
@@ -129,7 +130,8 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
     setActiveBar(undefined);
   };
 
-  const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
+  const yAxisDomain = (yAxisDomainOverride ??
+    getYAxisDomain(autoMinValue, minValue, maxValue)) as AxisDomain;
 
   return (
     <Flexbox

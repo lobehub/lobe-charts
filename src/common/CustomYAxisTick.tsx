@@ -5,6 +5,7 @@ import { ValueFormatter } from '@/types/charts';
 
 interface CustomYAxisTickProps {
   align: 'left' | 'right';
+  anchor?: 'end' | 'middle' | 'start';
   formatter: ValueFormatter;
 
   payload: {
@@ -17,8 +18,9 @@ interface CustomYAxisTickProps {
 }
 
 const CustomYAxisTick = memo<CustomYAxisTickProps>(
-  ({ yAxisLabel, x, y, payload, align, formatter }) => {
+  ({ yAxisLabel, x, y, payload, align, formatter, anchor }) => {
     const yAxisLabelWidth = yAxisLabel ? 24 : 0;
+    const resolvedTextAnchor = anchor ?? (align === 'left' ? 'start' : 'end');
 
     return (
       <g transform={`translate(${align === 'left' ? yAxisLabelWidth : x + yAxisLabelWidth},${y})`}>
@@ -26,7 +28,7 @@ const CustomYAxisTick = memo<CustomYAxisTickProps>(
           dy={4}
           fill={cssVar.colorTextDescription}
           fontSize={12}
-          textAnchor={align === 'left' ? 'start' : 'end'}
+          textAnchor={resolvedTextAnchor}
           x={0}
           y={0}
         >

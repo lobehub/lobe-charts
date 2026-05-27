@@ -27,7 +27,7 @@ import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 import { styles } from './styles';
 import type { ComposedChartProps } from './types';
 
-export type { ComposedChartProps, SeriesItem } from './types';
+export type { ComposedChartProps, SeriesItem, YAxisConfig } from './types';
 
 const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref) => {
   const themeColorRange = useThemeColorRange();
@@ -160,6 +160,7 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
               allowDecimals={allowDecimals}
               axisLine={false}
               className={styles.label}
+              domain={yAxisLeft?.domain}
               fill=""
               hide={!showYAxis}
               orientation="left"
@@ -169,7 +170,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                   {...tickProps}
                   align="left"
                   formatter={yAxisLeft?.valueFormatter ?? defaultValueFormatter}
-                  textAnchor="end"
                   yAxisLabel={Boolean(yAxisLeft?.label)}
                 />
               )}
@@ -202,6 +202,7 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 allowDecimals={allowDecimals}
                 axisLine={false}
                 className={styles.label}
+                domain={yAxisRight?.domain}
                 fill=""
                 hide={!showYAxis}
                 orientation="right"
@@ -210,8 +211,8 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                   <CustomYAxisTick
                     {...tickProps}
                     align="right"
+                    anchor="start"
                     formatter={yAxisRight?.valueFormatter ?? defaultValueFormatter}
-                    textAnchor="start"
                     yAxisLabel={Boolean(yAxisRight?.label)}
                   />
                 )}

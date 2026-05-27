@@ -17,6 +17,12 @@ A classic dual-axes chart: request count (bar, left axis) + average cost (line, 
 
 <code src="./demos/axis.tsx"></code>
 
+## Custom y-axis domain
+
+Recharts defaults number axes to `[0, auto]`, which flattens series in a narrow range (e.g. success rate 80–95%). Pass `domain` on `yAxisLeft` / `yAxisRight` to control the scale — same values as [recharts `YAxis.domain`](https://recharts.org/en-US/api/YAxis#domain).
+
+<code src="./demos/domain.tsx"></code>
+
 ## No Data
 
 <code src="./demos/noData.tsx"></code>

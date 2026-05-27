@@ -75,6 +75,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
     tickGap = 5,
     xAxisLabel,
     yAxisLabel,
+    yAxisDomain: yAxisDomainOverride,
     width = '100%',
     height = 280,
     style,
@@ -95,7 +96,8 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
   const CustomTooltip = customTooltip;
   const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
   const categoryColors = constructCategoryColors(categories, colors);
-  const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);
+  const yAxisDomain = (yAxisDomainOverride ??
+    getYAxisDomain(autoMinValue, minValue, maxValue)) as AxisDomain;
   const hasOnValueChange = !!onValueChange;
 
   const onDotClick = (itemData: any, event: MouseEvent) => {
