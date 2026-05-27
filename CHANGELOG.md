@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.2.0](https://github.com/lobehub/lobe-charts/compare/v5.1.0...v5.2.0)
+
+<sup>Released on **2026-05-27**</sup>
+
+#### ✨ Features
+
+- **misc**: Add domain to ComposedChart.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add domain to ComposedChart ([43ec0d7](https://github.com/lobehub/lobe-charts/commit/43ec0d7))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 5.1.0](https://github.com/lobehub/lobe-charts/compare/v5.0.0...v5.1.0)
 
 <sup>Released on **2026-05-25**</sup>
