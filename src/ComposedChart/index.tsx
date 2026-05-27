@@ -240,37 +240,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
               </YAxis>
             )}
 
-            <Tooltip
-              content={
-                showTooltip
-                  ? ({ active, payload, label }) => (
-                      <ChartTooltip
-                        active={active}
-                        categoryColors={categoryColors}
-                        customCategories={customCategories}
-                        label={label}
-                        payload={payload}
-                        valueFormatter={(value, name) => {
-                          const currentSeries = series.find((item) => item.key === name);
-                          const formatter =
-                            currentSeries?.valueFormatter ??
-                            (currentSeries?.axis === 'right'
-                              ? yAxisRight?.valueFormatter
-                              : yAxisLeft?.valueFormatter) ??
-                            defaultValueFormatter;
-
-                          return formatter(value);
-                        }}
-                      />
-                    )
-                  : undefined
-              }
-              cursor={{ fill: cssVar.colorFillTertiary }}
-              isAnimationActive={false}
-              position={{ y: 0 }}
-              wrapperStyle={{ outline: 'none' }}
-            />
-
             {showLegend && (
               <Legend
                 content={({ payload }) =>
@@ -332,6 +301,35 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
 
               return null;
             })}
+
+            {showTooltip && (
+              <Tooltip
+                content={({ active, payload, label }) => (
+                  <ChartTooltip
+                    active={active}
+                    categoryColors={categoryColors}
+                    customCategories={customCategories}
+                    label={label}
+                    payload={payload}
+                    valueFormatter={(value, name) => {
+                      const currentSeries = series.find((item) => item.key === name);
+                      const formatter =
+                        currentSeries?.valueFormatter ??
+                        (currentSeries?.axis === 'right'
+                          ? yAxisRight?.valueFormatter
+                          : yAxisLeft?.valueFormatter) ??
+                        defaultValueFormatter;
+
+                      return formatter(value);
+                    }}
+                  />
+                )}
+                cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
+                isAnimationActive={false}
+                position={{ y: 0 }}
+                wrapperStyle={{ outline: 'none' }}
+              />
+            )}
           </ReChartsComposedChart>
         ) : (
           <NoData noDataText={noDataText} />
