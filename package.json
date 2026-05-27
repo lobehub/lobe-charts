@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/charts",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "React modern charts components built on recharts",
   "keywords": [
     "lobehub",
