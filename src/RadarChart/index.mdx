@@ -1,0 +1,52 @@
+---
+title: RadarChart
+description: Radar charts compare multiple quantitative variables across categories on a polar grid.
+category: Charts
+order: 6
+---
+
+import DemoAngleAxisLabelFormatter from './demos/angleAxisLabelFormatter.tsx?demo';
+import DemoClickEvent from './demos/clickEvent.tsx?demo';
+import DemoCustomColors from './demos/customColors.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoLoading from './demos/loading.tsx?demo';
+import DemoNoData from './demos/noData.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below shows a chart composition combining a `RadarChart` with text elements.
+
+<Demo of={DemoExample} />
+
+## Usage example with custom angle axis labels
+
+The example below shows custom angle-axis labels using the `angleAxisLabelFormatter` prop, appending Product A values after each subject name.
+
+<Demo of={DemoAngleAxisLabelFormatter} />
+
+## Usage example with click event
+
+The example below shows an interactive chart using the `onValueChange` prop.
+
+<Demo of={DemoClickEvent} />
+
+## Usage example with a custom colors
+
+The example below shows a chart with custom `colors`.
+
+<Demo of={DemoCustomColors} />
+
+## No Data
+
+<Demo of={DemoNoData} />
+
+## Loading
+
+<Demo of={DemoLoading} />
+
+## API
+
+<Api name="RadarChart" />

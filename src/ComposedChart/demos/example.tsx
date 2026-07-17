@@ -8,7 +8,7 @@ const data: ComposedChartProps['data'] = [
   { bucket: '5k–10k', cost: 87.3, ops: 8730 },
   { bucket: '10k–20k', cost: 132.5, ops: 13_250 },
   { bucket: '20k–50k', cost: 198.6, ops: 19_860 },
-  { bucket: '50k+', cost: 320.0, ops: 32_000 },
+  { bucket: '50k+', cost: 320, ops: 32_000 },
 ];
 
 export default () => (

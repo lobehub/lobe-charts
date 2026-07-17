@@ -265,6 +265,78 @@
       "source": "src/BarList/demos/customColors.tsx"
     },
     {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-demos",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/index.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-example",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/example.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-axis",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-domain",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/domain.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-nodata",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/noData.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-loading",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/loading.tsx"
+    },
+    {
       "document": "src/DataBars/index.mdx",
       "legacyId": "progressbar, markerbar, deltabar, categorybar-demo-progressbar",
       "legacyRouteId": "components/DataBars/index",
@@ -613,6 +685,90 @@
       "source": "src/LineChart/demos/axis.tsx"
     },
     {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-demos",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/index.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-example",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/example.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-angleaxislabelformatter",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/angleAxisLabelFormatter.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-clickevent",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-customcolors",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-nodata",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/noData.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-loading",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/loading.tsx"
+    },
+    {
       "document": "src/ScatterChart/index.mdx",
       "legacyId": "scatterchart-demo-demos",
       "legacyRouteId": "components/ScatterChart/index",
@@ -834,6 +990,15 @@
       "title": "BarList"
     },
     {
+      "category": "Charts",
+      "description": "ComposedChart renders bar and line series on the same chart with independent left and right y-axes, sharing a single x-axis and a unified tooltip.",
+      "legacyRouteId": "components/ComposedChart/index",
+      "pathname": "/components/composed-chart",
+      "section": "Components",
+      "source": "src/ComposedChart/index.mdx",
+      "title": "ComposedChart"
+    },
+    {
       "category": "Visualizations",
       "description": "Components to indicate progress, performance, or status. For example, an individual score compared to a benchmark, the length of a process, or the deviation of a value.",
       "legacyRouteId": "components/DataBars/index",
@@ -886,6 +1051,15 @@
       "section": "Components",
       "source": "src/LineChart/index.mdx",
       "title": "LineChart"
+    },
+    {
+      "category": "Charts",
+      "description": "Radar charts compare multiple quantitative variables across categories on a polar grid.",
+      "legacyRouteId": "components/RadarChart/index",
+      "pathname": "/components/radar-chart",
+      "section": "Components",
+      "source": "src/RadarChart/index.mdx",
+      "title": "RadarChart"
     },
     {
       "category": "Charts",
