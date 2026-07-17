@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.4.0](https://github.com/lobehub/lobe-charts/compare/v5.3.1...v5.4.0)
+
+<sup>Released on **2026-07-17**</sup>
+
+#### ✨ Features
+
+- **docs**: Migrate to lobedocs.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **docs**: Migrate to lobedocs, closes [#28](https://github.com/lobehub/lobe-charts/issues/28) ([849c8c7](https://github.com/lobehub/lobe-charts/commit/849c8c7))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.3.1](https://github.com/lobehub/lobe-charts/compare/v5.3.0...v5.3.1)
 
 <sup>Released on **2026-07-17**</sup>
