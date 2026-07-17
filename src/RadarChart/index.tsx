@@ -179,36 +179,35 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
               tickFormatter={valueFormatter}
               tickLine={false}
             />
-            <Tooltip
-              content={
-                showTooltip
-                  ? ({ active, payload, label }) =>
-                      CustomTooltip ? (
-                        <CustomTooltip
-                          active={active}
-                          customCategories={customCategories}
-                          label={label}
-                          payload={payload?.map((payloadItem: any) => ({
-                            ...payloadItem,
-                            color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
-                          }))}
-                          valueFormatter={valueFormatter}
-                        />
-                      ) : (
-                        <ChartTooltip
-                          active={active}
-                          categoryColors={categoryColors}
-                          customCategories={customCategories}
-                          label={label}
-                          payload={payload}
-                          valueFormatter={valueFormatter}
-                        />
-                      )
-                  : undefined
-              }
-              isAnimationActive={false}
-              wrapperStyle={{ outline: 'none' }}
-            />
+            {showTooltip ? (
+              <Tooltip
+                content={({ active, payload, label }) =>
+                  CustomTooltip ? (
+                    <CustomTooltip
+                      active={active}
+                      customCategories={customCategories}
+                      label={label}
+                      payload={payload?.map((payloadItem: any) => ({
+                        ...payloadItem,
+                        color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
+                      }))}
+                      valueFormatter={valueFormatter}
+                    />
+                  ) : (
+                    <ChartTooltip
+                      active={active}
+                      categoryColors={categoryColors}
+                      customCategories={customCategories}
+                      label={label}
+                      payload={payload}
+                      valueFormatter={valueFormatter}
+                    />
+                  )
+                }
+                isAnimationActive={false}
+                wrapperStyle={{ outline: 'none' }}
+              />
+            ) : undefined}
             {showLegend ? (
               <Legend
                 content={({ payload }) =>
