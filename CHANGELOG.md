@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.3.0](https://github.com/lobehub/lobe-charts/compare/v5.2.1...v5.3.0)
+
+<sup>Released on **2026-07-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Add RadarChart.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add RadarChart ([d67c822](https://github.com/lobehub/lobe-charts/commit/d67c822))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.2.1](https://github.com/lobehub/lobe-charts/compare/v5.2.0...v5.2.1)
 
 <sup>Released on **2026-05-27**</sup>
