@@ -1,18 +1,21 @@
 ---
-nav: Components
-group: Charts
+title: FunnelChart
 description: A funnel chart illustrates the progression or conversion rates through successive stages of a process.
+category: Charts
 order: 3
 ---
 
-<code src="./demos/index.tsx" nopadding></code>
+import DemoIndex from './demos/index.tsx?demo';
+import DemoCalculateFrom from './demos/CalculateFrom.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
 
 ## Usage example with evolution gradient
 
 The `calculateFrom` prop controls the referenced value to calculate the drop-off between steps. Here we set it to previous, to always reference the preceding bar as the calculation base. We also set `showArrow` to false.
 
-<code src="./demos/CalculateFrom.tsx"></code>
+<Demo of={DemoCalculateFrom} />
 
 ## API
 
-<API></API>
+<Api name="FunnelChart" />
