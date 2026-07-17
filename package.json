@@ -85,9 +85,9 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@icons-pack/react-simple-icons": "^9.7.0",
-    "@lobehub/docs-kit": "^5.22.2",
+    "@lobehub/docs-kit": "^5.22.3",
     "@lobehub/lint": "^1.26.3",
-    "@lobehub/ui": "^5.22.2",
+    "@lobehub/ui": "^5.22.3",
     "@react-router/dev": "8.2.0",
     "@testing-library/react": "^16.3.2",
     "@types/chroma-js": "^3.1.2",
