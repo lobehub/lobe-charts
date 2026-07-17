@@ -17,6 +17,7 @@ export { default as FunnelChart, type FunnelChartProps } from './FunnelChart';
 export { default as Heatmaps, type HeatmapsProps } from './Heatmaps';
 export { default as Legend, type LegendProps } from './Legend';
 export { default as LineChart, type LineChartProps } from './LineChart';
+export { default as RadarChart, type RadarChartProps } from './RadarChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
 export * from './SparkChart';
 export { default as Tracker, type TrackerProps } from './Tracker';
