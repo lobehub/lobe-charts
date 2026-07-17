@@ -1,42 +1,49 @@
 ---
-nav: Components
-group: Charts
+title: LineChart
 description: A line chart is a graphical representation that connects one or more series of data points with a continuous line.
+category: Charts
 order: 1
 ---
 
-<code src="./demos/index.tsx" nopadding></code>
+import DemoIndex from './demos/index.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoClickEvent from './demos/clickEvent.tsx?demo';
+import DemoCustomTooltip from './demos/customTooltip.tsx?demo';
+import DemoCustomColors from './demos/customColors.tsx?demo';
+import DemoAxis from './demos/axis.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
 
 ## Usage example
 
 The example below shows a composition combining an `AreaChart` with text elements.
 
-<code src="./demos/example.tsx"></code>
+<Demo of={DemoExample} />
 
 ## Usage example with click event
 
 The example below shows an interacive chart using the `onValueChange` prop.
 
-<code src="./demos/clickEvent.tsx"></code>
+<Demo of={DemoClickEvent} />
 
 ## Usage example with custom tooltip
 
 The example below shows a custom tooltip using `customTooltip` prop.
 
-<code src="./demos/customTooltip.tsx"></code>
+<Demo of={DemoCustomTooltip} />
 
 ## Usage example with a custom colors
 
 The example below shows a chart with custom `colors`.
 
-<code src="./demos/customColors.tsx"></code>
+<Demo of={DemoCustomColors} />
 
 ## Usage example with x-axis and y-axis labels
 
 The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` prop.
 
-<code src="./demos/axis.tsx"></code>
+<Demo of={DemoAxis} />
 
 ## API
 
-<API></API>
+<Api name="LineChart" />

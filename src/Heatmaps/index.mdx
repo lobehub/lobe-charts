@@ -1,0 +1,70 @@
+---
+title: Heatmaps
+description: A flexible React component to display activity data in a heatmaps chart.
+category: Visualizations
+---
+
+import DemoIndex from './demos/index.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoLoading from './demos/loading.tsx?demo';
+import DemoActivityLevels from './demos/activityLevels.tsx?demo';
+import DemoDataRanges from './demos/dataRanges.tsx?demo';
+import DemoClickEvent from './demos/clickEvent.tsx?demo';
+import DemoCustomTooltip from './demos/customTooltip.tsx?demo';
+import DemoCustomColors from './demos/customColors.tsx?demo';
+import DemoCustomization from './demos/customization.tsx?demo';
+import DemoI18n from './demos/i18n.tsx?demo';
+
+<Demo of={DemoIndex} isolated layout="bare" />
+
+## Usage example
+
+The example below shows a composition of a `Heatmaps` component.
+
+<Demo of={DemoExample} isolated />
+
+## Loading
+
+<Demo of={DemoLoading} isolated />
+
+## Activity Levels
+
+Use the `maxLevel` prop to control the number of activity levels. This value is zero indexed (0 represents no activity),
+so for example a maxLevel of 2 will total in 3 levels as above. Each activity level must be in the interval from 0 to `maxLevel`,
+which is 4 per default.
+
+<Demo of={DemoActivityLevels} isolated />
+
+## Date Ranges
+
+<Demo of={DemoDataRanges} isolated />
+
+## Usage example with click event
+
+The example below shows an interacive chart using the `onValueChange` prop.
+
+<Demo of={DemoClickEvent} isolated />
+
+## Usage example with custom tooltip
+
+The example below shows a custom tooltip using `customTooltip` prop.
+
+<Demo of={DemoCustomTooltip} isolated />
+
+## Usage example with a custom colors
+
+The example below shows a chart with custom `colors`.
+
+<Demo of={DemoCustomColors} isolated />
+
+## Customization
+
+<Demo of={DemoCustomization} isolated />
+
+## Localization
+
+<Demo of={DemoI18n} isolated />
+
+## API
+
+<Api name="Heatmaps" />

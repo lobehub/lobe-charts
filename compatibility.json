@@ -1,0 +1,1092 @@
+{
+  "demoReferences": [
+    {
+      "document": "docs/index.mdx",
+      "legacyId": "docs-demo-docs",
+      "legacyRouteId": "docs/index",
+      "options": {
+        "inline": true,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/",
+      "source": "docs/index.tsx"
+    },
+    {
+      "document": "src/AccuracyBarChart/index.mdx",
+      "legacyId": "accuracybarchart-demo-demos",
+      "legacyRouteId": "components/AccuracyBarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/accuracy-bar-chart",
+      "source": "src/AccuracyBarChart/demos/index.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-demos",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/index.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-example",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/example.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-clickevent",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-customtooltip",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-customcolors",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/AreaChart/index.mdx",
+      "legacyId": "areachart-demo-axis",
+      "legacyRouteId": "components/AreaChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/area-chart",
+      "source": "src/AreaChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-demos",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/index.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-example",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/example.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-xaxislabelformatter",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/xAxisLabelFormatter.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-groups",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/groups.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-clickevent",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-customtooltip",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-customcolors",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-axis",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-nodata",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/noData.tsx"
+    },
+    {
+      "document": "src/BarChart/index.mdx",
+      "legacyId": "barchart-demo-loading",
+      "legacyRouteId": "components/BarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-chart",
+      "source": "src/BarChart/demos/loading.tsx"
+    },
+    {
+      "document": "src/BarList/index.mdx",
+      "legacyId": "barlist-demo-demos",
+      "legacyRouteId": "components/BarList/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/bar-list",
+      "source": "src/BarList/demos/index.tsx"
+    },
+    {
+      "document": "src/BarList/index.mdx",
+      "legacyId": "barlist-demo-example",
+      "legacyRouteId": "components/BarList/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-list",
+      "source": "src/BarList/demos/example.tsx"
+    },
+    {
+      "document": "src/BarList/index.mdx",
+      "legacyId": "barlist-demo-clickevent",
+      "legacyRouteId": "components/BarList/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-list",
+      "source": "src/BarList/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/BarList/index.mdx",
+      "legacyId": "barlist-demo-customcolors",
+      "legacyRouteId": "components/BarList/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/bar-list",
+      "source": "src/BarList/demos/customColors.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-demos",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/index.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-example",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/example.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-axis",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-domain",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/domain.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-nodata",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/noData.tsx"
+    },
+    {
+      "document": "src/ComposedChart/index.mdx",
+      "legacyId": "composedchart-demo-loading",
+      "legacyRouteId": "components/ComposedChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/composed-chart",
+      "source": "src/ComposedChart/demos/loading.tsx"
+    },
+    {
+      "document": "src/DataBars/index.mdx",
+      "legacyId": "progressbar, markerbar, deltabar, categorybar-demo-progressbar",
+      "legacyRouteId": "components/DataBars/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/data-bars",
+      "source": "src/DataBars/demos/ProgressBar.tsx"
+    },
+    {
+      "document": "src/DataBars/index.mdx",
+      "legacyId": "progressbar, markerbar, deltabar, categorybar-demo-markerbar",
+      "legacyRouteId": "components/DataBars/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/data-bars",
+      "source": "src/DataBars/demos/MarkerBar.tsx"
+    },
+    {
+      "document": "src/DataBars/index.mdx",
+      "legacyId": "progressbar, markerbar, deltabar, categorybar-demo-deltabar",
+      "legacyRouteId": "components/DataBars/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/data-bars",
+      "source": "src/DataBars/demos/DeltaBar.tsx"
+    },
+    {
+      "document": "src/DataBars/index.mdx",
+      "legacyId": "progressbar, markerbar, deltabar, categorybar-demo-categorybar",
+      "legacyRouteId": "components/DataBars/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/data-bars",
+      "source": "src/DataBars/demos/CategoryBar.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-demos",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/index.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-example",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/example.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-withlegend",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/withLegend.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-clickevent",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-customtooltip",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/DonutChart/index.mdx",
+      "legacyId": "donutchart-demo-customcolors",
+      "legacyRouteId": "components/DonutChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/donut-chart",
+      "source": "src/DonutChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/FunnelChart/index.mdx",
+      "legacyId": "funnelchart-demo-demos",
+      "legacyRouteId": "components/FunnelChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/funnel-chart",
+      "source": "src/FunnelChart/demos/index.tsx"
+    },
+    {
+      "document": "src/FunnelChart/index.mdx",
+      "legacyId": "funnelchart-demo-calculatefrom",
+      "legacyRouteId": "components/FunnelChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/funnel-chart",
+      "source": "src/FunnelChart/demos/CalculateFrom.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-demos",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "bare"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/index.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-example",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/example.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-loading",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/loading.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-activitylevels",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/activityLevels.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-dataranges",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/dataRanges.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-clickevent",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-customtooltip",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-customcolors",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/customColors.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-customization",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/customization.tsx"
+    },
+    {
+      "document": "src/Heatmaps/index.mdx",
+      "legacyId": "heatmaps-demo-i18n",
+      "legacyRouteId": "components/Heatmaps/index",
+      "options": {
+        "inline": false,
+        "isolated": true,
+        "layout": "default"
+      },
+      "pathname": "/components/heatmaps",
+      "source": "src/Heatmaps/demos/i18n.tsx"
+    },
+    {
+      "document": "src/Legend/index.mdx",
+      "legacyId": "legend-demo-demos",
+      "legacyRouteId": "components/Legend/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/legend",
+      "source": "src/Legend/demos/index.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-demos",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/index.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-example",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/example.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-clickevent",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-customtooltip",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-customcolors",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/LineChart/index.mdx",
+      "legacyId": "linechart-demo-axis",
+      "legacyRouteId": "components/LineChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/line-chart",
+      "source": "src/LineChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-demos",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/index.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-example",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/example.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-angleaxislabelformatter",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/angleAxisLabelFormatter.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-clickevent",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-customcolors",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-nodata",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/noData.tsx"
+    },
+    {
+      "document": "src/RadarChart/index.mdx",
+      "legacyId": "radarchart-demo-loading",
+      "legacyRouteId": "components/RadarChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/radar-chart",
+      "source": "src/RadarChart/demos/loading.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-demos",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/index.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-example",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/example.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-clickevent",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-customtooltip",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-customcolors",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/customColors.tsx"
+    },
+    {
+      "document": "src/ScatterChart/index.mdx",
+      "legacyId": "scatterchart-demo-axis",
+      "legacyRouteId": "components/ScatterChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/scatter-chart",
+      "source": "src/ScatterChart/demos/axis.tsx"
+    },
+    {
+      "document": "src/SparkChart/index.mdx",
+      "legacyId": "sparkareachart, sparkbarchart, sparklinechart-demo-sparkareachart",
+      "legacyRouteId": "components/SparkChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/spark-chart",
+      "source": "src/SparkChart/demos/SparkAreaChart.tsx"
+    },
+    {
+      "document": "src/SparkChart/index.mdx",
+      "legacyId": "sparkareachart, sparkbarchart, sparklinechart-demo-sparkbarchart",
+      "legacyRouteId": "components/SparkChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/spark-chart",
+      "source": "src/SparkChart/demos/SparkBarChart.tsx"
+    },
+    {
+      "document": "src/SparkChart/index.mdx",
+      "legacyId": "sparkareachart, sparkbarchart, sparklinechart-demo-sparklinechart",
+      "legacyRouteId": "components/SparkChart/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/spark-chart",
+      "source": "src/SparkChart/demos/SparkLineChart.tsx"
+    },
+    {
+      "document": "src/Tracker/index.mdx",
+      "legacyId": "tracker-demo-demos",
+      "legacyRouteId": "components/Tracker/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "bare"
+      },
+      "pathname": "/components/tracker",
+      "source": "src/Tracker/demos/index.tsx"
+    },
+    {
+      "document": "src/Tracker/index.mdx",
+      "legacyId": "tracker-demo-example",
+      "legacyRouteId": "components/Tracker/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/tracker",
+      "source": "src/Tracker/demos/example.tsx"
+    },
+    {
+      "document": "src/Tracker/index.mdx",
+      "legacyId": "tracker-demo-clickevent",
+      "legacyRouteId": "components/Tracker/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "default"
+      },
+      "pathname": "/components/tracker",
+      "source": "src/Tracker/demos/clickEvent.tsx"
+    },
+    {
+      "document": "src/Tracker/index.mdx",
+      "legacyId": "tracker-demo-customtooltip",
+      "legacyRouteId": "components/Tracker/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/tracker",
+      "source": "src/Tracker/demos/customTooltip.tsx"
+    },
+    {
+      "document": "src/Tracker/index.mdx",
+      "legacyId": "tracker-demo-customcolors",
+      "legacyRouteId": "components/Tracker/index",
+      "options": {
+        "inline": false,
+        "isolated": false,
+        "layout": "center"
+      },
+      "pathname": "/components/tracker",
+      "source": "src/Tracker/demos/customColors.tsx"
+    }
+  ],
+  "documents": [
+    {
+      "description": "New updates and improvements to @lobehub/charts",
+      "legacyRouteId": "docs/changelog",
+      "pathname": "/changelog",
+      "section": "Changelog",
+      "source": "docs/changelog.mdx",
+      "title": "Changelog"
+    },
+    {
+      "description": "React modern charts components built on recharts",
+      "legacyRouteId": "docs/index",
+      "pathname": "/",
+      "section": "Home",
+      "source": "docs/index.mdx"
+    },
+    {
+      "category": "Charts",
+      "description": "Accuracy bar charts visualize model or system performance metrics with intelligent color coding and percentage display.",
+      "legacyRouteId": "components/AccuracyBarChart/index",
+      "pathname": "/components/accuracy-bar-chart",
+      "section": "Components",
+      "source": "src/AccuracyBarChart/index.mdx",
+      "title": "AccuracyBarChart"
+    },
+    {
+      "category": "Charts",
+      "description": "An area chart displays quantitative data graphically. It is based on the line chart but the area between x-axis and line is emphasized with color.",
+      "legacyRouteId": "components/AreaChart/index",
+      "pathname": "/components/area-chart",
+      "section": "Components",
+      "source": "src/AreaChart/index.mdx",
+      "title": "AreaChart"
+    },
+    {
+      "category": "Charts",
+      "description": "Bar charts compare numerical values and use the length of each bar to represent the value of each variable.",
+      "legacyRouteId": "components/BarChart/index",
+      "pathname": "/components/bar-chart",
+      "section": "Components",
+      "source": "src/BarChart/index.mdx",
+      "title": "BarChart"
+    },
+    {
+      "category": "Visualizations",
+      "description": "Horizontal bars with a customizable label inside.",
+      "legacyRouteId": "components/BarList/index",
+      "pathname": "/components/bar-list",
+      "section": "Components",
+      "source": "src/BarList/index.mdx",
+      "title": "BarList"
+    },
+    {
+      "category": "Charts",
+      "description": "ComposedChart renders bar and line series on the same chart with independent left and right y-axes, sharing a single x-axis and a unified tooltip.",
+      "legacyRouteId": "components/ComposedChart/index",
+      "pathname": "/components/composed-chart",
+      "section": "Components",
+      "source": "src/ComposedChart/index.mdx",
+      "title": "ComposedChart"
+    },
+    {
+      "category": "Visualizations",
+      "description": "Components to indicate progress, performance, or status. For example, an individual score compared to a benchmark, the length of a process, or the deviation of a value.",
+      "legacyRouteId": "components/DataBars/index",
+      "pathname": "/components/data-bars",
+      "section": "Components",
+      "source": "src/DataBars/index.mdx",
+      "title": "DataBars"
+    },
+    {
+      "category": "Charts",
+      "description": "A donut chart displays quantitative information through a circular visualization.",
+      "legacyRouteId": "components/DonutChart/index",
+      "pathname": "/components/donut-chart",
+      "section": "Components",
+      "source": "src/DonutChart/index.mdx",
+      "title": "DonutChart"
+    },
+    {
+      "category": "Charts",
+      "description": "A funnel chart illustrates the progression or conversion rates through successive stages of a process.",
+      "legacyRouteId": "components/FunnelChart/index",
+      "pathname": "/components/funnel-chart",
+      "section": "Components",
+      "source": "src/FunnelChart/index.mdx",
+      "title": "FunnelChart"
+    },
+    {
+      "category": "Visualizations",
+      "description": "A flexible React component to display activity data in a heatmaps chart.",
+      "legacyRouteId": "components/Heatmaps/index",
+      "pathname": "/components/heatmaps",
+      "section": "Components",
+      "source": "src/Heatmaps/index.mdx",
+      "title": "Heatmaps"
+    },
+    {
+      "category": "Visualizations",
+      "description": "A color-coded legend which goes well with data bar components.",
+      "legacyRouteId": "components/Legend/index",
+      "pathname": "/components/legend",
+      "section": "Components",
+      "source": "src/Legend/index.mdx",
+      "title": "Legend"
+    },
+    {
+      "category": "Charts",
+      "description": "A line chart is a graphical representation that connects one or more series of data points with a continuous line.",
+      "legacyRouteId": "components/LineChart/index",
+      "pathname": "/components/line-chart",
+      "section": "Components",
+      "source": "src/LineChart/index.mdx",
+      "title": "LineChart"
+    },
+    {
+      "category": "Charts",
+      "description": "Radar charts compare multiple quantitative variables across categories on a polar grid.",
+      "legacyRouteId": "components/RadarChart/index",
+      "pathname": "/components/radar-chart",
+      "section": "Components",
+      "source": "src/RadarChart/index.mdx",
+      "title": "RadarChart"
+    },
+    {
+      "category": "Charts",
+      "description": "A scatter chart visualizes relationships between two or three variables.",
+      "legacyRouteId": "components/ScatterChart/index",
+      "pathname": "/components/scatter-chart",
+      "section": "Components",
+      "source": "src/ScatterChart/index.mdx",
+      "title": "ScatterChart"
+    },
+    {
+      "category": "Visualizations",
+      "description": "A small graph capable of visualizing data in a simplified form.",
+      "legacyRouteId": "components/SparkChart/index",
+      "pathname": "/components/spark-chart",
+      "section": "Components",
+      "source": "src/SparkChart/index.mdx",
+      "title": "SparkChart"
+    },
+    {
+      "category": "Visualizations",
+      "description": "Component for visualizing activity logs or other data related to monitoring.",
+      "legacyRouteId": "components/Tracker/index",
+      "pathname": "/components/tracker",
+      "section": "Components",
+      "source": "src/Tracker/index.mdx",
+      "title": "Tracker"
+    }
+  ]
+}
