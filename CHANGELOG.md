@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 5.5.1](https://github.com/lobehub/lobe-charts/compare/v5.5.0...v5.5.1)
+
+<sup>Released on **2026-09-18**</sup>
+
+#### 💄 Styles
+
+- **misc**: Prefer single-row legend and expose lineColor in StoryBook.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Prefer single-row legend and expose lineColor in StoryBook ([c3857f6](https://github.com/lobehub/lobe-charts/commit/c3857f6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 5.5.0](https://github.com/lobehub/lobe-charts/compare/v5.4.0...v5.5.0)
 
 <sup>Released on **2026-09-18**</sup>
