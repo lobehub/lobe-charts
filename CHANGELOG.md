@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.5.0](https://github.com/lobehub/lobe-charts/compare/v5.4.0...v5.5.0)
+
+<sup>Released on **2026-09-18**</sup>
+
+#### ✨ Features
+
+- **misc**: Add BenchmarkColumnChart and BenchmarkRankingChart.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add BenchmarkColumnChart and BenchmarkRankingChart, closes [#29](https://github.com/lobehub/lobe-charts/issues/29) ([a207a62](https://github.com/lobehub/lobe-charts/commit/a207a62))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 5.4.0](https://github.com/lobehub/lobe-charts/compare/v5.3.1...v5.4.0)
 
 <sup>Released on **2026-07-17**</sup>
