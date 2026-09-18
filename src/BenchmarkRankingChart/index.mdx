@@ -1,0 +1,59 @@
+---
+title: BenchmarkRankingChart
+description: Horizontal leaderboard chart for model benchmark rankings with injectable brand icons.
+category: Benchmark
+order: 2
+---
+
+import DemoIndex from './demos/index.tsx?demo';
+import DemoAccuracy from './demos/accuracy.tsx?demo';
+import DemoHighlighted from './demos/highlighted.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage
+
+Pass model icons and brand colors from the consumer (e.g. `@lobehub/icons`). The chart package does not bundle icons or brand color logic.
+
+```tsx
+import { BenchmarkRankingChart } from '@lobehub/charts';
+import { Gemini, OpenAI } from '@lobehub/icons';
+
+export default () => (
+  <BenchmarkRankingChart
+    data={[
+      {
+        color: Gemini.colorPrimary,
+        icon: <Gemini.Avatar size={22} />,
+        name: 'Gemini 3.8',
+        provider: 'Google',
+        score: 82.6,
+      },
+      {
+        color: OpenAI.colorPrimary,
+        icon: <OpenAI.Avatar size={22} />,
+        name: 'GPT-6 Pro',
+        provider: 'OpenAI',
+        score: 73.9,
+      },
+    ]}
+    labelWidth={280}
+  />
+);
+```
+
+## Accuracy with error bars
+
+Use `accuracyFormatter`, `error`, and `showErrorBars` for AccuracyBar-style percentage, ± uncertainty, and horizontal error whiskers. Pass `labelWidth` to cap the left label column; omit it to fit the longest name. The X axis is off by default — set `showXAxis` / `showYAxis` to show coordinate axes.
+
+<Demo of={DemoAccuracy} />
+
+## Highlighted items
+
+Set `highlighted: true` on a record to accent its name / provider / score with `highlightColor` (defaults to `theme.gold`). Bar fill colors are unchanged.
+
+<Demo of={DemoHighlighted} />
+
+## API
+
+<Api name="BenchmarkRankingChart" />

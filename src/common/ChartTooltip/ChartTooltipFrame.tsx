@@ -6,6 +6,8 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
   container: css`
     overflow: hidden;
 
+    width: max-content;
+    min-width: 160px;
     border: 1px solid ${cssVar.colorBorderSecondary};
     border-radius: ${cssVar.borderRadiusLG};
 
