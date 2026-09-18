@@ -126,6 +126,7 @@ const BenchmarkColumnChartLineDemo: FC = () => {
         step: 1,
         value: 11,
       },
+      lineColor: theme.gold,
       lineName: 'Overall pass rate / Pass¹',
       maxValue: 100,
       showErrorBars: false,

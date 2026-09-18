@@ -51,9 +51,9 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
   `,
   legend: css`
     display: flex;
-    flex-flow: column nowrap;
-    gap: 6px;
-    align-items: flex-start;
+    flex-flow: row wrap;
+    gap: 6px 16px;
+    align-items: center;
 
     min-width: 0;
 
@@ -69,6 +69,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
   `,
   legendItem: css`
     display: inline-flex;
+    flex-shrink: 0;
     gap: 6px;
     align-items: center;
   `,
