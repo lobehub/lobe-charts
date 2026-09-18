@@ -2,6 +2,20 @@ export { default as AccuracyBarChart, type AccuracyBarChartProps } from './Accur
 export { default as AreaChart, type AreaChartProps } from './AreaChart';
 export { default as BarChart, type BarChartProps } from './BarChart';
 export { type Bar, default as BarList, type BarListProps } from './BarList';
+export {
+  default as BenchmarkColumnChart,
+  type BenchmarkColumnChartProps,
+} from './BenchmarkColumnChart';
+export {
+  default as BenchmarkRankingChart,
+  type BenchmarkRankingChartProps,
+} from './BenchmarkRankingChart';
+export type {
+  BenchmarkEventProps,
+  BenchmarkFieldKeys,
+  BenchmarkRecord,
+  BenchmarkRenderIcon,
+} from './common/benchmark';
 export { default as ChartTooltip, type ChartTooltipProps } from './common/ChartTooltip';
 export { default as ChartTooltipFrame } from './common/ChartTooltip/ChartTooltipFrame';
 export { default as ChartTooltipRow } from './common/ChartTooltip/ChartTooltipRow';

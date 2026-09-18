@@ -41,7 +41,7 @@ const ChartTooltip = ({
 
     return (
       <ChartTooltipFrame>
-        <Flexbox className={cx(styles.header)} paddingBlock={8} paddingInline={16}>
+        <Flexbox className={cx(styles.header)} paddingBlock={8} paddingInline={16} width={'auto'}>
           <Typography.Paragraph ellipsis style={{ margin: 0 }}>
             {label}
           </Typography.Paragraph>
@@ -51,6 +51,7 @@ const ChartTooltip = ({
           paddingBlock={8}
           paddingInline={16}
           style={{ flexDirection: 'column-reverse', marginTop: 4 }}
+          width={'auto'}
         >
           {filteredPayload.map(({ value, name }: { name: string; value: number }, idx: number) => (
             <ChartTooltipRow

@@ -1,0 +1,66 @@
+---
+title: BenchmarkColumnChart
+description: Vertical column chart for model benchmark comparisons with injectable brand icons and rotated labels.
+category: Benchmark
+order: 3
+---
+
+import DemoIndex from './demos/index.tsx?demo';
+import DemoAccuracy from './demos/accuracy.tsx?demo';
+import DemoLine from './demos/line.tsx?demo';
+import DemoHighlighted from './demos/highlighted.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage
+
+Icons and brand colors are provided by the consumer. `@lobehub/icons` is only used in docs demos and is not a runtime dependency of `@lobehub/charts`.
+
+```tsx
+import { BenchmarkColumnChart } from '@lobehub/charts';
+import { Claude, OpenAI } from '@lobehub/icons';
+
+export default () => (
+  <BenchmarkColumnChart
+    data={[
+      {
+        color: Claude.colorPrimary,
+        icon: <Claude.Avatar size={20} />,
+        name: 'Claude Fable 5.1\n(max with fallback)',
+        provider: 'Anthropic',
+        score: 57,
+      },
+      {
+        color: OpenAI.colorPrimary,
+        icon: <OpenAI.Avatar size={20} />,
+        name: 'GPT-6 Astra\n(max)',
+        provider: 'OpenAI',
+        score: 55,
+      },
+    ]}
+    height={360}
+  />
+);
+```
+
+## Accuracy with error bars
+
+Use `accuracyFormatter`, `error`, and `showErrorBars` for AccuracyBar-style percentage and ± uncertainty display.
+
+<Demo of={DemoAccuracy} />
+
+## Line overlay + unranked
+
+Pass a secondary `line` value to draw an overlay series (e.g. Pass¹). Mark items with `unranked: true` to place them after a dashed separator — the line does not connect into unranked points. Override color with `lineColor` (defaults to `theme.gold`). Pass `false` or `''` for `barName` / `lineName` / `unrankedLabel` to hide that header item.
+
+<Demo of={DemoLine} />
+
+## Highlighted items
+
+Set `highlighted: true` on a record to accent its axis label / rank with `highlightColor` (defaults to `theme.gold`). Bar fill colors are unchanged.
+
+<Demo of={DemoHighlighted} />
+
+## API
+
+<Api name="BenchmarkColumnChart" />
