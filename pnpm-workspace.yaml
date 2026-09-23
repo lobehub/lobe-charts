@@ -1,7 +1,23 @@
+packages:
+  - '*'
+  - 'packages/*'
 allowBuilds:
   core-js: true
   core-js-pure: true
   esbuild: true
+  puppeteer: true
+  sharp: true
+  unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@lobehub/docs-kit@5.27.4'
   - '@lobehub/ui@5.49.0'
+publicHoistPattern:
+  - '*@umijs/lint*'
+  - '*changelog*'
+  - '*commitlint*'
+  - '*eslint*'
+  - '*postcss*'
+  - '*prettier*'
+  - '*remark*'
+  - '*semantic-release*'
+  - '*stylelint*'
