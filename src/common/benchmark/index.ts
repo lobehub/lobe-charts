@@ -2,6 +2,7 @@ export type {
   BenchmarkBaseProps,
   BenchmarkEventProps,
   BenchmarkFieldKeys,
+  BenchmarkPointShape,
   BenchmarkRecord,
   BenchmarkRenderIcon,
   NormalizedBenchmarkItem,

@@ -1,0 +1,7 @@
+allowBuilds:
+  core-js: true
+  core-js-pure: true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@lobehub/docs-kit@5.27.4'
+  - '@lobehub/ui@5.49.0'

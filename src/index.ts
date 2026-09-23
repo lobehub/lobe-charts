@@ -10,9 +10,15 @@ export {
   default as BenchmarkRankingChart,
   type BenchmarkRankingChartProps,
 } from './BenchmarkRankingChart';
+export {
+  default as BenchmarkScatterChart,
+  type BenchmarkScatterChartProps,
+  type BenchmarkScatterMetric,
+} from './BenchmarkScatterChart';
 export type {
   BenchmarkEventProps,
   BenchmarkFieldKeys,
+  BenchmarkPointShape,
   BenchmarkRecord,
   BenchmarkRenderIcon,
 } from './common/benchmark';

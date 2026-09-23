@@ -19,6 +19,10 @@ export interface BenchmarkRecord {
   provider?: ReactNode;
   rank?: number;
   score?: number;
+  /**
+   * Marker shape used by scatter-style charts when no icon is provided
+   */
+  shape?: BenchmarkPointShape;
   target?: string;
   /**
    * Place item after a visual separator; line series does not connect into it
@@ -26,11 +30,13 @@ export interface BenchmarkRecord {
   unranked?: boolean;
 }
 
+export type BenchmarkPointShape = 'circle' | 'square' | 'diamond' | 'triangle';
+
 export type BenchmarkRenderIcon = (record: BenchmarkRecord, index: number) => ReactNode;
 
 export type BenchmarkEventProps =
   | (BenchmarkRecord & {
-      eventType: 'bar' | 'row';
+      eventType: 'bar' | 'row' | 'point';
       value: number;
     })
   | null

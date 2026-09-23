@@ -15,7 +15,7 @@ export default defineDocsConfig({
   favicons: {
     icon: 'https://lobehub.com/favicon.ico',
   },
-  homePage: './docs/index.tsx',
+  homePage: './docs/home/home.tsx',
   legacyRedirects,
   navSections: {},
   siteUrl: 'https://charts.lobehub.com',
@@ -45,12 +45,8 @@ export default defineDocsConfig({
           'https://repository-images.githubusercontent.com/752544109/5bb43f23-aed9-44b0-b08e-91776eadfe1c',
       },
     },
-    navItems: [
-      { external: true, href: 'https://ui.lobehub.com', label: 'UI' },
-      { external: true, href: 'https://icon.lobehub.com', label: 'Icons' },
-      { href: '/changelog', label: 'Changelog' },
-    ],
-    prefersColor: 'dark',
+    navItems: [{ href: '/changelog', label: 'Changelog' }],
+    prefersColor: 'auto',
     socialLinks: [
       {
         href: 'https://github.com/lobehub/lobe-charts',

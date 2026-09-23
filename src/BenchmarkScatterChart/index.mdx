@@ -1,0 +1,61 @@
+---
+title: BenchmarkScatterChart
+description: Quality-vs-cost scatter chart for benchmarks with a Pareto frontier, auto-placed labels, switchable X metrics and injectable brand icons.
+category: Benchmark
+order: 4
+---
+
+import DemoIndex from './demos/index.tsx?demo';
+import DemoShapes from './demos/shapes.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage
+
+Each record needs a Y value (`score` by default, override with `valueKey`) and an X value (`x` by default, override with `xKey`). Icons and brand colors are provided by the consumer, e.g. from `@lobehub/icons`.
+
+```tsx
+import { BenchmarkScatterChart } from '@lobehub/charts';
+import { ClaudeCode, Codex } from '@lobehub/icons';
+
+export default () => (
+  <BenchmarkScatterChart
+    accuracyFormatter={(v) => `${v.toFixed(1)}%`}
+    data={[
+      { cost: 3.47, icon: <Codex.Avatar size={22} />, name: 'Codex', score: 66.7 },
+      {
+        color: ClaudeCode.colorPrimary,
+        cost: 18.34,
+        icon: <ClaudeCode.Avatar size={22} />,
+        name: 'Claude Code',
+        score: 63.3,
+      },
+    ]}
+    xAxisLabel="Median cost per task"
+    xFormatter={(v) => `$${v}`}
+    xKey="cost"
+    xScale="log"
+    yAxisLabel="Pass rate"
+  />
+);
+```
+
+## Switchable metrics
+
+Pass `metrics` to render a switcher (e.g. Cost / Speed). Each metric defines its own record `key`, `scale`, `formatter`, `axisLabel` and `direction` (which side is better — drives the Pareto frontier). All metrics are listed in the tooltip. Use `metric` + `onMetricChange` for controlled mode, and `showAnimation` to animate points between metrics.
+
+## Pareto frontier
+
+With `showFrontier` (default on), points that are not dominated by any other point — no other entry is both better on X and higher on Y — are connected by a line. Set `xDirection="higher"` when larger X is better.
+
+Hovering (or selecting) a point shades the region it dominates — worse on X and lower on Y — draws dashed guides along its edges, and grays out every point inside. Turn this off with `showDominatedArea={false}`; other points are then simply dimmed.
+
+## Shape markers
+
+When an item has no `icon`, a colored marker is drawn. Pick the shape per record with `shape`: `circle`, `square`, `diamond` or `triangle`.
+
+<Demo of={DemoShapes} />
+
+## API
+
+<Api name="BenchmarkScatterChart" />
