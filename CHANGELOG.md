@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.6.0](https://github.com/lobehub/lobe-charts/compare/v5.5.1...v5.6.0)
+
+<sup>Released on **2026-09-23**</sup>
+
+#### ✨ Features
+
+- **misc**: Redesign the docs home and add BenchmarkScatterChart.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Redesign the docs home and add BenchmarkScatterChart ([b8ea74a](https://github.com/lobehub/lobe-charts/commit/b8ea74a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.5.1](https://github.com/lobehub/lobe-charts/compare/v5.5.0...v5.5.1)
 
 <sup>Released on **2026-09-18**</sup>
