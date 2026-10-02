@@ -1,5 +1,5 @@
 import { Icon } from '@lobehub/ui';
-import { Button } from 'antd';
+import { Button } from '@lobehub/ui/base-ui';
 import { LucideIcon } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 

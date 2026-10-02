@@ -1,6 +1,6 @@
 import { Tracker, TrackerProps } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { useTheme } from 'antd-style';
 
 const data: TrackerProps['data'] = [
@@ -59,15 +59,12 @@ export default () => {
           width={4}
         />
         <Flexbox>
-          <Typography.Paragraph ellipsis style={{ color: theme.colorBgContainer, margin: 0 }}>
+          <Text ellipsis style={{ color: theme.colorBgContainer, margin: 0 }}>
             {item.tooltip}
-          </Typography.Paragraph>
-          <Typography.Paragraph
-            ellipsis
-            style={{ color: theme.colorBgLayout, fontWeight: 'bold', margin: 0 }}
-          >
+          </Text>
+          <Text ellipsis style={{ color: theme.colorBgLayout, fontWeight: 'bold', margin: 0 }}>
             {item.color?.toUpperCase()}
-          </Typography.Paragraph>
+          </Text>
         </Flexbox>
       </Flexbox>
     );

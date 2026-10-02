@@ -1,6 +1,6 @@
 import { ChartTooltipFrame, ScatterChart, ScatterChartProps } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { useTheme } from 'antd-style';
 
 const data: ScatterChartProps['data'] = [
@@ -80,21 +80,16 @@ export default () => {
             width={4}
           />
           <Flexbox gap={8}>
-            <Typography.Paragraph style={{ fontSize: 16, fontWeight: 500, margin: 0 }}>
-              {label}
-            </Typography.Paragraph>
+            <Text style={{ fontSize: 16, fontWeight: 500, margin: 0 }}>{label}</Text>
             <Flexbox>
               {payload.map((payloadItem: any, idx: number) => (
                 <Flexbox gap={48} horizontal key={idx}>
-                  <Typography.Paragraph
-                    ellipsis
-                    style={{ color: theme.colorTextSecondary, margin: 0 }}
-                  >
+                  <Text ellipsis style={{ color: theme.colorTextSecondary, margin: 0 }}>
                     {payloadItem.dataKey}
-                  </Typography.Paragraph>
-                  <Typography.Paragraph ellipsis style={{ margin: 0 }}>
+                  </Text>
+                  <Text ellipsis style={{ margin: 0 }}>
                     {payloadItem.value}
-                  </Typography.Paragraph>
+                  </Text>
                 </Flexbox>
               ))}
             </Flexbox>

@@ -1,6 +1,6 @@
 import { Heatmaps, HeatmapsProps } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { cssVar } from 'antd-style';
 
 import { yearData } from './data';
@@ -16,15 +16,12 @@ export default () => {
           width={4}
         />
         <Flexbox>
-          <Typography.Paragraph
-            ellipsis
-            style={{ color: cssVar.colorBgLayout, margin: 0, opacity: 0.5 }}
-          >
+          <Text ellipsis style={{ color: cssVar.colorBgLayout, margin: 0, opacity: 0.5 }}>
             {payload.date}
-          </Typography.Paragraph>
-          <Typography.Paragraph ellipsis style={{ color: cssVar.colorBgLayout, margin: 0 }}>
+          </Text>
+          <Text ellipsis style={{ color: cssVar.colorBgLayout, margin: 0 }}>
             {payload.count}
-          </Typography.Paragraph>
+          </Text>
         </Flexbox>
       </Flexbox>
     );

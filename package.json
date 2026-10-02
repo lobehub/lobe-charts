@@ -87,7 +87,7 @@
     "@lobehub/docs-kit": "^5.27.4",
     "@lobehub/icons": "^5.19.3",
     "@lobehub/lint": "^1.26.3",
-    "@lobehub/ui": "^5.49.0",
+    "@lobehub/ui": "^5.54.0",
     "@react-router/dev": "8.2.0",
     "@testing-library/react": "^16.3.3",
     "@types/chroma-js": "^3.1.2",
@@ -121,7 +121,7 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@lobehub/ui": "^4.3.3",
+    "@lobehub/ui": "^5.54.0",
     "antd": "^6.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

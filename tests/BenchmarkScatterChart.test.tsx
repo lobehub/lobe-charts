@@ -11,7 +11,11 @@ import {
 
 vi.mock('@lobehub/ui', () => ({
   A: ({ children, ...rest }: any) => <a {...rest}>{children}</a>,
-  Skeleton: { Block: () => <div data-testid="skeleton" /> },
+}));
+
+vi.mock('@lobehub/ui/base-ui', async (importOriginal) => ({
+  ...(await importOriginal<object>()),
+  Skeleton: () => <div data-testid="skeleton" />,
 }));
 
 const data = [

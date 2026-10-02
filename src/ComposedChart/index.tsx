@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, Skeleton } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { css, cssVar, cx } from 'antd-style';
 import { forwardRef, useMemo, useState } from 'react';
 import {
@@ -94,7 +95,7 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
     return getMaxLabelLength({ data, index, layout: 'horizontal', valueFormatter: rightFormatter });
   }, [yAxisRight, data, index]);
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const paddingValue = !showXAxis && !showYAxis ? 0 : 20;
 

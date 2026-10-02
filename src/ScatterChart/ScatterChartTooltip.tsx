@@ -1,5 +1,5 @@
 import { Flexbox, Icon } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { Circle } from 'lucide-react';
 import React, { memo } from 'react';
@@ -56,9 +56,9 @@ const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
             paddingInline={16}
           >
             <Icon color={color} fill={color} icon={Circle} size={10} />
-            <Typography.Paragraph ellipsis style={{ margin: 0 }}>
+            <Text ellipsis style={{ margin: 0 }}>
               {label}
-            </Typography.Paragraph>
+            </Text>
           </Flexbox>
           <Flexbox gap={4} paddingBlock={8} paddingInline={16} style={{ marginTop: 4 }}>
             {payload.map(({ value, name }: { name: string; value: number }, idx: number) => {

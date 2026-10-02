@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, Skeleton } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { cssVar, cx, useTheme } from 'antd-style';
 import { readableColor } from 'polished';
 import { type CSSProperties, MouseEvent, ReactNode, forwardRef, useMemo, useState } from 'react';
@@ -401,7 +402,7 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
   const showChartHeader = enableLine && (showBarLegend || showLineLegend || showUnrankedAnnotation);
   const chartTopPad = enableLine || enableError ? (showChartHeader ? 84 : 44) : 12;
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const hasOnValueChange = !!onValueChange;
 

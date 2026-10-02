@@ -1,6 +1,7 @@
 'use client';
 
-import { A, Flexbox, Skeleton } from '@lobehub/ui';
+import { A, Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { cssVar, cx } from 'antd-style';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 
@@ -73,7 +74,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
     );
   }, [sortedData]);
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const rowHeight = 32;
   const labelHeight = 20;

@@ -1,6 +1,6 @@
 import { BarChart, BarChartProps, ChartTooltipFrame } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { useTheme } from 'antd-style';
 
 const data: BarChartProps['data'] = [
@@ -57,12 +57,12 @@ export default () => {
               width={4}
             />
             <Flexbox>
-              <Typography.Paragraph ellipsis style={{ color: theme.colorTextSecondary, margin: 0 }}>
+              <Text ellipsis style={{ color: theme.colorTextSecondary, margin: 0 }}>
                 {category.dataKey}
-              </Typography.Paragraph>
-              <Typography.Paragraph ellipsis style={{ margin: 0 }}>
+              </Text>
+              <Text ellipsis style={{ margin: 0 }}>
                 {category.value} bpm
-              </Typography.Paragraph>
+              </Text>
             </Flexbox>
           </Flexbox>
         ))}
