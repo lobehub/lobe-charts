@@ -634,6 +634,14 @@ const BenchmarkScatterChart = forwardRef<HTMLDivElement, BenchmarkScatterChartPr
               pointerEvents: 'none',
               width: 'max-content',
             },
+            content: {
+              color: cssVar.colorText,
+              fontSize: cssVar.fontSize,
+              lineHeight: cssVar.lineHeight,
+              maxWidth: 'none',
+              overflow: 'visible',
+              padding: 0,
+            },
             root: { maxWidth: 'none', pointerEvents: 'none' },
           }}
           title={

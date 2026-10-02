@@ -257,6 +257,14 @@ const BenchmarkRankingChart = forwardRef<HTMLDivElement, BenchmarkRankingChartPr
               padding: 0,
               width: 'max-content',
             },
+            content: {
+              color: cssVar.colorText,
+              fontSize: cssVar.fontSize,
+              lineHeight: cssVar.lineHeight,
+              maxWidth: 'none',
+              overflow: 'visible',
+              padding: 0,
+            },
             root: {
               maxWidth: 'none',
             },
