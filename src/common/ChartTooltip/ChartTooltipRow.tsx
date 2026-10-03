@@ -1,5 +1,5 @@
 import { Flexbox, Icon } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { createStaticStyles } from 'antd-style';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
@@ -25,13 +25,13 @@ const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name, color }) => {
     <Flexbox align={'center'} gap={32} horizontal justify={'space-between'} width={'max-content'}>
       <Flexbox align={'center'} gap={8} horizontal width={'auto'}>
         <Icon color={color} fill={color} icon={Circle} size={10} />
-        <Typography.Paragraph className={styles.title} ellipsis style={{ margin: 0 }}>
+        <Text className={styles.title} ellipsis style={{ margin: 0 }}>
           {name}
-        </Typography.Paragraph>
+        </Text>
       </Flexbox>
-      <Typography.Paragraph className={styles.number} style={{ margin: 0 }}>
+      <Text className={styles.number} style={{ margin: 0 }}>
         {value}
-      </Typography.Paragraph>
+      </Text>
     </Flexbox>
   );
 });

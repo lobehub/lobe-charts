@@ -1,7 +1,7 @@
 'use client';
 
-import { A, Flexbox, Skeleton } from '@lobehub/ui';
-import { Tooltip } from 'antd';
+import { A, Flexbox } from '@lobehub/ui';
+import { Skeleton, Tooltip } from '@lobehub/ui/base-ui';
 import { cssVar, cx, useTheme } from 'antd-style';
 import { type CSSProperties, type ReactNode, forwardRef, useMemo, useState } from 'react';
 
@@ -201,7 +201,7 @@ const BenchmarkRankingChart = forwardRef<HTMLDivElement, BenchmarkRankingChartPr
     const labelWidthStyle = typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth;
     const gridTicks = axisTicks.filter((tick) => tick > 0 && tick < resolvedMaxValue);
 
-    if (loading || !data) return <Skeleton.Block active height={height ?? 280} width={width} />;
+    if (loading || !data) return <Skeleton height={height ?? 280} width={width} />;
 
     const handleClick = (item: NormalizedBenchmarkItem) => {
       if (!onValueChange) return;
@@ -256,6 +256,14 @@ const BenchmarkRankingChart = forwardRef<HTMLDivElement, BenchmarkRankingChartPr
               maxWidth: 'none',
               padding: 0,
               width: 'max-content',
+            },
+            content: {
+              color: cssVar.colorText,
+              fontSize: cssVar.fontSize,
+              lineHeight: cssVar.lineHeight,
+              maxWidth: 'none',
+              overflow: 'visible',
+              padding: 0,
             },
             root: {
               maxWidth: 'none',

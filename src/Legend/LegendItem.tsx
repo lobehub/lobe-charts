@@ -1,5 +1,5 @@
 import { Flexbox, Icon } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
@@ -63,7 +63,7 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
           opacity: activeLegend && activeLegend !== name ? 0.4 : 1,
         }}
       />
-      <Typography.Paragraph
+      <Text
         className={styles.itemContent}
         ellipsis
         style={{
@@ -73,7 +73,7 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
         }}
       >
         {label}
-      </Typography.Paragraph>
+      </Text>
     </Flexbox>
   );
 });

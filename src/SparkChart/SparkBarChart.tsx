@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, Skeleton } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { css, cssVar, cx } from 'antd-style';
 import { forwardRef } from 'react';
 import { Bar, BarChart as ReChartsBarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -40,7 +41,7 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
     ...rest
   } = props;
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const categoryColors = constructCategoryColors(categories, colors);
   const yAxisDomain = getYAxisDomain(autoMinValue, minValue, maxValue);

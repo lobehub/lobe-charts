@@ -20,7 +20,11 @@ vi.mock('@lobehub/ui', () => ({
     }
     return <div {...domProps}>{children}</div>;
   },
-  Skeleton: { Block: () => <div data-testid="skeleton" /> },
+}));
+
+vi.mock('@lobehub/ui/base-ui', async (importOriginal) => ({
+  ...(await importOriginal<object>()),
+  Skeleton: () => <div data-testid="skeleton" />,
 }));
 
 describe('BenchmarkRankingChart', () => {

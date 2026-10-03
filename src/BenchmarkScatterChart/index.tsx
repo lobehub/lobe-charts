@@ -1,8 +1,8 @@
 'use client';
 
-import { A, Skeleton } from '@lobehub/ui';
+import { A } from '@lobehub/ui';
+import { Segmented, Skeleton, Tooltip } from '@lobehub/ui/base-ui';
 import { useSize } from 'ahooks';
-import { Segmented, Tooltip } from 'antd';
 import { cssVar, cx, useTheme } from 'antd-style';
 import { type CSSProperties, type ReactNode, forwardRef, useMemo, useRef, useState } from 'react';
 
@@ -545,7 +545,7 @@ const BenchmarkScatterChart = forwardRef<HTMLDivElement, BenchmarkScatterChartPr
       yValues,
     ]);
 
-    if (loading || !data) return <Skeleton.Block active height={plotHeight} width={width} />;
+    if (loading || !data) return <Skeleton height={plotHeight} width={width} />;
 
     const focusKey = hoverKey ?? selectedKey;
     const focusPoint =
@@ -633,6 +633,14 @@ const BenchmarkScatterChart = forwardRef<HTMLDivElement, BenchmarkScatterChartPr
               padding: 0,
               pointerEvents: 'none',
               width: 'max-content',
+            },
+            content: {
+              color: cssVar.colorText,
+              fontSize: cssVar.fontSize,
+              lineHeight: cssVar.lineHeight,
+              maxWidth: 'none',
+              overflow: 'visible',
+              padding: 0,
             },
             root: { maxWidth: 'none', pointerEvents: 'none' },
           }}

@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, Skeleton } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { cssVar } from 'antd-style';
 import { ReactNode, forwardRef, useState } from 'react';
 import {
@@ -87,7 +88,7 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
   const [activeLegend, setActiveLegend] = useState<string | undefined>();
   const [legendHeight, setLegendHeight] = useState(60);
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const CustomTooltip = customTooltip;
   const categoryColors = constructCategoryColors(categories, colors);

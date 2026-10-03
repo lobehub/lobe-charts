@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip } from '@lobehub/ui';
+import { Flexbox, FlexboxProps } from '@lobehub/ui';
+import { Tooltip } from '@lobehub/ui/base-ui';
 import { cssVar, cx } from 'antd-style';
 import { ReactNode, forwardRef } from 'react';
 

@@ -1,5 +1,5 @@
 import { Flexbox } from '@lobehub/ui';
-import { Typography } from 'antd';
+import { Text } from '@lobehub/ui/base-ui';
 import { createStaticStyles, cssVar, cx } from 'antd-style';
 import { ReactNode } from 'react';
 
@@ -42,9 +42,9 @@ const ChartTooltip = ({
     return (
       <ChartTooltipFrame>
         <Flexbox className={cx(styles.header)} paddingBlock={8} paddingInline={16} width={'auto'}>
-          <Typography.Paragraph ellipsis style={{ margin: 0 }}>
+          <Text ellipsis style={{ margin: 0 }}>
             {label}
-          </Typography.Paragraph>
+          </Text>
         </Flexbox>
         <Flexbox
           gap={4}

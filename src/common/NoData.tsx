@@ -1,6 +1,5 @@
-import { Center, Flexbox } from '@lobehub/ui';
-import { Empty } from 'antd';
-import { cssVar } from 'antd-style';
+import { Center, Empty } from '@lobehub/ui';
+import { Inbox } from 'lucide-react';
 import { ReactNode, isValidElement, memo } from 'react';
 
 export interface NoDataProps {
@@ -26,21 +25,9 @@ const NoData = memo<NoDataProps>(
       <Center height={'100%'} width={'100%'}>
         <Empty
           className={className}
-          description={
-            isReactNodeText ? (
-              noDataText
-            ) : (
-              <Flexbox padding={8}>
-                <div style={{ color: cssVar.colorText, fontSize: 14, fontWeight: 'bold' }}>
-                  {(noDataText as any)?.title}
-                </div>
-                <div style={{ color: cssVar.colorTextDescription, fontSize: 12 }}>
-                  {(noDataText as any)?.desc}
-                </div>
-              </Flexbox>
-            )
-          }
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description={isReactNodeText ? noDataText : (noDataText as any)?.desc}
+          icon={Inbox}
+          title={isReactNodeText ? undefined : (noDataText as any)?.title}
         />
       </Center>
     );

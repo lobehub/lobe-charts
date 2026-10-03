@@ -1,6 +1,7 @@
 'use client';
 
-import { Flexbox, Skeleton } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
+import { Skeleton } from '@lobehub/ui/base-ui';
 import { css, cssVar, cx } from 'antd-style';
 import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
 import {
@@ -96,7 +97,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
     return getMaxLabelLength({ data, index, margin: 16, valueFormatter });
   }, [yAxisWidth, data, valueFormatter, index]);
 
-  if (loading || !data) return <Skeleton.Block active height={height} width={width} />;
+  if (loading || !data) return <Skeleton height={height} width={width} />;
 
   const CustomTooltip = customTooltip;
   const paddingValue = (!showXAxis && !showYAxis) || (startEndOnly && !showYAxis) ? 0 : 20;
