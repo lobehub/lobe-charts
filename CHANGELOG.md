@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.7.0](https://github.com/lobehub/lobe-charts/compare/v5.6.0...v5.7.0)
+
+<sup>Released on **2026-10-03**</sup>
+
+#### ✨ Features
+
+- **misc**: Migrate to @lobehub/ui/base-ui components.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Migrate to @lobehub/ui/base-ui components, closes [#32](https://github.com/lobehub/lobe-charts/issues/32) ([f5c337a](https://github.com/lobehub/lobe-charts/commit/f5c337a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 5.6.0](https://github.com/lobehub/lobe-charts/compare/v5.5.1...v5.6.0)
 
 <sup>Released on **2026-09-23**</sup>
