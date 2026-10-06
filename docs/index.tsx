@@ -1,6 +1,5 @@
-import { Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
+import { Block, Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
 import { Hero } from '@lobehub/ui/awesome';
-import { Card } from 'antd';
 import { Link } from 'react-router';
 
 import AreaChart from '@/AreaChart/demos/example';
@@ -36,24 +35,24 @@ export default () => {
         <Snippet language={'bash'}>{'$ bun add @lobehub/charts'}</Snippet>
       </Center>
       <Grid gap={16} rows={2} style={{ maxWidth: 960 }} width={'100%'}>
-        <Card>
+        <Block padding={24} variant={'outlined'}>
           <BarChart />
-        </Card>
-        <Card>
+        </Block>
+        <Block padding={24} variant={'outlined'}>
           <AreaChart />
-        </Card>
-        <Card>
+        </Block>
+        <Block padding={24} variant={'outlined'}>
           <LineChart />
-        </Card>
-        <Card>
+        </Block>
+        <Block padding={24} variant={'outlined'}>
           <DonutChart />
-        </Card>
-        <Card>
+        </Block>
+        <Block padding={24} variant={'outlined'}>
           <ScatterChart />
-        </Card>
-        <Card>
+        </Block>
+        <Block padding={24} variant={'outlined'}>
           <BarChartGroups />
-        </Card>
+        </Block>
       </Grid>
     </Flexbox>
   );
