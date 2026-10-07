@@ -73,7 +73,6 @@
   },
   "dependencies": {
     "ahooks": "^3.10.0",
-    "antd-style": "^4.1.0",
     "chroma-js": "^3.2.0",
     "date-fns": "^4.4.0",
     "dayjs": "^1.11.23",
@@ -95,8 +94,6 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitest/coverage-v8": "~1.2.2",
-    "antd": "^6.6.5",
-    "babel-plugin-antd-style": "^1.0.4",
     "clean-package": "^2.2.0",
     "commitlint": "^19.8.1",
     "cross-env": "^10.1.0",
@@ -122,7 +119,6 @@
   },
   "peerDependencies": {
     "@lobehub/ui": "^5.54.0",
-    "antd": "^6.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

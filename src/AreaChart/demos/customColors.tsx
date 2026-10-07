@@ -1,5 +1,5 @@
 import { AreaChart, AreaChartProps } from '@lobehub/charts';
-import { useTheme } from 'antd-style';
+import { useTheme } from '@lobehub/ui';
 
 const data: AreaChartProps['data'] = [
   {

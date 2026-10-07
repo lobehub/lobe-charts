@@ -1,6 +1,5 @@
 import { CategoryBar, Legend } from '@lobehub/charts';
-import { Flexbox } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
+import { Flexbox, useTheme } from '@lobehub/ui';
 
 export default () => {
   const theme = useTheme();

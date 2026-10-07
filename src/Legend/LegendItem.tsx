@@ -1,6 +1,4 @@
-import { Flexbox, Icon } from '@lobehub/ui';
-import { Text } from '@lobehub/ui/base-ui';
-import { createStaticStyles, cssVar, cx } from 'antd-style';
+import { Flexbox, Icon, Text, createStaticStyles, cssVar, cx } from '@lobehub/ui';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
 

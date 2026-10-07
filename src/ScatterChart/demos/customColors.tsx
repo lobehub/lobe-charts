@@ -1,5 +1,5 @@
 import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
-import { useTheme } from 'antd-style';
+import { useTheme } from '@lobehub/ui';
 
 const data: ScatterChartProps['data'] = [
   {

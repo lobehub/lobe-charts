@@ -9,12 +9,9 @@ import {
   placeLabels,
 } from '@/BenchmarkScatterChart/utils';
 
-vi.mock('@lobehub/ui', () => ({
-  A: ({ children, ...rest }: any) => <a {...rest}>{children}</a>,
-}));
-
-vi.mock('@lobehub/ui/base-ui', async (importOriginal) => ({
+vi.mock('@lobehub/ui', async (importOriginal) => ({
   ...(await importOriginal<object>()),
+  A: ({ children, ...rest }: any) => <a {...rest}>{children}</a>,
   Skeleton: () => <div data-testid="skeleton" />,
 }));
 
