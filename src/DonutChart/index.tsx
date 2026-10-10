@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
-import { css, cssVar, cx, useThemeMode } from 'antd-style';
+import { Flexbox, Skeleton, css, cssVar, cx, useThemeMode } from '@lobehub/ui';
 import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 

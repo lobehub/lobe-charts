@@ -1,6 +1,4 @@
-import { Flexbox } from '@lobehub/ui';
-import { Text } from '@lobehub/ui/base-ui';
-import { createStaticStyles, cssVar } from 'antd-style';
+import { Flexbox, Text, createStaticStyles, cssVar } from '@lobehub/ui';
 import React, { memo } from 'react';
 
 const styles = createStaticStyles(({ css }) => ({

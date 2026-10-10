@@ -25,6 +25,7 @@ import {
   OpenRouter,
   Qwen,
 } from '@lobehub/icons';
+import { createGlobalStyle, useTheme, useThemeMode } from '@lobehub/ui';
 import {
   AgentSkillCard,
   BentoCard,
@@ -42,7 +43,6 @@ import {
   LogoMarquee,
 } from '@lobehub/ui/awesome';
 import { GithubIcon } from '@lobehub/ui/icons';
-import { createGlobalStyle, useTheme, useThemeMode } from 'antd-style';
 import {
   ArrowRight,
   Braces,

@@ -3,7 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 import BenchmarkRankingChart from '@/BenchmarkRankingChart';
 
-vi.mock('@lobehub/ui', () => ({
+vi.mock('@lobehub/ui', async (importOriginal) => ({
+  ...(await importOriginal<object>()),
   A: ({ children, ...rest }: any) => <a {...rest}>{children}</a>,
   Flexbox: ({ children, ...rest }: any) => {
     const domProps = { ...rest };
@@ -20,10 +21,6 @@ vi.mock('@lobehub/ui', () => ({
     }
     return <div {...domProps}>{children}</div>;
   },
-}));
-
-vi.mock('@lobehub/ui/base-ui', async (importOriginal) => ({
-  ...(await importOriginal<object>()),
   Skeleton: () => <div data-testid="skeleton" />,
 }));
 

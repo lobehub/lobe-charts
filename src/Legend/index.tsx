@@ -1,5 +1,4 @@
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { createStaticStyles, cx } from 'antd-style';
+import { Flexbox, FlexboxProps, createStaticStyles, cx } from '@lobehub/ui';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 

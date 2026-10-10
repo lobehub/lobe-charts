@@ -1,5 +1,5 @@
 import { DonutChart, DonutChartProps } from '@lobehub/charts';
-import { useTheme } from 'antd-style';
+import { useTheme } from '@lobehub/ui';
 
 const data: DonutChartProps['data'] = [
   {

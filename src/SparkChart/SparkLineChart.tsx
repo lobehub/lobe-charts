@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
-import { css, cssVar, cx } from 'antd-style';
+import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
 import { forwardRef } from 'react';
 import { Line, LineChart as ReChartsLineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AxisDomain } from 'recharts/types/util/types';

@@ -1,5 +1,4 @@
-import { Tooltip } from '@lobehub/ui/base-ui';
-import { keyframes } from 'antd-style';
+import { Tooltip, keyframes } from '@lobehub/ui';
 import isEqual from 'fast-deep-equal';
 import { CSSProperties, ReactNode, memo, useMemo } from 'react';
 

@@ -73,7 +73,6 @@
   },
   "dependencies": {
     "ahooks": "^3.10.0",
-    "antd-style": "^4.1.0",
     "chroma-js": "^3.2.0",
     "date-fns": "^4.4.0",
     "dayjs": "^1.11.23",
@@ -85,9 +84,9 @@
     "@commitlint/cli": "^19.8.1",
     "@icons-pack/react-simple-icons": "^9.7.0",
     "@lobehub/docs-kit": "^5.27.4",
-    "@lobehub/icons": "^5.19.3",
+    "@lobehub/icons": "^6.0.0-beta.1",
     "@lobehub/lint": "^1.26.3",
-    "@lobehub/ui": "^5.56.0",
+    "@lobehub/ui": "^6.0.0-beta.1",
     "@react-router/dev": "8.2.0",
     "@testing-library/react": "^16.3.3",
     "@types/chroma-js": "^3.1.2",
@@ -95,8 +94,6 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitest/coverage-v8": "~1.2.2",
-    "antd": "^6.6.5",
-    "babel-plugin-antd-style": "^1.0.4",
     "clean-package": "^2.2.0",
     "commitlint": "^19.8.1",
     "cross-env": "^10.1.0",
@@ -121,8 +118,7 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@lobehub/ui": "^5.54.0",
-    "antd": "^6.1.1",
+    "@lobehub/ui": "^6.0.0-beta.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

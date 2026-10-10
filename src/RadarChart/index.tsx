@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
-import { cssVar } from 'antd-style';
+import { Flexbox, Skeleton, cssVar } from '@lobehub/ui';
 import { ReactNode, forwardRef, useState } from 'react';
 import {
   Legend,

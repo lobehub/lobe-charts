@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
-import { cssVar, cx, useTheme } from 'antd-style';
+import { Flexbox, Skeleton, cssVar, cx, useTheme } from '@lobehub/ui';
 import { readableColor } from 'polished';
 import { type CSSProperties, MouseEvent, ReactNode, forwardRef, useMemo, useState } from 'react';
 import {

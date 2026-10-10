@@ -1,4 +1,4 @@
-import { useTheme } from 'antd-style';
+import { useTheme } from '@lobehub/ui';
 import { useMemo } from 'react';
 
 export const useThemeColorRange = () => {

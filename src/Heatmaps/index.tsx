@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { TooltipGroup } from '@lobehub/ui/base-ui';
-import { cx, useTheme, useThemeMode } from 'antd-style';
+import { Flexbox, FlexboxProps, TooltipGroup, cx, useTheme, useThemeMode } from '@lobehub/ui';
 import type { Day as WeekDay } from 'date-fns';
 import { getYear, parseISO } from 'date-fns';
 import { ReactNode, forwardRef, useMemo } from 'react';

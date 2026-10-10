@@ -4,8 +4,8 @@ import {
   type BenchmarkScatterChartProps,
 } from '@lobehub/charts';
 import { ClaudeCode, Codex, DeepSeek, HermesAgent, Kimi, OpenCode, Pi } from '@lobehub/icons';
+import { useTheme } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { useTheme } from 'antd-style';
 import { ComponentType, FC, useMemo } from 'react';
 
 import { harnessData, harnessMetrics, passRateFormatter } from './data';

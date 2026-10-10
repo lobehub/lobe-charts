@@ -1,8 +1,6 @@
 'use client';
 
-import { A, Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
-import { cssVar, cx } from 'antd-style';
+import { A, Flexbox, Skeleton, cssVar, cx } from '@lobehub/ui';
 import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
 
 import NoData, { NoDataProps } from '@/common/NoData';

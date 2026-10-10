@@ -1,7 +1,5 @@
 import { Heatmaps, HeatmapsProps } from '@lobehub/charts';
-import { Flexbox } from '@lobehub/ui';
-import { Text } from '@lobehub/ui/base-ui';
-import { cssVar } from 'antd-style';
+import { Flexbox, Text, cssVar } from '@lobehub/ui';
 
 import { yearData } from './data';
 
