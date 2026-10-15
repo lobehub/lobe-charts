@@ -10,8 +10,8 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@lobehub/docs-kit@5.27.4 || 5.27.7-beta.1 || 5.27.7-beta.2'
-  - '@lobehub/ui@5.49.0 || 6.0.0-beta.10'
+  - '@lobehub/docs-kit@5.27.4 || 5.27.7-beta.1 || 5.27.7-beta.2 || 6.0.0'
+  - '@lobehub/ui@5.49.0 || 6.0.0-beta.10 || 6.0.0'
 publicHoistPattern:
   - '*@umijs/lint*'
   - '*changelog*'
