@@ -10,7 +10,7 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@lobehub/docs-kit@5.27.4'
-  - '@lobehub/ui@5.49.0'
+  - '@lobehub/ui@5.49.0 || 6.0.0-beta.10'
 publicHoistPattern:
   - '*@umijs/lint*'
   - '*changelog*'
