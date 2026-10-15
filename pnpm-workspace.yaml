@@ -5,11 +5,12 @@ allowBuilds:
   core-js: true
   core-js-pure: true
   esbuild: true
+  node-pty: false
   puppeteer: true
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@lobehub/docs-kit@5.27.4'
+  - '@lobehub/docs-kit@5.27.4 || 5.27.7-beta.1'
   - '@lobehub/ui@5.49.0 || 6.0.0-beta.10'
 publicHoistPattern:
   - '*@umijs/lint*'
