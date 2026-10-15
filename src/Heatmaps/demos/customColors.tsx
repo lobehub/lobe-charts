@@ -1,6 +1,5 @@
 import { Heatmaps } from '@lobehub/charts';
-import { Flexbox } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
+import { Flexbox, useTheme } from '@lobehub/ui';
 
 import { yearData } from './data';
 

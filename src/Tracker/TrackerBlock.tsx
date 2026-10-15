@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { Tooltip } from '@lobehub/ui/base-ui';
-import { createStaticStyles, cssVar } from 'antd-style';
+import { Flexbox, FlexboxProps, Tooltip, createStaticStyles, cssVar } from '@lobehub/ui';
 import { ReactNode, forwardRef, useMemo } from 'react';
 
 const styles = createStaticStyles(({ css }) => ({

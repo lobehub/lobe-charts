@@ -1,4 +1,4 @@
-import { createStaticStyles } from 'antd-style';
+import { createStaticStyles } from '@lobehub/ui';
 
 const mono = `'Geist Mono', SFMono-Regular, Consolas, 'Liberation Mono', monospace`;
 

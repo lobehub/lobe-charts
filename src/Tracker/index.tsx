@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { TooltipGroup } from '@lobehub/ui/base-ui';
-import { cx } from 'antd-style';
+import { Flexbox, FlexboxProps, TooltipGroup, cx } from '@lobehub/ui';
 import { ReactNode, forwardRef } from 'react';
 
 import TrackerBlock, { TrackerBlockProps } from './TrackerBlock';

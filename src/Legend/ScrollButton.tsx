@@ -1,5 +1,4 @@
-import { Icon } from '@lobehub/ui';
-import { Button } from '@lobehub/ui/base-ui';
+import { Button, Icon } from '@lobehub/ui';
 import { LucideIcon } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 

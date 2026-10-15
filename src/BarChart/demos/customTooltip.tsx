@@ -1,7 +1,5 @@
 import { BarChart, BarChartProps, ChartTooltipFrame } from '@lobehub/charts';
-import { Flexbox } from '@lobehub/ui';
-import { Text } from '@lobehub/ui/base-ui';
-import { useTheme } from 'antd-style';
+import { Flexbox, Text, useTheme } from '@lobehub/ui';
 
 const data: BarChartProps['data'] = [
   {

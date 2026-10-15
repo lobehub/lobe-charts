@@ -1,6 +1,6 @@
 import { BenchmarkColumnChart, type BenchmarkRecord } from '@lobehub/charts';
 import { Claude, DeepSeek, Gemini, Grok, Meta, OpenAI, Qwen } from '@lobehub/icons';
-import { useTheme } from 'antd-style';
+import { useTheme } from '@lobehub/ui';
 import { useMemo } from 'react';
 
 /** Flip near-black / near-white brand colors for theme contrast (demo only). */

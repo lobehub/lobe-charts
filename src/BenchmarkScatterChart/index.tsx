@@ -1,9 +1,7 @@
 'use client';
 
-import { A } from '@lobehub/ui';
-import { Segmented, Skeleton, Tooltip } from '@lobehub/ui/base-ui';
+import { A, Segmented, Skeleton, Tooltip, cssVar, cx, useTheme } from '@lobehub/ui';
 import { useSize } from 'ahooks';
-import { cssVar, cx, useTheme } from 'antd-style';
 import { type CSSProperties, type ReactNode, forwardRef, useMemo, useRef, useState } from 'react';
 
 import ChartTooltip from '@/common/ChartTooltip';

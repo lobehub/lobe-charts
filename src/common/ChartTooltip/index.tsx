@@ -1,6 +1,4 @@
-import { Flexbox } from '@lobehub/ui';
-import { Text } from '@lobehub/ui/base-ui';
-import { createStaticStyles, cssVar, cx } from 'antd-style';
+import { Flexbox, Text, createStaticStyles, cssVar, cx } from '@lobehub/ui';
 import { ReactNode } from 'react';
 
 import { ValueFormatter } from '@/types/charts';

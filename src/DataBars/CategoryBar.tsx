@@ -1,8 +1,6 @@
 'use client';
 
-import { Flexbox, FlexboxProps } from '@lobehub/ui';
-import { Tooltip } from '@lobehub/ui/base-ui';
-import { cssVar, cx } from 'antd-style';
+import { Flexbox, FlexboxProps, Tooltip, cssVar, cx } from '@lobehub/ui';
 import { forwardRef, memo, useMemo } from 'react';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';

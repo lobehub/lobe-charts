@@ -4,8 +4,8 @@ import {
   type BenchmarkRecord,
 } from '@lobehub/charts';
 import { Claude, DeepSeek, Gemini, Grok, Meta, Minimax, OpenAI, Qwen } from '@lobehub/icons';
+import { useTheme } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { useTheme } from 'antd-style';
 import { FC, useMemo } from 'react';
 
 /** Flip near-black / near-white brand colors for theme contrast (demo only). */

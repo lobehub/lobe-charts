@@ -1,9 +1,7 @@
 'use client';
 
-import { Flexbox } from '@lobehub/ui';
-import { Skeleton } from '@lobehub/ui/base-ui';
+import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
 import { useSize } from 'ahooks';
-import { css, cssVar, cx } from 'antd-style';
 import {
   Fragment,
   MouseEvent,
