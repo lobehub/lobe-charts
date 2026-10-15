@@ -20,5 +20,5 @@
     }
   },
   "exclude": [".react-router"],
-  "include": ["src", "docs", "tests", "docs.config.ts", ".fatherrc.ts"]
+  "include": ["src", "docs", "tests", "docs.config.ts", "tsdown.config.ts"]
 }
