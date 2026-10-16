@@ -134,7 +134,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     font-size: var(--benchmark-label-font-size, 14px);
     font-weight: 600;
     line-height: 1.3;
-    color: ${cssVar.colorText} !important;
+    color: ${cssVar.colorText};
     text-overflow: ellipsis;
     white-space: pre-line;
 
