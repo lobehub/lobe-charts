@@ -2,9 +2,7 @@
 
 <div align="center">
 
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/logo-3d.webp">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/split.svg">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-emoji/assets/bar-chart.webp">
+![](https://github.com/user-attachments/assets/6170b84b-a83e-4876-91af-8298a60a2b78)
 
 <h1>Lobe Charts</h1>
 
@@ -28,8 +26,6 @@ Beautiful React charts for dashboards and AI benchmarks, themed with Lobe UI.
 [![][github-stars-shield]][github-stars-link]
 [![][github-issues-shield]][github-issues-link]
 [![][github-license-shield]][github-license-link]
-
-![](https://github.com/user-attachments/assets/71f7ff66-7fc6-49b1-af12-02151c5b1026)
 
 </div>
 
