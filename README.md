@@ -8,7 +8,9 @@
 
 <h1>Lobe Charts</h1>
 
-React modern charts components built on recharts
+<h3>Charts for Dashboards and Model Leaderboards</h3>
+
+Beautiful React charts for dashboards and AI benchmarks, themed with Lobe UI.
 
 [Documents](https://charts.lobehub.com) · [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
@@ -36,35 +38,30 @@ React modern charts components built on recharts
 
 #### TOC
 
-- [✨ Features](#-features)
-- [📦 Installation](#-installation)
-  - [Compile with NextJS](#compile-with-nextjs)
+- [💡 Why Lobe Charts?](#-why-lobe-charts)
+- [🚀 Getting Started](#-getting-started)
+- [🤖 AI-Powered Development](#-ai-powered-development)
+- [📖 Documentation](#-documentation)
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
 - [🩷 Sponsor](#-sponsor)
 - [🔗 Links](#-links)
   - [Credits](#credits)
-  - [More Products](#more-products)
-  - [Design Resources](#design-resources)
-  - [Development Resources](#development-resources)
 
 ####
 
 </details>
 
-## ✨ Features
+## 💡 Why Lobe Charts?
 
-- [x] Line Chart
-- [x] Area Chart
-- [x] Bar Chart
-- [x] Donut Chart
-- [x] Funnel Chart
-- [x] Scatter Chart
-- [x] Spark Chart
-- [x] Heatmaps
-- [x] Data List
-- [x] Tracker
-- [x] Legend
+Lobe Charts (`@lobehub/charts`) is a React chart library for dashboards and AI products, built on [recharts](https://github.com/recharts/recharts) and designed to fit [Lobe UI](https://github.com/lobehub/lobe-ui) apps.
+
+- **Everything a dashboard needs** - business charts, sparklines, heatmaps and status trackers in one package
+- **Made for AI products** - ready-made charts for model benchmarks and leaderboards, with your own brand icons
+- **Fits your Lobe UI app** - charts follow the Lobe UI theme, so they look consistent without extra styling
+- **Simple, data-first props** - pass an array of objects and choose which keys to plot
+- **Fully typed** - TypeScript types for every component
+- **Agent-ready** - coding agents can learn the library from [`skills.md`][skills-md-link] and [`llms.txt`][llms-txt-link]
 
 <div align="right">
 
@@ -72,32 +69,67 @@ React modern charts components built on recharts
 
 </div>
 
-## 📦 Installation
-
-> \[!IMPORTANT]\
-> This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-
-To install Lobe UI, run the following command:
-
-[![][bun-shield]][bun-link]
+## 🚀 Getting Started
 
 ```bash
 $ bun add @lobehub/charts
 ```
 
-### Compile with NextJS
+`@lobehub/ui` (v6), `react` and `react-dom` (v19) are peer dependencies; install them too if your project does not have them yet. The package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+
+```tsx
+import { LineChart } from '@lobehub/charts';
+
+const data = [
+  { date: 'Jan 22', Inverters: 2338, SolarPanels: 2890 },
+  { date: 'Feb 22', Inverters: 2103, SolarPanels: 2756 },
+  { date: 'Mar 22', Inverters: 2194, SolarPanels: 3322 },
+];
+
+// `index` is the x-axis key, `categories` are the series to plot
+export default () => (
+  <LineChart categories={['SolarPanels', 'Inverters']} data={data} index="date" />
+);
+```
+
+See the [documents](https://charts.lobehub.com) for every component, live demos and props.
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 🤖 AI-Powered Development
+
+Lobe Charts publishes agent-readable docs, generated from the same source as the documentation site.
+
+| Resource                                                                           | What it is                                                                                                          | How to use it                                                                                                          |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Agent Skill** - [`skills.md`][skills-md-link]                                    | Skill entry point: setup, a recommended workflow and an index of every component page                               | Give the URL to your agent (Cursor, Claude Code, Codex, ...), or save it as a `SKILL.md` in your agent's skills folder |
+| **llms.txt** - [`llms.txt`][llms-txt-link]                                         | [llms.txt](https://llmstxt.org/) index of every docs page                                                           | Point any llms.txt-aware tool at it                                                                                    |
+| **Component reference** - `https://charts.lobehub.com/skills/components/<name>.md` | Markdown page for one component, e.g. [`line-chart.md`](https://charts.lobehub.com/skills/components/line-chart.md) | Fetch it before writing code with that component                                                                       |
+
+Works with **Cursor**, **Claude Code**, **Codex**, **Windsurf**, **GitHub Copilot** and any tool that can read a URL or `llms.txt`. Copy-paste prompt:
+
+```text
+Use @lobehub/charts. Read https://charts.lobehub.com/skills.md first,
+then fetch the reference page of each component you use before writing code.
+```
 
 > \[!NOTE]\
-> By work correct with nextjs ssr, add `transpilePackages: ['@lobehub/charts']` to `next.config.js`. For example:
+> There is no MCP server or skill install CLI yet; `skills.md` and `llms.txt` are the agent entry points.
 
-```js
-// next.config.js
-const nextConfig = {
-  // ...other config
+<div align="right">
 
-  transpilePackages: ['@lobehub/charts'],
-};
-```
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 📖 Documentation
+
+- **Docs & live demos**: [charts.lobehub.com](https://charts.lobehub.com) - line, area, bar, composed, donut / pie, funnel, scatter, radar, sparklines, heatmaps, trackers, benchmark charts and more
+- **Changelog**: [CHANGELOG.md](./CHANGELOG.md)
 
 <div align="right">
 
@@ -106,12 +138,6 @@ const nextConfig = {
 </div>
 
 ## ⌨️ Local Development
-
-You can use Github Codespaces for online development:
-
-[![][codespaces-shield]][codespaces-link]
-
-Or clone it for local development:
 
 ```bash
 $ git clone https://github.com/lobehub/lobe-charts.git
@@ -159,30 +185,19 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 ## 🔗 Links
 
+- **[🤯 Lobe UI](https://github.com/lobehub/lobe-ui)** - React component library for AI applications
+- **[🌈 Lobe Icons](https://github.com/lobehub/lobe-icons)** - AI / LLM brand logo and icon library
+- **[📊 Lobe Charts](https://github.com/lobehub/lobe-charts)** - React chart component library
+- **[✒️ Lobe Editor](https://github.com/lobehub/lobe-editor)** - Lexical-based rich text editor for React, with Markdown, plugins and a chat composer
+- **[🗣️ Lobe TTS](https://github.com/lobehub/lobe-tts)** - TTS / STT speech library
+- **[📐 Lobe Lint](https://github.com/lobehub/lobe-lint)** - ESLint, Prettier, Stylelint, Commitlint and more lint configs
+- **[😊 Fluent Emoji](https://github.com/lobehub/fluent-emoji)** - Fluent Emoji asset library
+
 ### Credits
 
 - **recharts** - <https://github.com/recharts/recharts>
 - **tremor** - <https://github.com/tremorlabs/tremor>
 - **react-activity-calendar** - <https://github.com/grubersjoe/react-activity-calendar>
-
-### More Products
-
-- **[🤯 Lobe Chat](https://github.com/lobehub/lobe-chat)** - An open-source, extensible (Function Calling), high-performance chatbot framework. It supports one-click free deployment of your private ChatGPT/LLM web application.
-- **[🅰️ Lobe Theme](https://github.com/lobehub/sd-webui-lobe-theme)** - The modern theme for stable diffusion webui, exquisite interface design, highly customizable UI, and efficiency boosting features.
-- **[🧸 Lobe Vidol](https://github.com/lobehub/lobe-vidol)** - Experience the magic of virtual idol creation with Lobe Vidol, enjoy the elegance of our Exquisite UI Design, dance along using MMD Dance Support, and engage in Smooth Conversations.
-
-### Design Resources
-
-- **[🍭 Lobe UI](https://ui.lobehub.com)** - An open-source UI component library for building AIGC web apps.
-- **[🥨 Lobe Icons](https://lobehub.com/icons)** - Popular AI / LLM Model Brand SVG Logo and Icon Collection.
-- **[📊 Lobe Charts](https://charts.lobehub.com)** - React modern charts components built on recharts
-
-### Development Resources
-
-- **[🎤 Lobe TTS](https://tts.lobehub.com)** - A high-quality & reliable TTS/STT library for Server and Browser
-- **[🌏 Lobe i18n](https://github.com/lobehub/lobe-cli-toolbox/blob/master/packages/lobe-i18n)** - Automation ai tool for the i18n (internationalization) translation process.
-
-[More Resources](https://lobehub.com/resources)
 
 <div align="right">
 
@@ -194,7 +209,7 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 <details><summary><h4>📝 License</h4></summary>
 
-[![][fossa-license-shield]][fossa-license-link]
+[![][github-license-shield]][github-license-link]
 
 </details>
 
@@ -204,19 +219,13 @@ This project is [MIT](./LICENSE) licensed.
 <!-- LINK GROUP -->
 
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
-[bun-link]: https://bun.sh
-[bun-shield]: https://img.shields.io/badge/-speedup%20with%20bun-black?logo=bun&style=for-the-badge
-[codespaces-link]: https://codespaces.new/lobehub/lobe-charts
-[codespaces-shield]: https://github.com/codespaces/badge.svg
 [contributors-contrib]: https://contrib.rocks/image?repo=lobehub/lobe-charts
 [contributors-link]: https://github.com/lobehub/lobe-charts/graphs/contributors
 [discord-link]: https://discord.gg/AYFPHvv2jT
 [discord-shield]: https://img.shields.io/discord/1127171173982154893?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
-[fossa-license-link]: https://app.fossa.com/projects/git%2Bgithub.com%2Flobehub%2Flobe-charts
-[fossa-license-shield]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Flobehub%2Flobe-charts.svg?type=large
-[github-action-release-link]: https://github.com/actions/workflows/lobehub/lobe-charts/release.yml
+[github-action-release-link]: https://github.com/lobehub/lobe-charts/actions/workflows/release.yml
 [github-action-release-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-charts/release.yml?label=release&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
-[github-action-test-link]: https://github.com/actions/workflows/lobehub/lobe-charts/test.yml
+[github-action-test-link]: https://github.com/lobehub/lobe-charts/actions/workflows/test.yml
 [github-action-test-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-charts/test.yml?label=test&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
 [github-contributors-link]: https://github.com/lobehub/lobe-charts/graphs/contributors
 [github-contributors-shield]: https://img.shields.io/github/contributors/lobehub/lobe-charts?color=c4f042&labelColor=black&style=flat-square
@@ -230,12 +239,14 @@ This project is [MIT](./LICENSE) licensed.
 [github-releasedate-shield]: https://img.shields.io/github/release-date/lobehub/lobe-charts?labelColor=black&style=flat-square
 [github-stars-link]: https://github.com/lobehub/lobe-charts/network/stargazers
 [github-stars-shield]: https://img.shields.io/github/stars/lobehub/lobe-charts?color=ffcb47&labelColor=black&style=flat-square
+[llms-txt-link]: https://charts.lobehub.com/llms.txt
 [npm-downloads-link]: https://www.npmjs.com/package/@lobehub/charts
 [npm-downloads-shield]: https://img.shields.io/npm/dt/@lobehub/charts?labelColor=black&style=flat-square
 [npm-release-link]: https://www.npmjs.com/package/@lobehub/charts
 [npm-release-shield]: https://img.shields.io/npm/v/@lobehub/charts?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
-[pr-welcome-link]: https://github.com/lobehub/lobe-chat/pulls
+[pr-welcome-link]: https://github.com/lobehub/lobe-charts/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/🤯_pr_welcome-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub
+[skills-md-link]: https://charts.lobehub.com/skills.md
 [vercel-link]: https://charts.lobehub.com
-[vercel-shield]: https://img.shields.io/website?down_message=offline&label=vercel&labelColor=black&logo=vercel&style=flat-square&up_message=online&url=https%3A%2F%2Fui.lobehub.com
+[vercel-shield]: https://img.shields.io/website?down_message=offline&label=vercel&labelColor=black&logo=vercel&style=flat-square&up_message=online&url=https%3A%2F%2Fcharts.lobehub.com

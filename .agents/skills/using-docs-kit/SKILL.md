@@ -1,43 +1,45 @@
 ---
 name: using-docs-kit
 description: >
-  Set up and author a documentation site with @lobehub/docs-kit (the `lobedocs` CLI, React Router
-  + Vite static docs used by ui.lobehub.com). Covers consumer repo layout, docs.config.ts,
+  Author and fix the lobe-charts documentation site, which is built with @lobehub/docs-kit (the
+  `lobedocs` CLI, a React Router + Vite static site). Covers this repo's layout, docs.config.ts,
   package scripts, component doc pages (index.mdx frontmatter, `?demo` imports, <Demo>, <Api>),
-  guide pages, home page, changelog, and the build-time validations that reject bad docs.
-  Trigger on docs-kit, lobedocs, defineDocsConfig, docs.config.ts, migrate from dumi, write
-  component docs, add a demo, <Demo>, <Api>, index.mdx, 文档站, 写文档, 组件文档, 迁移 dumi.
+  the home page, the changelog, and the build-time validations that reject bad docs. Trigger on
+  docs-kit, lobedocs, defineDocsConfig, docs.config.ts, write component docs, add a demo, <Demo>,
+  <Api>, index.mdx, docs build error, 文档站, 写文档, 组件文档.
 ---
 
-# Using @lobehub/docs-kit
+# Using @lobehub/docs-kit in lobe-charts
 
-The consumer repo holds **only content + `docs.config.ts`**. The kit owns Vite and React Router
-config; do not add `vite.config.ts` or `react-router.config.ts` unless overriding (see
-[reference/config.md](reference/config.md)).
+This repo holds **only content + `docs.config.ts`**. The kit owns the Vite and React Router
+config; there is no `vite.config.ts` or `react-router.config.ts` here, and you should not add one
+unless you need an override (see [reference/config.md](reference/config.md)).
 
-lobe-ui itself is the reference consumer: `docs.config.ts`, `docs/`, `src/*/index.mdx`,
-`src/*/demos/`.
+Installed version: `@lobehub/docs-kit` 6.0.2 (devDependency `^6.0.0`). Its source ships in
+`node_modules/@lobehub/docs-kit/` (`src/config.ts`, `site/compiler/**`); read it when a rule here
+is unclear.
 
 ## 1. Repo layout
 
 ```
-<repo>/
+lobe-charts/
 ├── docs.config.ts          # defineDocsConfig({...}) — required
+├── compatibility.json      # frozen dumi-era URL inventory, passed as legacyRedirects
 ├── package.json            # lobedocs scripts
 ├── docs/
 │   ├── index.mdx           # "/" — required (frontmatter feeds SEO even with a custom homePage)
-│   ├── changelog.mdx       # "/changelog" — optional; else root CHANGELOG.md is used
-│   └── home/home.tsx       # optional custom landing page (config.homePage)
+│   ├── index.tsx           # demo imported by docs/index.mdx
+│   ├── changelog.mdx       # "/changelog" — imports ../CHANGELOG.md
+│   └── home/home.tsx       # custom landing page (config.homePage)
 ├── src/
-│   └── Button/
-│       ├── index.ts        # barrel export — <Api> resolves props through it
-│       ├── Button.tsx
-│       ├── type.ts         # props with JSDoc
-│       ├── index.mdx       # -> /components/button
+│   └── RadarChart/
+│       ├── index.tsx       # component + exported props type — <Api> resolves through it
+│       ├── styles.ts       # createStaticStyles from @lobehub/ui
+│       ├── index.mdx       # -> /components/radar-chart
 │       └── demos/
-│           ├── index.tsx   # default-export component
-│           └── Variant.tsx
-├── public/                 # static assets served at "/" (favicons, og images)
+│           ├── index.tsx   # StoryBook playground (default export)
+│           └── example.tsx
+├── public/                 # static assets served at "/"
 └── CHANGELOG.md
 ```
 
@@ -46,93 +48,94 @@ Hard rules the compiler enforces:
 - Only files named **`index.mdx`** under an `atomDirs` root become component pages
   (`index.md` and `README.md` are ignored).
 - Demo files must live under **`src/**/demos/**`** — standalone `/~demos/:id` routes and
-  `isolated` demos are globbed from that path only.
-- Other `docs/**/*.mdx` files are **not** discovered unless listed in `publicDocs`.
+  `isolated` demos are globbed from that path only (plus `docs/index.tsx`).
+- Other `docs/**/*.mdx` files are **not** discovered unless listed in `publicDocs`
+  (this repo lists none; `docs/index.mdx` and `docs/changelog.mdx` are built in).
 
-## 2. Install and scripts
+## 2. Scripts
 
-```bash
-pnpm add -D @lobehub/docs-kit @react-router/dev@8.2.0 react-router@8.2.0 vite@8.1.4 tsx
-pnpm add react react-dom # ^19
-```
+Dependencies are already in `package.json`; install with `bun install` (what CI runs). Do not
+add docs-kit, React Router or Vite again.
 
-```json
-{
-  "scripts": {
-    "docs:dev": "lobedocs dev",
-    "docs:build": "lobedocs build",
-    "postinstall": "lobedocs typegen"
-  }
-}
-```
+| Script                       | Runs                                                       |
+| ---------------------------- | ---------------------------------------------------------- |
+| `npm run dev` (`npm start`)  | `lobedocs dev` — local docs server                         |
+| `npm run docs:build`         | `lobedocs build` — static site in `dist/`, runs all audits |
+| `npm run docs:build-analyze` | `ANALYZE=1 lobedocs build`                                 |
+| `npm run setup`              | `lobedocs typegen` (also run by `prepare` on install)      |
 
-`lobedocs build` writes the static site to `dist/` (Pagefind search, sitemap, `/llms.txt`,
-`/skills.md` are generated automatically). Node >= 22.22.
+There is no `docs:dev` script. `lobedocs build` generates Pagefind search, the sitemap,
+`/llms.txt` and `/skills.md` automatically. The kit requires Node >= 22.22.
 
-## 3. Minimal `docs.config.ts`
+## 3. `docs.config.ts`
+
+This repo's config (abridged):
 
 ```ts
-export default {
-  atomDirs: [{ dir: 'src' }],
-  title: 'Lobe Editor',
-  description: 'One sentence describing the library.',
-  siteUrl: 'https://editor.lobehub.com',
-  alias: { '@': 'src', '@lobehub/editor': 'src' }, // let demos import the package from source
+import { defineDocsConfig } from '@lobehub/docs-kit/src/config';
+import type { DocumentationInventory } from '@lobehub/docs-kit/src/types';
+
+import compatibility from './compatibility.json';
+
+export default defineDocsConfig({
+  alias: { '@': 'src', '@lobehub/charts': 'src' }, // demos import the package, run the source
+  atomDirs: [{ dir: 'src', subType: 'components', type: 'component' }],
+  description: 'React modern charts components built on recharts',
+  homePage: './docs/home/home.tsx',
+  legacyRedirects: compatibility as DocumentationInventory,
+  navSections: {},
+  siteUrl: 'https://charts.lobehub.com',
   themeConfig: {
     apiHeader: {
-      packageName: '@lobehub/editor', // defaults to @lobehub/ui — always set it
-      github: 'https://github.com/lobehub/lobe-editor',
+      github: 'https://github.com/lobehub/lobe-charts',
+      packageName: '@lobehub/charts', // defaults to @lobehub/ui — keep it set
+      /* docUrl, sourceUrl, match */
     },
-    socialLinks: [
-      { href: 'https://github.com/lobehub/lobe-editor', icon: 'github', label: 'GitHub' },
-    ],
+    navItems: [{ href: '/changelog', label: 'Changelog' }],
+    /* analytics, giscus, metadata, prefersColor, socialLinks */
   },
-};
+  title: 'Lobe Charts',
+});
 ```
 
-> The package's only stable JS entry is `@lobehub/docs-kit/react-router-config`; there is no
-> root export for `defineDocsConfig`. It is an identity function, so export a plain object.
-> (lobe-ui imports it from `./packages/docs-kit/src/config` only because it is the workspace.)
+> **Import path:** `@lobehub/docs-kit` has no `main` or `exports` field, so there is no root
+> import; `defineDocsConfig` lives in `src/config.ts` and this repo deep-imports it from
+> `@lobehub/docs-kit/src/config`. The kit's README lists only the `lobedocs` CLI and
+> `@lobehub/docs-kit/react-router-config` as supported entry points and calls other deep imports
+> "intentionally unstabilized". `defineDocsConfig` is an identity function, so if that path ever
+> moves, exporting the plain object works the same.
 
-**Restart `lobedocs dev` after editing `docs.config.ts`** — config is cached per process.
+**Restart `npm run dev` after editing `docs.config.ts`** — config is loaded once and cached per
+process.
 
-All fields (multiple `atomDirs`, `subType`, `homePage`, `publicDocs`, `navItems`, giscus,
-analytics, `legacyRedirects`) are in [reference/config.md](reference/config.md).
+All fields are in [reference/config.md](reference/config.md).
 
 ## 4. Writing a component page (`src/<Name>/index.mdx`)
 
-Template:
+Template (abridged from `src/RadarChart/index.mdx`):
 
 ```mdx
 ---
-title: Button
-description: Button triggers an action. Supports variants, sizes, loading and icon slots.
-category: General
-order: -1
+title: RadarChart
+description: Radar charts compare multiple quantitative variables across categories on a polar grid.
+category: Charts
+order: 6
 ---
 
-import Variants from './demos/Variant.tsx?demo';
-import Basic from './demos/index.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
 
-## Introduction
+<Demo of={DemoIndex} layout="bare" />
 
-One or two paragraphs: what it is, when to use it, when to use something else.
+## Usage example
 
-## Basic Usage
+One sentence on what this demo shows.
 
-<Demo of={Basic} title="Basic usage" layout="bare" />
-
-## Variants
-
-Explain the dimension first, then show it.
-
-<Demo of={Variants} title="Variants" />
+<Demo of={DemoExample} />
 
 ## API
 
-<Api name="Button" />
-
-Additionally, Button supports all props of antd's Button except `icon`.
+<Api name="RadarChart" />
 ```
 
 ### Frontmatter
@@ -141,29 +144,29 @@ Additionally, Button supports all props of antd's Button except `icon`.
 | ------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `title`       | yes             | H1, `<title>`, sidebar label. If PascalCase, the header shows `import { Title } from '<packageName>'` — match the export name |
 | `description` | yes             | Subtitle, meta/OG description, search, llms.txt. One or two plain sentences, no markdown                                      |
-| `category`    | yes (component) | Sidebar group inside the section. Reuse existing names; `General` sorts first                                                 |
-| `order`       | no              | Number, lower first within category; unset sorts last, then by title                                                          |
+| `category`    | yes (component) | Sidebar group. This repo uses `Charts`, `Benchmark` and `Visualizations`; reuse one                                           |
+| `order`       | no              | Finite number, lower first within category                                                                                    |
 | `status`      | no              | `stable` \| `beta` \| `experimental` \| `deprecated`                                                                          |
-| `since`       | no              | Version string                                                                                                                |
+| `since`       | no              | Non-empty version string                                                                                                      |
 | `route`       | no              | Override the URL; component pages must stay under `/components/`                                                              |
 
-Anything else (`group`, `nav`, `apiHeader`, dumi's `hero`) is ignored — remove it.
+Pages in this repo use only `title`, `description`, `category` and `order`.
 
-URL is derived from the folder: `src/Button/index.mdx` → `/components/button`,
-`src/base-ui/Select/index.mdx` → `/components/base-ui/select` (each segment kebab-cased).
+URL is derived from the folder: `src/BenchmarkScatterChart/index.mdx` →
+`/components/benchmark-scatter-chart` (kebab-cased).
 
 ### Headings
 
-The page already renders `title` as the H1. Start body sections at `##`; a stray `#` is
-downgraded to H2. Every heading gets an anchor and appears in the outline and llms.txt, so use
-short, stable, noun-style headings (`## Variants`, `## Controlled`, `## API`).
+The page renders `title` as the H1. Start body sections at `##`; a stray `#` is rendered as an
+H2. Every heading gets an anchor and appears in the outline and llms.txt, so use short, stable,
+noun-style headings (`## Usage example`, `## No Data`, `## API`).
 
 ### Demos
 
 ```mdx
-import Basic from './demos/index.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
 
-<Demo of={Basic} title="Basic usage" description="Optional caption." layout="center" />
+<Demo of={DemoIndex} title="Basic usage" description="Optional caption." layout="center" />
 ```
 
 | Prop                    | Default     | Use                                                                                     |
@@ -173,78 +176,76 @@ import Basic from './demos/index.tsx?demo';
 | `layout`                | `'default'` | `'bare'` no padding/frame (playgrounds, full-width); `'center'` centered small elements |
 | `isolated`              | `false`     | Render in an iframe — for fixed/portal/global-CSS demos that would leak into the page   |
 | `editable`              | `true`      | Set `false` if the demo uses dynamic `import()`, workers, or odd local deps             |
-| `height`                | —           | Frame height, e.g. for isolated demos                                                   |
+| `height`                | —           | Frame height (number = px), e.g. for isolated demos                                     |
 
 Demo file rules:
 
 - Exactly one `export default` component; import the library by its **package name**
-  (`import { Button } from '@lobehub/editor'`) so the shown source is copy-pasteable — the
+  (`import { RadarChart } from '@lobehub/charts'`) so the shown source is copy-pasteable — the
   `alias` maps it back to `src/`.
-- One idea per demo; name files after the idea (`Variant.tsx`, `Controlled.tsx`), `index.tsx`
-  for the basic one.
-- Keep it self-contained: no fetching, no reliance on site state; mock data inline.
-- Interactive playgrounds (lobe-ui style) use `StoryBook` + `useControls` from
-  `@lobehub/ui/storybook` with `layout="bare"`.
+- One idea per demo; name files after the idea (`example.tsx`, `customColors.tsx`,
+  `customTooltip.tsx`, `noData.tsx`). `index.tsx` is the playground.
+- Keep it self-contained: no fetching, no reliance on site state; mock data inline or in a local
+  `demos/data.ts`.
+- Playgrounds use `StoryBook`, `useControls` and `useCreateStore` from `@lobehub/ui/storybook`
+  and are shown with `layout="bare"` (every component in this repo has one).
 
 ### API table
 
 ```mdx
-<Api name="Button" />                      <!-- resolves via nearest index.ts barrel -->
-<Api name="ChatItem" from=".." />          <!-- module path relative to this index.mdx -->
+<Api name="RadarChart" />                 <!-- resolves via the nearest index.tsx / index.ts barrel -->
+<Api name="Name" from="./Name" />         <!-- module path relative to this index.mdx -->
 ```
 
-Only static `name` and `from` are allowed (`data` is compiler-owned; `migrationKey` in old
-lobe-ui pages is inert). Props are extracted from TypeScript, so the quality of the table is the
-quality of your types:
+Only static `name` and `from` are allowed (`data` is compiler-owned). Props are extracted from
+TypeScript, so the quality of the table is the quality of your types:
 
 ```ts
-export interface ButtonProps {
+export interface RadarChartProps extends BaseChartProps {
   /**
-   * Adds a frosted-glass background.
-   * @default false
+   * When true, series after the first are rendered at `secondaryOpacity`.
+   * @default true
    */
-  glass?: boolean;
-  /** @deprecated Use `variant="filled"` instead. */
-  filled?: boolean;
+  dimSecondarySeries?: boolean;
 }
 ```
 
 - The JSDoc body is the description; supported tags: `@default`, `@deprecated`, `@since`.
 - `@default` must match the runtime destructuring default, or the build fails.
-- `any` / `unknown` props fail the build — type them.
-- Props starting with `_` are hidden; inherited React/HTML attributes collapse into a footnote.
+- The props type **as a whole** must be concrete: if the component's props resolve to `any` or
+  `unknown`, the build fails. Individual props typed `any` are not rejected (for example
+  `BaseChartProps.data: any[]`), but a precise type gives a better table.
+- TypeScript errors in files related to the props type also fail the build.
+- Props starting with `_` are hidden; inherited props are labelled with the type they come from.
 
 ### Other MDX content
 
-- Globals available without import: only `Demo` and `Api`. Import anything else explicitly
-  (e.g. `import { Alert } from '@lobehub/ui'`).
+- Globals available without import: only `Demo` and `Api`. Import anything else explicitly.
 - GFM is on (tables, task lists, strikethrough). No `:::` callout syntax.
-- Code fences are highlighted only — never executed. dumi's ` ```tsx | pure ` meta is
-  harmless but meaningless; plain ` ```tsx ` is preferred for new pages.
-- `.md` files can be imported as components: `import Changelog from '../CHANGELOG.md'`.
+- Code fences are highlighted only — never executed.
+- `.md` files can be imported as components: `docs/changelog.mdx` does
+  `import Changelog from '../CHANGELOG.md'`.
 
-## 5. Guides, home, changelog
+## 5. Home and changelog
 
-- **Guide pages**: add `docs/<path>.mdx` (frontmatter `title` + `description`) and list it in
-  `publicDocs: ['docs/<path>.mdx']` → served at `/<path>`. Guides get no sidebar entry; link to
-  them via `themeConfig.navItems`.
-- **Home**: `docs/index.mdx` needs frontmatter. Without `homePage`, the default home is built
-  from `themeConfig.home` (hero, features, install). With `homePage: './docs/home/home.tsx'`,
-  that module's default export renders instead and receives
-  `{ description: string; getStartedPathname: string }`.
-- **Changelog**: either `docs/changelog.mdx` importing `../CHANGELOG.md`, or just a root
-  `CHANGELOG.md` (no frontmatter needed).
+- **Home**: `docs/index.mdx` needs frontmatter. Because `homePage: './docs/home/home.tsx'` is
+  set, that module's default export renders the landing page and receives
+  `{ description: string; getStartedPathname: string }`. See the `building-landing-home` skill.
+- **Changelog**: `docs/changelog.mdx` imports `../CHANGELOG.md`. `CHANGELOG.md` is generated by
+  semantic-release — do not edit it by hand.
+- **Guide pages** (none yet): add `docs/<path>.mdx` with `title` + `description` and list it in
+  `publicDocs: ['docs/<path>.mdx']` → served at `/<path>`; link it via `themeConfig.navItems`.
 
-## 6. Workflow for adding or migrating a page
+## 6. Workflow for adding or changing a page
 
 ```
 - [ ] index.mdx exists at src/<Name>/index.mdx with title, description, category
 - [ ] every <Demo of={X}> has a matching `import X from './demos/….tsx?demo'`
-- [ ] demos default-export and import the package by name
-- [ ] <Api name> matches an exported component; props typed with JSDoc
-- [ ] dumi leftovers removed: <code src=…>, `group:`, `nav:`, `hero:`, `apiHeader:` frontmatter
-- [ ] `lobedocs dev`, open the page, check demos + API table render
-- [ ] `lobedocs build` passes (it runs all audits)
+- [ ] demos default-export and import the package as '@lobehub/charts'
+- [ ] <Api name> matches a component exported from src/<Name>/index.tsx; props typed with JSDoc
+- [ ] the component is exported from src/index.ts
+- [ ] `npm run dev`, open the page, check demos + API table render
+- [ ] `npm run docs:build` passes (it runs all audits)
 ```
 
 When the build fails, the error lists the offending file and rule; see
@@ -252,6 +253,6 @@ When the build fails, the error lists the offending file and rule; see
 
 ## Additional resources
 
-- [reference/config.md](reference/config.md) — every `docs.config.ts` field, multi-package
-  `atomDirs`, sections/navigation, React Router overrides, tsconfig for typegen
+- [reference/config.md](reference/config.md) — every `docs.config.ts` field, sections/navigation,
+  React Router overrides
 - [reference/validations.md](reference/validations.md) — what fails `lobedocs build` and why
