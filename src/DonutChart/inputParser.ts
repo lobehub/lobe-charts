@@ -1,4 +1,4 @@
-import { ValueFormatter } from '@/types/charts';
+import type { ValueFormatter } from '@/types/charts';
 import { sumNumericArray } from '@/utils';
 
 const calculateDefaultLabel = (data: any[], category: string) =>

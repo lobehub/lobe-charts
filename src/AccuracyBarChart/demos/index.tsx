@@ -1,6 +1,7 @@
-import { AccuracyBarChart, AccuracyBarChartProps } from '@lobehub/charts';
+import type { AccuracyBarChartProps } from '@lobehub/charts';
+import { AccuracyBarChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const data: AccuracyBarChartProps['data'] = [
   {
@@ -79,7 +80,7 @@ const AccuracyBarChartDemo: FC = () => {
         data={data}
         errorKey={'error'}
         index={'name'}
-        onValueChange={(v: any) => console.log(v)}
+        onValueChange={(v: any) => console.info(v)}
         {...props}
       />
     </StoryBook>

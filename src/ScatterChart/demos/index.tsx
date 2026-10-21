@@ -1,4 +1,5 @@
-import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import type { ScatterChartProps } from '@lobehub/charts';
+import { ScatterChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: ScatterChartProps['data'] = [
@@ -180,11 +181,11 @@ export default () => {
       <ScatterChart
         category="Country"
         data={data}
-        onValueChange={(v) => console.log(v)}
         size="Population"
         valueFormatter={valueFormatter}
         x="GDP"
         y="Life expectancy"
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

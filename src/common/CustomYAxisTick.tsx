@@ -1,7 +1,7 @@
 import { cssVar } from '@lobehub/ui';
 import React, { memo } from 'react';
 
-import { ValueFormatter } from '@/types/charts';
+import type { ValueFormatter } from '@/types/charts';
 
 interface CustomYAxisTickProps {
   align: 'left' | 'right';

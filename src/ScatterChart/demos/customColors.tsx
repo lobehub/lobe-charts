@@ -1,4 +1,5 @@
-import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import type { ScatterChartProps } from '@lobehub/charts';
+import { ScatterChart } from '@lobehub/charts';
 import { useTheme } from '@lobehub/ui';
 
 const data: ScatterChartProps['data'] = [

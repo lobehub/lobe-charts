@@ -1,11 +1,14 @@
 'use client';
 
-import { Flexbox, FlexboxProps, TooltipGroup, cx, useTheme, useThemeMode } from '@lobehub/ui';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cx, Flexbox, TooltipGroup, useTheme, useThemeMode } from '@lobehub/ui';
 import type { Day as WeekDay } from 'date-fns';
 import { getYear, parseISO } from 'date-fns';
-import { ReactNode, forwardRef, useMemo } from 'react';
+import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 
-import NoData, { NoDataProps } from '@/common/NoData';
+import type { NoDataProps } from '@/common/NoData';
+import NoData from '@/common/NoData';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import type { Activity, Labels, Week } from '@/types/charts';
 import { isOnSeverSide } from '@/utils';
@@ -46,7 +49,7 @@ export interface HeatmapsProps extends FlexboxProps {
   weekStart?: WeekDay;
 }
 
-const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
+const Heatmaps = ({ ref, ...props }: HeatmapsProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     data,
     blockMargin = 4,
@@ -228,9 +231,9 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
               labelHeight={labelHeight}
               labels={labels}
               maxLevel={maxLevel}
-              onValueChange={onValueChange}
               showTooltip={showTooltip}
               weeks={weeks}
+              onValueChange={onValueChange}
             />
           </svg>
         </div>
@@ -252,7 +255,7 @@ const Heatmaps = forwardRef<HTMLDivElement, HeatmapsProps>((props, ref) => {
       </Flexbox>
     </TooltipGroup>
   );
-});
+};
 
 Heatmaps.displayName = 'Heatmaps';
 

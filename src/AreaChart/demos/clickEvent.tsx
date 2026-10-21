@@ -1,4 +1,5 @@
-import { AreaChart, AreaChartProps, EventProps } from '@lobehub/charts';
+import type { AreaChartProps, EventProps } from '@lobehub/charts';
+import { AreaChart } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 

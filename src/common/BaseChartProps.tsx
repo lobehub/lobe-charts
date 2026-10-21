@@ -1,11 +1,11 @@
-import { ComponentType, HTMLAttributes } from 'react';
+import type { ComponentType, HTMLAttributes } from 'react';
 import type { AxisDomain } from 'recharts/types/util/types';
 
 import type { NoDataProps } from '@/common/NoData';
-import { IntervalType, LabelFormatter, ValueFormatter } from '@/types/charts';
+import type { IntervalType, LabelFormatter, ValueFormatter } from '@/types/charts';
 
 import type BaseAnimationTimingProps from './BaseAnimationTimingProps';
-import { CustomTooltipProps } from './CustomTooltipProps';
+import type { CustomTooltipProps } from './CustomTooltipProps';
 
 type FixedProps = {
   categoryClicked: string;

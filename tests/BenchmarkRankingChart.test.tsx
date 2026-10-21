@@ -69,6 +69,7 @@ describe('BenchmarkRankingChart', () => {
   it('renders horizontal error bars when error is provided', () => {
     render(
       <BenchmarkRankingChart
+        showErrorBars
         data={[
           {
             color: '#34A853',
@@ -78,7 +79,6 @@ describe('BenchmarkRankingChart', () => {
             score: 82.6,
           },
         ]}
-        showErrorBars
       />,
     );
 
@@ -86,7 +86,7 @@ describe('BenchmarkRankingChart', () => {
   });
 
   it('shows skeleton while loading', () => {
-    render(<BenchmarkRankingChart data={[]} loading />);
+    render(<BenchmarkRankingChart loading data={[]} />);
     expect(screen.getByTestId('skeleton')).toBeTruthy();
   });
 
@@ -98,7 +98,7 @@ describe('BenchmarkRankingChart', () => {
     expect(screen.queryByText('100')).toBeNull();
 
     rerender(
-      <BenchmarkRankingChart data={[{ name: 'Gemini', score: 82.6 }]} maxValue={100} showXAxis />,
+      <BenchmarkRankingChart showXAxis data={[{ name: 'Gemini', score: 82.6 }]} maxValue={100} />,
     );
 
     expect(screen.getByText('100')).toBeTruthy();

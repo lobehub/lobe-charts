@@ -1,4 +1,5 @@
-import { FunnelChart, FunnelChartProps } from '@lobehub/charts';
+import type { FunnelChartProps } from '@lobehub/charts';
+import { FunnelChart } from '@lobehub/charts';
 
 const data: FunnelChartProps['data'] = [
   { name: 'Session start', value: 31_943 },

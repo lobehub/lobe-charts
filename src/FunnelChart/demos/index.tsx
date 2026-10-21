@@ -1,4 +1,5 @@
-import { FunnelChart, FunnelChartProps } from '@lobehub/charts';
+import type { FunnelChartProps } from '@lobehub/charts';
+import { FunnelChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: FunnelChartProps['data'] = [

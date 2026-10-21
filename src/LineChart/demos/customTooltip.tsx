@@ -1,4 +1,5 @@
-import { ChartTooltipFrame, LineChart, LineChartProps } from '@lobehub/charts';
+import type { LineChartProps } from '@lobehub/charts';
+import { ChartTooltipFrame, LineChart } from '@lobehub/charts';
 import { Flexbox, Text, useTheme } from '@lobehub/ui';
 
 const data: LineChartProps['data'] = [
@@ -36,7 +37,7 @@ export default () => {
     return (
       <ChartTooltipFrame gap={4} padding={8}>
         {payload.map((category: any, idx: number) => (
-          <Flexbox gap={8} horizontal key={idx} style={{ position: 'relative' }}>
+          <Flexbox horizontal gap={8} key={idx} style={{ position: 'relative' }}>
             <Flexbox
               flex={'none'}
               style={{ background: category.color, borderRadius: 2, minHeight: '100%' }}

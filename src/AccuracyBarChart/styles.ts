@@ -37,16 +37,15 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     align-items: center;
     justify-content: flex-end;
 
-    padding-right: 8px;
+    padding-inline-end: 8px;
   `,
   leftValueContainer: css`
     pointer-events: none;
 
     position: absolute;
     z-index: 10;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    inset-block: 0;
+    inset-inline-start: 0;
 
     display: flex;
     flex-direction: column;
@@ -54,7 +53,8 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     width: 80px;
   `,
   percentageLabel: css`
-    padding: 2px 4px;
+    padding-block: 2px;
+    padding-inline: 4px;
     border-radius: 4px;
     font-size: 12px;
   `,

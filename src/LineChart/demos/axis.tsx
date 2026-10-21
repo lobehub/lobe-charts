@@ -1,4 +1,5 @@
-import { LineChart, LineChartProps } from '@lobehub/charts';
+import type { LineChartProps } from '@lobehub/charts';
+import { LineChart } from '@lobehub/charts';
 
 const data: LineChartProps['data'] = [
   {

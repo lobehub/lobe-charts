@@ -1,4 +1,5 @@
-import { ComposedChart, ComposedChartProps } from '@lobehub/charts';
+import type { ComposedChartProps } from '@lobehub/charts';
+import { ComposedChart } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: ComposedChartProps['data'] = [
@@ -17,12 +18,12 @@ export default () => (
       data={data}
       height={320}
       index="month"
+      xAxisLabel="Month"
+      yAxisLeft={{ label: 'Revenue (USD)', valueFormatter: (v) => `$${(v / 1000).toFixed(0)}k` }}
       series={[
         { axis: 'left', key: 'revenue', name: 'Revenue', type: 'bar' },
         { axis: 'right', key: 'successRate', name: 'Success Rate (%)', type: 'line' },
       ]}
-      xAxisLabel="Month"
-      yAxisLeft={{ label: 'Revenue (USD)', valueFormatter: (v) => `$${(v / 1000).toFixed(0)}k` }}
       yAxisRight={{
         domain: [(dataMin: number) => Math.max(0, dataMin - 5), 100],
         label: 'Success Rate (%)',

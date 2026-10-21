@@ -1,14 +1,14 @@
-import { Flexbox, Text, createStaticStyles, cssVar, cx } from '@lobehub/ui';
-import { ReactNode } from 'react';
+import { createStaticStyles, cssVar, cx, Flexbox, Text } from '@lobehub/ui';
+import type { ReactNode } from 'react';
 
-import { ValueFormatter } from '@/types/charts';
+import type { ValueFormatter } from '@/types/charts';
 
 import ChartTooltipFrame from './ChartTooltipFrame';
 import ChartTooltipRow from './ChartTooltipRow';
 
 const styles = createStaticStyles(({ css, cssVar }) => ({
   header: css`
-    border-bottom: 1px solid ${cssVar.colorBorderSecondary};
+    border-block-end: 1px solid ${cssVar.colorBorderSecondary};
     font-weight: 500;
   `,
 }));

@@ -6,7 +6,8 @@ import {
 import { Claude, DeepSeek, Gemini, Grok, Meta, OpenAI, Qwen } from '@lobehub/icons';
 import { useTheme } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC, useMemo } from 'react';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 
 /** Flip near-black / near-white brand colors for theme contrast (demo only). */
 const adaptBrandColor = (color: string, isDarkMode: boolean) => {
@@ -156,7 +157,7 @@ const BenchmarkColumnChartDemo: FC = () => {
       <BenchmarkColumnChart
         data={data}
         height={360}
-        onValueChange={(v) => console.log(v)}
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

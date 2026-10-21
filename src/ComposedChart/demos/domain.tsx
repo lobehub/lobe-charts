@@ -1,4 +1,5 @@
-import { ComposedChart, ComposedChartProps } from '@lobehub/charts';
+import type { ComposedChartProps } from '@lobehub/charts';
+import { ComposedChart } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: ComposedChartProps['data'] = [
@@ -16,7 +17,7 @@ const series: ComposedChartProps['series'] = [
 ];
 
 export default () => (
-  <Flexbox gap={32} horizontal wrap="wrap">
+  <Flexbox horizontal gap={32} wrap="wrap">
     <Flexbox flex={1} style={{ minWidth: 300 }}>
       <h4 style={{ margin: '0 0 8px' }}>Default — right axis from 0%</h4>
       <ComposedChart

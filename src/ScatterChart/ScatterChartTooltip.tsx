@@ -1,16 +1,16 @@
-import { Flexbox, Icon, Text, createStaticStyles, cssVar, cx } from '@lobehub/ui';
+import { createStaticStyles, cssVar, cx, Flexbox, Icon, Text } from '@lobehub/ui';
 import { Circle } from 'lucide-react';
 import React, { memo } from 'react';
 
 import { ChartTooltipFrame } from '@/common/ChartTooltip/ChartTooltipFrame';
-import { ScatterChartValueFormatter } from '@/types/charts';
+import type { ScatterChartValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
 import ScatterChartTooltipRow from './ScatterChartTooltipRow';
 
 const styles = createStaticStyles(({ css }) => ({
   header: css`
-    border-bottom: 1px solid ${cssVar.colorBorderSecondary};
+    border-block-end: 1px solid ${cssVar.colorBorderSecondary};
     font-weight: 500;
   `,
 }));
@@ -46,10 +46,10 @@ const ScatterChartTooltip = memo<ScatterChartTooltipProps>(
       return (
         <ChartTooltipFrame>
           <Flexbox
+            horizontal
             align={'center'}
             className={cx(styles.header)}
             gap={8}
-            horizontal
             paddingBlock={8}
             paddingInline={16}
           >

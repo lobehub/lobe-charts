@@ -1,4 +1,4 @@
-import { Flexbox, Icon, Text, createStaticStyles, cssVar, cx } from '@lobehub/ui';
+import { createStaticStyles, cssVar, cx, Flexbox, Icon, Text } from '@lobehub/ui';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
 
@@ -39,17 +39,17 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
 
   return (
     <Flexbox
+      horizontal
       className={cx(styles.container, hasOnValueChange && styles.hasOnValueChange)}
       gap={6}
-      horizontal
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick?.(name, color);
-      }}
       paddingBlock={2}
       paddingInline={8}
       style={{
         cursor: hasOnValueChange ? 'pointer' : 'default',
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(name, color);
       }}
     >
       <Icon
@@ -62,8 +62,8 @@ const LegendItem = memo<LegendItemProps>(({ label, name, color, onClick, activeL
         }}
       />
       <Text
-        className={styles.itemContent}
         ellipsis
+        className={styles.itemContent}
         style={{
           color: activeLegend && activeLegend === name ? cssVar.colorTextSecondary : undefined,
           margin: 0,

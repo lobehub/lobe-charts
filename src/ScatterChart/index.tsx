@@ -1,24 +1,24 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { ComponentType, HTMLAttributes, MouseEvent, forwardRef, useMemo, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import type { ComponentType, HTMLAttributes, MouseEvent } from 'react';
+import { useMemo, useState } from 'react';
 import {
   CartesianGrid,
   Label,
   Legend,
-  ScatterChart as ReChartsScatterChart,
   ResponsiveContainer,
   Scatter,
+  ScatterChart as ReChartsScatterChart,
   Tooltip,
   XAxis,
   YAxis,
   ZAxis,
 } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import { renderShape } from '@/ScatterChart/renderShape';
 import ChartLegend from '@/common/ChartLegend';
-import { CustomTooltipProps } from '@/common/CustomTooltipProps';
+import type { CustomTooltipProps } from '@/common/CustomTooltipProps';
 import CustomYAxisTick from '@/common/CustomYAxisTick';
 import {
   constructCategories,
@@ -27,12 +27,12 @@ import {
   getYAxisDomain,
 } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import type { EventProps } from '@/types/charts';
-import { IntervalType, ValueFormatter } from '@/types/charts';
+import { renderShape } from '@/ScatterChart/renderShape';
+import type { EventProps, IntervalType, ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
-import BaseAnimationTimingProps from '../common/BaseAnimationTimingProps';
+import type BaseAnimationTimingProps from '../common/BaseAnimationTimingProps';
 import NoData, { type NoDataProps } from '../common/NoData';
 import ScatterChartTooltip from './ScatterChartTooltip';
 import { styles } from './styles';
@@ -88,7 +88,10 @@ export interface ScatterChartProps
   yAxisWidth?: number;
 }
 
-const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) => {
+const ScatterChart = ({
+  ref,
+  ...props
+}: ScatterChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -273,6 +276,10 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                 hide={!showYAxis}
                 name={y}
                 stroke=""
+                tickFormatter={valueFormatter.y}
+                tickLine={false}
+                type="number"
+                width={calculatedYAxisWidth}
                 tick={(props) => (
                   <CustomYAxisTick
                     {...props}
@@ -282,10 +289,6 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
-                tickFormatter={valueFormatter.y}
-                tickLine={false}
-                type="number"
-                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label
@@ -301,6 +304,9 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
               </YAxis>
             ) : null}
             <Tooltip
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
+              isAnimationActive={false}
+              wrapperStyle={{ outline: 'none' }}
               content={
                 showTooltip
                   ? ({ active, payload, label }) => {
@@ -310,16 +316,16 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                           active={active}
                           customCategories={customCategories}
                           label={color}
+                          valueFormatter={valueFormatter}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
                             color: categoryColors.get(color) ?? cssVar.colorPrimary,
                           }))}
-                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ScatterChartTooltip
                           active={active}
-                          axis={{ size: size, x: x, y: y }}
+                          axis={{ size, x, y }}
                           category={category}
                           categoryColors={categoryColors}
                           customCategories={customCategories}
@@ -331,15 +337,19 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                     }
                   : undefined
               }
-              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
-              isAnimationActive={false}
-              wrapperStyle={{ outline: 'none' }}
             />
             {size ? <ZAxis dataKey={size} name={size} range={sizeRange} type="number" /> : null}
             {categories.map((cat) => {
               return (
                 <Scatter
                   animationDuration={animationDuration}
+                  data={category ? data.filter((d) => d[category] === cat) : data}
+                  fill={`url(#${categoryColors.get(cat)})`}
+                  fillOpacity={showOpacity ? 0.7 : 1}
+                  isAnimationActive={showAnimation}
+                  key={cat}
+                  name={cat}
+                  shape={(props: any) => renderShape(props, activeNode, activeLegend)}
                   className={cx(
                     css`
                       fill: ${categoryColors.get(cat) ?? cssVar.colorPrimary};
@@ -349,22 +359,17 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                         stroke: ${categoryColors.get(cat) ?? cssVar.colorPrimary};
                       `,
                   )}
-                  data={category ? data.filter((d) => d[category] === cat) : data}
-                  fill={`url(#${categoryColors.get(cat)})`}
-                  fillOpacity={showOpacity ? 0.7 : 1}
-                  isAnimationActive={showAnimation}
-                  key={cat}
-                  name={cat}
-                  onClick={onNodeClick}
-                  shape={(props: any) => renderShape(props, activeNode, activeLegend)}
                   style={{
                     cursor: onValueChange ? 'pointer' : undefined,
                   }}
+                  onClick={onNodeClick}
                 />
               );
             })}
             {showLegend ? (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload },
@@ -378,8 +383,6 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             ) : undefined}
           </ReChartsScatterChart>
@@ -389,7 +392,7 @@ const ScatterChart = forwardRef<HTMLDivElement, ScatterChartProps>((props, ref) 
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 ScatterChart.displayName = 'ScatterChart';
 

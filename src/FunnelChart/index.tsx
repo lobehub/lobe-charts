@@ -1,22 +1,14 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { useSize } from 'ahooks';
-import {
-  Fragment,
-  MouseEvent,
-  Touch,
-  forwardRef,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import type { MouseEvent, Touch } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 
-import ArrowRightIcon from '@/FunnelChart/ArrowRightIcon';
-import BaseChartProps from '@/common/BaseChartProps';
+import type BaseChartProps from '@/common/BaseChartProps';
 import ChartTooltip from '@/common/ChartTooltip';
 import NoData from '@/common/NoData';
+import ArrowRightIcon from '@/FunnelChart/ArrowRightIcon';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
@@ -86,7 +78,7 @@ export interface FunnelChartProps extends Omit<BaseChartProps, 'categories' | 'i
   yAxisPadding?: number;
 }
 
-const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) => {
+const FunnelChart = ({ ref, ...props }: FunnelChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
 
   const {
@@ -307,7 +299,13 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
       {data?.length ? (
         <>
           <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
             onMouseLeave={() => setTooltip({ x: 0, y: 0 })}
+            onTouchEnd={() => setTooltip({ x: 0, y: 0 })}
             onMouseMove={(e) => {
               const fakeTouch = {
                 clientX: e.clientX,
@@ -317,16 +315,10 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
               } as Touch;
               handleTooltip(fakeTouch);
             }}
-            onTouchEnd={() => setTooltip({ x: 0, y: 0 })}
             onTouchMove={(e) => {
               const touch = e.touches[0];
               handleTooltip(touch);
             }}
-            style={{
-              height: '100%',
-              width: '100%',
-            }}
-            xmlns="http://www.w3.org/2000/svg"
           >
             {/* Y axis labels and lines */}
             {Y_AXIS_LABELS.map((label, index) => (
@@ -343,6 +335,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                 <text
                   className={styles.label}
                   textAnchor={yAxisAlign === 'left' ? 'start' : 'end'}
+                  y={(index * realHeight) / 4 + 5 + HALF_PADDING}
                   x={
                     yAxisAlign === 'left'
                       ? yAxisLabel
@@ -350,7 +343,6 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                         : 0
                       : calculatedYAxisWidth - 10 + HALF_PADDING
                   }
-                  y={(index * realHeight) / 4 + 5 + HALF_PADDING}
                 >
                   {label}
                 </text>
@@ -362,18 +354,20 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                 {/* Hover gray rect */}
                 <rect
                   height={realHeight}
+                  width={barWidth + gap}
+                  x={item.startX - gap * 0.5 + HALF_PADDING + calculatedYAxisWidth}
+                  y={HALF_PADDING}
                   style={{
                     fill: tooltip.index === index ? cssVar.colorFillTertiary : 'transparent',
                     zIndex: 0,
                   }}
-                  width={barWidth + gap}
-                  x={item.startX - gap * 0.5 + HALF_PADDING + calculatedYAxisWidth}
-                  y={HALF_PADDING}
                 />
                 {/* Gradient bar */}
                 {gradient && (
                   <rect
                     fill={`url(#base-gradient)`}
+                    width={barWidth}
+                    x={item.startX + HALF_PADDING + calculatedYAxisWidth}
                     height={
                       (realHeight -
                         item.barHeight -
@@ -385,8 +379,6 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                     style={{
                       opacity: activeBar && activeBar.index !== index ? 0.3 : 1,
                     }}
-                    width={barWidth}
-                    x={item.startX + HALF_PADDING + calculatedYAxisWidth}
                     y={
                       realHeight -
                       (isPreviousCalculation
@@ -399,36 +391,39 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                 {/* Main bar */}
                 <rect
                   height={item.barHeight}
-                  onClick={(e) => onBarClick(item, index, e)}
+                  width={barWidth}
+                  x={item.startX + HALF_PADDING + calculatedYAxisWidth}
                   style={{
                     cursor: onValueChange ? 'pointer' : undefined,
                     fill: color ?? cssVar.colorPrimary,
                     opacity: activeBar && activeBar.index !== index ? 0.3 : 1,
                   }}
-                  width={barWidth}
-                  x={item.startX + HALF_PADDING + calculatedYAxisWidth}
                   y={
                     (isVariantCenter ? realHeight / 2 - item.barHeight / 2 : item.startY) +
                     HALF_PADDING
                   }
+                  onClick={(e) => onBarClick(item, index, e)}
                 />
                 {/* Bottom gradient bar */}
                 {gradient && isVariantCenter && (
                   <rect
                     fill={`url(#base-gradient-revert)`}
                     height={(realHeight - item.barHeight) / 2}
-                    style={{
-                      opacity: activeBar && activeBar.index !== index ? 0.3 : 1,
-                    }}
                     width={barWidth}
                     x={item.startX + HALF_PADDING + calculatedYAxisWidth}
                     y={realHeight / 2 + item.barHeight / 2 + HALF_PADDING}
+                    style={{
+                      opacity: activeBar && activeBar.index !== index ? 0.3 : 1,
+                    }}
                   />
                 )}
                 {/* X axis label */}
                 {showXAxis && (
                   <foreignObject
                     height={rotateLabelX?.xAxisHeight || DEFAULT_X_AXIS_HEIGHT}
+                    width={barWidth}
+                    x={item.startX + HALF_PADDING + calculatedYAxisWidth}
+                    y={realHeight + HALF_PADDING + 10}
                     transform={
                       rotateLabelX
                         ? `rotate(${rotateLabelX?.angle}, ${
@@ -441,9 +436,6 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                           })`
                         : undefined
                     }
-                    width={barWidth}
-                    x={item.startX + HALF_PADDING + calculatedYAxisWidth}
-                    y={realHeight + HALF_PADDING + 10}
                   >
                     <div className={cx(styles.strongLabel, styles.emphasis)} title={item.name}>
                       {item.name}
@@ -540,31 +532,31 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
             ))}
             {/* Gradients */}
             <linearGradient
-              className={cx(css`
-                stop {
-                  stop-color: ${color ?? cssVar.colorPrimary};
-                }
-              `)}
               id={'base-gradient'}
               x1="0%"
               x2="0%"
               y1="0%"
               y2="100%"
-            >
-              <stop offset="5%" stopOpacity={0.4} />
-              <stop offset="95%" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient
               className={cx(css`
                 stop {
                   stop-color: ${color ?? cssVar.colorPrimary};
                 }
               `)}
+            >
+              <stop offset="5%" stopOpacity={0.4} />
+              <stop offset="95%" stopOpacity={0} />
+            </linearGradient>
+            <linearGradient
               id={'base-gradient-revert'}
               x1="0%"
               x2="0%"
               y1="0%"
               y2="100%"
+              className={cx(css`
+                stop {
+                  stop-color: ${color ?? cssVar.colorPrimary};
+                }
+              `)}
             >
               <stop offset="5%" stopOpacity={0} />
               <stop offset="95%" stopOpacity={0.4} />
@@ -594,6 +586,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
           {showTooltip && (
             <div
               ref={tooltipRef}
+              tabIndex={-1}
               style={{
                 display: tooltip.data ? 'block' : 'none',
                 left: tooltip.x + barWidth * 0.66,
@@ -601,7 +594,6 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
                 position: 'absolute',
                 top: 0,
               }}
-              tabIndex={-1}
             >
               {CustomTooltip ? (
                 <CustomTooltip
@@ -627,7 +619,7 @@ const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>((props, ref) =>
       )}
     </Flexbox>
   );
-});
+};
 
 FunnelChart.displayName = 'FunnelChart';
 

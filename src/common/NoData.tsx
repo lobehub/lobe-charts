@@ -1,6 +1,7 @@
 import { Center, Empty } from '@lobehub/ui';
 import { Inbox } from 'lucide-react';
-import { ReactNode, isValidElement, memo } from 'react';
+import type { ReactNode } from 'react';
+import { isValidElement, memo } from 'react';
 
 export interface NoDataProps {
   className?: string;

@@ -1,20 +1,22 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip, createStaticStyles, cssVar } from '@lobehub/ui';
-import { ReactNode, forwardRef, useMemo } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { createStaticStyles, cssVar, Flexbox, Tooltip } from '@lobehub/ui';
+import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 
 const styles = createStaticStyles(({ css }) => ({
   block: css`
     background: ${cssVar.colorFill};
 
     &:first-child {
-      border-top-left-radius: ${cssVar.borderRadiusSM};
-      border-bottom-left-radius: ${cssVar.borderRadiusSM};
+      border-start-start-radius: ${cssVar.borderRadiusSM};
+      border-end-start-radius: ${cssVar.borderRadiusSM};
     }
 
     &:last-child {
-      border-top-right-radius: ${cssVar.borderRadiusSM};
-      border-bottom-right-radius: ${cssVar.borderRadiusSM};
+      border-start-end-radius: ${cssVar.borderRadiusSM};
+      border-end-end-radius: ${cssVar.borderRadiusSM};
     }
 
     &:hover {
@@ -29,38 +31,43 @@ export interface TrackerBlockProps {
   tooltip?: ReactNode;
 }
 
-const TrackerBlock = forwardRef<HTMLDivElement, TrackerBlockProps & FlexboxProps>(
-  ({ color, tooltip, width, style, ...rest }, ref) => {
-    const blockColor = useMemo(() => {
-      switch (color) {
-        case 'success': {
-          return cssVar.colorSuccess;
-        }
-        case 'warning': {
-          return cssVar.colorWarning;
-        }
-        case 'error': {
-          return cssVar.colorError;
-        }
-        default: {
-          return color;
-        }
+const TrackerBlock = ({
+  ref,
+  color,
+  tooltip,
+  width,
+  style,
+  ...rest
+}: TrackerBlockProps & FlexboxProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  const blockColor = useMemo(() => {
+    switch (color) {
+      case 'success': {
+        return cssVar.colorSuccess;
       }
-    }, [color]);
+      case 'warning': {
+        return cssVar.colorWarning;
+      }
+      case 'error': {
+        return cssVar.colorError;
+      }
+      default: {
+        return color;
+      }
+    }
+  }, [color]);
 
-    return (
-      <Tooltip title={tooltip}>
-        <Flexbox
-          className={styles.block}
-          height={'100%'}
-          ref={ref}
-          style={{ background: blockColor, ...style }}
-          width={width || '100%'}
-          {...rest}
-        />
-      </Tooltip>
-    );
-  },
-);
+  return (
+    <Tooltip title={tooltip}>
+      <Flexbox
+        className={styles.block}
+        height={'100%'}
+        ref={ref}
+        style={{ background: blockColor, ...style }}
+        width={width || '100%'}
+        {...rest}
+      />
+    </Tooltip>
+  );
+};
 
 export default TrackerBlock;

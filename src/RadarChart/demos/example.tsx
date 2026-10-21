@@ -1,4 +1,5 @@
-import { RadarChart, RadarChartProps } from '@lobehub/charts';
+import type { RadarChartProps } from '@lobehub/charts';
+import { RadarChart } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: RadarChartProps['data'] = [
@@ -43,13 +44,13 @@ export default () => {
       <h4>Department performance comparison</h4>
       <RadarChart
         categories={['productA', 'productB']}
+        data={data}
+        index="subject"
+        valueFormatter={valueFormatter}
         customCategories={{
           productA: 'Product A',
           productB: 'Product B',
         }}
-        data={data}
-        index="subject"
-        valueFormatter={valueFormatter}
       />
     </Flexbox>
   );

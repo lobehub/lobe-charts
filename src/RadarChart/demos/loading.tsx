@@ -1,5 +1,5 @@
 import { RadarChart } from '@lobehub/charts';
 
 export default () => {
-  return <RadarChart categories={['productA', 'productB']} data={[]} index="subject" loading />;
+  return <RadarChart loading categories={['productA', 'productB']} data={[]} index="subject" />;
 };

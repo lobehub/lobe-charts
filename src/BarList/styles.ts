@@ -5,9 +5,8 @@ const prefixCls = 'ant';
 export const styles = createStaticStyles(({ css, cssVar }) => ({
   bar: css`
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    inset-block: 0;
+    inset-inline-start: 0;
 
     max-width: 100%;
     height: 100%;

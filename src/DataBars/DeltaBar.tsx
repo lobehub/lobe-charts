@@ -1,7 +1,8 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip, cssVar, cx } from '@lobehub/ui';
-import { ReactNode, forwardRef } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cssVar, cx, Flexbox, Tooltip } from '@lobehub/ui';
+import type { ReactNode } from 'react';
 
 import { DeltaTypes } from '@/types/charts';
 import { mapInputsToDeltaType } from '@/utils';
@@ -20,7 +21,7 @@ export interface DeltaBarProps extends FlexboxProps {
   value: number;
 }
 
-const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
+const DeltaBar = ({ ref, ...props }: DeltaBarProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     value,
     bgColors,
@@ -47,20 +48,21 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
   return (
     <Tooltip title={tooltip}>
       <Flexbox
+        horizontal
         align={'center'}
         className={className}
         height={size}
-        horizontal
         ref={ref}
+        width={width}
         style={{
           position: 'relative',
           ...style,
         }}
-        width={width}
         {...rest}
       >
         <Flexbox
           height={'100%'}
+          width={'100%'}
           style={{
             background: bgColors || cssVar.colorFillTertiary,
             borderRadius: size / 2,
@@ -69,13 +71,12 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
             position: 'absolute',
             zIndex: 0,
           }}
-          width={'100%'}
         />
         <Flexbox
+          horizontal
           align={'center'}
           flex={1}
           height={'100%'}
-          horizontal
           justify={'flex-end'}
           style={{ position: 'relative' }}
         >
@@ -102,10 +103,10 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
           }}
         />
         <Flexbox
+          horizontal
           align={'center'}
           flex={1}
           height={'100%'}
-          horizontal
           justify={'flex-start'}
           style={{ position: 'relative' }}
         >
@@ -125,7 +126,7 @@ const DeltaBar = forwardRef<HTMLDivElement, DeltaBarProps>((props, ref) => {
       </Flexbox>
     </Tooltip>
   );
-});
+};
 
 DeltaBar.displayName = 'DeltaBar';
 

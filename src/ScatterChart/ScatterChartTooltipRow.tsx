@@ -1,4 +1,4 @@
-import { Flexbox, Text, createStaticStyles, cssVar } from '@lobehub/ui';
+import { createStaticStyles, cssVar, Flexbox, Text } from '@lobehub/ui';
 import React, { memo } from 'react';
 
 const styles = createStaticStyles(({ css }) => ({
@@ -17,8 +17,8 @@ export interface ChartTooltipRowProps {
 
 const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name }) => {
   return (
-    <Flexbox align={'center'} gap={32} horizontal justify={'space-between'}>
-      <Text className={styles.title} ellipsis style={{ margin: 0 }}>
+    <Flexbox horizontal align={'center'} gap={32} justify={'space-between'}>
+      <Text ellipsis className={styles.title} style={{ margin: 0 }}>
         {name}
       </Text>
       <Text className={styles.number} style={{ margin: 0 }}>

@@ -1,6 +1,7 @@
-import { ComposedChart, ComposedChartProps } from '@lobehub/charts';
+import type { ComposedChartProps } from '@lobehub/charts';
+import { ComposedChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const data: ComposedChartProps['data'] = [
   { bucket: '0–1k', ops: 1200, successRate: 84.2 },
@@ -51,11 +52,11 @@ const ComposedChartDemo: FC = () => {
       <ComposedChart
         data={data}
         index="bucket"
+        yAxisLeft={{ label: 'Requests', valueFormatter: (v) => v.toLocaleString() }}
         series={[
           { axis: 'left', key: 'ops', name: 'Requests', type: 'bar' },
           { axis: 'right', key: 'successRate', name: 'Success Rate (%)', type: 'line' },
         ]}
-        yAxisLeft={{ label: 'Requests', valueFormatter: (v) => v.toLocaleString() }}
         yAxisRight={{
           ...(yAxisRightCustomDomain
             ? { domain: [(dataMin: number) => Math.max(0, dataMin - 5), 100] }

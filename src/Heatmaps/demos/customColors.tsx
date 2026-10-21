@@ -9,6 +9,7 @@ export default () => {
   return (
     <Flexbox gap={24}>
       <Heatmaps
+        data={yearData}
         colors={[
           theme.colorFillSecondary,
           theme.geekblue4,
@@ -16,7 +17,6 @@ export default () => {
           theme.geekblue8,
           theme.geekblue10,
         ]}
-        data={yearData}
       />
       <Heatmaps colors={[theme.gold, theme.geekblue]} data={yearData} />
     </Flexbox>

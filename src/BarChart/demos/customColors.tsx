@@ -1,4 +1,5 @@
-import { BarChart, BarChartProps } from '@lobehub/charts';
+import type { BarChartProps } from '@lobehub/charts';
+import { BarChart } from '@lobehub/charts';
 import { useTheme } from '@lobehub/ui';
 
 const data: BarChartProps['data'] = [

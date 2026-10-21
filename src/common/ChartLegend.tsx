@@ -1,8 +1,9 @@
 import { Flexbox } from '@lobehub/ui';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useRef } from 'react';
 
-import Legend from '@/Legend';
 import { useOnWindowResize } from '@/hooks/useOnWindowResize';
+import Legend from '@/Legend';
 
 const calculateHeight = (height: number | undefined) =>
   height
@@ -29,7 +30,7 @@ const ChartLegend = (
   const filteredPayload = payload.filter((item: any) => item.type !== 'none');
 
   return (
-    <Flexbox align={'center'} horizontal justify={'flex-end'} ref={legendRef}>
+    <Flexbox horizontal align={'center'} justify={'flex-end'} ref={legendRef}>
       <Legend
         activeLegend={activeLegend}
         categories={filteredPayload.map((entry: any) => entry.value)}

@@ -1,4 +1,5 @@
-import { ComposedChart, ComposedChartProps } from '@lobehub/charts';
+import type { ComposedChartProps } from '@lobehub/charts';
+import { ComposedChart } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: ComposedChartProps['data'] = [
@@ -18,12 +19,12 @@ export default () => (
       data={data}
       height={320}
       index="bucket"
+      yAxisLeft={{ valueFormatter: (v) => v.toLocaleString() }}
+      yAxisRight={{ valueFormatter: (v) => `$${v.toFixed(2)}` }}
       series={[
         { axis: 'left', key: 'ops', name: 'Requests', type: 'bar' },
         { axis: 'right', key: 'cost', name: 'Cost (USD)', type: 'line' },
       ]}
-      yAxisLeft={{ valueFormatter: (v) => v.toLocaleString() }}
-      yAxisRight={{ valueFormatter: (v) => `$${v.toFixed(2)}` }}
     />
   </Flexbox>
 );

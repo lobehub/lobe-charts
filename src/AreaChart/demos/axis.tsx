@@ -1,4 +1,5 @@
-import { AreaChart, AreaChartProps } from '@lobehub/charts';
+import type { AreaChartProps } from '@lobehub/charts';
+import { AreaChart } from '@lobehub/charts';
 
 const data: AreaChartProps['data'] = [
   {

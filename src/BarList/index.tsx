@@ -1,10 +1,12 @@
 'use client';
 
-import { A, Flexbox, Skeleton, cssVar, cx } from '@lobehub/ui';
-import React, { HTMLAttributes, ReactNode, forwardRef, useMemo } from 'react';
+import { A, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import type { HTMLAttributes, ReactNode } from 'react';
+import React, { useMemo } from 'react';
 
-import NoData, { NoDataProps } from '@/common/NoData';
-import { ValueFormatter } from '@/types/charts';
+import type { NoDataProps } from '@/common/NoData';
+import NoData from '@/common/NoData';
+import type { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 
 import { styles } from './styles';
@@ -37,7 +39,7 @@ export interface BarListProps extends HTMLAttributes<HTMLDivElement> {
 
 const prefixCls = 'ant';
 
-const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
+const BarList = ({ ref, ...props }: BarListProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     data = [],
     color = cssVar.colorTextQuaternary,
@@ -79,10 +81,10 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
 
   return (
     <Flexbox
+      horizontal
       aria-sort={sortOrder}
       className={className}
       gap={24}
-      horizontal
       justify={'space-between'}
       ref={ref}
       style={{ minHeight: height, position: 'relative', ...style }}
@@ -98,18 +100,18 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
         {sortedData.map((item, index) => {
           return (
             <Flexbox
+              horizontal
               align={'center'}
               className={cx(styles.barContainer, onValueChange && styles.barHover)}
               height={rowHeight}
-              horizontal
               key={item.key ?? index}
-              onClick={() => {
-                onValueChange?.(item);
-              }}
+              width={'100%'}
               style={{
                 cursor: onValueChange ? 'pointer' : 'default',
               }}
-              width={'100%'}
+              onClick={() => {
+                onValueChange?.(item);
+              }}
             >
               <div
                 className={cx(`${prefixCls}-chart-bar-item`, styles.bar)}
@@ -121,9 +123,9 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
                 }}
               />
               <Flexbox
+                horizontal
                 align={'center'}
                 gap={8}
-                horizontal
                 paddingInline={8}
                 style={{ overflow: 'hidden', position: 'relative', width: '100%', zIndex: 1 }}
               >
@@ -132,8 +134,8 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
                   <A
                     className={cx(styles.sourceALabel, styles.emphasis)}
                     href={item.href}
-                    onClick={(event) => event.stopPropagation()}
                     target={item.target}
+                    onClick={(event) => event.stopPropagation()}
                   >
                     {item.name}
                   </A>
@@ -159,9 +161,9 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
         )}
         {sortedData.map((item, index) => (
           <Flexbox
+            horizontal
             align={'center'}
             height={rowHeight}
-            horizontal
             justify={'flex-end'}
             key={item.key ?? index}
           >
@@ -173,7 +175,7 @@ const BarList = forwardRef<HTMLDivElement, BarListProps>((props, ref) => {
       </Flexbox>
     </Flexbox>
   );
-});
+};
 
 BarList.displayName = 'BarList';
 

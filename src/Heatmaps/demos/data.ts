@@ -1,4 +1,4 @@
-import { HeatmapsProps } from '@lobehub/charts';
+import type { HeatmapsProps } from '@lobehub/charts';
 
 export const yearData: HeatmapsProps['data'] = [
   {

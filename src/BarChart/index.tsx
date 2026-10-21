@@ -1,21 +1,22 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { MouseEvent, forwardRef, useMemo, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import type { MouseEvent } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Bar,
+  BarChart as ReChartsBarChart,
   CartesianGrid,
   Label,
   Legend,
-  BarChart as ReChartsBarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseChartProps from '@/common/BaseChartProps';
+import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
 import CustomYAxisTick from '@/common/CustomYAxisTick';
@@ -33,7 +34,7 @@ export interface BarChartProps extends BaseChartProps {
   stack?: boolean;
 }
 
-const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
+const BarChart = ({ ref, ...props }: BarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -147,6 +148,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
             barCategoryGap={barCategoryGap}
             data={data}
             layout={layout === 'vertical' ? 'vertical' : 'horizontal'}
+            stackOffset={stack ? 'sign' : 'none'}
             margin={{
               bottom: xAxisLabel ? 30 : undefined,
               left: yAxisLabel ? 20 : undefined,
@@ -162,7 +164,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                   }
                 : undefined
             }
-            stackOffset={stack ? 'sign' : 'none'}
           >
             {showGridLines ? (
               <CartesianGrid
@@ -247,6 +248,11 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 hide={!showYAxis}
                 interval="preserveStartEnd"
                 stroke=""
+                tickFormatter={xAxisLabelFormatter}
+                tickLine={false}
+                ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
+                type="category"
+                width={calculatedYAxisWidth}
                 tick={(props) => (
                   <CustomYAxisTick
                     {...props}
@@ -256,11 +262,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
-                tickFormatter={xAxisLabelFormatter}
-                tickLine={false}
-                ticks={startEndOnly ? [data[0][index], data.at(-1)[index]] : undefined}
-                type="category"
-                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label
@@ -287,6 +288,10 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                 fill=""
                 hide={!showYAxis}
                 stroke=""
+                tickFormatter={valueFormatter}
+                tickLine={false}
+                type="number"
+                width={calculatedYAxisWidth}
                 tick={(props) => (
                   <CustomYAxisTick
                     {...props}
@@ -296,10 +301,6 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     yAxisLabel={Boolean(yAxisLabel)}
                   />
                 )}
-                tickFormatter={valueFormatter}
-                tickLine={false}
-                type="number"
-                width={calculatedYAxisWidth}
               >
                 {yAxisLabel && (
                   <Label
@@ -319,6 +320,10 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
               </YAxis>
             )}
             <Tooltip
+              cursor={{ fill: cssVar.colorFillTertiary }}
+              isAnimationActive={false}
+              position={{ y: 0 }}
+              wrapperStyle={{ outline: 'none' }}
               content={
                 showTooltip
                   ? ({ active, payload, label }) =>
@@ -327,13 +332,13 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
+                          valueFormatter={valueFormatter}
                           payload={(stack ? payload?.reverse() : payload)?.map(
                             (payloadItem: any) => ({
                               ...payloadItem,
                               color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                             }),
                           )}
-                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip
@@ -347,13 +352,11 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ fill: cssVar.colorFillTertiary }}
-              isAnimationActive={false}
-              position={{ y: 0 }}
-              wrapperStyle={{ outline: 'none' }}
             />
             {showLegend ? (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload },
@@ -367,28 +370,26 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             ) : undefined}
             {categories.map((category) => {
               return (
                 <Bar
                   animationDuration={animationDuration}
-                  className={cx(css`
-                    fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
-                  `)}
                   dataKey={category}
                   fill={''}
                   isAnimationActive={showAnimation}
                   key={category}
                   name={category}
-                  onClick={onBarClick}
                   stackId={stack ? 'a' : undefined}
+                  type="linear"
+                  className={cx(css`
+                    fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
+                  `)}
                   style={{
                     cursor: onValueChange ? 'pointer' : undefined,
                   }}
-                  type="linear"
+                  onClick={onBarClick}
                 />
               );
             })}
@@ -399,7 +400,7 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>((props, ref) => {
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 BarChart.displayName = 'BarChart';
 

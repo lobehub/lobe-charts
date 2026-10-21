@@ -70,6 +70,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
 
     white-space: nowrap;
 
+    /* stylelint-disable-next-line liberty/use-logical-spec -- left/top are set as inline pixel coordinates, so the transition must target the physical properties */
     transition:
       left 0.4s ${cssVar.motionEaseInOut},
       top 0.4s ${cssVar.motionEaseInOut},
@@ -150,6 +151,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     align-items: center;
     justify-content: center;
 
+    /* stylelint-disable-next-line liberty/use-logical-spec -- left/top are set as inline pixel coordinates, so the transition must target the physical properties */
     transition:
       left 0.4s ${cssVar.motionEaseInOut},
       top 0.4s ${cssVar.motionEaseInOut},

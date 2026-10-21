@@ -1,6 +1,7 @@
-import { Tooltip, keyframes } from '@lobehub/ui';
+import { keyframes, Tooltip } from '@lobehub/ui';
 import isEqual from 'fast-deep-equal';
-import { CSSProperties, ReactNode, memo, useMemo } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { memo, useMemo } from 'react';
 
 import type { Activity, Labels, Week } from '@/types/charts';
 
@@ -90,13 +91,13 @@ const CalendarBlock = memo<CalendarBlockProps>(
         data-level={activity.level}
         fill={color}
         height={blockSize}
-        onClick={onValueChange ? () => onValueChange(activity) : undefined}
         rx={blockRadius}
         ry={blockRadius}
         style={style}
         width={blockSize}
         x={0}
         y={y}
+        onClick={onValueChange ? () => onValueChange(activity) : undefined}
       />
     );
 
@@ -170,8 +171,8 @@ const CalendarWeek = memo<CalendarWeekProps>(
               key={activity.date}
               labelHeight={labelHeight}
               labels={labels}
-              onValueChange={onValueChange}
               showTooltip={showTooltip}
+              onValueChange={onValueChange}
             />
           );
         })}
@@ -227,10 +228,10 @@ const Calendar = memo<CalendarProps>(
             labelHeight={labelHeight}
             labels={labels}
             maxLevel={maxLevel}
-            onValueChange={onValueChange}
             showTooltip={showTooltip}
             week={week}
             weekIndex={weekIndex}
+            onValueChange={onValueChange}
           />
         ))}
       </>

@@ -1,4 +1,5 @@
-import { Heatmaps, HeatmapsProps } from '@lobehub/charts';
+import type { HeatmapsProps } from '@lobehub/charts';
+import { Heatmaps } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 import { yearData } from './data';

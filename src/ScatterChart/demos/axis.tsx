@@ -1,4 +1,5 @@
-import { ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import type { ScatterChartProps } from '@lobehub/charts';
+import { ScatterChart } from '@lobehub/charts';
 
 const data: ScatterChartProps['data'] = [
   {
@@ -138,9 +139,9 @@ const valueFormatter: ScatterChartProps['valueFormatter'] = {
 export default () => {
   return (
     <ScatterChart
+      enableLegendSlider
       category="Country"
       data={data}
-      enableLegendSlider
       minYValue={60}
       showOpacity={true}
       size="Population"

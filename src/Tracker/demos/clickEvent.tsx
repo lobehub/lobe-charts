@@ -1,4 +1,5 @@
-import { Tracker, TrackerProps } from '@lobehub/charts';
+import type { TrackerProps } from '@lobehub/charts';
+import { Tracker } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 

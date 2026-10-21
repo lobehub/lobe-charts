@@ -1,6 +1,7 @@
-import { RadarChart, RadarChartProps } from '@lobehub/charts';
+import type { RadarChartProps } from '@lobehub/charts';
+import { RadarChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const data: RadarChartProps['data'] = [
   {
@@ -82,14 +83,14 @@ const RadarChartDemo: FC = () => {
     <StoryBook levaStore={store}>
       <RadarChart
         categories={['productA', 'productB']}
+        data={data}
+        index="subject"
+        valueFormatter={valueFormatter}
         customCategories={{
           productA: 'Product A',
           productB: 'Product B',
         }}
-        data={data}
-        index="subject"
-        onValueChange={(v) => console.log(v)}
-        valueFormatter={valueFormatter}
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

@@ -114,11 +114,11 @@ export default () => {
 
   return (
     <BenchmarkColumnChart
+      showError
+      showErrorBars
       accuracyFormatter={(value) => `${value.toFixed(1)}%`}
       data={data}
       height={400}
-      showError
-      showErrorBars
     />
   );
 };

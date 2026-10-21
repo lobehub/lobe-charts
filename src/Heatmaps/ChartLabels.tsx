@@ -18,8 +18,8 @@ interface WeekdayLabelsProps {
   firstWeek: Week;
   labelHeight: number;
   labelMargin: number;
-  weekStart: number;
   weekdays?: string[];
+  weekStart: number;
 }
 
 // Simple component - ChartLabels already memoized, so this doesn't need memo
@@ -120,8 +120,8 @@ interface ChartLabelsProps {
   labelMargin: number;
   labels: Labels;
   showWeekdayLabels: boolean;
-  weekStart: number;
   weeks: Week[];
+  weekStart: number;
 }
 
 const ChartLabels = memo<ChartLabelsProps>(

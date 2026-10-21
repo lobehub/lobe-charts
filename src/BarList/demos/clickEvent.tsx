@@ -1,4 +1,5 @@
-import { BarList, BarListProps } from '@lobehub/charts';
+import type { BarListProps } from '@lobehub/charts';
+import { BarList } from '@lobehub/charts';
 import { Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 

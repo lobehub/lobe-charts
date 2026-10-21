@@ -1,4 +1,5 @@
-import { Flexbox, FlexboxProps, createStaticStyles } from '@lobehub/ui';
+import type { FlexboxProps } from '@lobehub/ui';
+import { createStaticStyles, Flexbox } from '@lobehub/ui';
 import { memo } from 'react';
 
 export const styles = createStaticStyles(({ css, cssVar }) => ({

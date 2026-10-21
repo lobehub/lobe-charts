@@ -1,30 +1,31 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import type { MouseEvent } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import {
   Area,
+  AreaChart as ReChartsAreaChart,
   CartesianGrid,
   Dot,
   Label,
   Legend,
   Line,
-  AreaChart as ReChartsAreaChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseChartProps from '@/common/BaseChartProps';
+import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
 import CustomYAxisTick from '@/common/CustomYAxisTick';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain, hasOnlyOneValueForThisKey } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { CurveType } from '@/types/charts';
+import type { CurveType } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
@@ -42,7 +43,7 @@ interface ActiveDot {
   index?: number;
 }
 
-const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
+const AreaChart = ({ ref, ...props }: AreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -215,6 +216,10 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
               fill=""
               hide={!showYAxis}
               stroke=""
+              tickFormatter={valueFormatter}
+              tickLine={false}
+              type="number"
+              width={calculatedYAxisWidth}
               tick={(props) => (
                 <CustomYAxisTick
                   {...props}
@@ -224,10 +229,6 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   yAxisLabel={Boolean(yAxisLabel)}
                 />
               )}
-              tickFormatter={valueFormatter}
-              tickLine={false}
-              type="number"
-              width={calculatedYAxisWidth}
             >
               {yAxisLabel && (
                 <Label
@@ -242,6 +243,10 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
               )}
             </YAxis>
             <Tooltip
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
+              isAnimationActive={false}
+              position={{ y: 0 }}
+              wrapperStyle={{ outline: 'none' }}
               content={
                 showTooltip
                   ? ({ active, payload, label }) =>
@@ -250,13 +255,13 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
+                          valueFormatter={valueFormatter}
                           payload={(stack ? payload?.reverse() : payload)?.map(
                             (payloadItem: any) => ({
                               ...payloadItem,
                               color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                             }),
                           )}
-                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip
@@ -270,13 +275,11 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
-              isAnimationActive={false}
-              position={{ y: 0 }}
-              wrapperStyle={{ outline: 'none' }}
             />
             {showLegend ? (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload },
@@ -290,8 +293,6 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             ) : undefined}
             {categories.map((category) => {
@@ -299,14 +300,14 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                 <defs key={category}>
                   {showGradient ? (
                     <linearGradient
-                      className={cx(css`
-                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
-                      `)}
                       id={categoryColors.get(category)}
                       x1="0"
                       x2="0"
                       y1="0"
                       y2="1"
+                      className={cx(css`
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
+                      `)}
                     >
                       <stop
                         offset="5%"
@@ -319,14 +320,14 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                     </linearGradient>
                   ) : (
                     <linearGradient
-                      className={cx(css`
-                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
-                      `)}
                       id={categoryColors.get(category)}
                       x1="0"
                       x2="0"
                       y1="0"
                       y2="1"
+                      className={cx(css`
+                        color: ${categoryColors.get(category) ?? cssVar.colorPrimary};
+                      `)}
                     >
                       <stop
                         stopColor="currentColor"
@@ -341,6 +342,20 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
             })}
             {categories.map((category) => (
               <Area
+                animationDuration={animationDuration}
+                connectNulls={connectNulls}
+                dataKey={category}
+                fill={`url(#${categoryColors.get(category)})`}
+                isAnimationActive={showAnimation}
+                key={category}
+                name={category}
+                stackId={stack ? 'a' : undefined}
+                stroke=""
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeOpacity={activeDot || (activeLegend && activeLegend !== category) ? 0.3 : 1}
+                strokeWidth={2}
+                type={curveType}
                 activeDot={(props: any) => {
                   const {
                     cx: dotCx,
@@ -353,27 +368,24 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   } = props;
                   return (
                     <Dot
-                      className={cx(css`
-                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
-                      `)}
                       cx={dotCx}
                       cy={dotCy}
                       fill=""
-                      onClick={(dotProps: any, event) => onDotClick(props, event)}
                       r={5}
                       stroke={stroke}
                       strokeLinecap={strokeLinecap}
                       strokeLinejoin={strokeLinejoin}
                       strokeWidth={strokeWidth}
+                      className={cx(css`
+                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
+                      `)}
+                      onClick={(dotProps: any, event) => onDotClick(props, event)}
                     />
                   );
                 }}
-                animationDuration={animationDuration}
                 className={cx(css`
                   stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
-                connectNulls={connectNulls}
-                dataKey={category}
                 dot={(props: any) => {
                   const {
                     stroke,
@@ -393,9 +405,6 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   ) {
                     return (
                       <Dot
-                        className={cx(css`
-                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
-                        `)}
                         cx={dotCx}
                         cy={dotCy}
                         fill=""
@@ -405,6 +414,9 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                         strokeLinecap={strokeLinecap}
                         strokeLinejoin={strokeLinejoin}
                         strokeWidth={strokeWidth}
+                        className={cx(css`
+                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
+                        `)}
                         style={{
                           cursor: onValueChange ? 'pointer' : undefined,
                         }}
@@ -413,17 +425,6 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                   }
                   return <Fragment key={index} />;
                 }}
-                fill={`url(#${categoryColors.get(category)})`}
-                isAnimationActive={showAnimation}
-                key={category}
-                name={category}
-                stackId={stack ? 'a' : undefined}
-                stroke=""
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeOpacity={activeDot || (activeLegend && activeLegend !== category) ? 0.3 : 1}
-                strokeWidth={2}
-                type={curveType}
               />
             ))}
             {onValueChange
@@ -435,19 +436,19 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
                     key={category}
                     legendType="none"
                     name={category}
+                    stroke="transparent"
+                    strokeOpacity={0}
+                    strokeWidth={12}
+                    tooltipType="none"
+                    type={curveType}
+                    style={{
+                      cursor: 'pointer',
+                    }}
                     onClick={(props: any, event) => {
                       event.stopPropagation();
                       const { name } = props;
                       onCategoryClick(name);
                     }}
-                    stroke="transparent"
-                    strokeOpacity={0}
-                    strokeWidth={12}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                    tooltipType="none"
-                    type={curveType}
                   />
                 ))
               : undefined}
@@ -458,7 +459,7 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>((props, ref) => {
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 AreaChart.displayName = 'AreaChart';
 

@@ -1,7 +1,8 @@
 'use client';
 
-import { Flexbox, Skeleton, cssVar } from '@lobehub/ui';
-import { ReactNode, forwardRef, useState } from 'react';
+import { cssVar, Flexbox, Skeleton } from '@lobehub/ui';
+import type { ReactNode } from 'react';
+import { useState } from 'react';
 import {
   Legend,
   PolarAngleAxis,
@@ -12,9 +13,9 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseChartProps from '@/common/BaseChartProps';
+import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
 import NoData from '@/common/NoData';
@@ -45,7 +46,7 @@ export interface RadarChartProps extends BaseChartProps {
   showRadiusAxis?: boolean;
 }
 
-const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
+const RadarChart = ({ ref, ...props }: RadarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -143,6 +144,7 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
               axisLine={false}
               className={styles.label}
               dataKey={index}
+              tickLine={false}
               tick={(tickProps: any) => {
                 const { x, y, textAnchor, payload: tickPayload } = tickProps;
                 const value = tickPayload?.value;
@@ -166,7 +168,6 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
                   </text>
                 );
               }}
-              tickLine={false}
             />
             <PolarRadiusAxis
               allowDecimals={allowDecimals}
@@ -180,17 +181,19 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
             />
             {showTooltip ? (
               <Tooltip
+                isAnimationActive={false}
+                wrapperStyle={{ outline: 'none' }}
                 content={({ active, payload, label }) =>
                   CustomTooltip ? (
                     <CustomTooltip
                       active={active}
                       customCategories={customCategories}
                       label={label}
+                      valueFormatter={valueFormatter}
                       payload={payload?.map((payloadItem: any) => ({
                         ...payloadItem,
                         color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                       }))}
-                      valueFormatter={valueFormatter}
                     />
                   ) : (
                     <ChartTooltip
@@ -203,12 +206,12 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
                     />
                   )
                 }
-                isAnimationActive={false}
-                wrapperStyle={{ outline: 'none' }}
               />
             ) : undefined}
             {showLegend ? (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload: payload?.slice().reverse() },
@@ -222,8 +225,6 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             ) : undefined}
             {/* Render later categories first so earlier ones (e.g. A) paint on top */}
@@ -258,7 +259,7 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>((props, ref) => {
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 RadarChart.displayName = 'RadarChart';
 

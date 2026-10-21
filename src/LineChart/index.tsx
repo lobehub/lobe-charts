@@ -1,7 +1,8 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { Fragment, MouseEvent, forwardRef, useMemo, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import type { MouseEvent } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import {
   CartesianGrid,
   Dot,
@@ -14,16 +15,16 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseChartProps from '@/common/BaseChartProps';
+import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
 import CustomYAxisTick from '@/common/CustomYAxisTick';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain, hasOnlyOneValueForThisKey } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { CurveType } from '@/types/charts';
+import type { CurveType } from '@/types/charts';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
@@ -39,7 +40,7 @@ interface ActiveDot {
   index?: number;
 }
 
-const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
+const LineChart = ({ ref, ...props }: LineChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -211,6 +212,10 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
               fill=""
               hide={!showYAxis}
               stroke=""
+              tickFormatter={valueFormatter}
+              tickLine={false}
+              type="number"
+              width={calculatedYAxisWidth}
               tick={(props) => (
                 <CustomYAxisTick
                   {...props}
@@ -220,10 +225,6 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                   yAxisLabel={Boolean(yAxisLabel)}
                 />
               )}
-              tickFormatter={valueFormatter}
-              tickLine={false}
-              type="number"
-              width={calculatedYAxisWidth}
             >
               {yAxisLabel && (
                 <Label
@@ -238,6 +239,10 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
               )}
             </YAxis>
             <Tooltip
+              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
+              isAnimationActive={false}
+              position={{ y: 0 }}
+              wrapperStyle={{ outline: 'none' }}
               content={
                 showTooltip
                   ? ({ active, payload, label }) =>
@@ -246,11 +251,11 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={label}
+                          valueFormatter={valueFormatter}
                           payload={payload?.map((payloadItem: any) => ({
                             ...payloadItem,
                             color: categoryColors.get(payloadItem.dataKey) ?? cssVar.colorPrimary,
                           }))}
-                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <ChartTooltip
@@ -264,14 +269,12 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
-              isAnimationActive={false}
-              position={{ y: 0 }}
-              wrapperStyle={{ outline: 'none' }}
             />
 
             {showLegend ? (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload },
@@ -285,12 +288,22 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             ) : undefined}
             {categories.map((category) => (
               <Line
+                animationDuration={animationDuration}
+                connectNulls={connectNulls}
+                dataKey={category}
+                isAnimationActive={showAnimation}
+                key={category}
+                name={category}
+                stroke=""
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeOpacity={activeDot || (activeLegend && activeLegend !== category) ? 0.3 : 1}
+                strokeWidth={2}
+                type={curveType}
                 activeDot={(props: any) => {
                   const {
                     dotCx,
@@ -303,27 +316,24 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                   } = props;
                   return (
                     <Dot
-                      className={cx(css`
-                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
-                      `)}
                       cx={dotCx}
                       cy={dotCy}
                       fill=""
-                      onClick={(dotProps: any, event) => onDotClick(props, event)}
                       r={5}
                       stroke={stroke}
                       strokeLinecap={strokeLinecap}
                       strokeLinejoin={strokeLinejoin}
                       strokeWidth={strokeWidth}
+                      className={cx(css`
+                        fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
+                      `)}
+                      onClick={(dotProps: any, event) => onDotClick(props, event)}
                     />
                   );
                 }}
-                animationDuration={animationDuration}
                 className={cx(css`
                   stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
                 `)}
-                connectNulls={connectNulls}
-                dataKey={category}
                 dot={(props: any) => {
                   const {
                     stroke,
@@ -343,9 +353,6 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                   ) {
                     return (
                       <Dot
-                        className={cx(css`
-                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
-                        `)}
                         cx={dotCx}
                         cy={dotCy}
                         fill=""
@@ -355,20 +362,14 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                         strokeLinecap={strokeLinecap}
                         strokeLinejoin={strokeLinejoin}
                         strokeWidth={strokeWidth}
+                        className={cx(css`
+                          fill: ${categoryColors.get(dataKey) ?? cssVar.colorPrimary};
+                        `)}
                       />
                     );
                   }
                   return <Fragment key={index} />;
                 }}
-                isAnimationActive={showAnimation}
-                key={category}
-                name={category}
-                stroke=""
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeOpacity={activeDot || (activeLegend && activeLegend !== category) ? 0.3 : 1}
-                strokeWidth={2}
-                type={curveType}
               />
             ))}
             {onValueChange
@@ -380,19 +381,19 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
                     key={category}
                     legendType="none"
                     name={category}
+                    stroke="transparent"
+                    strokeOpacity={0}
+                    strokeWidth={12}
+                    tooltipType="none"
+                    type={curveType}
+                    style={{
+                      cursor: 'pointer',
+                    }}
                     onClick={(props: any, event) => {
                       event.stopPropagation();
                       const { name } = props;
                       onCategoryClick(name);
                     }}
-                    stroke="transparent"
-                    strokeOpacity={0}
-                    strokeWidth={12}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                    tooltipType="none"
-                    type={curveType}
                   />
                 ))
               : undefined}
@@ -403,7 +404,7 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>((props, ref) => {
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 LineChart.displayName = 'LineChart';
 

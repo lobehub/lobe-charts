@@ -1,4 +1,5 @@
-import { RadarChart, RadarChartProps } from '@lobehub/charts';
+import type { RadarChartProps } from '@lobehub/charts';
+import { RadarChart } from '@lobehub/charts';
 
 const data: RadarChartProps['data'] = [
   {
@@ -38,12 +39,12 @@ export default () => {
     <RadarChart
       categories={['productA', 'productB']}
       colors={['#00ff7b', '#f97316']}
+      data={data}
+      index="subject"
       customCategories={{
         productA: 'Product A',
         productB: 'Product B',
       }}
-      data={data}
-      index="subject"
     />
   );
 };

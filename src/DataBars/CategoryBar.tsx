@@ -1,10 +1,11 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip, cssVar, cx } from '@lobehub/ui';
-import { forwardRef, memo, useMemo } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cssVar, cx, Flexbox, Tooltip } from '@lobehub/ui';
+import { memo, useMemo } from 'react';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { ValueFormatter } from '@/types/charts';
+import type { ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, sumNumericArray } from '@/utils';
 
 import { styles } from './styles';
@@ -37,8 +38,8 @@ const BarLabels = memo<{ valueFormatter?: ValueFormatter; values: number[] }>(
     let sumConsecutiveHiddenLabels = 0;
     return (
       <Flexbox
-        className={cx(styles.label, styles.emphasis)}
         horizontal
+        className={cx(styles.label, styles.emphasis)}
         style={{
           position: 'relative',
         }}
@@ -60,8 +61,8 @@ const BarLabels = memo<{ valueFormatter?: ValueFormatter; values: number[] }>(
 
           return (
             <Flexbox
-              align={'center'}
               horizontal
+              align={'center'}
               justify={'flex-end'}
               key={`item-${idx}`}
               style={{ width: `${widthPositionLeft}%` }}
@@ -78,10 +79,10 @@ const BarLabels = memo<{ valueFormatter?: ValueFormatter; values: number[] }>(
             </Flexbox>
           );
         })}
-        <Flexbox align={'center'} horizontal style={{ bottom: 0, left: 0, position: 'absolute' }}>
+        <Flexbox horizontal align={'center'} style={{ bottom: 0, left: 0, position: 'absolute' }}>
           {valueFormatter ? valueFormatter(0) : 0}
         </Flexbox>
-        <Flexbox align={'center'} horizontal style={{ bottom: 0, position: 'absolute', right: 0 }}>
+        <Flexbox horizontal align={'center'} style={{ bottom: 0, position: 'absolute', right: 0 }}>
           {valueFormatter ? valueFormatter(sumValues) : sumValues}
         </Flexbox>
       </Flexbox>
@@ -100,7 +101,7 @@ export interface CategoryBarProps extends FlexboxProps {
   values: number[];
 }
 
-const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) => {
+const CategoryBar = ({ ref, ...props }: CategoryBarProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     values = [],
@@ -137,32 +138,32 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
         className={className}
         gap={8}
         ref={ref}
+        width={width}
         style={{
           position: 'relative',
           ...style,
         }}
-        width={width}
         {...rest}
       >
         {showLabels && <BarLabels valueFormatter={valueFormatter} values={values} />}
         <Flexbox
+          horizontal
           align={'center'}
           className={cx('relative w-full flex items-center h-2')}
           height={size}
-          horizontal
           style={{
             position: 'relative',
           }}
         >
           <Flexbox
+            horizontal
             align={'center'}
             height={'100%'}
-            horizontal
+            width={'100%'}
             style={{
               borderRadius: size / 2,
               overflow: 'hidden',
             }}
-            width={'100%'}
           >
             {values.map((value, idx) => {
               const baseColor = colorGroup[idx] ?? cssVar.colorPrimary;
@@ -196,7 +197,7 @@ const CategoryBar = forwardRef<HTMLDivElement, CategoryBarProps>((props, ref) =>
       </Flexbox>
     </Tooltip>
   );
-});
+};
 
 CategoryBar.displayName = 'CategoryBar';
 

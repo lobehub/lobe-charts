@@ -14,6 +14,7 @@ export const renderShape = (
     <Dot
       cx={cx}
       cy={cy}
+      r={width / 2}
       opacity={
         activeNode || (activeLegend && activeLegend !== name)
           ? deepEqual(activeNode, node)
@@ -21,7 +22,6 @@ export const renderShape = (
             : 0.3
           : fillOpacity
       }
-      r={width / 2}
     />
   );
 };

@@ -1,15 +1,15 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx, useThemeMode } from '@lobehub/ui';
-import { CSSProperties, ComponentType, MouseEvent, forwardRef, useEffect, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton, useThemeMode } from '@lobehub/ui';
+import type { ComponentType, CSSProperties, MouseEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 import type BaseAnimationTimingProps from '@/common/BaseAnimationTimingProps';
-import { CustomTooltipProps } from '@/common/CustomTooltipProps';
+import type { CustomTooltipProps } from '@/common/CustomTooltipProps';
 import NoData, { type NoDataProps } from '@/common/NoData';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import type { EventProps } from '@/types/charts';
-import { ValueFormatter } from '@/types/charts';
+import type { EventProps, ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 
 import { DonutChartTooltip } from './DonutChartTooltip';
@@ -42,7 +42,7 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   variant?: DonutChartVariant;
 }
 
-const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
+const DonutChart = ({ ref, ...props }: DonutChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -165,7 +165,6 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
               innerRadius={isDonut ? '75%' : '0%'}
               isAnimationActive={showAnimation}
               nameKey={index}
-              onClick={onShapeClick}
               outerRadius="100%"
               startAngle={90}
               stroke=""
@@ -175,6 +174,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 outline: 'none',
                 stroke: cssVar.colorBgContainer,
               }}
+              onClick={onShapeClick}
             />
             {isDonut && (
               <Pie
@@ -182,14 +182,6 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 animationDuration={animationDuration}
                 cx="50%"
                 cy="50%"
-                data={parseData(
-                  [{ [category]: 1 }],
-                  [
-                    isDarkMode
-                      ? 'color-mix(in srgb, #000000 33%, transparent)'
-                      : 'color-mix(in srgb, #000000 10%, transparent)',
-                  ],
-                )}
                 dataKey={category}
                 endAngle={-270}
                 inactiveShape={renderInactiveShape}
@@ -200,6 +192,14 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                 startAngle={90}
                 stroke=""
                 strokeLinejoin="round"
+                data={parseData(
+                  [{ [category]: 1 }],
+                  [
+                    isDarkMode
+                      ? 'color-mix(in srgb, #000000 33%, transparent)'
+                      : 'color-mix(in srgb, #000000 10%, transparent)',
+                  ],
+                )}
                 style={{
                   outline: 'none',
                   pointerEvents: 'none',
@@ -207,6 +207,8 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
               />
             )}
             <Tooltip
+              isAnimationActive={false}
+              wrapperStyle={{ outline: 'none' }}
               content={
                 showTooltip
                   ? ({ active, payload }) =>
@@ -215,11 +217,11 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                           active={active}
                           customCategories={customCategories}
                           label={payload?.[0]?.name}
+                          valueFormatter={valueFormatter}
                           payload={payload?.map((payloadItem) => ({
                             ...payloadItem,
                             color: payload?.[0]?.payload?.color ?? cssVar.colorPrimary,
                           }))}
-                          valueFormatter={valueFormatter}
                         />
                       ) : (
                         <DonutChartTooltip
@@ -231,8 +233,6 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
                       )
                   : undefined
               }
-              isAnimationActive={false}
-              wrapperStyle={{ outline: 'none' }}
             />
           </ReChartsDonutChart>
         ) : (
@@ -241,7 +241,7 @@ const DonutChart = forwardRef<HTMLDivElement, DonutChartProps>((props, ref) => {
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 DonutChart.displayName = 'DonutChart';
 

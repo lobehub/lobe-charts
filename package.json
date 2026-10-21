@@ -105,8 +105,7 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.md": [
-      "remark --quiet --output --",
+    "*.{md,mdx}": [
       "prettier --write --no-error-on-unmatched-pattern"
     ],
     "*.json": [
@@ -139,7 +138,7 @@
     "@lobehub/docs-kit": "^6.0.0",
     "@lobehub/fluent-emoji": "^5.0.0-beta.1",
     "@lobehub/icons": "^6.0.0-beta.1",
-    "@lobehub/lint": "^1.26.3",
+    "@lobehub/lint": "^2.1.5",
     "@lobehub/ui": "^6.0.0",
     "@react-router/dev": "8.2.0",
     "@testing-library/react": "^16.3.3",
@@ -151,18 +150,18 @@
     "commitlint": "^19.8.1",
     "cross-env": "^10.1.0",
     "dpdm": "^3.15.1",
-    "eslint": "^8.57.1",
+    "eslint": "^10.12.0",
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "lint-staged": "^16.4.0",
-    "prettier": "^3.9.8",
+    "prettier": "^3.9.10",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router": "8.2.0",
     "remark": "^15.0.1",
     "remark-cli": "^12.0.1",
     "semantic-release": "^21.1.2",
-    "stylelint": "^15.11.0",
+    "stylelint": "^16.26.1",
     "tsdown": "^0.23.1",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",

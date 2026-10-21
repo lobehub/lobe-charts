@@ -1,14 +1,14 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { forwardRef, useMemo, useState } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
+import { useMemo, useState } from 'react';
 import {
   Bar,
   CartesianGrid,
+  ComposedChart as ReChartsComposedChart,
   Label,
   Legend,
   Line,
-  ComposedChart as ReChartsComposedChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -28,7 +28,10 @@ import type { ComposedChartProps } from './types';
 
 export type { ComposedChartProps, SeriesItem, YAxisConfig } from './types';
 
-const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref) => {
+const ComposedChart = ({
+  ref,
+  ...props
+}: ComposedChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -118,7 +121,7 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
             }}
           >
             {showGridLines && (
-              <CartesianGrid className={styles.gridLines} horizontal vertical={false} />
+              <CartesianGrid horizontal className={styles.gridLines} vertical={false} />
             )}
 
             <XAxis
@@ -164,6 +167,11 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
               hide={!showYAxis}
               orientation="left"
               stroke=""
+              tickFormatter={yAxisLeft?.valueFormatter ?? defaultValueFormatter}
+              tickLine={false}
+              type="number"
+              width={leftYAxisWidth}
+              yAxisId="left"
               tick={(tickProps) => (
                 <CustomYAxisTick
                   {...tickProps}
@@ -172,11 +180,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                   yAxisLabel={Boolean(yAxisLeft?.label)}
                 />
               )}
-              tickFormatter={yAxisLeft?.valueFormatter ?? defaultValueFormatter}
-              tickLine={false}
-              type="number"
-              width={leftYAxisWidth}
-              yAxisId="left"
             >
               {yAxisLeft?.label && (
                 <Label
@@ -206,6 +209,11 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 hide={!showYAxis}
                 orientation="right"
                 stroke=""
+                tickFormatter={yAxisRight?.valueFormatter ?? defaultValueFormatter}
+                tickLine={false}
+                type="number"
+                width={rightYAxisWidth}
+                yAxisId="right"
                 tick={(tickProps) => (
                   <CustomYAxisTick
                     {...tickProps}
@@ -215,11 +223,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                     yAxisLabel={Boolean(yAxisRight?.label)}
                   />
                 )}
-                tickFormatter={yAxisRight?.valueFormatter ?? defaultValueFormatter}
-                tickLine={false}
-                type="number"
-                width={rightYAxisWidth}
-                yAxisId="right"
               >
                 {yAxisRight?.label && (
                   <Label
@@ -241,6 +244,8 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
 
             {showLegend && (
               <Legend
+                height={legendHeight}
+                verticalAlign="top"
                 content={({ payload }) =>
                   ChartLegend(
                     { payload },
@@ -252,8 +257,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                     customCategories,
                   )
                 }
-                height={legendHeight}
-                verticalAlign="top"
               />
             )}
 
@@ -265,15 +268,15 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 return (
                   <Bar
                     animationDuration={animationDuration}
-                    className={cx(css`
-                      fill: ${color};
-                    `)}
                     dataKey={s.key}
                     fill=""
                     isAnimationActive={showAnimation}
                     key={s.key}
                     name={s.key}
                     yAxisId={axisId}
+                    className={cx(css`
+                      fill: ${color};
+                    `)}
                   />
                 );
               }
@@ -282,9 +285,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                 return (
                   <Line
                     animationDuration={animationDuration}
-                    className={cx(css`
-                      stroke: ${color};
-                    `)}
                     dataKey={s.key}
                     dot={false}
                     isAnimationActive={showAnimation}
@@ -294,6 +294,9 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                     strokeWidth={2}
                     type="monotone"
                     yAxisId={axisId}
+                    className={cx(css`
+                      stroke: ${color};
+                    `)}
                   />
                 );
               }
@@ -303,6 +306,10 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
 
             {showTooltip && (
               <Tooltip
+                cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
+                isAnimationActive={false}
+                position={{ y: 0 }}
+                wrapperStyle={{ outline: 'none' }}
                 content={({ active, payload, label }) => (
                   <ChartTooltip
                     active={active}
@@ -323,10 +330,6 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
                     }}
                   />
                 )}
-                cursor={{ stroke: cssVar.colorTextSecondary, strokeWidth: 1 }}
-                isAnimationActive={false}
-                position={{ y: 0 }}
-                wrapperStyle={{ outline: 'none' }}
               />
             )}
           </ReChartsComposedChart>
@@ -336,7 +339,7 @@ const ComposedChart = forwardRef<HTMLDivElement, ComposedChartProps>((props, ref
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 ComposedChart.displayName = 'ComposedChart';
 

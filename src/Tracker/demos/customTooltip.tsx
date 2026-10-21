@@ -1,4 +1,5 @@
-import { Tracker, TrackerProps } from '@lobehub/charts';
+import type { TrackerProps } from '@lobehub/charts';
+import { Tracker } from '@lobehub/charts';
 import { Flexbox, Text, useTheme } from '@lobehub/ui';
 
 const data: TrackerProps['data'] = [
@@ -50,7 +51,7 @@ export default () => {
     }
 
     return (
-      <Flexbox gap={8} horizontal style={{ position: 'relative' }}>
+      <Flexbox horizontal gap={8} style={{ position: 'relative' }}>
         <Flexbox
           flex={'none'}
           style={{ background: color, borderRadius: 2, minHeight: '100%' }}

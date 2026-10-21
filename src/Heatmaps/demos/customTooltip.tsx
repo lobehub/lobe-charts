@@ -1,5 +1,6 @@
-import { Heatmaps, HeatmapsProps } from '@lobehub/charts';
-import { Flexbox, Text, cssVar } from '@lobehub/ui';
+import type { HeatmapsProps } from '@lobehub/charts';
+import { Heatmaps } from '@lobehub/charts';
+import { cssVar, Flexbox, Text } from '@lobehub/ui';
 
 import { yearData } from './data';
 
@@ -7,7 +8,7 @@ export default () => {
   const customTooltip: HeatmapsProps['customTooltip'] = (payload) => {
     if (!payload) return null;
     return (
-      <Flexbox gap={8} horizontal style={{ position: 'relative' }}>
+      <Flexbox horizontal gap={8} style={{ position: 'relative' }}>
         <Flexbox
           flex={'none'}
           style={{ background: cssVar.colorSuccess, borderRadius: 2, minHeight: '100%' }}

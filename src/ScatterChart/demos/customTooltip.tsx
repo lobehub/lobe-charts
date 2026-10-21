@@ -1,4 +1,5 @@
-import { ChartTooltipFrame, ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import type { ScatterChartProps } from '@lobehub/charts';
+import { ChartTooltipFrame, ScatterChart } from '@lobehub/charts';
 import { Flexbox, Text, useTheme } from '@lobehub/ui';
 
 const data: ScatterChartProps['data'] = [
@@ -71,7 +72,7 @@ export default () => {
     if (!active || !payload) return null;
     return (
       <ChartTooltipFrame gap={8} padding={8}>
-        <Flexbox gap={16} horizontal style={{ position: 'relative' }}>
+        <Flexbox horizontal gap={16} style={{ position: 'relative' }}>
           <Flexbox
             flex={'none'}
             style={{ background: payload[0].color, borderRadius: 2, minHeight: '100%' }}
@@ -81,7 +82,7 @@ export default () => {
             <Text style={{ fontSize: 16, fontWeight: 500, margin: 0 }}>{label}</Text>
             <Flexbox>
               {payload.map((payloadItem: any, idx: number) => (
-                <Flexbox gap={48} horizontal key={idx}>
+                <Flexbox horizontal gap={48} key={idx}>
                   <Text ellipsis style={{ color: theme.colorTextSecondary, margin: 0 }}>
                     {payloadItem.dataKey}
                   </Text>

@@ -1,4 +1,5 @@
-import { DonutChart, DonutChartProps, Legend } from '@lobehub/charts';
+import type { DonutChartProps } from '@lobehub/charts';
+import { DonutChart, Legend } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: DonutChartProps['data'] = [

@@ -1,7 +1,8 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip, cssVar, cx } from '@lobehub/ui';
-import { ReactNode, forwardRef } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cssVar, cx, Flexbox, Tooltip } from '@lobehub/ui';
+import type { ReactNode } from 'react';
 
 import { styles } from './styles';
 
@@ -18,7 +19,7 @@ export interface MarkerBarProps extends FlexboxProps {
   value: number;
 }
 
-const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
+const MarkerBar = ({ ref, ...props }: MarkerBarProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     value,
     minValue,
@@ -37,20 +38,21 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
   } = props;
   return (
     <Flexbox
+      horizontal
       align={'center'}
       className={className}
       height={size}
-      horizontal
       ref={ref}
+      width={width}
       style={{
         position: 'relative',
         ...style,
       }}
-      width={width}
       {...rest}
     >
       <Flexbox
         height={'100%'}
+        width={'100%'}
         style={{
           background: bgColors || cssVar.colorFillTertiary,
           borderRadius: size / 2,
@@ -59,13 +61,13 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
           position: 'absolute',
           zIndex: 0,
         }}
-        width={'100%'}
       />
       {minValue !== undefined && maxValue !== undefined ? (
         <Tooltip title={rangeTooltip}>
           <Flexbox
             className={cx(showAnimation && styles.showAnimation)}
             height={'100%'}
+            width={`${maxValue - minValue}%`}
             style={{
               background: rangeColors || cssVar.colorFill,
               borderRadius: size / 2,
@@ -75,7 +77,6 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
               position: 'absolute',
               zIndex: 0,
             }}
-            width={`${maxValue - minValue}%`}
           />
         </Tooltip>
       ) : null}
@@ -97,7 +98,7 @@ const MarkerBar = forwardRef<HTMLDivElement, MarkerBarProps>((props, ref) => {
       </Tooltip>
     </Flexbox>
   );
-});
+};
 
 MarkerBar.displayName = 'MarkerBar';
 

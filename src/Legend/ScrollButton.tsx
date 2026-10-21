@@ -1,5 +1,5 @@
 import { Button, Icon } from '@lobehub/ui';
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 
 export interface ScrollButtonProps {
@@ -34,6 +34,11 @@ const ScrollButton = memo<ScrollButtonProps>(({ icon, onClick, disabled }) => {
     <Button
       disabled={disabled}
       icon={<Icon className={'w-full'} icon={icon} />}
+      size={'small'}
+      style={{
+        height: 24,
+        width: 24,
+      }}
       onClick={(e) => {
         e.stopPropagation();
         onClick?.();
@@ -45,11 +50,6 @@ const ScrollButton = memo<ScrollButtonProps>(({ icon, onClick, disabled }) => {
       onMouseUp={(e) => {
         e.stopPropagation();
         setIsPressed(false);
-      }}
-      size={'small'}
-      style={{
-        height: 24,
-        width: 24,
       }}
     />
   );

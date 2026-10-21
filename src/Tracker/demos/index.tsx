@@ -1,4 +1,5 @@
-import { Tracker, TrackerProps } from '@lobehub/charts';
+import type { TrackerProps } from '@lobehub/charts';
+import { Tracker } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 const data: TrackerProps['data'] = [

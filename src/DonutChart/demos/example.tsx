@@ -1,4 +1,5 @@
-import { DonutChart, DonutChartProps } from '@lobehub/charts';
+import type { DonutChartProps } from '@lobehub/charts';
+import { DonutChart } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: DonutChartProps['data'] = [
@@ -36,16 +37,16 @@ export default () => (
     <h4>Donut Variant</h4>
     <DonutChart
       data={data}
-      onValueChange={(v) => console.log(v)}
       valueFormatter={valueFormatter}
       variant="donut"
+      onValueChange={(v) => console.info(v)}
     />
     <h4>Pie Variant</h4>
     <DonutChart
       data={data}
-      onValueChange={(v) => console.log(v)}
       valueFormatter={valueFormatter}
       variant="pie"
+      onValueChange={(v) => console.info(v)}
     />
   </Flexbox>
 );

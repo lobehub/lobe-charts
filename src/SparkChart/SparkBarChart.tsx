@@ -1,11 +1,10 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { forwardRef } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { Bar, BarChart as ReChartsBarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseSparkChartProps from '@/common/BaseSparkChartProps';
+import type BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
@@ -16,7 +15,10 @@ export interface SparkBarChartProps extends BaseSparkChartProps {
   stack?: boolean;
 }
 
-const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref) => {
+const SparkBarChart = ({
+  ref,
+  ...props
+}: SparkBarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -60,14 +62,11 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
             margin={{ bottom: 0, left: -1.5, right: -1.5, top: 0 }}
             stackOffset={relative ? 'expand' : 'none'}
           >
-            <YAxis domain={yAxisDomain as AxisDomain} hide />
-            <XAxis dataKey={index} hide />
+            <YAxis hide domain={yAxisDomain as AxisDomain} />
+            <XAxis hide dataKey={index} />
             {categories.map((category) => (
               <Bar
                 animationDuration={animationDuration}
-                className={cx(css`
-                  fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
-                `)}
                 dataKey={category}
                 fill=""
                 isAnimationActive={showAnimation}
@@ -75,6 +74,9 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
                 name={category}
                 stackId={stack || relative ? 'a' : undefined}
                 type="linear"
+                className={cx(css`
+                  fill: ${categoryColors.get(category) ?? cssVar.colorPrimary};
+                `)}
               />
             ))}
           </ReChartsBarChart>
@@ -84,7 +86,7 @@ const SparkBarChart = forwardRef<HTMLDivElement, SparkBarChartProps>((props, ref
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 SparkBarChart.displayName = 'SparkBarChart';
 

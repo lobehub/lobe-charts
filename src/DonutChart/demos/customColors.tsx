@@ -1,4 +1,5 @@
-import { DonutChart, DonutChartProps } from '@lobehub/charts';
+import type { DonutChartProps } from '@lobehub/charts';
+import { DonutChart } from '@lobehub/charts';
 import { useTheme } from '@lobehub/ui';
 
 const data: DonutChartProps['data'] = [

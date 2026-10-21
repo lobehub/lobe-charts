@@ -6,9 +6,8 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
 
     position: absolute;
     z-index: 2;
-    top: 8px;
-    right: 0;
-    left: 0;
+    inset-block-start: 8px;
+    inset-inline: 0;
 
     display: flex;
     gap: 16px;
@@ -77,7 +76,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     display: inline-block;
     width: 16px;
     height: 0;
-    border-top: 2px solid ${cssVar.colorTextSecondary};
+    border-block-start: 2px solid ${cssVar.colorTextSecondary};
   `,
   lineLabel: css`
     pointer-events: none;
@@ -97,7 +96,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     font-variant-numeric: tabular-nums;
     line-height: 1.3;
     color: ${cssVar.colorTextQuaternary};
-    text-align: left;
+    text-align: start;
 
     fill: ${cssVar.colorTextQuaternary};
   `,
@@ -114,7 +113,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     font-size: 12px;
     line-height: 16px;
     color: ${cssVar.colorTextDescription};
-    text-align: right;
+    text-align: end;
   `,
   valueLabel: css`
     pointer-events: none;

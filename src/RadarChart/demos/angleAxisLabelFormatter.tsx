@@ -1,4 +1,5 @@
-import { RadarChart, RadarChartProps, useThemeColorRange } from '@lobehub/charts';
+import type { RadarChartProps } from '@lobehub/charts';
+import { RadarChart, useThemeColorRange } from '@lobehub/charts';
 
 const data: RadarChartProps['data'] = [
   {
@@ -39,18 +40,18 @@ export default () => {
 
   return (
     <RadarChart
+      categories={['productA', 'productB']}
+      data={data}
+      index="subject"
       angleAxisLabelFormatter={(label, payload) => (
         <>
           {label} <tspan fill={colorA}>{payload?.productA}</tspan>
         </>
       )}
-      categories={['productA', 'productB']}
       customCategories={{
         productA: 'Product A',
         productB: 'Product B',
       }}
-      data={data}
-      index="subject"
     />
   );
 };

@@ -1,6 +1,7 @@
-import { BarChart, BarChartProps } from '@lobehub/charts';
+import type { BarChartProps } from '@lobehub/charts';
+import { BarChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const data: BarChartProps['data'] = [
   {
@@ -82,14 +83,14 @@ const BarChartDemo: FC = () => {
     <StoryBook levaStore={store}>
       <BarChart
         categories={['groupA', 'groupB']}
+        data={data}
+        index={'name'}
+        valueFormatter={valueFormatter}
         customCategories={{
           groupA: 'Group A',
           groupB: 'Group B',
         }}
-        data={data}
-        index={'name'}
-        onValueChange={(v) => console.log(v)}
-        valueFormatter={valueFormatter}
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

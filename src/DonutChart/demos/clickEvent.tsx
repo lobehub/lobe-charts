@@ -1,4 +1,5 @@
-import { DonutChart, DonutChartProps, EventProps } from '@lobehub/charts';
+import type { DonutChartProps, EventProps } from '@lobehub/charts';
+import { DonutChart } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 
@@ -36,8 +37,8 @@ export default () => {
         category="sales"
         data={data}
         index="name"
-        onValueChange={(v) => setValue(v)}
         valueFormatter={valueFormatter}
+        onValueChange={(v) => setValue(v)}
       />
       <Highlighter language={'json'} style={{ marginTop: 16 }}>
         {JSON.stringify(value, null, 2)}

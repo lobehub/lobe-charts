@@ -1,4 +1,5 @@
-import { BarChart, BarChartProps, EventProps } from '@lobehub/charts';
+import type { BarChartProps, EventProps } from '@lobehub/charts';
+import { BarChart } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 

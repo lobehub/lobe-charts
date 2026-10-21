@@ -1,16 +1,16 @@
 'use client';
 
-import { Flexbox, Skeleton, cssVar, cx, useTheme } from '@lobehub/ui';
+import { cssVar, cx, Flexbox, Skeleton, useTheme } from '@lobehub/ui';
 import { readableColor } from 'polished';
-import { type CSSProperties, MouseEvent, ReactNode, forwardRef, useMemo, useState } from 'react';
+import { type CSSProperties, type MouseEvent, type ReactNode, useMemo, useState } from 'react';
 import {
   Bar,
   CartesianGrid,
   Cell,
+  ComposedChart as ReChartsComposedChart,
   ErrorBar,
   LabelList,
   Line,
-  ComposedChart as ReChartsComposedChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -19,19 +19,19 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
-import ChartTooltip from '@/common/ChartTooltip';
-import NoData from '@/common/NoData';
 import {
   type BenchmarkBaseProps,
   type BenchmarkEventProps,
-  type NormalizedBenchmarkItem,
   defaultBenchmarkErrorFormatter,
   defaultBenchmarkValueFormatter,
   getBenchmarkLabelMetrics,
   getBenchmarkMaxValue,
   normalizeBenchmarkData,
+  type NormalizedBenchmarkItem,
   splitBenchmarkLabel,
 } from '@/common/benchmark';
+import ChartTooltip from '@/common/ChartTooltip';
+import NoData from '@/common/NoData';
 import { constructCategoryColors, deepEqual, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { getTextWidth } from '@/utils/getMaxLabelLength';
@@ -203,7 +203,10 @@ const RoundedTopBar = (props: any) => {
   return <path d={path} fill={fill} />;
 };
 
-const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProps>((props, ref) => {
+const BenchmarkColumnChart = ({
+  ref,
+  ...props
+}: BenchmarkColumnChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const theme = useTheme();
   const themeColorRange = useThemeColorRange();
   const {
@@ -500,6 +503,7 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
       className={cx(styles.container, className)}
       height={numericHeight}
       ref={ref}
+      width={width}
       style={
         {
           '--benchmark-header-pad-inline': `${headerPadInline}px`,
@@ -509,7 +513,6 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
           ...style,
         } as CSSProperties
       }
-      width={width}
       {...rest}
     >
       <div
@@ -569,7 +572,7 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
               }
             >
               {showGridLines ? (
-                <CartesianGrid className={styles.gridLines} horizontal vertical={false} />
+                <CartesianGrid horizontal className={styles.gridLines} vertical={false} />
               ) : null}
               <XAxis
                 axisLine={showXAxis}
@@ -592,6 +595,9 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                 width={showYAxis ? 40 : 0}
               />
               <Tooltip
+                cursor={{ fill: cssVar.colorFillTertiary }}
+                isAnimationActive={false}
+                wrapperStyle={{ outline: 'none' }}
                 content={
                   showTooltip
                     ? ({ active, payload }) => {
@@ -633,6 +639,8 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                         return (
                           <ChartTooltip
                             active={active}
+                            payload={tooltipPayload}
+                            valueFormatter={(val: number): any => displayFormatter(Number(val))}
                             categoryColors={
                               new Map([
                                 [tooltipBarName, swatch],
@@ -644,16 +652,11 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                                 ? `${title} · ${modelName}`
                                 : title
                             }
-                            payload={tooltipPayload}
-                            valueFormatter={(val: number): any => displayFormatter(Number(val))}
                           />
                         );
                       }
                     : undefined
                 }
-                cursor={{ fill: cssVar.colorFillTertiary }}
-                isAnimationActive={false}
-                wrapperStyle={{ outline: 'none' }}
               />
               {firstUnrankedKey !== undefined ? (
                 <ReferenceLine
@@ -669,9 +672,9 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                 dataKey="__value"
                 isAnimationActive={showAnimation}
                 name={tooltipBarName}
-                onClick={onBarClick}
                 shape={(shapeProps: any) => <RoundedTopBar {...shapeProps} radius={barRadius} />}
                 style={{ cursor: onValueChange ? 'pointer' : undefined }}
+                onClick={onBarClick}
               >
                 {chartData.map((entry) => {
                   const fill =
@@ -683,6 +686,8 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                 })}
                 {showValueLabel ? (
                   <LabelList
+                    dataKey="__value"
+                    position="insideTop"
                     content={(labelProps: any) => {
                       const {
                         x,
@@ -737,8 +742,6 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                         </text>
                       );
                     }}
-                    dataKey="__value"
-                    position="insideTop"
                   />
                 ) : null}
                 {enableError ? (
@@ -756,6 +759,11 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                   activeDot={{ r: 5 }}
                   connectNulls={false}
                   dataKey="__line"
+                  isAnimationActive={showAnimation}
+                  name={tooltipLineName}
+                  stroke={resolvedLineColor}
+                  strokeWidth={2}
+                  type="monotone"
                   dot={(dotProps: any) => {
                     const { cx, cy, payload, value } = dotProps;
                     if (
@@ -778,14 +786,11 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                       />
                     );
                   }}
-                  isAnimationActive={showAnimation}
-                  name={tooltipLineName}
-                  stroke={resolvedLineColor}
-                  strokeWidth={2}
-                  type="monotone"
                 >
                   {showLineLabel ? (
                     <LabelList
+                      dataKey="__line"
+                      position="top"
                       content={(labelProps: any) => {
                         const { x, y, value } = labelProps;
                         if (
@@ -808,8 +813,6 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                           </text>
                         );
                       }}
-                      dataKey="__line"
-                      position="top"
                     />
                   ) : null}
                 </Line>
@@ -818,6 +821,11 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                 <Line
                   connectNulls={false}
                   dataKey="__lineSolo"
+                  isAnimationActive={false}
+                  legendType="none"
+                  stroke="transparent"
+                  strokeWidth={0}
+                  type="monotone"
                   dot={(dotProps: any) => {
                     const { cx, cy, payload, value } = dotProps;
                     if (
@@ -840,14 +848,11 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                       />
                     );
                   }}
-                  isAnimationActive={false}
-                  legendType="none"
-                  stroke="transparent"
-                  strokeWidth={0}
-                  type="monotone"
                 >
                   {showLineLabel ? (
                     <LabelList
+                      dataKey="__lineSolo"
+                      position="top"
                       content={(labelProps: any) => {
                         const { x, y, value } = labelProps;
                         if (
@@ -870,8 +875,6 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
                           </text>
                         );
                       }}
-                      dataKey="__lineSolo"
-                      position="top"
                     />
                   ) : null}
                 </Line>
@@ -884,7 +887,7 @@ const BenchmarkColumnChart = forwardRef<HTMLDivElement, BenchmarkColumnChartProp
       </div>
     </Flexbox>
   );
-});
+};
 
 BenchmarkColumnChart.displayName = 'BenchmarkColumnChart';
 

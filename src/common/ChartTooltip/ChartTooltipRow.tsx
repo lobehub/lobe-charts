@@ -1,4 +1,4 @@
-import { Flexbox, Icon, Text, createStaticStyles } from '@lobehub/ui';
+import { createStaticStyles, Flexbox, Icon, Text } from '@lobehub/ui';
 import { Circle } from 'lucide-react';
 import { memo } from 'react';
 
@@ -20,10 +20,10 @@ export interface ChartTooltipRowProps {
 
 const ChartTooltipRow = memo<ChartTooltipRowProps>(({ value, name, color }) => {
   return (
-    <Flexbox align={'center'} gap={32} horizontal justify={'space-between'} width={'max-content'}>
-      <Flexbox align={'center'} gap={8} horizontal width={'auto'}>
+    <Flexbox horizontal align={'center'} gap={32} justify={'space-between'} width={'max-content'}>
+      <Flexbox horizontal align={'center'} gap={8} width={'auto'}>
         <Icon color={color} fill={color} icon={Circle} size={10} />
-        <Text className={styles.title} ellipsis style={{ margin: 0 }}>
+        <Text ellipsis className={styles.title} style={{ margin: 0 }}>
           {name}
         </Text>
       </Flexbox>

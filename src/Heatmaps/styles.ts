@@ -33,7 +33,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
     display: flex;
     gap: 3px;
     align-items: center;
-    margin-left: auto;
+    margin-inline-start: auto;
   `,
   scrollContainer: css`
     overflow: auto hidden;

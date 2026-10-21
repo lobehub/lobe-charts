@@ -1,7 +1,7 @@
-import { NameType, Payload } from 'recharts/types/component/DefaultTooltipContent';
+import type { NameType, Payload } from 'recharts/types/component/DefaultTooltipContent';
 
-import { ScatterChartValueFormatter } from '@/ScatterChart';
-import { ValueFormatter } from '@/types/charts';
+import type { ScatterChartValueFormatter } from '@/ScatterChart';
+import type { ValueFormatter } from '@/types/charts';
 
 export type CustomTooltipProps = {
   active: boolean | undefined;

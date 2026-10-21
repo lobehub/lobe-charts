@@ -1,4 +1,5 @@
-import { EventProps, ScatterChart, ScatterChartProps } from '@lobehub/charts';
+import type { EventProps, ScatterChartProps } from '@lobehub/charts';
+import { ScatterChart } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 
@@ -146,13 +147,13 @@ export default () => {
         category="Country"
         data={data}
         minYValue={60}
-        onValueChange={(v) => setValue(v)}
         showLegend={false}
         showOpacity={true}
         size="Population"
         valueFormatter={valueFormatter}
         x="GDP"
         y="Life expectancy"
+        onValueChange={(v) => setValue(v)}
       />
       <Highlighter language={'json'} style={{ marginTop: 16 }}>
         {JSON.stringify(value, null, 2)}

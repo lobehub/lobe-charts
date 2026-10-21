@@ -1,10 +1,12 @@
 'use client';
 
-import { Flexbox, FlexboxProps, TooltipGroup, cx } from '@lobehub/ui';
-import { ReactNode, forwardRef } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cx, Flexbox, TooltipGroup } from '@lobehub/ui';
+import type { ReactNode } from 'react';
 
-import TrackerBlock, { TrackerBlockProps } from './TrackerBlock';
 import { styles } from './styles';
+import type { TrackerBlockProps } from './TrackerBlock';
+import TrackerBlock from './TrackerBlock';
 
 interface DataItem extends TrackerBlockProps {
   [key: string]: any;
@@ -21,7 +23,7 @@ export interface TrackerProps extends FlexboxProps {
   rightLabel?: ReactNode;
 }
 
-const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
+const Tracker = ({ ref, ...props }: TrackerProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     data = [],
     className,
@@ -45,12 +47,12 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
           color={item.color}
           height={blockHeight}
           key={item.key ?? idx}
-          onClick={() => onValueChange?.(item)}
+          tooltip={customTooltip ? customTooltip(item) : item.tooltip}
+          width={blockWidth}
           style={{
             cursor: onValueChange ? 'pointer' : 'default',
           }}
-          tooltip={customTooltip ? customTooltip(item) : item.tooltip}
-          width={blockWidth}
+          onClick={() => onValueChange?.(item)}
         />
       ))}
     </TooltipGroup>
@@ -67,13 +69,13 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
         width={width}
         {...rest}
       >
-        <Flexbox align={'center'} horizontal justify={'space-between'} width={'100%'}>
+        <Flexbox horizontal align={'center'} justify={'space-between'} width={'100%'}>
           <div className={cx(styles.strongLabel, styles.emphasis)}>{leftLabel}</div>
           <div className={cx(styles.label, styles.emphasis)} style={{ textAlign: 'right' }}>
             {rightLabel}
           </div>
         </Flexbox>
-        <Flexbox align={'center'} gap={blockGap} height={blockHeight} horizontal width={'100%'}>
+        <Flexbox horizontal align={'center'} gap={blockGap} height={blockHeight} width={'100%'}>
           {content}
         </Flexbox>
       </Flexbox>
@@ -82,11 +84,11 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
 
   return (
     <Flexbox
+      horizontal
       align={'center'}
       className={className}
       gap={blockGap}
       height={height || blockHeight}
-      horizontal
       ref={ref}
       width={width}
       {...rest}
@@ -94,7 +96,7 @@ const Tracker = forwardRef<HTMLDivElement, TrackerProps>((props, ref) => {
       {content}
     </Flexbox>
   );
-});
+};
 
 Tracker.displayName = 'Tracker';
 

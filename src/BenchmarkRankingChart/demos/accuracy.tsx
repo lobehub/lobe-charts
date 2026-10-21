@@ -115,13 +115,13 @@ export default () => {
 
   return (
     <BenchmarkRankingChart
-      accuracyFormatter={(value) => `${value.toFixed(1)}%`}
-      data={data}
       showError
       showErrorBars
       showGridLines
       showXAxis
       showYAxis
+      accuracyFormatter={(value) => `${value.toFixed(1)}%`}
+      data={data}
       xAxisLabel="Accuracy (%)"
     />
   );

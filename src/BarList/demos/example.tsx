@@ -1,5 +1,6 @@
 import { SiGithub, SiGoogle, SiReddit, SiX, SiYoutube } from '@icons-pack/react-simple-icons';
-import { BarList, BarListProps } from '@lobehub/charts';
+import type { BarListProps } from '@lobehub/charts';
+import { BarList } from '@lobehub/charts';
 import { Flexbox } from '@lobehub/ui';
 
 const data: BarListProps['data'] = [

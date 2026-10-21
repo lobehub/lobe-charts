@@ -1,6 +1,7 @@
-import { Flexbox, FlexboxProps, createStaticStyles, cx } from '@lobehub/ui';
+import type { FlexboxProps } from '@lobehub/ui';
+import { createStaticStyles, cx, Flexbox } from '@lobehub/ui';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 
@@ -14,17 +15,13 @@ const styles = createStaticStyles(({ css }) => ({
   `,
   enableLegendSlider: css`
     scrollbar-width: none;
-
     overflow: auto;
     align-items: center;
-
-    padding-right: 48px;
-    padding-left: 16px;
+    padding-inline: 16px 48px;
   `,
   scrollButtons: css`
-    top: 0;
-    right: 0;
-    bottom: 0;
+    inset-block: 0;
+    inset-inline-end: 0;
   `,
 }));
 
@@ -44,7 +41,7 @@ type HasScrollProps = {
   right: boolean;
 };
 
-const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
+const Legend = ({ ref, ...props }: LegendProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     customCategories,
@@ -144,18 +141,18 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
 
   // @ts-ignore
   return (
-    <Flexbox className={cx(styles.container, className)} gap={8} horizontal ref={ref} {...rest}>
+    <Flexbox horizontal className={cx(styles.container, className)} gap={8} ref={ref} {...rest}>
       <Flexbox
-        className={cx(
-          enableLegendSlider && (hasScroll?.right || hasScroll?.left) && styles.enableLegendSlider,
-        )}
+        horizontal
         flex={1}
         height={'100%'}
-        horizontal
         ref={scrollableRef}
         style={{ overflow: 'hidden' }}
         tabIndex={0}
         wrap={enableLegendSlider ? 'nowrap' : 'wrap'}
+        className={cx(
+          enableLegendSlider && (hasScroll?.right || hasScroll?.left) && styles.enableLegendSlider,
+        )}
       >
         {categories.map((category, idx) => (
           <LegendItem
@@ -170,12 +167,12 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
       </Flexbox>
       {enableLegendSlider && (hasScroll?.right || hasScroll?.left) ? (
         <Flexbox
+          horizontal
           align={'center'}
           className={styles.scrollButtons}
           flex={'none'}
           gap={4}
           height={'100%'}
-          horizontal
           justify={'center'}
           ref={scrollButtonsRef}
         >
@@ -199,7 +196,7 @@ const Legend = forwardRef<HTMLDivElement, LegendProps>((props, ref) => {
       ) : null}
     </Flexbox>
   );
-});
+};
 
 Legend.displayName = 'Legend';
 

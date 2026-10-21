@@ -1,7 +1,8 @@
 'use client';
 
-import { Flexbox, FlexboxProps, Tooltip, cssVar, cx } from '@lobehub/ui';
-import { ReactNode, forwardRef } from 'react';
+import type { FlexboxProps } from '@lobehub/ui';
+import { cssVar, cx, Flexbox, Tooltip } from '@lobehub/ui';
+import type { ReactNode } from 'react';
 
 import { styles } from './styles';
 
@@ -14,7 +15,7 @@ export interface ProgressBarProps extends FlexboxProps {
   value: number;
 }
 
-const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) => {
+const ProgressBar = ({ ref, ...props }: ProgressBarProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const {
     value,
     color,
@@ -31,20 +32,21 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) =>
   return (
     <Tooltip title={tooltip}>
       <Flexbox
+        horizontal
         align={'center'}
         className={className}
         height={size}
-        horizontal
         ref={ref}
+        width={width}
         style={{
           position: 'relative',
           ...style,
         }}
-        width={width}
         {...rest}
       >
         <Flexbox
           height={'100%'}
+          width={'100%'}
           style={{
             background: bgColors || cssVar.colorFillTertiary,
             borderRadius: size / 2,
@@ -53,22 +55,21 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) =>
             position: 'absolute',
             zIndex: 0,
           }}
-          width={'100%'}
         />
         <Flexbox
           className={cx(showAnimation && styles.showAnimation)}
           height={'100%'}
+          width={`${value}%`}
           style={{
             background: color || cssVar.colorPrimary,
             borderRadius: size / 2,
             zIndex: 1,
           }}
-          width={`${value}%`}
         />
       </Flexbox>
     </Tooltip>
   );
-});
+};
 
 ProgressBar.displayName = 'ProgressBar';
 

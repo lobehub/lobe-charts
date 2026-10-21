@@ -1,6 +1,7 @@
-import { AreaChart, AreaChartProps } from '@lobehub/charts';
+import type { AreaChartProps } from '@lobehub/charts';
+import { AreaChart } from '@lobehub/charts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const data: AreaChartProps['data'] = [
   {
@@ -112,14 +113,14 @@ const Demo: FC = () => {
     <StoryBook levaStore={store}>
       <AreaChart
         categories={['solarPanels', 'inverters']}
+        data={data}
+        index={'date'}
+        valueFormatter={valueFormatter}
         customCategories={{
           inverters: 'Inverters',
           solarPanels: 'Solar Panels',
         }}
-        data={data}
-        index={'date'}
-        onValueChange={(v) => console.log(v)}
-        valueFormatter={valueFormatter}
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

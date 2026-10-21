@@ -1,4 +1,5 @@
-import { EventProps, LineChart, LineChartProps } from '@lobehub/charts';
+import type { EventProps, LineChartProps } from '@lobehub/charts';
+import { LineChart } from '@lobehub/charts';
 import { Flexbox, Highlighter } from '@lobehub/ui';
 import { useState } from 'react';
 

@@ -1,15 +1,14 @@
 'use client';
 
-import { Flexbox, Skeleton, css, cssVar, cx } from '@lobehub/ui';
-import { forwardRef } from 'react';
+import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { Line, LineChart as ReChartsLineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { AxisDomain } from 'recharts/types/util/types';
+import type { AxisDomain } from 'recharts/types/util/types';
 
-import BaseSparkChartProps from '@/common/BaseSparkChartProps';
+import type BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
-import { CurveType } from '@/types/charts';
+import type { CurveType } from '@/types/charts';
 
 export interface SparkLineChartProps extends BaseSparkChartProps {
   connectNulls?: boolean;
@@ -17,7 +16,10 @@ export interface SparkLineChartProps extends BaseSparkChartProps {
   loading?: boolean;
 }
 
-const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, ref) => {
+const SparkLineChart = ({
+  ref,
+  ...props
+}: SparkLineChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -57,14 +59,11 @@ const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, r
       <ResponsiveContainer>
         {data?.length ? (
           <ReChartsLineChart data={data} margin={{ bottom: 1, left: 1, right: 1, top: 1 }}>
-            <YAxis domain={yAxisDomain as AxisDomain} hide />
-            <XAxis dataKey={index} hide />
+            <YAxis hide domain={yAxisDomain as AxisDomain} />
+            <XAxis hide dataKey={index} />
             {categories.map((category) => (
               <Line
                 animationDuration={animationDuration}
-                className={cx(css`
-                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
-                `)}
                 connectNulls={connectNulls}
                 dataKey={category}
                 dot={false}
@@ -77,6 +76,9 @@ const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, r
                 strokeOpacity={1}
                 strokeWidth={2}
                 type={curveType}
+                className={cx(css`
+                  stroke: ${categoryColors.get(category) ?? cssVar.colorPrimary};
+                `)}
               />
             ))}
           </ReChartsLineChart>
@@ -86,7 +88,7 @@ const SparkLineChart = forwardRef<HTMLDivElement, SparkLineChartProps>((props, r
       </ResponsiveContainer>
     </Flexbox>
   );
-});
+};
 
 SparkLineChart.displayName = 'SparkLineChart';
 

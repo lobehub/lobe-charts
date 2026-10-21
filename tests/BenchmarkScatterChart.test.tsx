@@ -84,13 +84,13 @@ describe('BenchmarkScatterChart', () => {
     render(
       <BenchmarkScatterChart
         data={data}
+        showLegend={false}
+        width={800}
         metrics={[
           { formatter: (v) => `$${v}`, key: 'cost', label: 'Cost', scale: 'log' },
           { formatter: (v) => `${v}s`, key: 'time', label: 'Speed' },
         ]}
         onMetricChange={onMetricChange}
-        showLegend={false}
-        width={800}
       />,
     );
 
@@ -105,10 +105,10 @@ describe('BenchmarkScatterChart', () => {
     render(
       <BenchmarkScatterChart
         data={data}
-        onValueChange={onValueChange}
         showTooltip={false}
         width={800}
         xKey="cost"
+        onValueChange={onValueChange}
       />,
     );
 
@@ -133,7 +133,7 @@ describe('BenchmarkScatterChart', () => {
   });
 
   it('shows skeleton while loading', () => {
-    render(<BenchmarkScatterChart data={[]} loading />);
+    render(<BenchmarkScatterChart loading data={[]} />);
     expect(screen.getByTestId('skeleton')).toBeTruthy();
   });
 });

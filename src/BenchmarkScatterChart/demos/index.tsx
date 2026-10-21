@@ -6,7 +6,8 @@ import {
 import { ClaudeCode, Codex, DeepSeek, HermesAgent, Kimi, OpenCode, Pi } from '@lobehub/icons';
 import { useTheme } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { ComponentType, FC, useMemo } from 'react';
+import type { ComponentType, FC } from 'react';
+import { useMemo } from 'react';
 
 import { harnessData, harnessMetrics, passRateFormatter } from './data';
 
@@ -95,7 +96,7 @@ const BenchmarkScatterChartDemo: FC = () => {
         accuracyFormatter={passRateFormatter}
         data={data}
         metrics={harnessMetrics}
-        onValueChange={(v) => console.log(v)}
+        onValueChange={(v) => console.info(v)}
         {...props}
       />
     </StoryBook>

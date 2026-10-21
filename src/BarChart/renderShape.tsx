@@ -20,6 +20,9 @@ export const renderShape = (
   return (
     <rect
       height={height}
+      width={width}
+      x={x}
+      y={y}
       opacity={
         activeBar || (activeLegend && activeLegend !== name)
           ? deepEqual(activeBar, { ...payload, value })
@@ -27,9 +30,6 @@ export const renderShape = (
             : 0.3
           : fillOpacity
       }
-      width={width}
-      x={x}
-      y={y}
     />
   );
 };

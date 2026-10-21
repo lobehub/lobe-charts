@@ -18,7 +18,7 @@ export const styles = createStaticStyles(({ css, cssVar }) => ({
   `,
   markerWrapper: css`
     position: absolute;
-    right: 50%;
+    inset-inline-end: 50%;
     width: 1.25rem;
   `,
   showAnimation: css`

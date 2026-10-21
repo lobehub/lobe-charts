@@ -1,8 +1,8 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 
-import { NoDataProps } from '@/common/NoData';
+import type { NoDataProps } from '@/common/NoData';
 
-import BaseAnimationTimingProps from './BaseAnimationTimingProps';
+import type BaseAnimationTimingProps from './BaseAnimationTimingProps';
 
 interface BaseSparkChartProps extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
   autoMinValue?: boolean;
