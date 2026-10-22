@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "declaration": true,
-    "downlevelIteration": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -14,9 +12,9 @@
     "target": "es6",
     "types": ["vitest/globals"],
     "paths": {
-      "@/*": ["src/*"],
-      "@lobehub/charts": ["src"],
-      "@lobehub/charts/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@lobehub/charts": ["./src"],
+      "@lobehub/charts/*": ["./src/*"]
     }
   },
   "exclude": [".react-router"],
