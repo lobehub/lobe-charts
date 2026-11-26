@@ -5,23 +5,22 @@ import type { CSSProperties, MouseEvent, ReactNode, Ref } from 'react';
 import { useMemo } from 'react';
 
 import {
-  A2UI_GRID,
   A2UI_NEGATIVE,
   A2UI_POSITIVE,
-  A2UI_TICK,
   A2uiFloatingTooltip,
-  A2uiFrame,
   a2uiStyles,
   type ChartNumberFormat,
+  ChartShell,
+  type ChartVariant,
   createTickFormatter,
   createValueFormatter,
+  lookOf,
   measureTextWidth,
   niceScale,
   rightMarginFor,
   shortLabel,
   useA2uiHover,
   useElementWidth,
-  X_TICK_BASELINE,
   Y_TICK_PADDING,
   yAxisWidthFor,
 } from '@/common/a2ui';
@@ -64,14 +63,19 @@ export interface CandlestickChartProps {
    */
   showTooltip?: boolean;
   style?: CSSProperties;
-  /** Secondary line under the title. */
+  /** Secondary line under the title (a2ui only). */
   subtitle?: string;
-  /** Card title. */
+  /** Card title (a2ui only). */
   title?: string;
   /** Unit appended to prices. */
   unit?: string;
   /** Formats prices; wins over `format`. */
   valueFormatter?: ValueFormatter;
+  /**
+   * Visual style: `default` sits with the other lobe charts; `a2ui` draws the A2UI card.
+   * @default 'default'
+   */
+  variant?: ChartVariant;
 }
 
 const TOP = 10;
@@ -93,10 +97,13 @@ const CandlestickChart = ({
   noDataText,
   showSummary = true,
   showTooltip = true,
+  variant = 'default',
   className,
   style,
   ref,
 }: CandlestickChartProps) => {
+  const look = lookOf(variant);
+  const fontSize = look.tick.fontSize;
   const [plotRef, width, fontFamily] = useElementWidth();
   const { hover, setHover } = useA2uiHover<Candle>();
   const candles = useMemo(() => parseCandles(data, index), [data, index]);
@@ -119,6 +126,7 @@ const CandlestickChart = ({
       ticks.map((t) => formatTick(t)),
       0,
       fontFamily,
+      fontSize,
     ) + Y_TICK_PADDING;
   const n = candles.length;
   // Keep the last date label inside the card: the plot ends where that label still fits.
@@ -129,10 +137,11 @@ const CandlestickChart = ({
       labels[n - 1],
       s * BAND_PADDING + (s * (1 - BAND_PADDING)) / 2,
       fontFamily,
+      fontSize,
     );
   }
   const plotW = Math.max(0, width - left - right);
-  const plotH = Math.max(0, height - TOP - BOTTOM);
+  const plotH = Math.max(0, height - TOP - BOTTOM - (fontSize - 11));
   const step = n > 0 ? plotW / (n + BAND_PADDING) : 0;
   const bw = step * (1 - BAND_PADDING);
   const xAt = (i: number) => left + step * BAND_PADDING + step * i + bw / 2;
@@ -143,7 +152,9 @@ const CandlestickChart = ({
   const visibleLabels = new Set(
     thinLabels(
       candles.map((_, i) => xAt(i)),
-      labels.map((l) => measureTextWidth(l, `11px ${fontFamily ?? 'sans-serif'}`, 11)),
+      labels.map((l) =>
+        measureTextWidth(l, `${fontSize}px ${fontFamily ?? 'sans-serif'}`, fontSize),
+      ),
       5,
     ),
   );
@@ -182,7 +193,7 @@ const CandlestickChart = ({
     hovered && hovered.open ? ((hovered.close - hovered.open) / hovered.open) * 100 : 0;
 
   return (
-    <A2uiFrame
+    <ChartShell
       aside={summary}
       className={className}
       empty={!loading && n === 0}
@@ -191,6 +202,7 @@ const CandlestickChart = ({
       style={style}
       subtitle={subtitle}
       title={title}
+      variant={variant}
     >
       <div className={a2uiStyles.plot} ref={plotRef} style={{ height }}>
         {loading ? (
@@ -205,7 +217,7 @@ const CandlestickChart = ({
             onMouseLeave={() => setHover(undefined)}
             onMouseMove={onMove}
           >
-            <g {...A2UI_GRID}>
+            <g {...look.grid}>
               {ticks.map((t) => (
                 <line key={t} x1={left} x2={left + plotW} y1={yAt(t)} y2={yAt(t)} />
               ))}
@@ -213,10 +225,10 @@ const CandlestickChart = ({
             {ticks.map((t) => (
               <text
                 key={`y-${t}`}
-                {...A2UI_TICK}
+                {...look.tick}
                 dominantBaseline="middle"
-                textAnchor="end"
-                x={left - Y_TICK_PADDING}
+                textAnchor={look.yAlign === 'edge' ? 'start' : 'end'}
+                x={look.yAlign === 'edge' ? 0 : left - Y_TICK_PADDING}
                 y={yAt(t)}
               >
                 {formatTick(t)}
@@ -226,10 +238,10 @@ const CandlestickChart = ({
               visibleLabels.has(i) ? (
                 <text
                   key={`x-${c.date}-${i}`}
-                  {...A2UI_TICK}
+                  {...look.tick}
                   textAnchor="middle"
                   x={xAt(i)}
-                  y={TOP + plotH + X_TICK_BASELINE}
+                  y={TOP + plotH + look.xBaseline}
                 >
                   {labels[i]}
                 </text>
@@ -271,6 +283,7 @@ const CandlestickChart = ({
           <A2uiFloatingTooltip
             height={height}
             title={hovered.date}
+            variant={variant}
             width={width}
             x={xAt(candles.indexOf(hovered))}
             y={(yAt(hovered.open) + yAt(hovered.close)) / 2}
@@ -289,7 +302,7 @@ const CandlestickChart = ({
           />
         ) : null}
       </div>
-    </A2uiFrame>
+    </ChartShell>
   );
 };
 

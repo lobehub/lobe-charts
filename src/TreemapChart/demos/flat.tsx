@@ -16,7 +16,5 @@ export default () => (
     format="percent"
     height={200}
     style={{ maxWidth: 560 }}
-    subtitle="Share of lines changed this quarter"
-    title="Languages"
   />
 );

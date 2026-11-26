@@ -1,7 +1,7 @@
 import { createStaticStyles } from '@lobehub/ui';
 
 // Adapted from CopilotKit a2ui-playground (MIT): charts.tsx `Gauge`.
-export const styles = createStaticStyles(({ css }) => ({
+export const styles = createStaticStyles(({ css, cssVar }) => ({
   arc: css`
     position: relative;
 
@@ -10,6 +10,9 @@ export const styles = createStaticStyles(({ css }) => ({
     width: 100%;
     max-width: 240px;
     margin-block-start: 8px;
+  `,
+  arcPlain: css`
+    margin-block-start: 0;
   `,
   center: css`
     pointer-events: none;
@@ -26,6 +29,12 @@ export const styles = createStaticStyles(({ css }) => ({
     line-height: 1.5;
     color: var(--a2-muted-fg);
   `,
+  labelPlain: css`
+    margin-block-start: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: ${cssVar.colorTextDescription};
+  `,
   range: css`
     display: flex;
     justify-content: space-between;
@@ -39,6 +48,19 @@ export const styles = createStaticStyles(({ css }) => ({
     line-height: 1.5;
     color: var(--a2-muted-fg);
   `,
+  rangePlain: css`
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 240px;
+    margin-block-start: 4px;
+
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+    color: ${cssVar.colorTextDescription};
+  `,
   root: css`
     display: flex;
     flex-direction: column;
@@ -46,6 +68,12 @@ export const styles = createStaticStyles(({ css }) => ({
 
     padding-block: 14px 12px;
     padding-inline: 16px;
+  `,
+  rootPlain: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   `,
   title: css`
     overflow: hidden;
@@ -67,5 +95,12 @@ export const styles = createStaticStyles(({ css }) => ({
     line-height: 1;
     color: var(--a2-fg);
     letter-spacing: -0.025em;
+  `,
+  valuePlain: css`
+    font-size: 24px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: ${cssVar.colorText};
   `,
 }));

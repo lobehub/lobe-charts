@@ -5,17 +5,19 @@ import type { CSSProperties, ReactNode, Ref } from 'react';
 import { useMemo } from 'react';
 
 import {
-  A2UI_PALETTE,
   A2uiFloatingTooltip,
-  A2uiFrame,
   a2uiPaletteAt,
   a2uiStyles,
   type ChartNumberFormat,
+  ChartShell,
+  type ChartVariant,
   createValueFormatter,
   measureTextWidth,
+  readableInk,
   useA2uiHover,
   useElementWidth,
 } from '@/common/a2ui';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ValueFormatter } from '@/types/charts';
 
 import { layoutTreemap, type TreemapCell } from './utils';
@@ -27,7 +29,7 @@ export interface TreemapChartProps {
    */
   category?: string;
   className?: string;
-  /** Palette, one colour per group (or per item when ungrouped). Defaults to the A2UI palette. */
+  /** Palette, one colour per group (or per item when ungrouped). Defaults to the theme colour range. */
   colors?: string[];
   /**
    * ISO 4217 code used when `format` is `currency`.
@@ -66,14 +68,19 @@ export interface TreemapChartProps {
    */
   showTooltip?: boolean;
   style?: CSSProperties;
-  /** Secondary line under the title. */
+  /** Secondary line under the title (a2ui only). */
   subtitle?: string;
-  /** Card title. */
+  /** Card title (a2ui only). */
   title?: string;
   /** Unit appended to values. */
   unit?: string;
   /** Formats values; wins over `format`. */
   valueFormatter?: ValueFormatter;
+  /**
+   * Visual style: `default` sits with the other lobe charts; `a2ui` draws the A2UI card.
+   * @default 'default'
+   */
+  variant?: ChartVariant;
 }
 
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
@@ -86,7 +93,7 @@ const TreemapChart = ({
   index = 'name',
   category = 'value',
   group = 'group',
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   format,
   currency = 'USD',
   unit,
@@ -98,10 +105,16 @@ const TreemapChart = ({
   noDataText,
   showLegend = true,
   showTooltip = true,
+  variant = 'default',
   className,
   style,
   ref,
 }: TreemapChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
+  const a2ui = variant === 'a2ui';
+  const labelSize = a2ui ? LABEL_SIZE : 12;
+  const labelWeight = a2ui ? 600 : 500;
   const [plotRef, width, fontFamily] = useElementWidth();
   const { hover, bind } = useA2uiHover<TreemapCell>();
   const leaves = useMemo(() => {
@@ -124,20 +137,20 @@ const TreemapChart = ({
     [valueFormatter, currency, format, unit],
   );
   const hasGroups = leaves.some((l) => l.group);
-  const font = `600 ${LABEL_SIZE}px ${fontFamily ?? 'sans-serif'}`;
+  const font = `${labelWeight} ${labelSize}px ${fontFamily ?? 'sans-serif'}`;
 
   const fits = (cell: TreemapCell) => {
-    const w = measureTextWidth(cell.name, font, LABEL_SIZE);
+    const w = measureTextWidth(cell.name, font, labelSize);
     return (
       cell.x1 - cell.x0 - LABEL_PADDING * 2 >= w &&
-      cell.y1 - cell.y0 - LABEL_PADDING * 2 >= LABEL_SIZE * 1.2
+      cell.y1 - cell.y0 - LABEL_PADDING * 2 >= labelSize * 1.2
     );
   };
 
   const hovered = hover?.datum;
 
   return (
-    <A2uiFrame
+    <ChartShell
       className={className}
       empty={!loading && leaves.length === 0}
       emptyText={noDataText}
@@ -145,6 +158,7 @@ const TreemapChart = ({
       style={style}
       subtitle={subtitle}
       title={title}
+      variant={variant}
       legend={
         showLegend && hasGroups ? keys.map((k) => ({ color: colorOf(k), label: k })) : undefined
       }
@@ -172,7 +186,7 @@ const TreemapChart = ({
                     fill={colorOf(key)}
                     fillOpacity={active ? 1 : 0.88}
                     height={h}
-                    rx={Math.min(6, w / 2, h / 2)}
+                    rx={Math.min(a2ui ? 6 : 4, w / 2, h / 2)}
                     stroke={active ? 'var(--a2-chart-focus)' : undefined}
                     strokeWidth={active ? 1.5 : undefined}
                     width={w}
@@ -182,9 +196,9 @@ const TreemapChart = ({
                   {fits(cell) ? (
                     <text
                       dominantBaseline="middle"
-                      fill="var(--a2-treemap-ink)"
-                      fontSize={LABEL_SIZE}
-                      fontWeight={600}
+                      fill={readableInk(colorOf(key))}
+                      fontSize={labelSize}
+                      fontWeight={labelWeight}
                       pointerEvents="none"
                       textAnchor="middle"
                       x={cell.x0 + w / 2}
@@ -202,6 +216,7 @@ const TreemapChart = ({
           <A2uiFloatingTooltip
             height={height}
             title={hovered.name}
+            variant={variant}
             width={width}
             x={(hovered.x0 + hovered.x1) / 2}
             y={(hovered.y0 + hovered.y1) / 2}
@@ -219,7 +234,7 @@ const TreemapChart = ({
           />
         ) : null}
       </div>
-    </A2uiFrame>
+    </ChartShell>
   );
 };
 
