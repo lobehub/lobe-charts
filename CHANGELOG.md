@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version&nbsp;6.1.0](https://github.com/lobehub/lobe-charts/compare/v6.0.1...v6.1.0)
+
+<sup>Released on **2026-11-26**</sup>
+
+#### ✨ Features
+
+- **misc**: A2UI look for charts (variant="a2ui"), five new charts and ChartFrame.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: A2UI look for charts (variant="a2ui"), five new charts and ChartFrame, closes [#39](https://github.com/lobehub/lobe-charts/issues/39) ([7eb13c6](https://github.com/lobehub/lobe-charts/commit/7eb13c6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 6.0.1](https://github.com/lobehub/lobe-charts/compare/v6.0.0...v6.0.1)
 
 <sup>Released on **2026-10-21**</sup>
