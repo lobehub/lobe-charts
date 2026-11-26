@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/charts",
-  "version": "6.1.2",
+  "version": "6.2.0",
   "description": "React modern charts components built on recharts",
   "keywords": [
     "lobehub",
@@ -68,10 +68,12 @@
     "./es/*/axis": "./es/*/axis.mjs",
     "./es/*/calendar": "./es/*/calendar.mjs",
     "./es/*/charts": "./es/*/charts.mjs",
+    "./es/*/color": "./es/*/color.mjs",
     "./es/*/curve": "./es/*/curve.mjs",
     "./es/*/format": "./es/*/format.mjs",
     "./es/*/getMaxLabelLength": "./es/*/getMaxLabelLength.mjs",
     "./es/*/inputParser": "./es/*/inputParser.mjs",
+    "./es/*/look": "./es/*/look.mjs",
     "./es/*/renderInactiveShape": "./es/*/renderInactiveShape.mjs",
     "./es/*/renderShape": "./es/*/renderShape.mjs",
     "./es/*/scale": "./es/*/scale.mjs",

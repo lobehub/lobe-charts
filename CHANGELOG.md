@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version&nbsp;6.2.0](https://github.com/lobehub/lobe-charts/compare/v6.1.2...v6.2.0)
+
+<sup>Released on **2026-11-26**</sup>
+
+#### ✨ Features
+
+- **misc**: Default variant for the new charts; a2ui colours from LobeHub tokens.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Default variant for the new charts; a2ui colours from LobeHub tokens, closes [#41](https://github.com/lobehub/lobe-charts/issues/41) ([12c187d](https://github.com/lobehub/lobe-charts/commit/12c187d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version&nbsp;6.1.2](https://github.com/lobehub/lobe-charts/compare/v6.1.1...v6.1.2)
 
 <sup>Released on **2026-11-26**</sup>
