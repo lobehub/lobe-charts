@@ -1,0 +1,15 @@
+export const spend = [
+  { group: 'Compute', name: 'VMs', value: 48_200 },
+  { group: 'Compute', name: 'Functions', value: 12_800 },
+  { group: 'Compute', name: 'Containers', value: 9600 },
+  { group: 'Storage', name: 'Objects', value: 21_400 },
+  { group: 'Storage', name: 'Disks', value: 11_200 },
+  { group: 'Storage', name: 'Archive', value: 2600 },
+  { group: 'Database', name: 'SQL', value: 26_800 },
+  { group: 'Database', name: 'Key-value', value: 9900 },
+  { group: 'Database', name: 'Cache', value: 5400 },
+  { group: 'Network', name: 'CDN', value: 8700 },
+  { group: 'Network', name: 'Egress', value: 6100 },
+  { group: 'AI', name: 'Inference', value: 17_300 },
+  { group: 'AI', name: 'Training', value: 7900 },
+];

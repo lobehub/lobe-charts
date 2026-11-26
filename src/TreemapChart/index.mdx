@@ -1,0 +1,28 @@
+---
+title: TreemapChart
+description: A treemap that sizes each item by its value in nested rectangles, grouped and coloured by category, drawn in the A2UI look.
+category: Charts
+order: 23
+---
+
+import DemoExample from './demos/example.tsx?demo';
+import DemoFlat from './demos/flat.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below groups services by area with `group`; each group gets one colour and the legend lists the groups. Items too small for their name stay unlabelled; hover them for the name, value and share.
+
+<Demo of={DemoExample} />
+
+## Without groups
+
+Without a `group` key every item gets its own colour. `index` and `category` pick the name and value keys.
+
+<Demo of={DemoFlat} />
+
+## API
+
+<Api name="TreemapChart" />

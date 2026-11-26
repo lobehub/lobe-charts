@@ -1,0 +1,28 @@
+---
+title: SankeyChart
+description: A Sankey diagram that shows how a quantity flows between stages, with ribbon widths proportional to value, drawn in the A2UI look.
+category: Charts
+order: 24
+---
+
+import DemoBudget from './demos/budget.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below shows a signup funnel. Each row of `data` is a link; nodes are the names the links mention, coloured in the order they first appear. Parallel links are merged, and a link that would close a cycle is dropped.
+
+<Demo of={DemoExample} />
+
+## Custom keys and currency
+
+`source`, `target` and `value` pick the keys of a link. `format="currency"` formats node labels and the tooltip.
+
+<Demo of={DemoBudget} />
+
+## API
+
+<Api name="SankeyChart" />

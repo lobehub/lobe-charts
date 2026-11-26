@@ -1,0 +1,35 @@
+---
+title: HeatmapChart
+description: A matrix heatmap that colours each x / y cell by its value on a single-hue ramp, with a min-to-max legend, drawn in the A2UI look.
+category: Charts
+order: 21
+---
+
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoNoData from './demos/noData.tsx?demo';
+import DemoValues from './demos/values.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+`HeatmapChart` takes rows of `{ x, y, value }` (rename the keys with `x`, `y` and `value`). For a GitHub-style calendar of daily activity, use `Heatmaps`.
+
+## Usage example
+
+The example below shows request volume by weekday and hour. Columns and rows keep the order they first appear in `data`.
+
+<Demo of={DemoExample} />
+
+## Values in cells
+
+Small grids print each value in its cell; `showValues` turns this on or off. `color` sets the hue of the ramp.
+
+<Demo of={DemoValues} />
+
+## No Data
+
+<Demo of={DemoNoData} />
+
+## API
+
+<Api name="HeatmapChart" />
