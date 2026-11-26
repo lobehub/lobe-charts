@@ -4,13 +4,17 @@ import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { Area, AreaChart as ReChartsAreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import type BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { CurveType } from '@/types/charts';
 
-export interface SparkAreaChartProps extends BaseSparkChartProps {
+import A2uiSparkChart, { type A2uiSparkProps } from './A2uiSparkChart';
+
+export interface SparkAreaChartProps
+  extends BaseSparkChartProps, Omit<A2uiChartProps, 'subtitle'>, A2uiSparkProps {
   connectNulls?: boolean;
   curveType?: CurveType;
   loading?: boolean;
@@ -18,7 +22,7 @@ export interface SparkAreaChartProps extends BaseSparkChartProps {
   stack?: boolean;
 }
 
-const SparkAreaChart = ({
+const DefaultSparkAreaChart = ({
   ref,
   ...props
 }: SparkAreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
@@ -128,6 +132,43 @@ const SparkAreaChart = ({
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const SparkAreaChart = ({
+  variant = 'default',
+  format,
+  currency = 'USD',
+  unit,
+  label,
+  value,
+  delta,
+  tone,
+  ref,
+  ...props
+}: SparkAreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultSparkAreaChart ref={ref} {...props} />;
+  return (
+    <A2uiSparkChart
+      categories={props.categories}
+      className={props.className}
+      connectNulls={props.connectNulls}
+      currency={currency}
+      curveType={props.curveType}
+      data={props.data}
+      delta={delta}
+      format={format}
+      index={props.index}
+      kind="area"
+      label={label}
+      loading={props.loading}
+      ref={ref}
+      showAnimation={props.showAnimation}
+      style={props.style}
+      tone={tone}
+      unit={unit}
+      value={value}
+    />
   );
 };
 

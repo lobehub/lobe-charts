@@ -12,6 +12,7 @@ import DemoExample from './demos/example.tsx?demo';
 import DemoIndex from './demos/index.tsx?demo';
 import DemoLoading from './demos/loading.tsx?demo';
 import DemoNoData from './demos/noData.tsx?demo';
+import DemoA2ui from './demos/a2ui.tsx?demo';
 
 <Demo of={DemoIndex} layout="bare" />
 
@@ -46,6 +47,12 @@ The example below shows a chart with custom `colors`.
 ## Loading
 
 <Demo of={DemoLoading} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the chart in its own card with a `title`, `subtitle`, the A2UI palette and a hairline polygon grid. `maxValue` sets the outer ring.
+
+<Demo of={DemoA2ui} />
 
 ## API
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
-import type { ComponentType, HTMLAttributes, MouseEvent } from 'react';
+import type { ComponentType, HTMLAttributes, MouseEvent, ReactNode, Ref } from 'react';
 import { useMemo, useState } from 'react';
 import {
   CartesianGrid,
@@ -17,6 +17,7 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import ChartLegend from '@/common/ChartLegend';
 import type { CustomTooltipProps } from '@/common/CustomTooltipProps';
 import CustomYAxisTick from '@/common/CustomYAxisTick';
@@ -34,6 +35,7 @@ import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import type BaseAnimationTimingProps from '../common/BaseAnimationTimingProps';
 import NoData, { type NoDataProps } from '../common/NoData';
+import A2uiScatterChart from './A2uiScatterChart';
 import ScatterChartTooltip from './ScatterChartTooltip';
 import { styles } from './styles';
 
@@ -44,7 +46,7 @@ export type ScatterChartValueFormatter = {
 };
 
 export interface ScatterChartProps
-  extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement> {
+  extends BaseAnimationTimingProps, HTMLAttributes<HTMLDivElement>, A2uiChartProps {
   allowDecimals?: boolean;
   autoMinXValue?: boolean;
   autoMinYValue?: boolean;
@@ -57,6 +59,8 @@ export interface ScatterChartProps
   data: any[];
   enableLegendSlider?: boolean;
   intervalType?: IntervalType;
+  /** Key of a point's name, shown as the tooltip title (a2ui only). */
+  label?: string;
   loading?: boolean;
   maxXValue?: number;
   maxYValue?: number;
@@ -88,7 +92,7 @@ export interface ScatterChartProps
   yAxisWidth?: number;
 }
 
-const ScatterChart = ({
+const DefaultScatterChart = ({
   ref,
   ...props
 }: ScatterChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
@@ -391,6 +395,52 @@ const ScatterChart = ({
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const ScatterChart = ({
+  variant = 'default',
+  subtitle,
+  format,
+  currency = 'USD',
+  unit,
+  label,
+  ref,
+  ...props
+}: ScatterChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultScatterChart ref={ref} {...props} />;
+  return (
+    <A2uiScatterChart
+      category={props.category}
+      className={props.className}
+      colors={props.colors}
+      currency={currency}
+      customCategories={props.customCategories}
+      data={props.data}
+      format={format}
+      height={(props as { height?: number | string }).height}
+      label={label}
+      loading={props.loading}
+      noDataText={props.noDataText as ReactNode}
+      ref={ref as Ref<HTMLElement>}
+      showAnimation={props.showAnimation}
+      showGridLines={props.showGridLines}
+      showLegend={props.showLegend}
+      showTooltip={props.showTooltip}
+      showXAxis={props.showXAxis}
+      showYAxis={props.showYAxis}
+      size={props.size}
+      style={props.style}
+      subtitle={subtitle}
+      title={props.title}
+      unit={unit}
+      valueFormatter={props.valueFormatter}
+      x={props.x}
+      xAxisLabel={props.xAxisLabel}
+      y={props.y}
+      yAxisLabel={props.yAxisLabel}
+      onValueChange={props.onValueChange}
+    />
   );
 };
 

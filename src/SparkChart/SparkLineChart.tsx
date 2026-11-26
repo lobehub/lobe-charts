@@ -4,19 +4,23 @@ import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { Line, LineChart as ReChartsLineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import type BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { CurveType } from '@/types/charts';
 
-export interface SparkLineChartProps extends BaseSparkChartProps {
+import A2uiSparkChart, { type A2uiSparkProps } from './A2uiSparkChart';
+
+export interface SparkLineChartProps
+  extends BaseSparkChartProps, Omit<A2uiChartProps, 'subtitle'>, A2uiSparkProps {
   connectNulls?: boolean;
   curveType?: CurveType;
   loading?: boolean;
 }
 
-const SparkLineChart = ({
+const DefaultSparkLineChart = ({
   ref,
   ...props
 }: SparkLineChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
@@ -87,6 +91,43 @@ const SparkLineChart = ({
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const SparkLineChart = ({
+  variant = 'default',
+  format,
+  currency = 'USD',
+  unit,
+  label,
+  value,
+  delta,
+  tone,
+  ref,
+  ...props
+}: SparkLineChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultSparkLineChart ref={ref} {...props} />;
+  return (
+    <A2uiSparkChart
+      categories={props.categories}
+      className={props.className}
+      connectNulls={props.connectNulls}
+      currency={currency}
+      curveType={props.curveType}
+      data={props.data}
+      delta={delta}
+      format={format}
+      index={props.index}
+      kind="line"
+      label={label}
+      loading={props.loading}
+      ref={ref}
+      showAnimation={props.showAnimation}
+      style={props.style}
+      tone={tone}
+      unit={unit}
+      value={value}
+    />
   );
 };
 

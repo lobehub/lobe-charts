@@ -1,7 +1,7 @@
 'use client';
 
 import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, ReactNode, Ref } from 'react';
 import { useMemo, useState } from 'react';
 import {
   Bar,
@@ -16,6 +16,7 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
@@ -26,15 +27,19 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
+import A2uiBarChart from './A2uiBarChart';
 import { styles } from './styles';
 
-export interface BarChartProps extends BaseChartProps {
+export interface BarChartProps extends BaseChartProps, A2uiChartProps {
   barCategoryGap?: string | number;
   layout?: 'vertical' | 'horizontal';
   stack?: boolean;
 }
 
-const BarChart = ({ ref, ...props }: BarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+const DefaultBarChart = ({
+  ref,
+  ...props
+}: BarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -399,6 +404,51 @@ const BarChart = ({ ref, ...props }: BarChartProps & { ref?: React.Ref<HTMLDivEl
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const BarChart = ({
+  variant = 'default',
+  subtitle,
+  format,
+  currency = 'USD',
+  unit,
+  ref,
+  ...props
+}: BarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultBarChart ref={ref} {...props} />;
+  return (
+    <A2uiBarChart
+      categories={props.categories}
+      className={props.className}
+      colors={props.colors}
+      currency={currency}
+      customCategories={props.customCategories}
+      data={props.data}
+      format={format}
+      height={props.height}
+      index={props.index}
+      layout={props.layout}
+      loading={props.loading}
+      maxValue={props.maxValue}
+      minValue={props.minValue}
+      noDataText={props.noDataText as ReactNode}
+      ref={ref as Ref<HTMLElement>}
+      showAnimation={props.showAnimation}
+      showGridLines={props.showGridLines}
+      showLegend={props.showLegend}
+      showTooltip={props.showTooltip}
+      showXAxis={props.showXAxis}
+      showYAxis={props.showYAxis}
+      stack={props.stack}
+      style={props.style}
+      subtitle={subtitle}
+      title={props.title}
+      unit={unit}
+      valueFormatter={props.valueFormatter}
+      xAxisLabelFormatter={props.xAxisLabelFormatter}
+      onValueChange={props.onValueChange}
+    />
   );
 };
 

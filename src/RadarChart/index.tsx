@@ -1,7 +1,7 @@
 'use client';
 
 import { cssVar, Flexbox, Skeleton } from '@lobehub/ui';
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 import { useState } from 'react';
 import {
   Legend,
@@ -15,6 +15,7 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
@@ -23,9 +24,10 @@ import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import { defaultValueFormatter } from '@/utils';
 
+import A2uiRadarChart from './A2uiRadarChart';
 import { styles } from './styles';
 
-export interface RadarChartProps extends BaseChartProps {
+export interface RadarChartProps extends BaseChartProps, A2uiChartProps {
   /**
    * Format angle-axis labels. Receives the index value and the matching data row.
    * Can return a string or ReactNode (e.g. colored `<tspan>`).
@@ -46,7 +48,10 @@ export interface RadarChartProps extends BaseChartProps {
   showRadiusAxis?: boolean;
 }
 
-const RadarChart = ({ ref, ...props }: RadarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+const DefaultRadarChart = ({
+  ref,
+  ...props
+}: RadarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -258,6 +263,47 @@ const RadarChart = ({ ref, ...props }: RadarChartProps & { ref?: React.Ref<HTMLD
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const RadarChart = ({
+  variant = 'default',
+  subtitle,
+  format,
+  currency = 'USD',
+  unit,
+  ref,
+  ...props
+}: RadarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultRadarChart ref={ref} {...props} />;
+  return (
+    <A2uiRadarChart
+      angleAxisLabelFormatter={props.angleAxisLabelFormatter}
+      categories={props.categories}
+      className={props.className}
+      colors={props.colors}
+      currency={currency}
+      customCategories={props.customCategories}
+      data={props.data}
+      fillOpacity={props.fillOpacity}
+      format={format}
+      height={props.height}
+      index={props.index}
+      loading={props.loading}
+      maxValue={props.maxValue}
+      noDataText={props.noDataText as ReactNode}
+      ref={ref as Ref<HTMLElement>}
+      showAnimation={props.showAnimation}
+      showGridLines={props.showGridLines}
+      showLegend={props.showLegend}
+      showTooltip={props.showTooltip}
+      style={props.style}
+      subtitle={subtitle}
+      title={props.title}
+      unit={unit}
+      valueFormatter={props.valueFormatter}
+      onValueChange={props.onValueChange}
+    />
   );
 };
 

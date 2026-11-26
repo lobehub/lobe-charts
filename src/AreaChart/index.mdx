@@ -11,6 +11,7 @@ import DemoClickEvent from './demos/clickEvent.tsx?demo';
 import DemoCustomTooltip from './demos/customTooltip.tsx?demo';
 import DemoCustomColors from './demos/customColors.tsx?demo';
 import DemoAxis from './demos/axis.tsx?demo';
+import DemoA2ui from './demos/a2ui.tsx?demo';
 
 <Demo of={DemoIndex} layout="bare" />
 
@@ -43,6 +44,12 @@ The example below shows a chart with custom `colors`.
 The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` prop.
 
 <Demo of={DemoAxis} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the chart in its own card with a `title`, `subtitle`, the A2UI palette and a dotted grid. With `stack`, series stack as solid layers and the tooltip adds a total; without it each area fades out under its line.
+
+<Demo of={DemoA2ui} />
 
 ## API
 

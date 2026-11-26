@@ -15,6 +15,8 @@ import DemoCustomColors from './demos/customColors.tsx?demo';
 import DemoAxis from './demos/axis.tsx?demo';
 import DemoNoData from './demos/noData.tsx?demo';
 import DemoLoading from './demos/loading.tsx?demo';
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoA2uiHorizontal from './demos/a2uiHorizontal.tsx?demo';
 
 <Demo of={DemoIndex} layout="bare" />
 
@@ -67,6 +69,18 @@ The example below shows added axis labels using `xAxisLabel` and `yAxisLabel` pr
 ## Loading
 
 <Demo of={DemoLoading} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the chart in its own card with a `title`, `subtitle`, the A2UI palette and a dotted grid. Several categories group side by side; `stack` stacks them.
+
+<Demo of={DemoA2ui} />
+
+## A2UI horizontal bars
+
+With `layout="vertical"` the bars run horizontally. `format="percent"` reads values as 0-100.
+
+<Demo of={DemoA2uiHorizontal} />
 
 ## API
 
