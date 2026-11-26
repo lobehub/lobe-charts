@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version&nbsp;6.1.2](https://github.com/lobehub/lobe-charts/compare/v6.1.1...v6.1.2)
+
+<sup>Released on **2026-11-26**</sup>
+
+#### 🐛 Bug Fixes
+
+- **docs**: Lucide-react 1.x so the docs site builds again.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **docs**: Lucide-react 1.x so the docs site builds again, closes [#40](https://github.com/lobehub/lobe-charts/issues/40) ([98b70f6](https://github.com/lobehub/lobe-charts/commit/98b70f6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version&nbsp;6.1.1](https://github.com/lobehub/lobe-charts/compare/v6.1.0...v6.1.1)
 
 <sup>Released on **2026-11-26**</sup>
