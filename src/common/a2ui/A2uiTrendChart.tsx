@@ -6,6 +6,7 @@ import { useId, useMemo, useState } from 'react';
 import { Area, CartesianGrid, ComposedChart, Line, Tooltip, XAxis, YAxis } from 'recharts';
 
 import type { EventProps } from '@/common/BaseChartProps';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { CurveType, ValueFormatter } from '@/types/charts';
 
 import { A2uiXTick, A2uiYTick, rightMarginFor, Y_TICK_PADDING, yAxisWidthFor } from './axis';
@@ -15,7 +16,7 @@ import A2uiFrame from './Frame';
 import A2uiPlacedTooltip from './PlacedTooltip';
 import { niceScale } from './scale';
 import { styles } from './styles';
-import { A2UI_GRID, A2UI_PALETTE, A2UI_SURFACE, a2uiPaletteAt } from './tokens';
+import { A2UI_GRID, A2UI_SURFACE, a2uiPaletteAt } from './tokens';
 import A2uiTooltip from './Tooltip';
 import { useElementWidth } from './useElementWidth';
 
@@ -69,7 +70,7 @@ const A2uiTrendChart = ({
   data = [],
   index,
   categories = [],
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   stack = false,
   connectNulls = false,
   curveType,
@@ -98,6 +99,8 @@ const A2uiTrendChart = ({
   style,
   ref,
 }: A2uiTrendChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
   const uid = useId().replaceAll(':', '');
   const [plotRef, width, fontFamily] = useElementWidth();
   const [focus, setFocus] = useState<{ name: string; x: number; y: number } | undefined>();

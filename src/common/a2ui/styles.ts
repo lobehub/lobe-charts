@@ -1,6 +1,6 @@
 import { createStaticStyles } from '@lobehub/ui';
 
-import { A2UI_DARK_VARS, A2UI_LIGHT_VARS } from './tokens';
+import { A2UI_VARS } from './tokens';
 
 // Adapted from CopilotKit a2ui-playground (MIT): `.a2-card`, `.a2-well` (globals.css) and ChartFrame /
 // Legend / tooltip chrome (chart-kit.tsx).
@@ -20,7 +20,7 @@ export const styles = createStaticStyles(({ css }) => ({
     font-variant-numeric: normal;
     color: var(--a2-chart-ink);
 
-    background: linear-gradient(180deg, var(--a2-card-sheen), transparent 40%), var(--a2-surface);
+    background: var(--a2-surface);
     box-shadow: var(--a2-card-shadow);
 
     & svg text {
@@ -39,9 +39,6 @@ export const styles = createStaticStyles(({ css }) => ({
       outline: none;
     }
   `,
-  dark: css`
-    ${A2UI_DARK_VARS}
-  `,
   empty: css`
     display: grid;
     place-items: center;
@@ -53,7 +50,7 @@ export const styles = createStaticStyles(({ css }) => ({
     font-size: 12px;
     color: var(--a2-muted-fg);
 
-    background: oklch(var(--a2-ink) / 3%);
+    background: var(--a2-well);
   `,
   frame: css`
     display: flex;
@@ -103,8 +100,8 @@ export const styles = createStaticStyles(({ css }) => ({
     font-variant-numeric: tabular-nums;
     color: color-mix(in oklch, var(--a2-fg) 85%, transparent);
   `,
-  light: css`
-    ${A2UI_LIGHT_VARS}
+  vars: css`
+    ${A2UI_VARS}
   `,
   plot: css`
     position: relative;

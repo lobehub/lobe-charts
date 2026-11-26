@@ -7,7 +7,6 @@ import { Bar, BarChart, CartesianGrid, Customized, Tooltip, XAxis, YAxis } from 
 
 import {
   A2UI_GRID,
-  A2UI_PALETTE,
   A2UI_SURFACE,
   A2uiFrame,
   a2uiPaletteAt,
@@ -27,6 +26,7 @@ import {
   yAxisWidthFor,
 } from '@/common/a2ui';
 import type { EventProps } from '@/common/BaseChartProps';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ValueFormatter } from '@/types/charts';
 
 export interface A2uiBarChartProps {
@@ -103,7 +103,7 @@ const A2uiBarChart = ({
   data = [],
   index,
   categories = [],
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   layout = 'horizontal',
   stack = false,
   format,
@@ -130,6 +130,8 @@ const A2uiBarChart = ({
   style,
   ref,
 }: A2uiBarChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
   const [plotRef, width, fontFamily] = useElementWidth();
   const [focus, setFocus] = useState<{ name: string; x: number; y: number } | undefined>();
   const names = categories;

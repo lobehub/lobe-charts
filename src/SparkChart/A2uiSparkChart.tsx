@@ -19,6 +19,7 @@ import {
   useA2uiThemeClass,
   useElementWidth,
 } from '@/common/a2ui';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { CurveType, ValueFormatter } from '@/types/charts';
 
 export type SparkTone = 'positive' | 'negative' | 'default';
@@ -83,6 +84,7 @@ const A2uiSparkChart = ({
 }: A2uiSparkChartProps) => {
   const uid = useId().replaceAll(':', '');
   const themeClass = useA2uiThemeClass();
+  const palette = useThemeColorRange();
   const [plotRef, width] = useElementWidth();
   const key = categories[0];
   const values = useMemo(() => (key ? data.map((d) => d?.[key]).filter(isNum) : []), [data, key]);
@@ -92,7 +94,7 @@ const A2uiSparkChart = ({
     toneProp ??
     (values.length > 1 ? ((last as number) >= first ? 'positive' : 'negative') : 'default');
   const stroke =
-    tone === 'positive' ? A2UI_POSITIVE : tone === 'negative' ? A2UI_NEGATIVE : 'var(--a2-chart-1)';
+    tone === 'positive' ? A2UI_POSITIVE : tone === 'negative' ? A2UI_NEGATIVE : palette[0];
   const min = values.length > 0 ? Math.min(...values) : 0;
   const max = values.length > 0 ? Math.max(...values) : 1;
   const formatValue = useMemo(

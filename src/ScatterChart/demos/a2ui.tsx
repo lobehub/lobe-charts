@@ -1,4 +1,6 @@
 import { ScatterChart } from '@lobehub/charts';
+import { Flexbox, Segmented } from '@lobehub/ui';
+import { useState } from 'react';
 
 const data = [
   { latency: 84, name: 'api-gateway', region: 'us-east', replicas: 2, rps: 120 },
@@ -14,20 +16,35 @@ const data = [
   { latency: 262, name: 'catalog', region: 'ap-south', replicas: 7, rps: 690 },
 ];
 
-export default () => (
-  <ScatterChart
-    category="region"
-    data={data}
-    label="name"
-    size="replicas"
-    style={{ maxWidth: 560 }}
-    subtitle="Per deployment, bubble size is replica count"
-    title="Latency vs throughput"
-    unit="ms"
-    variant="a2ui"
-    x="rps"
-    xAxisLabel="Requests / s"
-    y="latency"
-    yAxisLabel="p95 latency"
-  />
-);
+export default () => {
+  const [variant, setVariant] = useState<'a2ui' | 'default'>('a2ui');
+  return (
+    <Flexbox gap={12} width={'100%'}>
+      <Segmented
+        style={{ alignSelf: 'flex-start' }}
+        value={variant}
+        options={[
+          { label: 'A2UI', value: 'a2ui' },
+          { label: 'Default', value: 'default' },
+        ]}
+        onChange={(v) => setVariant(v as 'a2ui' | 'default')}
+      />
+      <div style={{ maxWidth: 560 }}>
+        <ScatterChart
+          category="region"
+          data={data}
+          label="name"
+          size="replicas"
+          subtitle="Per deployment, bubble size is replica count"
+          title="Latency vs throughput"
+          unit="ms"
+          variant={variant}
+          x="rps"
+          xAxisLabel="Requests / s"
+          y="latency"
+          yAxisLabel="p95 latency"
+        />
+      </div>
+    </Flexbox>
+  );
+};

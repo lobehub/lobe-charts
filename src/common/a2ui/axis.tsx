@@ -8,22 +8,24 @@ export const Y_TICK_PADDING = 8;
 export const X_TICK_BASELINE = 16.8;
 
 /** Width of an 11px tick label, measured in `fontFamily` when known, otherwise estimated. */
-export const tickLabelWidth = (label: string, fontFamily?: string) =>
-  fontFamily ? measureTextWidth(label, `11px ${fontFamily}`, 11) : estimateLabelWidth(label) - 2;
+export const tickLabelWidth = (label: string, fontFamily?: string, fontSize = 11) =>
+  fontFamily
+    ? measureTextWidth(label, `${fontSize}px ${fontFamily}`, fontSize)
+    : estimateLabelWidth(label, fontSize) - 2;
 
 /**
  * Right edge of the y tick labels (the plot starts `Y_TICK_PADDING` further right): the widest label plus
  * a 4px gutter, plus `extra` for an axis title.
  */
-export const yAxisWidthFor = (labels: string[], extra = 0, fontFamily?: string) =>
-  4 + extra + Math.max(0, ...labels.map((l) => Math.ceil(tickLabelWidth(l, fontFamily))));
+export const yAxisWidthFor = (labels: string[], extra = 0, fontFamily?: string, fontSize = 11) =>
+  4 + extra + Math.max(0, ...labels.map((l) => Math.ceil(tickLabelWidth(l, fontFamily, fontSize))));
 
 /**
  * Right margin that keeps the last x label inside the chart: half the label past the point it is centred
  * on (`inset` from the plot's right edge), plus a 4px gutter; never less than 4px.
  */
-export const rightMarginFor = (label: string, inset: number, fontFamily?: string) =>
-  Math.max(4, tickLabelWidth(label, fontFamily) / 2 - inset + 4);
+export const rightMarginFor = (label: string, inset: number, fontFamily?: string, fontSize = 11) =>
+  Math.max(4, tickLabelWidth(label, fontFamily, fontSize) / 2 - inset + 4);
 
 interface TickProps {
   formatter?: ValueFormatter | ((v: any) => string);

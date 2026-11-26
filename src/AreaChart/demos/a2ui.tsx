@@ -1,4 +1,6 @@
 import { AreaChart } from '@lobehub/charts';
+import { Flexbox, Segmented } from '@lobehub/ui';
+import { useState } from 'react';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const chat = [4200, 4800, 5600, 6100, 7300, 8100, 8900, 9400, 10_800, 11_600, 12_900, 14_100];
@@ -12,16 +14,31 @@ const data = months.map((month, i) => ({
   month,
 }));
 
-export default () => (
-  <AreaChart
-    stack
-    categories={['Chat', 'Agents', 'Embeddings']}
-    data={data}
-    format="currency"
-    index="month"
-    style={{ maxWidth: 662 }}
-    subtitle="Stacked monthly cost, USD"
-    title="Inference spend by workload"
-    variant="a2ui"
-  />
-);
+export default () => {
+  const [variant, setVariant] = useState<'a2ui' | 'default'>('a2ui');
+  return (
+    <Flexbox gap={12} width={'100%'}>
+      <Segmented
+        style={{ alignSelf: 'flex-start' }}
+        value={variant}
+        options={[
+          { label: 'A2UI', value: 'a2ui' },
+          { label: 'Default', value: 'default' },
+        ]}
+        onChange={(v) => setVariant(v as 'a2ui' | 'default')}
+      />
+      <div style={{ maxWidth: 662 }}>
+        <AreaChart
+          stack
+          categories={['Chat', 'Agents', 'Embeddings']}
+          data={data}
+          format="currency"
+          index="month"
+          subtitle="Stacked monthly cost, USD"
+          title="Inference spend by workload"
+          variant={variant}
+        />
+      </div>
+    </Flexbox>
+  );
+};

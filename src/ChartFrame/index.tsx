@@ -36,8 +36,8 @@ export interface ChartFrameProps {
 
 /**
  * The card every a2ui chart draws in: surface, hairline border, 14px radius, soft shadow, a header with
- * title, subtitle and legend. Also sets the A2UI colour variables (`--a2-chart-1` ... `--a2-chart-6`,
- * `--a2-chart-grid`, ...) for the current light / dark mode, so custom content can use them.
+ * title, subtitle and legend. Colours come from LobeHub theme tokens, so it follows light / dark mode;
+ * legend colours default to the theme colour range.
  */
 const ChartFrame = ({ emptyText = 'No data yet', ref, ...props }: ChartFrameProps) => (
   <A2uiFrame emptyText={emptyText} ref={ref} {...props} />
