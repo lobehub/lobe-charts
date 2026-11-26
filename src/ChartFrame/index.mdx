@@ -1,0 +1,30 @@
+---
+title: ChartFrame
+description: The card the a2ui charts draw in, with title, subtitle, legend and an aside slot, for framing custom content the same way.
+category: Charts
+order: 25
+---
+
+import DemoAside from './demos/aside.tsx?demo';
+import DemoEmpty from './demos/empty.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+
+## Usage example
+
+`ChartFrame` is the card every chart draws in with `variant="a2ui"`. Put any content inside; it can use the A2UI colour variables (`var(--a2-chart-1)` to `var(--a2-chart-6)`, `var(--a2-muted-fg)`, ...), which follow light and dark mode. The legend shows at the top right when it has more than one item.
+
+<Demo of={DemoExample} />
+
+## Aside and footer
+
+`aside` replaces the legend, for a summary value or a key. `footer` goes under the content.
+
+<Demo of={DemoAside} />
+
+## Empty
+
+<Demo of={DemoEmpty} />
+
+## API
+
+<Api name="ChartFrame" />
