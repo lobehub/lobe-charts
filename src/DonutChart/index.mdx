@@ -10,6 +10,7 @@ import DemoWithLegend from './demos/withLegend.tsx?demo';
 import DemoClickEvent from './demos/clickEvent.tsx?demo';
 import DemoCustomTooltip from './demos/customTooltip.tsx?demo';
 import DemoCustomColors from './demos/customColors.tsx?demo';
+import DemoA2ui from './demos/a2ui.tsx?demo';
 
 <Demo of={DemoIndex} layout="bare" />
 
@@ -42,6 +43,12 @@ The example below shows a custom tooltip using `customTooltip` prop.
 The example below shows a chart with custom `colors`.
 
 <Demo of={DemoCustomColors} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw a framed donut with the total in the centre and a value and share list beside it. `centerLabel` captions the total; `donut={false}` draws a pie.
+
+<Demo of={DemoA2ui} />
 
 ## API
 

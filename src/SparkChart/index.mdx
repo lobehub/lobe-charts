@@ -7,6 +7,7 @@ category: Visualizations
 import DemoSparkAreaChart from './demos/SparkAreaChart.tsx?demo';
 import DemoSparkBarChart from './demos/SparkBarChart.tsx?demo';
 import DemoSparkLineChart from './demos/SparkLineChart.tsx?demo';
+import DemoA2ui from './demos/a2ui.tsx?demo';
 
 ## Spark AreaC hart
 
@@ -19,6 +20,12 @@ import DemoSparkLineChart from './demos/SparkLineChart.tsx?demo';
 ## Spark Line Chart
 
 <Demo of={DemoSparkLineChart} layout="center" />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw a stat card: a `label`, the latest value (or `value`), a `delta` chip and the spark line beside it. `tone` colours the line and chip; by default it follows whether the series ended above where it started.
+
+<Demo of={DemoA2ui} />
 
 ## API
 

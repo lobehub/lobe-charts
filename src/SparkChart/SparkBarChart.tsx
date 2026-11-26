@@ -4,18 +4,22 @@ import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
 import { Bar, BarChart as ReChartsBarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import type { A2uiChartProps } from '@/common/a2ui';
 import type BaseSparkChartProps from '@/common/BaseSparkChartProps';
 import NoData from '@/common/NoData';
 import { constructCategoryColors, getYAxisDomain } from '@/common/utils';
 import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 
-export interface SparkBarChartProps extends BaseSparkChartProps {
+import A2uiSparkChart, { type A2uiSparkProps } from './A2uiSparkChart';
+
+export interface SparkBarChartProps
+  extends BaseSparkChartProps, Omit<A2uiChartProps, 'subtitle'>, A2uiSparkProps {
   loading?: boolean;
   relative?: boolean;
   stack?: boolean;
 }
 
-const SparkBarChart = ({
+const DefaultSparkBarChart = ({
   ref,
   ...props
 }: SparkBarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
@@ -85,6 +89,41 @@ const SparkBarChart = ({
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const SparkBarChart = ({
+  variant = 'default',
+  format,
+  currency = 'USD',
+  unit,
+  label,
+  value,
+  delta,
+  tone,
+  ref,
+  ...props
+}: SparkBarChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultSparkBarChart ref={ref} {...props} />;
+  return (
+    <A2uiSparkChart
+      categories={props.categories}
+      className={props.className}
+      currency={currency}
+      data={props.data}
+      delta={delta}
+      format={format}
+      index={props.index}
+      kind="bar"
+      label={label}
+      loading={props.loading}
+      ref={ref}
+      showAnimation={props.showAnimation}
+      style={props.style}
+      tone={tone}
+      unit={unit}
+      value={value}
+    />
   );
 };
 

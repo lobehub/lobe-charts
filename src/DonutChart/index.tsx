@@ -1,10 +1,11 @@
 'use client';
 
 import { css, cssVar, cx, Flexbox, Skeleton, useThemeMode } from '@lobehub/ui';
-import type { ComponentType, CSSProperties, MouseEvent } from 'react';
+import type { ComponentType, CSSProperties, MouseEvent, ReactNode, Ref } from 'react';
 import { useEffect, useState } from 'react';
 import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Tooltip } from 'recharts';
 
+import type { ChartNumberFormat } from '@/common/a2ui';
 import type BaseAnimationTimingProps from '@/common/BaseAnimationTimingProps';
 import type { CustomTooltipProps } from '@/common/CustomTooltipProps';
 import NoData, { type NoDataProps } from '@/common/NoData';
@@ -12,23 +13,42 @@ import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { EventProps, ValueFormatter } from '@/types/charts';
 import { defaultValueFormatter, isOnSeverSide } from '@/utils';
 
+import A2uiDonutChart from './A2uiDonutChart';
 import { DonutChartTooltip } from './DonutChartTooltip';
 import { parseLabelInput } from './inputParser';
 import { renderInactiveShape } from './renderInactiveShape';
 import { styles } from './styles';
 
-type DonutChartVariant = 'donut' | 'pie';
+/** `a2ui` draws the A2UI look: a framed donut (or pie, with `donut={false}`) beside a value list. */
+type DonutChartVariant = 'donut' | 'pie' | 'a2ui';
 
 export interface DonutChartProps extends BaseAnimationTimingProps {
   category?: string;
+  /**
+   * Caption under the centre total (a2ui only).
+   * @default 'Total'
+   */
+  centerLabel?: string;
   className?: string;
   colors?: string[];
+  /**
+   * ISO 4217 code used when `format` is `currency` (a2ui only).
+   * @default 'USD'
+   */
+  currency?: string;
   customCategories?: {
     [key: string]: string;
   };
   customTooltip?: ComponentType<CustomTooltipProps>;
   data: any[];
+  /**
+   * Draw a ring with the total in the centre; `false` draws a pie (a2ui only).
+   * @default true
+   */
+  donut?: boolean;
   donutLabel?: string;
+  /** How values read in the a2ui look. `percent` expects 0-100. */
+  format?: ChartNumberFormat;
   index?: string;
   label?: string;
   loading?: boolean;
@@ -37,12 +57,26 @@ export interface DonutChartProps extends BaseAnimationTimingProps {
   showAnimation?: boolean;
   showLabel?: boolean;
   showTooltip?: boolean;
+  /**
+   * Diameter of the donut in px (a2ui only).
+   * @default 200
+   */
+  size?: number;
   style?: CSSProperties;
+  /** Secondary line under the title (a2ui only). */
+  subtitle?: string;
+  /** Card title (a2ui only). */
+  title?: string;
+  /** Unit appended to values (a2ui only). */
+  unit?: string;
   valueFormatter?: ValueFormatter;
   variant?: DonutChartVariant;
 }
 
-const DonutChart = ({ ref, ...props }: DonutChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+const DefaultDonutChart = ({
+  ref,
+  ...props
+}: DonutChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -240,6 +274,49 @@ const DonutChart = ({ ref, ...props }: DonutChartProps & { ref?: React.Ref<HTMLD
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const DonutChart = ({
+  centerLabel = 'Total',
+  currency = 'USD',
+  donut = true,
+  format,
+  size = 200,
+  subtitle,
+  title,
+  unit,
+  ref,
+  ...props
+}: DonutChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (props.variant !== 'a2ui') return <DefaultDonutChart ref={ref} {...props} />;
+  return (
+    <A2uiDonutChart
+      category={props.category ?? 'value'}
+      centerLabel={centerLabel}
+      className={props.className}
+      colors={props.colors}
+      currency={currency}
+      customCategories={props.customCategories}
+      data={props.data}
+      donut={donut}
+      format={format}
+      index={props.index ?? 'name'}
+      label={props.label}
+      loading={props.loading}
+      noDataText={props.noDataText as ReactNode}
+      ref={ref as Ref<HTMLElement>}
+      showAnimation={props.showAnimation}
+      showLabel={props.showLabel}
+      showTooltip={props.showTooltip}
+      size={size}
+      style={props.style}
+      subtitle={subtitle}
+      title={title}
+      unit={unit}
+      valueFormatter={props.valueFormatter}
+      onValueChange={props.onValueChange}
+    />
   );
 };
 

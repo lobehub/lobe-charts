@@ -1,7 +1,7 @@
 'use client';
 
 import { css, cssVar, cx, Flexbox, Skeleton } from '@lobehub/ui';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, ReactNode, Ref } from 'react';
 import { Fragment, useMemo, useState } from 'react';
 import {
   Area,
@@ -18,6 +18,7 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import { type A2uiChartProps, A2uiTrendChart } from '@/common/a2ui';
 import type BaseChartProps from '@/common/BaseChartProps';
 import ChartLegend from '@/common/ChartLegend';
 import ChartTooltip from '@/common/ChartTooltip';
@@ -31,7 +32,7 @@ import { getMaxLabelLength } from '@/utils/getMaxLabelLength';
 
 import { styles } from './styles';
 
-export interface AreaChartProps extends BaseChartProps {
+export interface AreaChartProps extends BaseChartProps, A2uiChartProps {
   connectNulls?: boolean;
   curveType?: CurveType;
   showGradient?: boolean;
@@ -43,7 +44,10 @@ interface ActiveDot {
   index?: number;
 }
 
-const AreaChart = ({ ref, ...props }: AreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+const DefaultAreaChart = ({
+  ref,
+  ...props
+}: AreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
   const themeColorRange = useThemeColorRange();
   const {
     data = [],
@@ -458,6 +462,54 @@ const AreaChart = ({ ref, ...props }: AreaChartProps & { ref?: React.Ref<HTMLDiv
         )}
       </ResponsiveContainer>
     </Flexbox>
+  );
+};
+
+const AreaChart = ({
+  variant = 'default',
+  subtitle,
+  format,
+  currency = 'USD',
+  unit,
+  ref,
+  ...props
+}: AreaChartProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  if (variant !== 'a2ui') return <DefaultAreaChart ref={ref} {...props} />;
+  return (
+    <A2uiTrendChart
+      categories={props.categories}
+      className={props.className}
+      colors={props.colors}
+      connectNulls={props.connectNulls}
+      currency={currency}
+      curveType={props.curveType}
+      customCategories={props.customCategories}
+      data={props.data}
+      format={format}
+      height={props.height}
+      index={props.index}
+      kind="area"
+      loading={props.loading}
+      maxValue={props.maxValue}
+      minValue={props.minValue}
+      noDataText={props.noDataText as ReactNode}
+      ref={ref as Ref<HTMLElement>}
+      showAnimation={props.showAnimation}
+      showGradient={props.showGradient}
+      showGridLines={props.showGridLines}
+      showLegend={props.showLegend}
+      showTooltip={props.showTooltip}
+      showXAxis={props.showXAxis}
+      showYAxis={props.showYAxis}
+      stack={props.stack}
+      style={props.style}
+      subtitle={subtitle}
+      title={props.title}
+      unit={unit}
+      valueFormatter={props.valueFormatter}
+      xAxisLabelFormatter={props.xAxisLabelFormatter}
+      onValueChange={props.onValueChange}
+    />
   );
 };
 
