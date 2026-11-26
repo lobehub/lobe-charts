@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version&nbsp;6.1.1](https://github.com/lobehub/lobe-charts/compare/v6.1.0...v6.1.1)
+
+<sup>Released on **2026-11-26**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Let custom textColor reach linked ranking names.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Let custom textColor reach linked ranking names, closes [#38](https://github.com/lobehub/lobe-charts/issues/38) ([b3e3196](https://github.com/lobehub/lobe-charts/commit/b3e3196))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version&nbsp;6.1.0](https://github.com/lobehub/lobe-charts/compare/v6.0.1...v6.1.0)
 
 <sup>Released on **2026-11-26**</sup>
