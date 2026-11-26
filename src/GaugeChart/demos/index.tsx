@@ -5,6 +5,7 @@ export default () => {
   const store = useCreateStore();
   const props = useControls(
     {
+      variant: { options: ['default', 'a2ui'], value: 'default' },
       format: { options: ['number', 'compact', 'currency', 'percent'], value: 'percent' },
       label: 'of 512 GPUs busy',
       max: 100,

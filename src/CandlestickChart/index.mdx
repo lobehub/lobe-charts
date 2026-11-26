@@ -1,10 +1,11 @@
 ---
 title: CandlestickChart
-description: A candlestick chart that shows open, high, low and close per period, green when a period closes up and red when it closes down, drawn in the A2UI look.
+description: A candlestick chart that shows open, high, low and close per period, in the theme success colour when a period closes up and the error colour when it closes down. Comes in the default look and the A2UI look.
 category: Charts
 order: 22
 ---
 
+import DemoA2ui from './demos/a2ui.tsx?demo';
 import DemoExample from './demos/example.tsx?demo';
 import DemoIndex from './demos/index.tsx?demo';
 import DemoNoData from './demos/noData.tsx?demo';
@@ -13,9 +14,15 @@ import DemoNoData from './demos/noData.tsx?demo';
 
 ## Usage example
 
-The example below shows a month of daily prices. The header shows the last close and the change from the first open; hover a candle for its open, high, low, close and change.
+The example below shows a month of daily prices. The last close and the change from the first open sit at the top right; hover a candle for its open, high, low, close and change.
 
 <Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the chart in the A2UI card with a `title` and `subtitle`; the summary moves into the card header.
+
+<Demo of={DemoA2ui} />
 
 ## No Data
 

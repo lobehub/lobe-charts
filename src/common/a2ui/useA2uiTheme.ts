@@ -1,9 +1,7 @@
-import { useThemeMode } from '@lobehub/ui';
-
 import { styles } from './styles';
 
-/** Class that defines the a2ui colour variables for the current light / dark mode. */
-export const useA2uiThemeClass = () => {
-  const { isDarkMode } = useThemeMode();
-  return isDarkMode ? styles.dark : styles.light;
-};
+/**
+ * Class that defines the a2ui colour variables. They map to LobeHub theme tokens, so light / dark mode
+ * follows the theme without a separate dark table.
+ */
+export const useA2uiThemeClass = () => styles.vars;

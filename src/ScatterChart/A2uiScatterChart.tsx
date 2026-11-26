@@ -7,7 +7,6 @@ import { CartesianGrid, Label, Scatter, ScatterChart, Tooltip, XAxis, YAxis } fr
 
 import {
   A2UI_GRID,
-  A2UI_PALETTE,
   A2uiFrame,
   a2uiPaletteAt,
   A2uiPlacedTooltip,
@@ -27,6 +26,7 @@ import {
   yAxisWidthFor,
 } from '@/common/a2ui';
 import type { EventProps } from '@/common/BaseChartProps';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ScatterChartValueFormatter } from '@/types/charts';
 
 export interface A2uiScatterChartProps {
@@ -81,7 +81,7 @@ const A2uiScatterChart = ({
   size,
   category,
   label,
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   format,
   currency,
   unit,
@@ -105,6 +105,8 @@ const A2uiScatterChart = ({
   style,
   ref,
 }: A2uiScatterChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
   const [plotRef, width, fontFamily] = useElementWidth();
   const [active, setActive] = useState<string | undefined>();
   const plotHeight = typeof height === 'number' ? height : 260;

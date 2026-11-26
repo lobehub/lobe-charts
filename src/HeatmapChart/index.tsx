@@ -5,18 +5,21 @@ import type { CSSProperties, MouseEvent, ReactNode, Ref } from 'react';
 import { useMemo } from 'react';
 
 import {
-  A2UI_TICK,
   A2uiFloatingTooltip,
-  A2uiFrame,
   a2uiStyles,
   type ChartNumberFormat,
+  ChartShell,
+  type ChartVariant,
   createValueFormatter,
   formatNumber,
+  lookOf,
+  readableInk,
   useA2uiHover,
   useElementWidth,
   Y_TICK_PADDING,
   yAxisWidthFor,
 } from '@/common/a2ui';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ValueFormatter } from '@/types/charts';
 
 import { styles } from './styles';
@@ -25,8 +28,8 @@ import { heatColor, type HeatmapCell, heatRatio, parseHeatmap } from './utils';
 export interface HeatmapChartProps {
   className?: string;
   /**
-   * Colour of the high end of the ramp. The low end is the surface tint.
-   * @default 'var(--a2-chart-1)'
+   * Colour of the high end of the ramp; the low end is the theme fill tint. Defaults to the first colour
+   * of the theme colour range.
    */
   color?: string;
   /**
@@ -57,9 +60,9 @@ export interface HeatmapChartProps {
    */
   showValues?: boolean;
   style?: CSSProperties;
-  /** Secondary line under the title. */
+  /** Secondary line under the title (a2ui only). */
   subtitle?: string;
-  /** Card title. */
+  /** Card title (a2ui only). */
   title?: string;
   /** Unit appended to values. */
   unit?: string;
@@ -70,6 +73,11 @@ export interface HeatmapChartProps {
   value?: string;
   /** Formats values; wins over `format`. */
   valueFormatter?: ValueFormatter;
+  /**
+   * Visual style: `default` sits with the other lobe charts; `a2ui` draws the A2UI card.
+   * @default 'default'
+   */
+  variant?: ChartVariant;
   /**
    * Key of the column category.
    * @default 'x'
@@ -95,7 +103,7 @@ const HeatmapChart = ({
   x = 'x',
   y = 'y',
   value = 'value',
-  color = 'var(--a2-chart-1)',
+  color: colorProp,
   format,
   currency = 'USD',
   unit,
@@ -108,10 +116,17 @@ const HeatmapChart = ({
   showLegend = true,
   showTooltip = true,
   showValues,
+  variant = 'default',
   className,
   style,
   ref,
 }: HeatmapChartProps) => {
+  const palette = useThemeColorRange();
+  const color = colorProp ?? palette[0];
+  const look = lookOf(variant);
+  const a2ui = variant === 'a2ui';
+  const xBaseline = a2ui ? X_BASELINE : 16;
+  const bottom = a2ui ? BOTTOM : 20;
   const [plotRef, width, fontFamily] = useElementWidth();
   const { hover, setHover } = useA2uiHover<HeatmapCell>();
   const { cells, xs, ys, min, max } = useMemo(
@@ -132,9 +147,9 @@ const HeatmapChart = ({
       ? valueFormatter(v)
       : formatNumber(v, format === 'currency' ? 'currency' : 'compact', unit, currency);
 
-  const left = yAxisWidthFor(ys, 0, fontFamily) + Y_TICK_PADDING;
+  const left = yAxisWidthFor(ys, 0, fontFamily, look.tick.fontSize) + Y_TICK_PADDING;
   const plotWidth = Math.max(0, width - left - RIGHT);
-  const plotH = Math.max(0, plotHeight - TOP - BOTTOM);
+  const plotH = Math.max(0, plotHeight - TOP - bottom);
   const bw = xs.length > 0 ? plotWidth / xs.length : 0;
   const bh = ys.length > 0 ? plotH / ys.length : 0;
   const texts = showValues ?? (xs.length * ys.length <= 48 && xs.length <= 12);
@@ -156,12 +171,12 @@ const HeatmapChart = ({
 
   const legend =
     showLegend && cells.length > 0 ? (
-      <div className={styles.legend}>
+      <div className={a2ui ? styles.legend : styles.legendPlain}>
         <span>{formatRange(min)}</span>
         <span
           className={styles.ramp}
           style={{
-            background: `linear-gradient(90deg, color-mix(in oklch, ${color} 6%, var(--a2-heat-legend-low)), ${color})`,
+            background: `linear-gradient(90deg, color-mix(in oklch, ${color} 6%, var(--a2-heat-low)), ${color})`,
           }}
         />
         <span>{formatRange(max)}</span>
@@ -169,7 +184,7 @@ const HeatmapChart = ({
     ) : undefined;
 
   return (
-    <A2uiFrame
+    <ChartShell
       aside={legend}
       className={className}
       empty={empty}
@@ -178,6 +193,7 @@ const HeatmapChart = ({
       style={style}
       subtitle={subtitle}
       title={title}
+      variant={variant}
     >
       <div className={a2uiStyles.plot} ref={plotRef} style={{ height: plotHeight }}>
         {loading ? (
@@ -195,10 +211,10 @@ const HeatmapChart = ({
             {ys.map((row, i) => (
               <text
                 key={`y-${row}`}
-                {...A2UI_TICK}
+                {...look.tick}
                 dominantBaseline="middle"
-                textAnchor="end"
-                x={left - Y_TICK_PADDING}
+                textAnchor={look.yAlign === 'edge' ? 'start' : 'end'}
+                x={look.yAlign === 'edge' ? 0 : left - Y_TICK_PADDING}
                 y={TOP + bh * (i + 0.5)}
               >
                 {row}
@@ -207,10 +223,10 @@ const HeatmapChart = ({
             {xs.map((col, i) => (
               <text
                 key={`x-${col}`}
-                {...A2UI_TICK}
+                {...look.tick}
                 textAnchor="middle"
                 x={left + bw * (i + 0.5)}
-                y={TOP + plotH + X_BASELINE}
+                y={TOP + plotH + xBaseline}
               >
                 {col}
               </text>
@@ -225,7 +241,7 @@ const HeatmapChart = ({
                   <rect
                     fill={heatColor(t, color)}
                     height={Math.max(0, bh - INSET * 2)}
-                    rx={4}
+                    rx={a2ui ? 4 : 3}
                     stroke={active ? 'var(--a2-chart-focus)' : undefined}
                     strokeWidth={active ? 1.5 : undefined}
                     width={Math.max(0, bw - INSET * 2)}
@@ -235,7 +251,7 @@ const HeatmapChart = ({
                   {texts ? (
                     <text
                       dominantBaseline="middle"
-                      fill={t > 0.55 ? 'var(--a2-heat-ink-hi)' : 'var(--a2-heat-ink-lo)'}
+                      fill={t > 0.55 ? readableInk(color) : 'var(--a2-fg)'}
                       fontSize={10.5}
                       fontWeight={600}
                       pointerEvents="none"
@@ -255,6 +271,7 @@ const HeatmapChart = ({
           <A2uiFloatingTooltip
             height={plotHeight}
             title={`${hover.datum.y} · ${hover.datum.x}`}
+            variant={variant}
             width={width}
             x={left + bw * (xs.indexOf(hover.datum.x) + 0.5)}
             y={TOP + bh * (ys.indexOf(hover.datum.y) + 0.5)}
@@ -268,7 +285,7 @@ const HeatmapChart = ({
           />
         ) : null}
       </div>
-    </A2uiFrame>
+    </ChartShell>
   );
 };
 

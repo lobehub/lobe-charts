@@ -5,25 +5,26 @@ import type { CSSProperties, ReactNode, Ref } from 'react';
 import { useMemo } from 'react';
 
 import {
-  A2UI_PALETTE,
   A2uiFloatingTooltip,
-  A2uiFrame,
   a2uiPaletteAt,
   a2uiStyles,
   type ChartNumberFormat,
+  ChartShell,
+  type ChartVariant,
   createValueFormatter,
   formatNumber,
   shortLabel,
   useA2uiHover,
   useElementWidth,
 } from '@/common/a2ui';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ValueFormatter } from '@/types/charts';
 
 import { layoutSankey, prepareSankey, ribbonPath, type SankeyLink, type SankeyNode } from './utils';
 
 export interface SankeyChartProps {
   className?: string;
-  /** Palette, one colour per node in first-seen order. Defaults to the A2UI palette. */
+  /** Palette, one colour per node in first-seen order. Defaults to the theme colour range. */
   colors?: string[];
   /**
    * ISO 4217 code used when `format` is `currency`.
@@ -66,14 +67,14 @@ export interface SankeyChartProps {
    */
   source?: string;
   style?: CSSProperties;
-  /** Secondary line under the title. */
+  /** Secondary line under the title (a2ui only). */
   subtitle?: string;
   /**
    * Key of the link target.
    * @default 'target'
    */
   target?: string;
-  /** Card title. */
+  /** Card title (a2ui only). */
   title?: string;
   /** Unit appended to values. */
   unit?: string;
@@ -84,6 +85,11 @@ export interface SankeyChartProps {
   value?: string;
   /** Formats values; wins over `format`. */
   valueFormatter?: ValueFormatter;
+  /**
+   * Visual style: `default` sits with the other lobe charts; `a2ui` draws the A2UI card.
+   * @default 'default'
+   */
+  variant?: ChartVariant;
 }
 
 const INSET = { bottom: 6, left: 2, right: 2, top: 6 };
@@ -97,7 +103,7 @@ const SankeyChart = ({
   source = 'source',
   target = 'target',
   value = 'value',
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   format,
   currency = 'USD',
   unit,
@@ -111,10 +117,14 @@ const SankeyChart = ({
   noDataText,
   showValues = true,
   showTooltip = true,
+  variant = 'default',
   className,
   style,
   ref,
 }: SankeyChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
+  const a2ui = variant === 'a2ui';
   const [plotRef, width] = useElementWidth();
   const { hover, bind } = useA2uiHover<Hovered>();
   const graph = useMemo(
@@ -162,7 +172,7 @@ const SankeyChart = ({
       : hovered.node === l.source || hovered.node === l.target);
 
   return (
-    <A2uiFrame
+    <ChartShell
       className={className}
       empty={!loading && graph.links.length === 0}
       emptyText={noDataText}
@@ -170,6 +180,7 @@ const SankeyChart = ({
       style={style}
       subtitle={subtitle}
       title={title}
+      variant={variant}
     >
       <div className={a2uiStyles.plot} ref={plotRef} style={{ height }}>
         {loading ? (
@@ -210,9 +221,9 @@ const SankeyChart = ({
             {layout.nodes.map((n) => (
               <text
                 dominantBaseline="middle"
-                fill="var(--a2-chart-label)"
-                fontSize={11}
-                fontWeight={550}
+                fill={a2ui ? 'var(--a2-chart-name)' : 'var(--a2-fg)'}
+                fontSize={a2ui ? 11 : 12}
+                fontWeight={a2ui ? 550 : 500}
                 key={`label-${n.id}`}
                 pointerEvents="none"
                 textAnchor={flip(n) ? 'end' : 'start'}
@@ -228,6 +239,7 @@ const SankeyChart = ({
         {showTooltip && hover && hovered ? (
           <A2uiFloatingTooltip
             height={height}
+            variant={variant}
             width={width}
             x={hover.x}
             y={hover.y}
@@ -251,7 +263,7 @@ const SankeyChart = ({
           />
         ) : null}
       </div>
-    </A2uiFrame>
+    </ChartShell>
   );
 };
 

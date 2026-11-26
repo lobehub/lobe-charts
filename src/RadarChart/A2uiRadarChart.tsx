@@ -6,7 +6,6 @@ import { useMemo } from 'react';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 
 import {
-  A2UI_PALETTE,
   A2uiFrame,
   a2uiPaletteAt,
   A2uiPlacedTooltip,
@@ -18,6 +17,7 @@ import {
   useElementWidth,
 } from '@/common/a2ui';
 import type { EventProps } from '@/common/BaseChartProps';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { ValueFormatter } from '@/types/charts';
 
 export interface A2uiRadarChartProps {
@@ -52,14 +52,15 @@ const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFin
 const MARGIN = 4;
 const RADIUS_RATIO = 0.78;
 const LABEL_OFFSET = 12;
-const INK = 'oklch(var(--a2-ink))';
+/** Rings and spokes: the theme border colour. */
+const INK = 'var(--a2-chart-hairline)';
 
 // Adapted from CopilotKit a2ui-playground (MIT): charts.tsx `RadarChart`.
 const A2uiRadarChart = ({
   data = [],
   index,
   categories = [],
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   fillOpacity = 0.2,
   format,
   currency,
@@ -82,6 +83,8 @@ const A2uiRadarChart = ({
   style,
   ref,
 }: A2uiRadarChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
   const [plotRef, width] = useElementWidth();
   const plotHeight = typeof height === 'number' ? height : 280;
   const names = categories;
@@ -117,7 +120,7 @@ const A2uiRadarChart = ({
         {showGridLines && (
           <line
             stroke={INK}
-            strokeOpacity={0.07}
+            strokeOpacity={1}
             x1={cx}
             x2={cx + radius * cos}
             y1={cy}
@@ -206,7 +209,7 @@ const A2uiRadarChart = ({
                 polarRadius={[0.25, 0.5, 0.75, 1].map((f) => f * radius)}
                 radialLines={false}
                 stroke={INK}
-                strokeOpacity={0.08}
+                strokeOpacity={1}
               />
             )}
             <PolarAngleAxis

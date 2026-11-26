@@ -6,7 +6,6 @@ import { useMemo, useState } from 'react';
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
 import {
-  A2UI_PALETTE,
   A2uiFrame,
   a2uiPaletteAt,
   A2uiPlacedTooltip,
@@ -16,6 +15,7 @@ import {
   formatNumber,
   summaryFormat,
 } from '@/common/a2ui';
+import { useThemeColorRange } from '@/hooks/useThemeColorRange';
 import type { EventProps, ValueFormatter } from '@/types/charts';
 
 import { a2uiStyles as styles } from './a2uiStyles';
@@ -58,7 +58,7 @@ const A2uiDonutChart = ({
   data = [],
   category,
   index,
-  colors = A2UI_PALETTE,
+  colors: colorsProp,
   donut = true,
   centerLabel = 'Total',
   label,
@@ -80,6 +80,8 @@ const A2uiDonutChart = ({
   style,
   ref,
 }: A2uiDonutChartProps) => {
+  const themeColors = useThemeColorRange();
+  const colors = colorsProp ?? themeColors;
   const [hover, setHover] = useState<number | undefined>();
   const rows = useMemo(
     () =>

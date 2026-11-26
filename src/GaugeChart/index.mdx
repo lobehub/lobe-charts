@@ -1,10 +1,11 @@
 ---
 title: GaugeChart
-description: A half-ring gauge that shows one value against a range, with the value and a caption in the centre, drawn in the A2UI look.
+description: A half-ring gauge that shows one value against a range, with the value and a caption in the centre. Comes in the default look and the A2UI look.
 category: Charts
 order: 20
 ---
 
+import DemoA2ui from './demos/a2ui.tsx?demo';
 import DemoExample from './demos/example.tsx?demo';
 import DemoIndex from './demos/index.tsx?demo';
 import DemoWarning from './demos/warning.tsx?demo';
@@ -16,6 +17,12 @@ import DemoWarning from './demos/warning.tsx?demo';
 The example below shows a utilisation gauge with a `label` under the value and `min` / `max` under the ring.
 
 <Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the gauge in the A2UI card with a `title`. Colours are the same in both looks: the first colour of the theme colour range, and the theme error colour from `warnAt`.
+
+<Demo of={DemoA2ui} />
 
 ## Formats and warning colour
 

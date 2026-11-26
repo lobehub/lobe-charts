@@ -272,6 +272,53 @@ describe('new a2ui charts', () => {
     expect(screen.getByText(/Pricing\s+33.5K/)).toBeTruthy();
   });
 
+  it('new charts default to the plain look and take variant="a2ui" for the card', () => {
+    const data = [
+      { group: 'Compute', name: 'VMs', value: 48_200 },
+      { group: 'Storage', name: 'Objects', value: 21_400 },
+    ];
+    const plain = render(<TreemapChart data={data} title="Spend" />);
+    expect(plain.container.querySelector('figure')).toBeNull();
+    expect(screen.queryByText('Spend')).toBeNull();
+    expect(screen.getByText('Compute')).toBeTruthy();
+    plain.unmount();
+
+    const card = render(<TreemapChart data={data} title="Spend" variant="a2ui" />);
+    expect(card.container.querySelector('figure')).not.toBeNull();
+    expect(screen.getByText('Spend')).toBeTruthy();
+    card.unmount();
+  });
+
+  it('every new chart renders in both variants', () => {
+    const cases = [
+      (variant: 'default' | 'a2ui') => <GaugeChart title="G" value={40} variant={variant} />,
+      (variant: 'default' | 'a2ui') => (
+        <HeatmapChart data={[{ value: 1, x: 'a', y: 'b' }]} title="H" variant={variant} />
+      ),
+      (variant: 'default' | 'a2ui') => (
+        <CandlestickChart
+          data={[{ close: 2, date: 'd', high: 3, low: 1, open: 1.5 }]}
+          title="C"
+          variant={variant}
+        />
+      ),
+      (variant: 'default' | 'a2ui') => (
+        <SankeyChart data={[{ source: 'a', target: 'b', value: 1 }]} title="S" variant={variant} />
+      ),
+    ];
+    for (const make of cases) {
+      const a = render(make('a2ui'));
+      expect(a.container.querySelector('svg')).not.toBeNull();
+      // The a2ui card shows the title; the default look does not.
+      expect(a.container.textContent).toMatch(/[GHCS]/);
+      a.unmount();
+      const d = render(make('default'));
+      expect(d.container.querySelector('svg')).not.toBeNull();
+      expect(d.container.querySelector('figure')).toBeNull();
+      d.unmount();
+    }
+  });
+
   it('ChartFrame frames custom content with a legend', () => {
     render(
       <ChartFrame legend={['A', 'B']} subtitle="sub" title="Frame">

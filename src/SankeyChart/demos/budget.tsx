@@ -16,9 +16,7 @@ export default () => (
     height={240}
     source="from"
     style={{ maxWidth: 662 }}
-    subtitle="FY2026, USD millions"
     target="to"
-    title="Where revenue goes"
     value="usd"
   />
 );

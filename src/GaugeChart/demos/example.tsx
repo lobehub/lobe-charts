@@ -6,8 +6,7 @@ export default () => (
     label="of 512 GPUs busy"
     max={100}
     min={0}
-    style={{ width: 'fit-content' }}
-    title="GPU cluster utilization"
+    style={{ maxWidth: 240 }}
     value={72}
   />
 );

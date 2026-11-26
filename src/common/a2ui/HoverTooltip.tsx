@@ -1,8 +1,10 @@
 import type { MouseEvent } from 'react';
 import { useCallback, useState } from 'react';
 
+import { ChartTooltipContent } from './look';
 import A2uiPlacedTooltip from './PlacedTooltip';
-import A2uiTooltip, { type A2uiTooltipProps } from './Tooltip';
+import type { A2uiTooltipProps } from './Tooltip';
+import type { ChartVariant } from './types';
 
 export interface A2uiHoverState<T = unknown> {
   datum: T;
@@ -31,6 +33,11 @@ export const useA2uiHover = <T,>() => {
 export interface A2uiFloatingTooltipProps extends A2uiTooltipProps {
   /** Plot height, used to keep the tooltip inside. */
   height: number;
+  /**
+   * Tooltip chrome.
+   * @default 'a2ui'
+   */
+  variant?: ChartVariant;
   /** Plot width, used to keep the tooltip inside. */
   width: number;
   /** Focused point in plot coordinates. */
@@ -39,8 +46,15 @@ export interface A2uiFloatingTooltipProps extends A2uiTooltipProps {
 }
 
 /** The a2ui tooltip placed at a focus point inside a `position: relative` plot. */
-export const A2uiFloatingTooltip = ({ x, y, width, height, ...rest }: A2uiFloatingTooltipProps) => (
+export const A2uiFloatingTooltip = ({
+  x,
+  y,
+  width,
+  height,
+  variant = 'a2ui',
+  ...rest
+}: A2uiFloatingTooltipProps) => (
   <A2uiPlacedTooltip height={height} width={width} x={x} y={y}>
-    <A2uiTooltip {...rest} />
+    <ChartTooltipContent variant={variant} {...rest} />
   </A2uiPlacedTooltip>
 );

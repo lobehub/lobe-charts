@@ -1,4 +1,6 @@
 import { LineChart } from '@lobehub/charts';
+import { Flexbox, Segmented } from '@lobehub/ui';
+import { useState } from 'react';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const web = [
@@ -10,15 +12,30 @@ const mobile = [
 
 const data = months.map((month, i) => ({ Mobile: mobile[i], Web: web[i], month }));
 
-export default () => (
-  <LineChart
-    categories={['Web', 'Mobile']}
-    data={data}
-    format="compact"
-    index="month"
-    style={{ maxWidth: 662 }}
-    subtitle="Web vs mobile, last 12 months"
-    title="Weekly active users"
-    variant="a2ui"
-  />
-);
+export default () => {
+  const [variant, setVariant] = useState<'a2ui' | 'default'>('a2ui');
+  return (
+    <Flexbox gap={12} width={'100%'}>
+      <Segmented
+        style={{ alignSelf: 'flex-start' }}
+        value={variant}
+        options={[
+          { label: 'A2UI', value: 'a2ui' },
+          { label: 'Default', value: 'default' },
+        ]}
+        onChange={(v) => setVariant(v as 'a2ui' | 'default')}
+      />
+      <div style={{ maxWidth: 662 }}>
+        <LineChart
+          categories={['Web', 'Mobile']}
+          data={data}
+          format="compact"
+          index="month"
+          subtitle="Web vs mobile, last 12 months"
+          title="Weekly active users"
+          variant={variant}
+        />
+      </div>
+    </Flexbox>
+  );
+};

@@ -7,6 +7,7 @@ export default () => {
   const store = useCreateStore();
   const props = useControls(
     {
+      variant: { options: ['default', 'a2ui'], value: 'default' },
       format: { options: ['number', 'compact', 'currency', 'percent'], value: 'compact' },
       loading: false,
       showLegend: true,
