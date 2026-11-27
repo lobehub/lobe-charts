@@ -1,0 +1,35 @@
+---
+title: LocationCard
+description: A card for one place with a mini map, name, address, category, rating, hours and Directions / Open map links. Use it instead of MapView for a single place.
+category: Maps
+order: 2
+---
+
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoMinimal from './demos/minimal.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below shows the official A2UI sample place. Directions opens Google Maps directions to the point and Open map opens it on openstreetmap.org; `directionsUrl` and `mapUrl` replace either link. The map needs `maplibre-gl` (see [MapView](/components/map-view#setup)).
+
+<Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the A2UI card.
+
+<Demo of={DemoA2ui} />
+
+## Name and coordinates only
+
+Only `name`, `lat` and `lon` are required; `showActions={false}` hides the links.
+
+<Demo of={DemoMinimal} />
+
+## API
+
+<Api name="LocationCard" />

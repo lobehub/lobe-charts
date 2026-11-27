@@ -1,0 +1,35 @@
+---
+title: StockTicker
+description: A stock quote header with symbol, name, price, change and percent change, a sparkline of recent prices and key stats.
+category: Visualizations
+order: 20
+---
+
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoNegative from './demos/negative.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below shows the official A2UI sample quote. `sample` adds a badge that marks the numbers as illustrative. The sparkline is a [SparkAreaChart](/components/spark-chart) in the theme success or error colour, with a dashed line at the first price.
+
+<Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the A2UI card.
+
+<Demo of={DemoA2ui} />
+
+## Falling price and other currencies
+
+A negative `change` turns the change and the sparkline to the error colour. `currency` and `locale` set how the price reads.
+
+<Demo of={DemoNegative} />
+
+## API
+
+<Api name="StockTicker" />

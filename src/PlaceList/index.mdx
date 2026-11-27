@@ -1,0 +1,49 @@
+---
+title: PlaceList
+description: A ranked list of places next to a map. Hovering a row highlights its marker, clicking a row flies to it, and clicking a marker selects its row.
+category: Maps
+order: 3
+---
+
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoNarrow from './demos/narrow.tsx?demo';
+import DemoNoData from './demos/noData.tsx?demo';
+import DemoSelected from './demos/selected.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below lists the official A2UI sample places with rating, address, category and distance. The map needs `maplibre-gl` (see [MapView](/components/map-view#setup)).
+
+<Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the A2UI card.
+
+<Demo of={DemoA2ui} />
+
+## Preselected row and selection event
+
+`selected` highlights a row at first while the map keeps every place in view; `onSelectedChange` reports the row the user picks.
+
+<Demo of={DemoSelected} />
+
+## Narrow layout
+
+Below 540 px of width the map moves above the list.
+
+<Demo of={DemoNarrow} />
+
+## No Data
+
+Without valid places the list and the map wait with placeholders.
+
+<Demo of={DemoNoData} />
+
+## API
+
+<Api name="PlaceList" />

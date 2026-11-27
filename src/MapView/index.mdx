@@ -1,0 +1,76 @@
+---
+title: MapView
+description: An interactive MapLibre map with numbered markers that fits every marker in view, and a row of chips linked to the markers. Draws given coordinates only; it does no geocoding.
+category: Maps
+order: 1
+---
+
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoActiveChange from './demos/activeChange.tsx?demo';
+import DemoBasemap from './demos/basemap.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoNoData from './demos/noData.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Setup
+
+The map components draw with [MapLibre GL](https://maplibre.org), an optional peer dependency. Install it in apps that show maps:
+
+```bash
+npm i maplibre-gl
+```
+
+`maplibre-gl` and its stylesheet are loaded with a dynamic `import()` when the first map mounts, so it is not in the main bundle, and apps that never render a map do not load it. Until it loads, the map shows a placeholder; if it is not installed, the map shows "Map unavailable" and the rest of the card still renders.
+
+MapLibre GL 6 starts a web worker from `maplibre-gl-worker.mjs`. Bundlers usually move that file, so tell the map where it ended up once, before the first map renders:
+
+```ts
+import { setMapLibreWorkerUrl } from '@lobehub/charts';
+// Vite
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
+
+setMapLibreWorkerUrl(workerUrl);
+
+// webpack / Next.js
+setMapLibreWorkerUrl(new URL('maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url).href);
+```
+
+MapLibre GL 5 inlines its worker and needs no setup.
+
+Basemaps come from [OpenFreeMap](https://openfreemap.org): no API key, free for commercial use, OpenStreetMap data. The attribution sits behind the (i) button in the corner.
+
+## Usage example
+
+The example below pins six places with the official A2UI sample data. Hover or click a chip to highlight its marker; click a marker to highlight its chip and show its name.
+
+<Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the map in the A2UI card. Marker and route colours are the same in both looks: the first colour of the theme colour range, or `color`.
+
+<Demo of={DemoA2ui} />
+
+## Basemaps
+
+`basemap` picks an OpenFreeMap style; `auto` (the default) shows Liberty in light mode and Dark in dark mode. `mapStyle` takes any MapLibre style URL or object, or one per theme mode, for example the CARTO styles in `CARTO_STYLES` as a fallback.
+
+<Demo of={DemoBasemap} />
+
+## Active marker event
+
+`onActiveChange` reports the marker that is highlighted.
+
+<Demo of={DemoActiveChange} />
+
+## No Data
+
+Without valid markers the map waits with a placeholder.
+
+<Demo of={DemoNoData} />
+
+## API
+
+<Api name="MapView" />
