@@ -50,6 +50,7 @@ export { default as LocationCard, type LocationCardProps } from './LocationCard'
 export { type MapMarker, default as MapView, type MapViewProps } from './MapView';
 export { type Place, default as PlaceList, type PlaceListProps } from './PlaceList';
 export { default as RadarChart, type RadarChartProps } from './RadarChart';
+export { default as RouteMap, type RouteMapProps } from './RouteMap';
 export { default as SankeyChart, type SankeyChartProps } from './SankeyChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
 export * from './SparkChart';

@@ -1,0 +1,35 @@
+---
+title: RouteMap
+description: A map that draws a route through given coordinates, with start and end pins, distance and duration. It draws the line it is given and makes no routing calls.
+category: Maps
+order: 4
+---
+
+import DemoA2ui from './demos/a2ui.tsx?demo';
+import DemoExample from './demos/example.tsx?demo';
+import DemoIndex from './demos/index.tsx?demo';
+import DemoNoData from './demos/noData.tsx?demo';
+
+<Demo of={DemoIndex} layout="bare" />
+
+## Usage example
+
+The example below draws the official A2UI sample route. `coordinates` are `[[lon, lat], ...]` in travel order; the line runs from the theme success colour at the start to the accent at the destination. The map needs `maplibre-gl` (see [MapView](/components/map-view#setup)).
+
+<Demo of={DemoExample} />
+
+## A2UI look
+
+Set `variant="a2ui"` to draw the A2UI card.
+
+<Demo of={DemoA2ui} />
+
+## No Data
+
+With fewer than two valid coordinates the map waits with a placeholder.
+
+<Demo of={DemoNoData} />
+
+## API
+
+<Api name="RouteMap" />
