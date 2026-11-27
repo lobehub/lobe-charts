@@ -39,6 +39,15 @@ const DARK_PAINT: Record<string, Record<string, unknown>> = {
 
 const PAINT_KEYS = ['fill-color', 'line-color'] as const;
 
+/** Liberty place labels: smaller and slate instead of large black (layer id -> text size at zoom 11+). */
+const LIBERTY_LABELS: Record<string, number> = {
+  label_city: 14,
+  label_city_capital: 15,
+  label_town: 12,
+  label_village: 11,
+};
+const LABEL_INK = '#44546a';
+
 /** Liberty layers that crowd a small map: points of interest, transit stops, one-way arrows. */
 const LIBERTY_HIDDEN = /^(?:poi_|road_one_way_arrow)/;
 
@@ -77,6 +86,20 @@ export const tuneBasemap = (map: TunableMap, kind: BasemapTuning) => {
     if (kind !== 'liberty') continue;
     if (LIBERTY_HIDDEN.test(layer.id)) {
       map.setLayoutProperty(layer.id, 'visibility', 'none');
+      continue;
+    }
+    if (layer.id in LIBERTY_LABELS) {
+      const size = LIBERTY_LABELS[layer.id];
+      map.setLayoutProperty(layer.id, 'text-size', [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        4,
+        size - 3,
+        11,
+        size,
+      ]);
+      map.setPaintProperty(layer.id, 'text-color', LABEL_INK);
       continue;
     }
     if (layer.id === 'building-3d') {
