@@ -130,13 +130,17 @@ describe('tuneBasemap', () => {
     expect(map.setPaintProperty).toHaveBeenCalledWith('building-3d', 'fill-extrusion-height', 0);
   });
 
-  it('lifts the dark style and leaves positron colours alone', () => {
+  it('lifts the dark style; positron only gets calmer labels', () => {
     const dark = fakeMap([{ id: 'water' }, { id: 'unknown' }]);
     tuneBasemap(dark, 'dark');
     expect(dark.setPaintProperty).toHaveBeenCalledWith('water', 'fill-color', '#25282e');
     expect(dark.setPaintProperty).toHaveBeenCalledTimes(1);
-    const positron = fakeMap([{ id: 'water', paint: { 'fill-color': '#fc8' } }]);
+    const positron = fakeMap([
+      { id: 'water', paint: { 'fill-color': '#fc8' } },
+      { id: 'label_city', paint: { 'text-color': '#000' } },
+    ]);
     tuneBasemap(positron, 'positron');
-    expect(positron.setPaintProperty).not.toHaveBeenCalled();
+    expect(positron.setPaintProperty).toHaveBeenCalledTimes(1);
+    expect(positron.setPaintProperty).toHaveBeenCalledWith('label_city', 'text-color', '#5c5c5c');
   });
 });
