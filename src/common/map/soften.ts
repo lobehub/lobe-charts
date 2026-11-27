@@ -39,6 +39,9 @@ const DARK_PAINT: Record<string, Record<string, unknown>> = {
 
 const PAINT_KEYS = ['fill-color', 'line-color'] as const;
 
+/** Liberty layers that crowd a small map: points of interest, transit stops, one-way arrows. */
+const LIBERTY_HIDDEN = /^(?:poi_|road_one_way_arrow)/;
+
 export type BasemapTuning = 'liberty' | 'positron' | 'dark';
 
 interface StyleLayer {
@@ -72,6 +75,17 @@ export const tuneBasemap = (map: TunableMap, kind: BasemapTuning) => {
       continue;
     }
     if (kind !== 'liberty') continue;
+    if (LIBERTY_HIDDEN.test(layer.id)) {
+      map.setLayoutProperty(layer.id, 'visibility', 'none');
+      continue;
+    }
+    if (layer.id === 'building-3d') {
+      // Flat footprints instead of extruded blocks.
+      map.setPaintProperty(layer.id, 'fill-extrusion-height', 0);
+      map.setPaintProperty(layer.id, 'fill-extrusion-base', 0);
+      map.setPaintProperty(layer.id, 'fill-extrusion-color', '#e6ddd2');
+      continue;
+    }
     for (const key of PAINT_KEYS) {
       const value = layer.paint?.[key];
       if (value === undefined) continue;

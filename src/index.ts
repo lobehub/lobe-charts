@@ -46,6 +46,7 @@ export { default as HeatmapChart, type HeatmapChartProps } from './HeatmapChart'
 export { default as Heatmaps, type HeatmapsProps } from './Heatmaps';
 export { default as Legend, type LegendProps } from './Legend';
 export { default as LineChart, type LineChartProps } from './LineChart';
+export { default as LocationCard, type LocationCardProps } from './LocationCard';
 export { type MapMarker, default as MapView, type MapViewProps } from './MapView';
 export { default as RadarChart, type RadarChartProps } from './RadarChart';
 export { default as SankeyChart, type SankeyChartProps } from './SankeyChart';

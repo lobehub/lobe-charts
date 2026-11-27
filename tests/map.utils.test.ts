@@ -109,6 +109,8 @@ describe('tuneBasemap', () => {
         paint: { 'line-color': ['interpolate', ['linear'], ['zoom'], 5, '#fc8'] },
       },
       { id: 'park', paint: { 'fill-color': '#d8e8c8' } },
+      { id: 'poi_transit' },
+      { id: 'building-3d' },
     ]);
     tuneBasemap(map, 'liberty');
     expect(map.setLayoutProperty).toHaveBeenCalledWith(
@@ -124,7 +126,8 @@ describe('tuneBasemap', () => {
       5,
       '#fbe1ae',
     ]);
-    expect(map.setPaintProperty).toHaveBeenCalledTimes(2);
+    expect(map.setLayoutProperty).toHaveBeenCalledWith('poi_transit', 'visibility', 'none');
+    expect(map.setPaintProperty).toHaveBeenCalledWith('building-3d', 'fill-extrusion-height', 0);
   });
 
   it('lifts the dark style and leaves positron colours alone', () => {
