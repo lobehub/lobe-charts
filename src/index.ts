@@ -46,6 +46,7 @@ export { default as HeatmapChart, type HeatmapChartProps } from './HeatmapChart'
 export { default as Heatmaps, type HeatmapsProps } from './Heatmaps';
 export { default as Legend, type LegendProps } from './Legend';
 export { default as LineChart, type LineChartProps } from './LineChart';
+export { type MapMarker, default as MapView, type MapViewProps } from './MapView';
 export { default as RadarChart, type RadarChartProps } from './RadarChart';
 export { default as SankeyChart, type SankeyChartProps } from './SankeyChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
@@ -54,4 +55,14 @@ export { default as StockTicker, type StockTickerProps, type StockTickerStat } f
 export { default as Tracker, type TrackerProps } from './Tracker';
 export { default as TreemapChart, type TreemapChartProps } from './TreemapChart';
 export type * from './types/charts';
+export {
+  CARTO_STYLES,
+  type LngLat,
+  type MapBasemap,
+  type MapPoint,
+  type MapStyleInput,
+  OPENFREEMAP_STYLES,
+  setMapLibreWorkerUrl,
+  type ThemedMapStyle,
+} from '@/common/map';
 export { useThemeColorRange } from '@/hooks/useThemeColorRange';

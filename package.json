@@ -180,6 +180,7 @@
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "lint-staged": "^16.4.0",
+    "maplibre-gl": "^6.19.0",
     "prettier": "^3.9.10",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
@@ -197,8 +198,14 @@
   },
   "peerDependencies": {
     "@lobehub/ui": "^6.0.0",
+    "maplibre-gl": "^5.0.0 || ^6.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "maplibre-gl": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",
