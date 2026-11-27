@@ -50,6 +50,7 @@ export { default as RadarChart, type RadarChartProps } from './RadarChart';
 export { default as SankeyChart, type SankeyChartProps } from './SankeyChart';
 export { default as ScatterChart, type ScatterChartProps } from './ScatterChart';
 export * from './SparkChart';
+export { default as StockTicker, type StockTickerProps, type StockTickerStat } from './StockTicker';
 export { default as Tracker, type TrackerProps } from './Tracker';
 export { default as TreemapChart, type TreemapChartProps } from './TreemapChart';
 export type * from './types/charts';
