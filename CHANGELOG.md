@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version&nbsp;6.3.0](https://github.com/lobehub/lobe-charts/compare/v6.2.0...v6.3.0)
+
+<sup>Released on **2026-11-27**</sup>
+
+#### ✨ Features
+
+- **misc**: A2UI map components (MapView, LocationCard, PlaceList, RouteMap) and StockTicker.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: A2UI map components (MapView, LocationCard, PlaceList, RouteMap) and StockTicker, closes [#42](https://github.com/lobehub/lobe-charts/issues/42) ([cafdd80](https://github.com/lobehub/lobe-charts/commit/cafdd80))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version&nbsp;6.2.0](https://github.com/lobehub/lobe-charts/compare/v6.1.2...v6.2.0)
 
 <sup>Released on **2026-11-26**</sup>
