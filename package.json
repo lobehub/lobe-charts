@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/charts",
-  "version": "6.3.0",
+  "version": "6.3.1",
   "description": "React modern charts components built on recharts",
   "keywords": [
     "lobehub",
@@ -81,6 +81,7 @@
     "./es/*/inputParser": "./es/*/inputParser.mjs",
     "./es/*/loader": "./es/*/loader.mjs",
     "./es/*/look": "./es/*/look.mjs",
+    "./es/*/maplibreCss": "./es/*/maplibreCss.mjs",
     "./es/*/parts": "./es/*/parts.mjs",
     "./es/*/renderInactiveShape": "./es/*/renderInactiveShape.mjs",
     "./es/*/renderShape": "./es/*/renderShape.mjs",

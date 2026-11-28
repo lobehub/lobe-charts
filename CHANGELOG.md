@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version&nbsp;6.3.1](https://github.com/lobehub/lobe-charts/compare/v6.3.0...v6.3.1)
+
+<sup>Released on **2026-11-28**</sup>
+
+#### 🐛 Bug Fixes
+
+- **maps**: Ship the MapLibre rules the maps use instead of importing its stylesheet.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **maps**: Ship the MapLibre rules the maps use instead of importing its stylesheet, closes [#43](https://github.com/lobehub/lobe-charts/issues/43) ([e95074d](https://github.com/lobehub/lobe-charts/commit/e95074d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version&nbsp;6.3.0](https://github.com/lobehub/lobe-charts/compare/v6.2.0...v6.3.0)
 
 <sup>Released on **2026-11-27**</sup>
