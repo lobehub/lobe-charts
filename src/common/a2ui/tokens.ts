@@ -1,13 +1,15 @@
 // Colour tokens of the a2ui look. Every value is a LobeHub theme token (`cssVar`), so the a2ui and
 // default variants share colours and dark mode comes from the theme. The variables are set on the chart
-// frame; series colours come from `useThemeColorRange()`, like the default charts.
+// frame; series colours come from `useThemeColorRange()`, like the default charts. The card and tooltip
+// surfaces are @lobehub/ui's `--lobe-a2ui-surface` steps (a card one step above the A2UI floor, a
+// tooltip one above the card in dark), falling back to the container / elevated colours.
 // Layout and type follow CopilotKit a2ui-playground (MIT); the colours are ours.
 import { cssVar } from '@lobehub/ui';
 
 export const A2UI_VARS = `
   --a2-fg: ${cssVar.colorText};
   --a2-muted-fg: ${cssVar.colorTextSecondary};
-  --a2-surface: ${cssVar.colorBgContainer};
+  --a2-surface: var(--lobe-a2ui-surface, ${cssVar.colorBgContainer});
   --a2-line: ${cssVar.colorBorderSecondary};
   --a2-positive: ${cssVar.colorSuccess};
   --a2-negative: ${cssVar.colorError};
@@ -24,7 +26,7 @@ export const A2UI_VARS = `
   --a2-heat-low: ${cssVar.colorFillTertiary};
   --a2-track: ${cssVar.colorFillSecondary};
   --a2-well: ${cssVar.colorFillQuaternary};
-  --a2-tooltip-bg: ${cssVar.colorBgElevated};
+  --a2-tooltip-bg: var(--lobe-a2ui-surface-2, ${cssVar.colorBgElevated});
   --a2-tooltip-fg: ${cssVar.colorText};
   --a2-tooltip-border: ${cssVar.colorBorderSecondary};
   --a2-tooltip-shadow: ${cssVar.boxShadowSecondary};
