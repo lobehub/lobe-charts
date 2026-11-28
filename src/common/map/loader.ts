@@ -2,6 +2,8 @@
 // component mounts, so apps that never draw a map do not ship it.
 
 /** The parts of the `maplibre-gl` module the map components use. */
+import { MAPLIBRE_CSS } from './maplibreCss';
+
 export type MapLibreModule = typeof import('maplibre-gl');
 
 let pending: Promise<MapLibreModule> | undefined;
@@ -21,15 +23,26 @@ export const setMapLibreWorkerUrl = (url: string) => {
   loaded?.setWorkerUrl?.(url);
 };
 
-/** Loads `maplibre-gl` and its stylesheet once. Rejects when the package is not installed. */
+const STYLE_ID = 'lobe-charts-maplibre';
+
+/**
+ * Adds the MapLibre rules the map components use, once per document. A stylesheet import would leave
+ * a CSS-only chunk for every bundler to handle (Vite drops it while other chunks still name it), so
+ * the rules ship as a string with the components instead.
+ */
+const injectMapLibreCss = () => {
+  if (typeof document === 'undefined' || document.getElementById(STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = STYLE_ID;
+  style.textContent = MAPLIBRE_CSS;
+  document.head.append(style);
+};
+
+/** Loads `maplibre-gl` once, with its stylesheet. Rejects when the package is not installed. */
 export const loadMapLibre = (): Promise<MapLibreModule> => {
   if (loaded) return Promise.resolve(loaded);
-  pending ??= Promise.all([
-    import('maplibre-gl'),
-    // The stylesheet is best effort: without it the map still draws, only the controls lose their icons.
-    // @ts-ignore -- stylesheet import, typed by the consumer's bundler
-    import('maplibre-gl/dist/maplibre-gl.css').catch(() => undefined),
-  ]).then(([mod]) => {
+  injectMapLibreCss();
+  pending ??= import('maplibre-gl').then((mod) => {
     const lib = pick(mod);
     if (!lib?.Map) throw new Error('maplibre-gl did not load');
     if (workerUrl) lib.setWorkerUrl?.(workerUrl);
