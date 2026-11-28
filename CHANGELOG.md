@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version&nbsp;6.3.2](https://github.com/lobehub/lobe-charts/compare/v6.3.1...v6.3.2)
+
+<sup>Released on **2026-11-28**</sup>
+
+#### 🐛 Bug Fixes
+
+- **a2ui**: Chart cards use the a2ui surface steps.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **a2ui**: Chart cards use the a2ui surface steps, closes [#44](https://github.com/lobehub/lobe-charts/issues/44) ([f2a536f](https://github.com/lobehub/lobe-charts/commit/f2a536f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version&nbsp;6.3.1](https://github.com/lobehub/lobe-charts/compare/v6.3.0...v6.3.1)
 
 <sup>Released on **2026-11-28**</sup>
